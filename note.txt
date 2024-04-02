@@ -1,0 +1,24 @@
+#to see running celery
+ps aux | grep celery
+
+#supervisord to manage multiple Celery workers:
+sudo apt-get install supervisor
+
+#create a *.conf file in etc/supervisor/conf.d
+#input
+
+[program:celery_worker1]
+/home/blaq/Desktop/clinicalx/env/bin/celery -A celery_config.celery worker --loglevel=info --concurrency=4 -n worker1
+user=blaq
+numprocs=1
+stdout_logfile=/var/log/celery/worker1.log
+stderr_logfile=/var/log/celery/worker1.log
+autostart=true
+autorestart=true
+startsecs=10
+
+#Update supervisord with the new configuration and start the workers:
+
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start worker1

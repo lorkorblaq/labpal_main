@@ -1,0 +1,10 @@
+.form-control {
+    border: 1px solid rgb(62,128,185);
+    box-shadow: 4px 4px 5px rgb(62,128,185);
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem black;
+}
+/* Styles for the modal */
+

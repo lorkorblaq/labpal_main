@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/inventory.css">
+{% endblock head %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 mb-2">
+            <h1>Inventory</h1>
+            <button  id="inventory_b" ><i class="fas fa-database"></i> Stock Levels</button>
+            <button  id="inventory_b" ><i class="fas fa-database"></i> Make Request</button>
+
+            <div class="" id="drawer_invent">
+                <div class="card card-body">
+                    <p>Stock</p>
+                    <select class="form-control" id="inventory_filter">
+                        <option value="" disabled selected>Select Stock filter</option>
+                        <option value="stock">Stock, i.e all items </option>
+                        <option value="alert">Alert Stock, i.e less than 5 vials </option>
+                        <option value="safe">Safe Stock, i.e less than 10 vials</option>
+                        <option value="reorderLevel">Reorder threshold i.e items at or less than the reorder level</option>
+                    </select>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="inventory_table">
+                            <thead class="head thead-dark">
+                            <tr id="inventory_head">
+                                <!-- Headers for the expired items table -->
+                            </tr>
+                            </thead>
+                            <tbody id="inventory_body" class="body">
+                                <!-- Placeholder for dynamic table content -->
+                            </tbody>
+                        </table>
+                        <br>
+                        <button class="btn-primary" data-toggle="collapse" data-target="#drawer" aria-expanded="false" aria-controls="drawer">
+                        Close Drawer
+                        </button>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="../static/js/inventory.js" type="text/javascript"></script>
+{% endblock %}

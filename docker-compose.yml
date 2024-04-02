@@ -1,0 +1,177 @@
+version: '3'
+services:
+  main:
+    build: /home/blaq/Desktop/clinicalx/
+    # build: https://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@github.com/lorkorblaq/clinicalx.git
+    image: lorkorblaq/clinicalx_main:latest
+    container_name: main
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_ENV=main.py
+    volumes:
+      - main_v:/app/data
+    command: python3 main.py 
+    # Run in detached mode
+    stdin_open: true
+    tty: true
+
+  api:
+    build: /home/blaq/Desktop/clinicalx/api/
+    # build: https://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@github.com/lorkorblaq/clinicalx/api.git
+    image: lorkorblaq/clinicalx_api:latest
+    container_name: api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - api_v:/app/data
+    environment:
+      - FLASK_ENV=development
+      - FLASK_ENV=api.py
+    command: python3 api.py 
+    # Run in detached mode
+    stdin_open: true
+    tty: true
+
+  dashapp:
+    build: /home/blaq/Desktop/clinicalx/dashapp/
+    # build: https://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@github.com/lorkorblaq/clinicalx/dashapp.git
+    image: lorkorblaq/clinicalx_dashapp:latest
+    container_name: dashapp
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "8050:8050"
+    volumes:
+      - dashapp_v:/app/data
+    environment:
+      - FLASK_ENV=dashapp.py
+    command: python3 dashapp.py 
+    # Run in detached mode
+    stdin_open: true
+    tty: true
+
+
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongodb
+  #   # restart: unless-stopped
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_v:/app/data
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=clinicalx
+  #     - MONGO_INITDB_ROOT_PASSWORD=Ilupeju2024.
+
+  # mongo-express:
+  #   image: mongo-express:1.0.2-20
+  #   container_name: mongo-express
+  #   # restart: unless-stopped
+  #   ports:
+  #     - "8081:8081"
+  #   volumes:
+  #     - mongo_v:/app/data
+  #   environment:
+  #     - ME_CONFIG_MONGODB_SERVER=mongodb
+  #     - ME_CONFIG_MONGODB_PORT=27017
+  #     - ME_CONFIG_MONGODB_URL=mongodb://clinicalx:Ilupeju2024@mongo:27017
+
+  jenkins:
+    image: jenkins/jenkins:jdk11
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_v:/app/data
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=true"
+
+  # jenkinsAgent1:
+  #   image: jenkins/ssh-agent
+  #   container_name: jenkinsAgent1
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock 
+  #     - JENKINS_URL=http://jenkins:8082
+  #     - JENKINS_SECRET=
+
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: nginx
+  #   # restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - nginx_v:/add/data
+  #   depends_on:
+  #     - main
+  #     - api
+
+  # haproxy:
+  #   image: haproxy:latest
+  #   container_name: haproxy
+  #   # restart: unless-stopped
+  #   ports:
+  #     - "8083:80"
+  #   volumes:
+  #     - haproxy_v:/usr/local/etc/haproxy/haproxy.cfg
+  #   depends_on:
+  #     - main
+  #     - api
+  
+volumes:
+  main_v:
+  api_v:
+  dashapp_v:
+  # mongo_v:
+  jenkins_v:
+  # var/run/docker:
+  # nginx_v:
+  # haproxy_v:
+
+#sudo docker tag main lorkorblaq/clinicalx_main
+#sudo docker-compose up -d --build
+#sudo docker rmi -f $(sudo docker images -q) remove all images
+#sudo docker rm -f $(docker ps -aq) remove all containers
+#sudo docker volume rm $(docker volume ls -q) remove all volumes
+#sudo docker push clinicalx/main
+
+
+
+
+
+
+
+
+
+
+# version: '3'
+# services:
+
+#   jenkins:
+#     build:
+#       context: .
+#       dockerfile: DockerfileJenkins
+#     hostname: jenkins
+#     container_name: jenkins
+#     restart: unless-stopped
+#     privileged: true
+#     user: root
+#     ports:
+#       - 8082:8080
+#       - 50000:50000
+
+#     volumes:
+#       - ~/jenkins_data:/var/jenkins_home
+#       - /var/run/docker.sock:/var/run/docker.sock
+#       - /usr/bin/docker:/usr/bin/docker
+
+# volumes:
+#       jenkins_home:

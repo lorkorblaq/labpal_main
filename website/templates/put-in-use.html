@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/piu.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+{% endblock head %}
+
+{% block body %}
+<!-- <h1>my name is {{name}}</h1>
+<h1>token {{token}}</h1>
+<h1>timeleft {{time_left}}</h1> -->
+    <main >
+        <div class="container mt-2">
+            <h1>In Use</h1>
+            <form id="postFormPIS"  method="post">
+            
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select class="form-control" id="dropDownBench" placeholder="Bench">
+                            <option selected disabled>Bench</option>
+                            <option>Endoserology</option>
+                            <option>Chemistry</option>
+                            <option>Haematology</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <!-- <input type="text" class="form-control" id="autoInputMachine" placeholder="Enter Machine..."> -->
+                        <select class="form-control" id="dropDownMachine">
+                            <option selected disabled>Machine</option>
+                            <option>DXC 700</option>
+                            <option>AU 680</option>
+                            <option>BIORAD-DM 3</option>
+                            <option>BIORAD-DM 2</option>
+                            <option>Abbott i1000</option>
+                            <option>DxI 800</option>
+                            <option>Sysmex XN550</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                       <input type="text" class="form-control" id="autoInputItem" placeholder="Enter Item...">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="number" class="form-control" id="quantityInputPIS" placeholder="Enter Quantity">
+                    </div>                
+                </div>
+
+                <div class="form-row">                    
+                    <div class="form-group col-md-8">
+                       <input type="text" class="form-control" id="DescripInputPIS" placeholder="Enter Description">
+                    </div>
+                    
+                </div>
+                <button>Push</button>
+
+            </form>
+        </div>
+        <div class="container mt-5 mb-2">
+            <button id="piu_btn" data-toggle="collapse" data-target="#drawer" aria-expanded="true" aria-controls="drawer">
+        <i class="fas fa-database"></i>Put in Use Log</button>
+            <div class="collapse show" id="drawer">
+                <div class="card card-body">
+                    <!-- Drawer Content Goes Here -->
+                    <p>Put in Use Log</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="r_table">
+                            <thead class="head thead-dark">
+                                <tr id="reports_h">
+                                </tr>
+                            </thead>
+                            <tbody id="tbody" class="body">
+                                <tr id='reports_r'>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <button class="btn-primary" data-toggle="collapse" data-target="#drawer" aria-expanded="false" aria-controls="drawer">
+                    Close Drawer
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- <button type="button" data-toggle="modal" data-target="#myModal">Open Popup
+        </button> -->
+
+
+           <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Enter Lot Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Your input fields for the modal go here -->
+                        <div class="form-group">
+                            <label for="modalInput">Expiration Date</label>
+                            <input type="text" class="form-control" id="modalInput" placeholder="Enter value">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalInput">Modal Input</label>
+                            <input type="text" class="form-control" id="modalInput" placeholder="Enter value">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/js/piu.js" type="text/javascript"></script>
+{% endblock %}
