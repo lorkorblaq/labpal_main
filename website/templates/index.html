@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+	{{ super() }}
+	<link rel="stylesheet" href="../static/css/clock.css">
+{% endblock head %}
+
+{% block body %}
+    <main>
+		<div class="lab">
+			<canvas id="canvas" width="500" height="500" ></canvas>
+		</div>
+	</main>
+{% endblock %}
+
+{% block scripts %}
+        <script src="../static/js/clock.js" type="text/javascript"></script>
+    {% endblock %}

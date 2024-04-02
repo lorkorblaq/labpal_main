@@ -1,0 +1,31 @@
+  {% extends "base.html" %}
+  {% block head %}
+      {{ super() }}
+      <link rel="stylesheet" href="../static/css/chat.css">
+  {% endblock head %}
+
+  {% block body %}
+          <main>
+            <div class="chat-box">
+                <div class="chat-header">LabPal</div>
+                <div class="chat-messages">
+                    <div class="chatbot-message">Hello! <br> How can I help you today?</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+          </main>
+  {% endblock %}
+  
+  {% block scripts %}
+    <script>
+      function sendMessage() {
+          // Functionality to send user message and receive a response
+          // This is where you would integrate with your backend or JavaScript logic
+          // For a static example, you can update the chat-messages div content with user input and chatbot response.
+      }
+    </script>
+  <!-- <script src="../static/js/channels.js" type="text/javascript"></script> -->
+  {% endblock %}

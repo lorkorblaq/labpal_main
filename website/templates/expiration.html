@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/expiration.css">
+{% endblock head %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 mb-2">
+            <h1>Expiration</h1>
+            <button  id="expire_b" ><i class="fas fa-database"></i> Expiring Items</button>
+            <button  id="expire_b" ><i class="fas fa-database"></i> Return Expired</button>
+            <div class="" id="drawer_expire">
+                <div class="card card-body">
+                    <p>Expired</p>
+                    <select class="form-control" id="expiry_filter">
+                        <option value="" disabled selected>Select expiration filter</option>
+                        <option value="present">Expired</option>
+                        <option value="30">Expiring in 30 days</option>
+                        <option value="60">Expiring in 60 days</option>
+                        <option value="90">Expiring in 90 days</option>
+                    </select>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="expire_table">
+                            <thead class="head thead-dark">
+                                <tr id="expire_head">
+                                <!-- Headers for the expired items table -->
+                                </tr>
+                            </thead>
+                            <tbody id="expire_body" class="body">
+                                <!-- Content for the expired items table will be populated dynamically -->
+                            </tbody>
+                        </table>
+                        <br>
+                        <button class="btn-primary" data-toggle="collapse" data-target="#drawer_expire" aria-expanded="false" aria-controls="drawer_expire">
+                        Close Drawer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="../static/js/expiration.js" type="text/javascript"></script>
+{% endblock %}

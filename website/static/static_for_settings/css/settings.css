@@ -1,0 +1,22 @@
+#settings.active {
+    display: none;
+}
+#settings.active {
+    display: block;
+}
+#notifications {
+    display: none;
+}
+#notifications.active {
+    display: block;
+}
+#billing {
+    display: none;
+}
+#billing.active {
+    display: block;
+}
+.nav-link:hover {
+    color: azure;
+    cursor: pointer;
+}

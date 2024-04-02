@@ -1,0 +1,72 @@
+main {
+    margin: 0;
+}
+
+.search {
+    display: flex;
+    width: 100%;
+    justify-content:flex-end;
+    height: 5%;
+}
+
+
+.s-search {
+    display: flex;
+    width: 50%;
+    margin-top: 5px;
+    padding-right: 10px;
+
+}
+
+.location {
+    display: flex;
+    border-right:1px solid #DDDDDD ;
+    flex-grow: 1;
+}
+
+.request {
+    flex-grow: 1;
+}
+
+button {
+    /* border-radius: 45; */
+    color: black;
+    width: 150px;
+    background-color: hsl(208, 56%, 67%);
+    justify-self: flex-start;
+    cursor: pointer;
+    border: 1px solid rgb(62,128,185);
+    box-shadow: 2px 2px 2px rgb(62,128,185);
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.s-lab {
+    display: flex;
+    border: 1px solid #DDDDDD;
+    justify-content: space-between;
+    padding-bottom: 40px;
+}
+
+.s-lab article {
+    border: 1px solid #DDDDDD;
+    width: 400px;
+}
+
+/* Apply zebra striping to odd rows */
+
+
+/* Apply zebra striping to even rows */
+.table-striped tbody tr:nth-child(even) {
+    background-color: rgb(184, 218, 240); /* Set the background color for even rows */
+}
+
+.form-row {
+    color:  #9794cb;
+}
+
+
+
+
