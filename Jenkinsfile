@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git(url: 'https://github.com/lorkorblaq/clinicalx.git', branch: 'production', credentialsId: GIT_CREDENTIALS)
+                git(url: 'https://github.com/lorkorblaq/clinicalx_main.git', branch: 'production', credentialsId: GIT_CREDENTIALS)
             }
         }
         stage('Build Image') {
