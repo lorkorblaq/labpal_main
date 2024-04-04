@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building image..' 
-                    docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                    docker.build("${DOCKER_IMAGE}", "-f ${DOCKERFILE_PATH} .")
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                 echo 'Pushing to Docker Hub..'
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD docker.io"
-                    sh "docker push ${DOCKER_TAG}" 
+                    sh "docker push ${DOCKER_IMAGE}" 
                 }
             }
         }
