@@ -39,7 +39,7 @@ pipeline {
                 echo 'Testing to begin..'
                 // sh "docker pull ${DOCKER_IMAGE}"
                 echo 'Deploying to testing stage..'
-                docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                // docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
                 sh "docker stop clinicalx_main_test || true"
                 sh "docker rm clinicalx_main_test || true"
                 // Run the new container
@@ -48,7 +48,7 @@ pipeline {
                 // sh "docker exec clinicalx_main_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
                 sh "docker stop clinicalx_main_test"
                 sh "docker rm clinicalx_main_test"
-                sh "docker rmi ${DOCKER_TAG} -f"                    
+                // sh "docker rmi ${DOCKER_TAG} -f"                    
               }
             }
         }
@@ -56,7 +56,7 @@ pipeline {
             steps {
               script {
                 echo 'Deploying to Beta stage..'
-                docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                // docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
                 // Stop and remove any existing container
                 sh "docker stop clinicalx_main_beta || true"
                 sh "docker rm clinicalx_main_beta || true"
@@ -65,21 +65,22 @@ pipeline {
                 sh "docker run -d --name clinicalx_main_beta -p 8079:8080 ${DOCKER_TAG}"
                 sh "docker stop clinicalx_main_beta || true"
                 sh "docker rm clinicalx_main_beta || true"
-                sh "docker rmi ${DOCKER_TAG} -f || true"
+                // sh "docker rmi ${DOCKER_TAG} -f || true"
               }
             }
         }
         stage('Push Image') {
             steps {
                 echo 'Pushing to Docker Hub..'
-                script {
-                    echo 'Building image..'
-                    docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
-                    }
+                // script {
+                //     echo 'Building image..'
+                //     docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                //     }
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                     sh "docker push ${DOCKER_TAG}"
                     sh "docker rmi ${DOCKER_TAG} -f || true"
+                    
                 }
             }
         }
