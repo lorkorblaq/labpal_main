@@ -29,7 +29,7 @@ pipeline {
                     // sh "docker exec clinicalx_main_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
                     sh "docker stop clinicalx_main_build"
                     sh "docker rm clinicalx_main_build"
-                    sh "docker rmi ${DOCKER_TAG} -f"                    
+                    // sh "docker rmi ${DOCKER_TAG} -f"                    
                 }
             }
         }
