@@ -22,18 +22,44 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Test Stage') {
             steps {
               script {
-                echo 'Testing..'
-                // def dockerimage = docker.build("${DOCKER_IMAGE}", "-f ${DOCKERFILE_PATH} .")
-                // dockerimage.inside {
-                //     sh 'pytest --junitxml=pytest-report.xml api/tests/test_user_api.py'  // Run pytest with JUnit output
-                // }
+                echo 'Testing to begin..'
+                // sh "docker pull ${DOCKER_IMAGE}"
+                echo 'Deploying to testing stage..'
+                docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                sh "docker stop clinicalx_main_test || true"
+                sh "docker rm clinicalx_main_test || true"
+        
+                // Run the new container
+                sh "docker run -d --name clinicalx_api_test -p 2998:3000 ${DOCKER_IMAGE}"
+                echo 'Starting Integration testing'
+                // // sh "docker exec clinicalx_api_test pytest tests/test_user_api.py"
+                sh "docker exec clinicalx_api_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
+                sh "docker stop clinicalx_api_test"
+                sh "docker rm clinicalx_api_test"
+                sh "docker rmi ${DOCKER_TAG} -f"                    
               }
             }
         }
-        
+        stage('Beta stage') {
+            steps {
+              script {
+                echo 'Deploying to Beta stage..'
+                docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
+                // Stop and remove any existing container
+                sh "docker stop clinicalx_main_beta || true"
+                sh "docker rm clinicalx_main_beta || true"
+                echo 'Starting End to end testing...'
+                // Run the new container
+                sh "docker run -d --name clinicalx_main_beta -p 8079:8080 ${DOCKER_TAG}"
+                sh "docker stop clinicalx_main_beta || true"
+                sh "docker rm clinicalx_main_beta || true"
+                sh "docker rmi ${DOCKER_TAG} -f || true"
+              }
+            }
+        }
         stage('Push Image') {
             steps {
                 echo 'Pushing to Docker Hub..'
@@ -47,16 +73,17 @@ pipeline {
                 }
             }
         }
-
-       stage('Deployment') {
+       stage('Production Deployment') {
             steps {
-                echo 'Deploying...'
-                sh "docker stop clincalx_main -f || true"
-                sh "docker rm clincalx_main -f || true"
+                echo 'Deploying to production...'
+                // Pull the latest image from Docker Hub
+                sh "docker pull ${DOCKER_TAG}"
+                // Stop and remove any existing container
+                sh "docker stop clinicalx_main || true"
+                sh "docker rm clinicalx_main || true"
                 // Run the new container
-                sh "docker run -d --name clinicalx_main -p 8080:8080 ${DOCKER_TAG}"
+                sh "docker run -d --name clinicalx_main -p 3000:3000 ${DOCKER_TAG}"
             }
-        }
-
-     }
- }
+        } 
+    }
+}
