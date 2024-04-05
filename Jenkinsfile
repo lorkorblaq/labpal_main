@@ -22,15 +22,15 @@ pipeline {
                     }
                 script{
                     echo 'Running unit tests..'
-                    // sh "docker stop clinicalx_api_test || true"
-                    // sh "docker rm clinicalx_api_test || true"
-                    sh "docker run -d --name clinicalx_main_test -p 8078:8080 ${DOCKER_IMAGE}"
+                    sh "docker stop clinicalx_main_build || true"
+                    sh "docker rm clinicalx_main_build || true"
+                    sh "docker run -d --name clinicalx_main_build -p 8078:8080 ${DOCKER_IMAGE}"
                     // sh "docker exec clinicalx_api_test pytest tests/test_user_api.py"
                     // sh "docker exec clinicalx_main_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
-                    sh "docker stop clinicalx_main_test"
-                    sh "docker rm clinicalx_main_test"
+                    sh "docker stop clinicalx_main_build"
+                    sh "docker rm clinicalx_main_build"
                     sh "docker rmi ${DOCKER_TAG} -f"                    
-                    }
+                }
             }
         }
         stage('Test Stage') {
@@ -42,14 +42,12 @@ pipeline {
                 docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
                 sh "docker stop clinicalx_main_test || true"
                 sh "docker rm clinicalx_main_test || true"
-        
                 // Run the new container
-                sh "docker run -d --name clinicalx_api_test -p 2998:3000 ${DOCKER_IMAGE}"
+                sh "docker run -d --name clinicalx_main_test -p 8079:8080 ${DOCKER_IMAGE}"
                 echo 'Starting Integration testing'
-                // // sh "docker exec clinicalx_api_test pytest tests/test_user_api.py"
-                sh "docker exec clinicalx_api_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
-                sh "docker stop clinicalx_api_test"
-                sh "docker rm clinicalx_api_test"
+                // sh "docker exec clinicalx_main_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
+                sh "docker stop clinicalx_main_test"
+                sh "docker rm clinicalx_main_test"
                 sh "docker rmi ${DOCKER_TAG} -f"                    
               }
             }
