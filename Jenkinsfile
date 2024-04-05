@@ -17,9 +17,20 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    echo 'Building image..' 
+                    echo 'Building image..'
                     docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
-                }
+                    }
+                script{
+                    echo 'Running unit tests..'
+                    // sh "docker stop clinicalx_api_test || true"
+                    // sh "docker rm clinicalx_api_test || true"
+                    sh "docker run -d --name clinicalx_main_test -p 8078:8080 ${DOCKER_IMAGE}"
+                    // sh "docker exec clinicalx_api_test pytest tests/test_user_api.py"
+                    // sh "docker exec clinicalx_main_test pytest --junitxml=pytest-report.xml tests/test_user_api.py"
+                    sh "docker stop clinicalx_main_test"
+                    sh "docker rm clinicalx_main_test"
+                    sh "docker rmi ${DOCKER_TAG} -f"                    
+                    }
             }
         }
         stage('Test Stage') {
@@ -69,7 +80,8 @@ pipeline {
                     }
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                    sh "docker push ${DOCKER_TAG}" 
+                    sh "docker push ${DOCKER_TAG}"
+                    sh "docker rmi ${DOCKER_TAG} -f || true"
                 }
             }
         }
