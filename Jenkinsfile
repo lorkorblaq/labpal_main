@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'lorkorblaq/clinicalx_main'
-        // DOCKER_TAG = "${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
+        DOCKER_TAG = "${DOCKER_IMAGE}:${BUILD_NUMBER}"         
         DOCKER_REGISTRY_URL = 'https://hub.docker.com'
         GIT_CREDENTIALS = 'gitpass'
         DOCKER_CREDENTIALS= 'dockerpass'
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building image..' 
-                    docker.build("${DOCKER_IMAGE}", "-f ${DOCKERFILE_PATH} .")
+                    docker.build("${DOCKER_TAG}", "-f ${DOCKERFILE_PATH} .")
                 }
             }
         }
@@ -38,8 +38,8 @@ pipeline {
             steps {
                 echo 'Pushing to Docker Hub..'
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD docker.io"
-                    sh "docker push ${DOCKER_IMAGE}" 
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker push ${DOCKER_TAG}" 
                 }
             }
         }
@@ -47,15 +47,10 @@ pipeline {
        stage('Deployment') {
             steps {
                 echo 'Deploying...'
-                // Pull the latest image from Docker Hub
-                // sh "docker pull ${DOCKER_IMAGE}"
-                // Stop and remove any existing container
                 sh "docker stop clincalx_main -f || true"
                 sh "docker rm clincalx_main -f || true"
                 // Run the new container
-                sh "docker run -d --name clinicalx_main -p 8080:8080 ${DOCKER_IMAGE}"
-                sh "docker rmi \$(docker images -q) || true"
-                sh "docker rmi \$(docker images -q lorkorblaq/clinicalx_main) || true"
+                sh "docker run -d --name clinicalx_main -p 8080:8080 ${DOCKER_TAG}"
             }
         }
 
