@@ -21,5 +21,5 @@ ENV FLASK_APP=main.py
 
 # Command to run the application with Gunicorn
 # CMD ["gunicorn", "-w", "3", "-t", "1", "-b", "0.0.0.0:8080", "main:app"]
-CMD ["python3", "api.py"]
+CMD ["python3", "main.py"]
 
