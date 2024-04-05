@@ -93,7 +93,7 @@ pipeline {
                 sh "docker stop clinicalx_main || true"
                 sh "docker rm clinicalx_main || true"
                 // Run the new container
-                sh "docker run -d --name clinicalx_main -p 3000:3000 ${DOCKER_TAG}"
+                sh "docker run -d --name clinicalx_main -p 8080:8080 ${DOCKER_TAG}"
             }
         } 
     }
