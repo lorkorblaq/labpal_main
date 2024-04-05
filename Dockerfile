@@ -20,4 +20,6 @@ ENV FLASK_APP=main.py
 # CMD ["flask", "run", "--host=0.0.0.0","--port=8080"]
 
 # Command to run the application with Gunicorn
-CMD ["gunicorn", "-w", "3", "-t", "1", "-b", "0.0.0.0:8080", "main:app"]
+# CMD ["gunicorn", "-w", "3", "-t", "1", "-b", "0.0.0.0:8080", "main:app"]
+CMD ["python3", "api.py"]
+
