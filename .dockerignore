@@ -1,5 +1,7 @@
 mainenv/
+__pycache__/
 .gitignore
 README.md
 license
 note.txt
+website/__pycache__/
