@@ -5654,3 +5654,12 @@ INFO:werkzeug:127.0.0.1 - - [31/Mar/2024 16:15:25] "GET /signin-signup HTTP/1.1"
 INFO:werkzeug:127.0.0.1 - - [31/Mar/2024 16:15:26] "GET /static/css/auth.css HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [31/Mar/2024 16:15:26] "GET /static/js/auth.js HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [31/Mar/2024 16:15:27] "GET /signin-signup HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.25.1.208:8080
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 508-894-357
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-04-09 21:30:31.280064
