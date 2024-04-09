@@ -1,1 +1,4 @@
 mainenv/
+__pycache__/
+website/__pycache__
+app.log
