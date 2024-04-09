@@ -1,8 +1,5 @@
-env
+mainenv/
 .gitignore
 README.md
 license
 note.txt
-api/
-dashapp/
-charbot/

@@ -40,3 +40,4 @@ WTForms==3.1.2
 flask-socketio
 gunicorn
 pytest
+eventlet
