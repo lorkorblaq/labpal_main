@@ -7,16 +7,8 @@ WORKDIR /clinicalx_main/
 # Copy the current directory contents into the container at /app
 COPY . /clinicalx_main/
 
-RUN rm /etc/nginx/nginx.conf
-RUN rm /etc/nginx/sites-available/default
-
-COPY ./devops/nginx/clinicalx.conf /etc/nginx/sites-available/
-COPY ./devops/nginx/clinicalx_nginx.conf /etc/nginx/conf.d/clinicalx_nginx.conf
-COPY ./website /var/www/html/
-
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-RUN ln -s /etc/nginx/sites-available/clinicalx.conf /etc/nginx/sites-enabled/
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
