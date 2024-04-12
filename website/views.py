@@ -4,7 +4,7 @@ from flask_cors import CORS
 from .auth import auth_required
 from flask_mail import Message, Mail
 
-BASE = "http://127.0.0.1:3000/api"
+BASE = "http://0.0.0.0:3000/api"
 views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
 CORS(views)
 data=""

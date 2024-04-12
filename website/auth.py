@@ -15,7 +15,7 @@ logging.basicConfig(filename='app.log', level=logging.INFO)
 
 
 # jwt = JWTManager()
-API_BASE_URL = "http://127.0.0.1:3000/api/user/push/"
+API_BASE_URL = "http://0.0.0.0:3000/api/user/push/"
 
 auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
 
