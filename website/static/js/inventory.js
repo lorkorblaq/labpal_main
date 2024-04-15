@@ -4,7 +4,7 @@ $(function () {
     const ColumnsItem = ['item',  'in stock', 'tests/vial', 'category', 'bench', ];
     const columnsLot = ['item', 'lot_numb', 'expiration', 'quantity', 'created at'];
     const headersLot = ['Item', 'Lot','Expiration', 'Quantity', 'Created At'];
-    BaseUrl = "http://0.0.0.0:3000/api"
+    BaseUrl = "http://13.53.70.208:3000/api"
     
     function fetchData(url) {
         // Fetch data from the provided URL

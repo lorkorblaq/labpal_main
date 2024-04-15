@@ -1,6 +1,6 @@
 $(function () {
     console.log("MAIN ready");
-    BaseUrl = "http://0.0.0.0:3000/api/"
+    BaseUrl = "http://13.53.70.208:3000/api/"
 
     $('#InputItemMain').typeahead({
         source: function (request, response) {
