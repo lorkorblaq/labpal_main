@@ -1,6 +1,6 @@
 $(function() {
     console.log('port.js loaded');
-    const BaseUrl = "http://127.0.0.1:3000/api";
+    const BaseUrl = "http://13.53.70.208:3000/api";
     // const url_channels = `${BaseUrl}/channels/get`
 
     function fetchData(url) {

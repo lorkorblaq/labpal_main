@@ -1,6 +1,6 @@
 $(function () {
     console.log("user-profile.js loaded");
-    Baseurl= 'http://127.0.0.1:3000/api'
+    Baseurl= 'http://13.53.70.208:3000/api'
     function setCookie(name, value, hours) {
         var expires = "";
         var sameSite = document.location.protocol === 'https:' ? "; SameSite=None" : "";
