@@ -73,6 +73,7 @@ $(function () {
                     }
                 });
                 try {
+                    // updateing items database
                     itemform = {
                         direction: "To",
                         item: item,
