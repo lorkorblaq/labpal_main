@@ -70,21 +70,15 @@
             </div>
             <!-- Page Content -->
             <div class="bodyof">
-                <div class = "search">
-                    <form class ="s-search">
-                            <div class="location">
-                                <input type="text" class="form-control" id="InputItemMain" placeholder="Item">
-                            </div>
-                        <button id="fgh"> SEARCH</button>
-                    </form>  
-                </div>
-                <!-- </nav> -->
-                <!-- <nav class="navbar">
-                    <form class="form-inline">
-                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+                <nav class="search">
+                    <form class="form-inline s-search">
+                        <div class="location">
+                            <input class="form-control mr-sm-2" type="search" id="InputItemMain" placeholder="?" aria-label="Search">
+                            <button class="btn btn-outline-danger my-2 my-sm-0"  type="submit">Search</button>
+                        </div>
                     </form>
-                </nav> -->
+                </nav>
+
                 <div class="bodyofbody">
                     {% block body %}
                     {% endblock %}

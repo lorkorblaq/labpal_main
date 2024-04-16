@@ -24,11 +24,27 @@
         <main>
             <div class="col-9">
                 <h1>Port</h1>
-                        <button type="button" class="" id="exInUse"><i class="fas fa-download"></i><br>Export In Use Data</button>
-                        <button type="button" class="" id="exchannel"><i class="fas fa-download"></i><br>Export Channels</button>
-                        <button type="button" class="" id="exInVen"><i class="fas fa-download"></i> <br>Export Inventory</button>
-                        <button onclick="openModal()" type="button" class="" id="imItems"><i class="fas fa-upload" onclick="openModal()"></i> <br> Import Items</button>
-                        <button onclick="openModal()" type="button" class="" id="imChannels"><i class="fas fa-upload"></i> <br>Import Channels</button>
+                    <div class="porter">
+                        <div class="card exporter">
+                            <div class="card-header">
+                                EXPORTER
+                            </div>
+                            <div class="card-body">
+                                <button type="button" class="" id="exInUse"><i class="fas fa-download"></i><br>In Use Data</button>
+                                <button type="button" class="" id="exchannel"><i class="fas fa-download"></i><br>Channels</button>
+                                <button type="button" class="" id="exInVen"><i class="fas fa-download"></i> <br>Inventory</button>
+                            </div>
+                        </div>
+                        <div class="card importer">
+                            <div class="card-header">
+                                IMPORTER
+                            </div>
+                            <div class="card-body">
+                                <button onclick="openModal()" type="button" class="" id="imItems"><i class="fas fa-upload" onclick="openModal()"></i> <br>Inventory</button>
+                                <button onclick="openModal()" type="button" class="" id="imChannels"><i class="fas fa-upload"></i> <br>Channels</button>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
