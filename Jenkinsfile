@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'lorkorblaq/clinicalx_main'
-        DOCKER_TAG = "${DOCKER_IMAGE}:${BUILD_NUMBER}"         
+        DOCKER_TAG = "${DOCKER_IMAGE}:latest"
+        // ${BUILD_NUMBER}"         
         DOCKER_REGISTRY_URL = 'https://hub.docker.com'
         GIT_CREDENTIALS = 'gitpass'
         DOCKER_CREDENTIALS= 'dockerpass'
