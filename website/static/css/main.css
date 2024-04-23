@@ -10,6 +10,11 @@ main {
     margin: 0px;
 }
 
+/* Define the styles for the active link */
+.active {
+    background-color: #007bff; /* Change this to your desired highlight color */
+    color: #df0b0b; /* Change this to your desired text color */
+}
 
 .s-search {
     display: flex;
@@ -69,6 +74,17 @@ button:hover {
     color:  #9794cb;
 }
 
+.card-body  {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+    border:5px solid rgba(131, 146, 212, 0.125);
+}       
 
-
+.table-responsive {
+    flex: 1 1 auto;
+    min-height: 1px;
+    border:5px solid rgba(131, 146, 212, 0.125);
+    background-color: #f0f0f0;
+}       
 

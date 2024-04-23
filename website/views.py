@@ -48,7 +48,7 @@ def port():
 @views.route("/chat",  strict_slashes=False)
 @auth_required
 def chat():
-    return render_template("chat.html", data=data)
+    return render_template("/templates_for_messenger/messenger.html", data=data)
 
 @views.route("/user-profile",  strict_slashes=False)
 @auth_required

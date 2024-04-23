@@ -9,7 +9,7 @@
     {% block body %}
         <main>
             <div class="container mt-2" >
-                <div style="padding-right: 20px;"><h1>Channels</h1></div>
+                <h1>Channels</h1>
                 <form id="postChannelForm" action="http://13.53.70.208:3000/api/channel/push/" method="Enter Post">
                     <div class="form-row">
 
@@ -145,11 +145,10 @@
                 </form>
             </div>
             <div class="container mt-5 mb-2">
-                <button  id="channel_btn" data-toggle="collapse" data-target="#drawer" aria-expanded="true" aria-controls="drawer"><i class="fas fa-database"></i> Channels log</button>
+                <button  id="channel_btn" data-toggle="collapse" data-target="#drawer" aria-expanded="true" aria-controls="drawer">
+                <i class="fas fa-database"></i> Channels log</button>
                 <div class="collapse show" id="drawer">
-                    <div class="card card-body">
                         <!-- Drawer Content Goes Here -->
-                        <p>Channels</p>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="r_table">
                                 <thead class="head thead-dark">
@@ -163,7 +162,7 @@
                             </table>
                         </div>
                         <br>
-                        <button class="btn-primary" data-toggle="collapse" data-target="#drawer" aria-expanded="false" aria-controls="drawer">
+                        <button class="" data-toggle="collapse" data-target="#drawer" aria-expanded="false" aria-controls="drawer">
                         Close Drawer
                         </button>
                     </div>
