@@ -2,6 +2,8 @@ $(function () {
     const headersChannel = ['_id','created at', 'user', 'item', 'lot_numb', 'direction', 'location', 'quantity', 'description', 'action'];
     console.log("channels.js loaded");
     BaseUrl = "http://13.53.70.208:3000/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
+
     // const user_d = $.cookie('user_id');
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");

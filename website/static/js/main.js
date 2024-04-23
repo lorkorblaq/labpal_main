@@ -1,6 +1,7 @@
 $(function () {
     console.log("MAIN ready");
-    BaseUrl = "http://13.53.70.208:3000/api/"
+    // BaseUrl = "http://13.53.70.208:3000/api/"
+    BaseUrl = "http://0.0.0.0:3000/api";
 
     $('#InputItemMain').typeahead({
         source: function (request, response) {
@@ -57,6 +58,10 @@ $(function () {
                 });
             },
         });
+    var path = window.location.pathname;
+    
+    // Add the 'active' class to the link with a matching pattern
+    $('a[href="' + path + '"]').addClass('active');
     function refreshTable() {
         fetchData(`${BaseUrl}/channels/get/`).then(data => {
             dataTableInstance.clear();
