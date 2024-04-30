@@ -1,6 +1,8 @@
-from flask import app, Blueprint, render_template, request, url_for, redirect, flash, make_response,jsonify, session
+from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response,jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import RegistrationForm, LoginForm, Resetpassword
+from .extensions import socketio
+from flask_socketio import send, emit
 from . import db_clinical
 import requests
 import os
@@ -98,6 +100,17 @@ def signup_signin():
         # Fetch user from MongoDB based on the provided email
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
+            identity ={}
+            full_id = str(user['_id'])
+            # session['session_id'] = session_id
+            session['id'] = full_id
+            data_user_session = {
+                'session_id': 'session_id',
+                'user_id': full_id
+                }
+
+            # socketio.emit('my_response', {'data': 'Connected'})
+
             ip_address = request.remote_addr
             # user_agent = request.user_agent.string
             full_id = str(user['_id'])
@@ -144,6 +157,8 @@ def signup_signin():
             response.set_cookie('user_id', full_id)
             response.set_cookie('email', email)
             response.set_cookie('name', name)
+            # response.set_cookie('id', session_id)
+            response.set_cookie('token', session['token'] )
             return response
             # return make_response
         else:

@@ -3,6 +3,9 @@ import requests
 from flask_cors import CORS
 from .auth import auth_required
 from flask_mail import Message, Mail
+from .extensions import socketio
+from flask_socketio import send, emit
+
 
 BASE = "http://0.0.0.0:3000/api"
 views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
