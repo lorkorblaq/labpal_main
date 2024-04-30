@@ -3,6 +3,28 @@ $(function () {
     // BaseUrl = "http://13.53.70.208:3000/api/"
     BaseUrl = "http://0.0.0.0:3000/api";
 
+    function getCookie(name) {
+        const cookieArr = document.cookie.split("; ");
+        for (let i = 0; i < cookieArr.length; i++) {
+            const cookiePair = cookieArr[i].split("=");
+            if (name === cookiePair[0]) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    };
+    const user_id = getCookie('user_id');
+    const session_id = getCookie('session_id');
+
+// Check if socket is already initialized
+    if (!window.socket) {
+        // Initialize socket
+        window.socket = io();
+    }
+        
+
+    // In your other file (let's call it otherFile.js)
+
     $('#InputItemMain').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -71,4 +93,8 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
+
+
+ 
+
 });
