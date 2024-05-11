@@ -6,10 +6,10 @@
 .form-control:focus {
     box-shadow: 0 0 0 0.2rem black;
 }
-* {
+/* * {
     display: flexbox;
     color: rgb(53, 28, 28);
-}
+} */
 /* Styles for the modal */
 
 body{

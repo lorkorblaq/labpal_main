@@ -8,8 +8,8 @@
     <main>
         <div class="container mt-5 mb-2">
             <h1>Expiration</h1>
-            <button  id="expire_b" ><i class="fas fa-database"></i> Expiring Items</button>
-            <button  id="expire_b" ><i class="fas fa-database"></i> Return Expired</button>
+            <!-- <button  id="expire_b" ><i class="fas fa-database"></i> Expiring Items</button>
+            <button  id="expire_b" ><i class="fas fa-database"></i> Return Expired</button> -->
             <div class="" id="drawer_expire">
                     <select class="form-control" id="expiry_filter">
                         <option value="" disabled selected>Select expiration filter</option>
@@ -29,10 +29,12 @@
                                 <!-- Content for the expired items table will be populated dynamically -->
                             </tbody>
                         </table>
-                        <br>
-                        <button class="btn-primary" data-toggle="collapse" data-target="#drawer_expire" aria-expanded="false" aria-controls="drawer_expire">
-                        Close Drawer
+                        <button id="export_button">
+                            <i class="fas fa-file-export"></i> Export
                         </button>
+                        <button id="print_button" >
+                            <i class="fas fa-print"></i> Print
+                        </button> 
                     </div>
                 </div>
             </div>

@@ -10,8 +10,9 @@
         <div class="col-9">
             <div class="container-xl px-4 mt-4">
                 <nav class="nav nav-borders">
-                    <a class="nav-link" id="sec-btn" style="color: red;">Security</a>
-                    <a class="nav-link" id="not-btn" style="color: orange;">Notifications</a>
+                    <a class="nav-link" id="sec-btn" >Security</a>
+                    <a class="nav-link" id="not-btn">Notifications</a>
+                    <a class="nav-link" id="data-btn">Data</a>
                     <a class="nav-link" id="bill-btn">Billing</a>
                 </nav>
                 <hr>
@@ -237,6 +238,40 @@
                         </div>
                     </div>       
                 </div>
+                <div class="row" id ="data">
+                    <div class="col-9">
+                        <br><br>
+                            <div class="porter">
+                                <div class="card exporter ">
+                                    <div class="card-header d-flex justify-content-center align-items-center">
+                                        EXPORTER
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center align-items-center">                                <button type="button" class="" id="exInUse"><i class="fas fa-download"></i><br>In Use Data</button>
+                                        <button type="button" class="" id="exchannel"><i class="fas fa-download"></i><br>Channels</button>
+                                        <button type="button" class="" id="exInVen"><i class="fas fa-download"></i> <br>Inventory</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="card importer">
+                                    <div class="card-header d-flex justify-content-center align-items-center">
+                                        IMPORTER
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center align-items-center">                                <button onclick="openModal()" type="button" class="" id="imItems"><i class="fas fa-upload" onclick="openModal()"></i> <br>Inventory</button>
+                                        <button onclick="openModal()" type="button" class="" id="imChannels"><i class="fas fa-upload"></i> <br>Channels</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div onclick="document.getElementById('file-input').click();" id="drop-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+                                <p>Drag & Drop</p>
+                                <input type="file" id="file-input" onchange="handleFileSelect(this.files)">
+                            </div>
+                        </div>
+                        <button onclick="document.getElementById('file-input').click();">Browse</button>
+                    </div>
+                </div>
                 <div class="row" id ="billing">
                     <div class="row">
                         <div class="col-lg-4 mb-4">
@@ -394,4 +429,39 @@
 
 {% block scripts %}
 <script src="../../static/static_for_settings/js/settings.js" type="text/javascript"></script>
+<script src="../../static/static_for_settings/js/data.js" type="text/javascript"></script>
+<script>
+    function openModal() {
+        console.log('open modal');
+        $('#importModal').modal('show');
+    }
+
+    function closeModal() {
+        document.getElementById('importModal').style.display = 'none';
+    }
+
+
+    function showFileDialog() {
+        document.getElementById('file-input').click();
+    }
+
+    function handleFileSelect(files) {
+    var fileList = document.getElementById('file-list');
+        fileList.innerHTML = ''; // Clear previous files
+
+        for (var i = 0; i < files.length; i++) {
+            var listItem = document.createElement('li');
+            listItem.innerHTML = files[i].name;
+            fileList.appendChild(listItem);
+        }
+
+        // Close the modal after handling files
+        closeModal();
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+
+</script>
 {% endblock %}

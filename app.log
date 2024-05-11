@@ -7305,3 +7305,2576 @@ INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 269-024-319
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 269-024-319
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-04-30 18:09:41.982902
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-04-30 18:10:04.262804
+INFO:root:tund3oloko@gmail.com logout, 127.0.0.1 at 2024-04-30 18:21:19.562321
+INFO:root:user:irobe Oloko, email:irob3oloko@gmail.com, ip:127.0.0.1 at 2024-04-30 18:21:24.234428
+INFO:root:irob3oloko@gmail.com logout, 127.0.0.1 at 2024-04-30 18:22:03.072232
+INFO:root:user:irobe Oloko, email:irob3oloko@gmail.com, ip:127.0.0.1 at 2024-04-30 18:22:30.384210
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 04:24:44.617334
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 06:13:52.626495
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 23, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 23, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 06:41:58.619624
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 09:03:53.212271
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 09:04:13.565805
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 30, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+NameError: name 'get_rooms_for_user' is not defined
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 30, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+NameError: name 'get_rooms_for_user' is not defined
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 30, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+NameError: name 'get_rooms_for_user' is not defined
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 11:18:12.365090
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 11:23:41.963368
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 13:22:04.738222
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 13:29:52.833938
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 856-854-818
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-01 17:59:12.960946
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 18:00:13.199532
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-01 18:00:40.705670
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-01 18:01:02.225611
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 779-883-830
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-03 06:44:13.741414
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 827-846-257
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-03 07:45:00.905551
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 827-846-257
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 827-846-257
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 827-846-257
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-03 08:48:54.755372
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7de6600d5120>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7de6600d5120>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 57, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 18, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7de6600d5120>: Failed to establish a new connection: [Errno 111] Connection refused'))
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-03 10:43:17.982870
+INFO:root:tund3oloko@gmail.com logout, 127.0.0.1 at 2024-05-03 10:45:29.802197
+INFO:root:user:irobe Oloko, email:irob3oloko@gmail.com, ip:127.0.0.1 at 2024-05-03 10:45:36.314172
+INFO:root:irob3oloko@gmail.com logout, 127.0.0.1 at 2024-05-03 10:47:18.565228
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-03 10:47:22.864140
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-03 10:49:16.409358
+INFO:root:tund3oloko@gmail.com logout, 127.0.0.1 at 2024-05-03 10:49:30.343004
+INFO:root:user:irobe Oloko, email:irob3oloko@gmail.com, ip:127.0.0.1 at 2024-05-03 10:49:35.600707
+ERROR:engineio.server:Invalid session Kx3pHVkvwx1XJvS7AAG8 (further occurrences of this error will be logged with level INFO)
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-03 13:15:26.781175
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 448-620-987
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 492-945-815
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 04:34:53.588455
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 492-945-815
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-04 04:41:46.997064
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 492-945-815
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 492-945-815
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 04:47:21.733699
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 537, in _make_request
+    response = conn.getresponse()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 466, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 470, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 537, in _make_request
+    response = conn.getresponse()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 466, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 57, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 18, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 501, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7e45cd519d80>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7e45cd519d80>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 57, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 18, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7e45cd519d80>: Failed to establish a new connection: [Errno 111] Connection refused'))
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 429-256-519
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 10:28:01.725852
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 429-256-519
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 429-256-519
+ERROR:engineio.server:Invalid session 7T7sqWnhDwL1aSboAAAd (further occurrences of this error will be logged with level INFO)
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 13:48:57.181165
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 49, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 19:08:52.964841
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 552-514-435
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-066-780
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-04 21:11:51.043994
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 02:22:36.631311
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 04:22:50.972875
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 06:23:10.320806
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 08:25:20.406249
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/settings.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/settings.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 09:24:55.320807
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 09:25:01.376726
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 12:39:21.550174
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/settings.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/settings.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 12:44:54.909829
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 12:45:18.929725
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 12:45:25.110046
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 12:53:25.057788
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 12:53:30.576368
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 12:53:44.479154
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 12:53:49.118132
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 13:15:13.215289
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:15:21.438864
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 13:19:27.590609
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:19:32.560962
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 13:20:44.420132
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:20:48.893849
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 13:33:06.813678
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:33:11.674215
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-05 13:35:48.859301
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:35:53.688454
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 13:39:01.765462
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:05:25.915315
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:07:30.764738
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:07:38.555316
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:13:34.472008
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:18:07.861794
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:22:44.835413
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:26:01.691601
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:29:57.258615
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:32:49.259786
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 14:33:46.893441
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:28:40.910516
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:29:31.354892
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:29:38.159669
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:33:03.055140
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:33:29.204943
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:34:54.674210
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:42:40.771073
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-05 15:51:04.441144
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-05 16:00:26.956245
+INFO:root:tund3oloko@gmail.com logout, 127.0.0.1 at 2024-05-05 16:00:42.112692
+INFO:root:user:irobe Oloko, email:irob3oloko@gmail.com, ip:127.0.0.1 at 2024-05-05 16:00:47.897841
+INFO:root:irob3oloko@gmail.com logout, 127.0.0.1 at 2024-05-05 16:19:38.204564
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-05 16:19:42.571587
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 628-010-561
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 50, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 50, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 132-095-998
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 11:32:20.334055
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 132-095-998
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 132-095-998
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 50, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 19:08:51.519553
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 19:29:43.580346
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 19:33:11.296655
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 19:34:09.252609
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 20:08:51.693875
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 20:08:57.301784
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 20:18:48.041379
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 20:18:59.525259
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 20:23:05.057050
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 20:23:09.191022
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 20:29:24.492670
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 20:29:29.275813
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-06 20:31:50.723185
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 20:32:04.262804
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/notifications.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 50, in handle_connect
+    redis_client.hset('users', user_id, session_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/redis/commands/core.py", line 5012, in hset
+    raise DataError("'hset' with no key value pairs")
+redis.exceptions.DataError: 'hset' with no key value pairs
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-06 22:41:39.149806
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-07 13:35:12.670753
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-07 14:37:09.494560
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-08 12:03:33.884413
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 404-112-076
+WARNING:kombu.connection:No hostname was supplied. Reverting to default 'localhost'
+WARNING:kombu.connection:No hostname was supplied. Reverting to default 'localhost'
+WARNING:kombu.connection:No hostname was supplied. Reverting to default 'localhost'
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-10 09:53:35.776448
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7218797f9b70>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7218797f9b70>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7218797f9b70>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x72187982f1c0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x72187982f1c0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x72187982f1c0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x721878563a90>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563a90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563a90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x72187982c8b0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x72187982c8b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x72187982c8b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x721878563af0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563af0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563af0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x721878563be0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563be0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878563be0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x721878560250>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878560250>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x721878560250>: Failed to establish a new connection: [Errno 111] Connection refused'))
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/views.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7cc07c09dc90>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7cc07c09dc90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7cc07c09dc90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/views.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-10 09:56:56.533238
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-10 09:57:02.394582
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+WARNING:kombu.connection:No hostname was supplied. Reverting to default 'localhost'
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-10 12:04:00.701202
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/views.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/views.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/main.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-10 15:27:34.062941
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celery_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-567-734
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-10 17:33:59.452611
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-11 11:30:56.410481
+ERROR:engineio.server:message handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 823, in _handle_event
+    ret = handler(auth)
+TypeError: handle_connect() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 400, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 238, in connect
+    self.sock = self._new_conn()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x71b08c297e50>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x71b08c297e50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 640, in _handle_eio_message
+    self._handle_connect(eio_sid, pkt.namespace, pkt.data)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 534, in _handle_connect
+    success = self._trigger_event(
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 611, in _trigger_event
+    return handler(*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 282, in _handler
+    return self._handle_event(handler, message, namespace, sid,
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/flask_socketio/__init__.py", line 825, in _handle_event
+    ret = handler()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 59, in handle_connect
+    rooms = get_rooms_for_user(user_id)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py", line 19, in get_rooms_for_user
+    response = requests.get(USERS_POTS_URL)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=3000): Max retries exceeded with url: /api/pots/get/65c8c313b6caf1b43966f1ac/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x71b08c297e50>: Failed to establish a new connection: [Errno 111] Connection refused'))
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-11 11:39:18.428158
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-11 11:39:25.671512
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-11 11:42:54.180951
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-11 11:43:02.005197
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-11 11:45:06.504173
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-11 11:45:12.227558
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-11 11:46:58.717495
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-11 11:47:06.915913

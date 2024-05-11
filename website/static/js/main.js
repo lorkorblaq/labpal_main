@@ -93,8 +93,10 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
-
-
- 
-
+    socket.on('notifications', function(data) {
+        // Handle notification received from the server
+        console.log('Notification:', data.message);
+        // Display the notification to the user (e.g., using a toast or alert)
+    });
+    
 });

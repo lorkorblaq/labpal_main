@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import RegistrationForm, LoginForm, Resetpassword
 from .extensions import socketio
 from flask_socketio import send, emit
-from . import db_clinical
+from .db_clinicalx import db
 import requests
 import os
 import jwt
@@ -11,6 +11,9 @@ import datetime
 from functools import wraps
 from .mailer import *
 import logging
+from .notifications import *
+from .taskMaster import *
+
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -36,7 +39,7 @@ def time_left_until_expiration(token, secret_key):
         decoded_token = jwt.decode(token, secret_key)
         expiration_time = datetime.datetime.fromtimestamp(decoded_token['exp'])
         # print(expiration_time)
-        current_time = datetime.datetime.utcnow()
+        current_time = datetime.datetime.now()
         time_left = expiration_time - current_time
         return time_left
     except jwt.ExpiredSignatureError:
@@ -46,7 +49,7 @@ def time_left_until_expiration(token, secret_key):
         # Invalid token
         return None
 
-USERS_COLLECTION = db_clinical['users']   
+USERS_COLLECTION = db['users']   
 @auth.route("/signin-signup", methods=['GET'])
 def auth_page():
     login_form = LoginForm()
@@ -100,16 +103,12 @@ def signup_signin():
         # Fetch user from MongoDB based on the provided email
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
+            watch_inventory_changes.delay()
+
             identity ={}
             full_id = str(user['_id'])
             # session['session_id'] = session_id
             session['id'] = full_id
-            data_user_session = {
-                'session_id': 'session_id',
-                'user_id': full_id
-                }
-
-            # socketio.emit('my_response', {'data': 'Connected'})
 
             ip_address = request.remote_addr
             # user_agent = request.user_agent.string
@@ -139,8 +138,7 @@ def signup_signin():
             session['image'] = user.get('image', "")
 
             # stockAlert(email, name)
-            # watch_inventory_changes.delay(name, email)
-            # print(watch_inventory_changes)
+            print(watch_inventory_changes)
             secret_key = "LVUC5jSkp7jjR3O-"
             # secret_key = "LVUC5jSkp7jjR3O-"
             # print(secret_key)

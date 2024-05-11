@@ -29,12 +29,11 @@ body {
 #sidebar-wrapper:hover {
     width: 155px;
     position: sticky;
-    top: 0;
+    top: 0; 
     .bodyof {
         width: 80%;
         /* margin-left: 60px */
     }
-    
 } 
 
 #sidebar-wrapper .fas {
@@ -47,6 +46,7 @@ body {
 
 #sidebar-wrapper:hover span {
     display: inline;
+    color: white;
 }
 .location input {
     border: 2px solid #DDDDDD;
@@ -65,3 +65,11 @@ body {
     position: sticky;
     display: flex-end;
 }
+
+
+.su {
+    position: absolute; /* Position the div absolutely */
+    bottom: 0; 
+    width: 100%; /* Set the width of the div */
+}
+

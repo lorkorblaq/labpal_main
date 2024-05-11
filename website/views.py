@@ -5,6 +5,7 @@ from .auth import auth_required
 from flask_mail import Message, Mail
 from .extensions import socketio
 from flask_socketio import send, emit
+from  .taskMaster import watch_inventory_changes
 
 
 BASE = "http://0.0.0.0:3000/api"

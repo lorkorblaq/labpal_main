@@ -2,14 +2,13 @@ $(function () {
     console.log("expiration.js loaded");
     const columnsLot = ['item', 'lot_numb', 'expiration', 'quantity', 'created at'];
     const headersLot = ['Item', 'Lot','Expiration', 'Quantity', 'Created At'];
-    BaseUrl = "http://13.53.70.208:3000/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "http://13.53.70.208:3000/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
 
     function fetchData(url) {
         // Fetch data from the provided URL
         return $.get(url);
     }
-
 
     function renderInventoryTable(data, columns) {
         if ($.fn.DataTable.isDataTable('#inventory_table')) {
