@@ -1,42 +1,18 @@
-from flask import Flask, jsonify, request, url_for, redirect
-from functools import wraps
-from flask_redis import FlaskRedis# import jwt
-from .redis_config import redis_client
-# import os
-
-from flask_mail import Mail
+import os
 from datetime import timedelta
-from celery_config import celery
+from flask import Flask
+from flask_mail import Mail, Message
+from flask_redis import FlaskRedis
 
 from website.events import socketio
-# from flask_socketio import SocketIO
+from website.auth import auth
+from website.settings import settings
+from website.views import views
+# from website.celery_config import make_celery
 
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-# from dotenv import load_dotenv, find_dotenv
-import os
-
-password="518Oloko."
-uri_development = "mongodb://localhost:27017"
-uri_production = f"mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
-client = MongoClient(uri_production, server_api=ServerApi('1'))
-try:
-    client.admin.command('ping')
-    print("You successfully connected to Clinicalx MongoDB!")
-except Exception as e:  
-    print(f"error in connection:{e}")
-
-db_clinical = client.clinicalx
-
-app = Flask(__name__)
-mail = Mail(app)
 def create_app():
-    socketio.init_app(app)
-    from .views import views
-    from .auth import auth
-    from .settings import settings
-
-    # from .notification import notification
+    app = Flask(__name__)
+    # Configuration settings
     app.config['SECRET_KEY'] = 'LVUC5jSkp7jjR3O-'
     app.config['MAIL_SERVER'] = 'mail.digitalinkx.com'
     app.config['MAIL_PORT'] = 465
@@ -45,28 +21,23 @@ def create_app():
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_DEFAULT_SENDER'] = ('Clinicalx','alertclinicalx@digitalinkx.com')
-    app.config['SESSION_TYPE'] = 'redis'  # You can change this to other backends (e.g., 'redis')
-    app.config['SESSION_REDIS'] = 'redis://localhost:6379/0'  # Replace with your Redis server URL  
-    app.config['SESSION_PERMANENT'] = True  # Session will not expire on browser close
-    app.config['SESSION_USE_SIGNER'] = True  # Sign the session cookie for added security
-    app.config['SESSION_KEY_PREFIX'] = 'labpal'  # Change this to a unique string
-    app.config['PERMANENT_SESSION_LIFETIME'] =  timedelta(hours=2)  # Set the session timeout
-    # app.config['SESSION_FILE_DIR'] = '/tmp/sessions'  # Directory for storing session data
+    app.config['SESSION_TYPE'] = 'redis'
+    app.config['SESSION_REDIS'] = 'redis://localhost:6379/0'
+    app.config['SESSION_PERMANENT'] = True
+    app.config['SESSION_USE_SIGNER'] = True
+    app.config['SESSION_KEY_PREFIX'] = 'labpal'
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
+    app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0/'
+    app.config['REDIS_URL'] = "redis://localhost:6379/0"
+    app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 
-    app.config.update(
-    CELERY_BROKER_URL='pyamqp://blaq:518Oloko.@localhost:5672//',
-    CELERY_RESULT_BACKEND='rpc://'
-    )
-    celery.conf.update(app.config)
+    # Initialize extensions
+    socketio.init_app(app)
+    mail = Mail(app)
+    # celery = make_celery(app)
 
-
-    
-    # from .dashboard import dash
-    # print(app.config)
-
+    # Register blueprints
     app.register_blueprint(views, url_prefix="")
     app.register_blueprint(settings, url_prefix="/settings")
-    # app.register_blueprint(dash, url_prefix="/dashboard")
-
     app.register_blueprint(auth, url_prefix="")
     return app

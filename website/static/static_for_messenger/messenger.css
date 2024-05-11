@@ -18,16 +18,13 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+/* article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
-}
+} */
 
 ol, ul {
 	list-style: none;
@@ -35,7 +32,6 @@ ol, ul {
 
 .window-wrapper{
 	background: #fff;
-	margin: 25px auto;
 	border-radius: 6px;
 	box-shadow: 0 0 16px rgba(89, 129, 240, 0.801);
 	overflow: hidden;
@@ -257,6 +253,7 @@ ol, ul {
 	border-left: 5px solid #cfdae1;
 	border-top: 1px solid #cfdae1;
 	width: 175px;
+	font-size: small;
 }
 .right-tabs > ul.tabs{
 	overflow: hidden;
@@ -290,9 +287,7 @@ ol, ul {
 .right-tabs > ul.tabs > li:first-child > a{
 	border-left: none;
 }
-.right-tabs > ul.tabs > li > a >i{
-	font-size: 18px
-}
+
 ul.tabs-container{
 	padding: 10px;
 	color: #6e7f91;
@@ -369,7 +364,11 @@ ul.tabs-container{
 	width: 7px;
 }
 
-
+button {
+	border-radius: 45px;
+	width: 70px;
+	height: 35px;
+}
 
 
 

@@ -56,5 +56,3 @@ def notifications():
         # "mobile": session['mobile']
     }
     return render_template("notifications.html", name=session['name'], data=data)
-
-

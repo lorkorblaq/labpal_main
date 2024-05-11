@@ -36,7 +36,7 @@ main {
 }
 
 button {
-    /* border-radius: 45; */
+    border-radius: 45px;
     color: black;
     width: 150px;
     background-color: hsl(208, 56%, 67%);
@@ -48,6 +48,7 @@ button {
 
 button:hover {
     opacity: 0.7;
+    border-radius: 50px;
 }
 
 .s-lab {

@@ -9,34 +9,88 @@
         <div class="container mt-5 mb-2">
             <h1>Inventory</h1>
             <button  id="inventory_b" ><i class="fas fa-database"></i> Stock Levels</button>
-            <button  id="inventory_b" ><i class="fas fa-database"></i> Make Request</button>
-
+            <button  id="request_b" ><i class="fas fa-database"></i> Requisite</button>
+            <br> <br>
             <div class="" id="drawer_invent">
-                    <select class="form-control" id="inventory_filter">
-                        <option value="" disabled selected>Select Stock filter</option>
-                        <option value="stock">Stock, i.e all items </option>
-                        <option value="alert">Alert Stock, i.e less than 5 vials </option>
-                        <option value="safe">Safe Stock, i.e less than 10 vials</option>
-                        <option value="reorderLevel">Reorder threshold i.e items at or less than the reorder level</option>
-                    </select>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="inventory_table">
-                            <thead class="head thead-dark">
-                            <tr id="inventory_head">
-                                <!-- Headers for the expired items table -->
-                            </tr>
-                            </thead>
-                            <tbody id="inventory_body" class="body">
-                                <!-- Placeholder for dynamic table content -->
-                            </tbody>
-                        </table>
-                        <br>
-                        <button data-toggle="collapse" data-target="#drawer" aria-expanded="false" aria-controls="drawer">
-                        Close Drawer
-                        </button>
-                    </div>                  
-                </div>
+                <select class="form-control" id="inventory_filter">
+                    <option value="" disabled selected>Select Stock filter</option>
+                    <option value="stock">Stock, i.e all items </option>
+                    <option value="alert">Alert Stock, i.e less than 5 vials </option>
+                    <option value="safe">Safe Stock, i.e less than 10 vials</option>
+                    <option value="reorderLevel">Reorder threshold i.e items at or less than the reorder level</option>
+                </select>
+                <div class="table-responsive drawer" id="ex-inventory_table">
+                    <table class="table table-bordered table-striped" id="inventory_table">
+                        <thead class="head thead-dark">
+                        <tr id="inventory_table_head">
+                            <!-- Headers for the expired items table -->
+                        </tr>
+                        </thead>
+                        <tbody id="inventory_table_body" class="body">
+                            <!-- Placeholder for dynamic table content -->
+                        </tbody>
+                    </table>
+                    <!-- <button class="export_button">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                    <button class="print_button" >
+                        <i class="fas fa-print"></i> Print
+                    </button>  -->
+                </div>                  
             </div>
+            <div class="invent" id="request_invent" style="display: none;">
+                <select class="form-control" id="bench_filter">
+                    <option value="" disabled selected>Select Bench</option>
+                    <option value="ENDOSEROLOGY">Endoserology </option>
+                    <option value="CHEMISTRY">Chemistry</option>
+                    <option value="HAEMATOLOGY">Haematology</option>
+                    <option value="SUNDRY">Sundry</option>
+                </select>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="category_dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="category_dropdown">
+                        <div class="dropdown-item"><input type="checkbox" id="check_all"> All</div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item"><input type="checkbox" class="category_filter" value="REAGENT"> Reagent</div>
+                        <div class="dropdown-item"><input type="checkbox" class="category_filter" value="CONTROL"> Control</div>
+                        <div class="dropdown-item"><input type="checkbox" class="category_filter" value="CALIBRATOR"> Calibrator</div>
+                        <div class="dropdown-item"><input type="checkbox" class="category_filter" value="CONSUMABLE"> CONSUMABLE</div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="quantity" placeholder="Number of days">
+
+                        </div>
+                    </div>
+                </div>
+                <button id="submit_request" class="btn">Request</button>
+                <div class="table-responsive drawer" id="ex-request_invent_table" style="display: none;">
+                    <table class="table table-bordered table-striped" id="request_invent_table">
+                        <thead class="head thead-dark">
+                        <tr id="request_invent_table_head">
+                            <!-- Headers for the expired items table -->
+                        </tr>
+                        </thead>
+                        <tbody id="request_invent_table_body" class="body">
+                            <!-- Placeholder for dynamic table content -->
+                        </tbody>
+                    </table>
+                    <!-- <button id="close_drawer_button" class="" data-toggle="collapse" data-target=".drawer" aria-expanded="false" aria-controls="drawer">
+                        Close Drawer
+                    </button>       -->
+                    <!-- <button id="export_request_button">
+                        <i class="fas fa-file-export"></i> Export
+                    </button>
+                    <button id="print_request_button" >
+                        <i class="fas fa-print"></i> Print
+                    </button>                 -->
+                </div> 
+            </div>      
         </div>
     </main>
 {% endblock %}

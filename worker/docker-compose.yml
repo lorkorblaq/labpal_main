@@ -1,0 +1,21 @@
+version: 3
+
+services:
+    redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+        - "6379:6379"
+    command: redis-server --requirepass password
+    networks:
+        - clinicalx_network
+    volumes:
+        - redis_data:/data
+
+networks:
+    clinicalx_network:
+        driver: bridge
+volumes:
+    redis_data:
+        driver: local

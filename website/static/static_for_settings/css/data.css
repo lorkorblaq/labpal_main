@@ -1,0 +1,12 @@
+
+#drop-area {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 500px;
+    text-align: center;
+    color: #ccc;
+}
+
+#file-input {
+    display: none;
+}

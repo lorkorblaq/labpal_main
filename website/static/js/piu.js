@@ -1,8 +1,8 @@
 $(function () {
     console.log("piu.js loaded");
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine', 'quantity', 'description', ''];
-    // BaseUrl = "http://0.0.0.0:3000/api";
-    BaseUrl = "http://13.53.70.208:3000/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "http://13.53.70.208:3000/api"
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
@@ -45,9 +45,9 @@ $(function () {
             case !machine:
                 alert("Please enter a machine.");
                 break;
-            case !bench:
-                alert("Please enter a bench.");
-                break;
+            // case !bench:
+            //     alert("Please enter a bench.");
+            //     break;
             default:
                 // Create an object with the form data
                 let formData = {

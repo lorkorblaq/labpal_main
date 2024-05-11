@@ -11,8 +11,8 @@
 
     <div class="window-wrapper">
             <div class="conversation-list">
-                <ul class="">
-                    <li><a href="#"><i class="fas fa-users"></i><span>Pots</span></a></li>
+                <ul class="group">
+                    <li><a href="#"><i class="fas fa-users"></i>Pots</a></li>
                     <ul class="potsContainer">
                         <!-- <li class="item active"><a href="#"><i class="fa fa-users"></i><span>Blaq pot</span><i class="fa fa-times"></i></a></li> -->
 
@@ -20,8 +20,8 @@
                         <li class="item active"><a href="#"><i class="fa fa-users"></i><span>Bad pot</span><i class="fa fa-times"></i></a></li> -->
                     </ul>
                 </ul>
-                <ul class="">
-                    <li class="item"><a href="#"><i class="fas fa-user"></i><span>Contacts</span></a></li>
+                <ul class="private">
+                    <li class="item"><a href="#"><i class="fas fa-user"></i>Contacts</a></li>
                     <ul class="contactsContainer">
                         <!-- <li><a href="#"><i class="fas fa-circle online"></i></i><span>Cucu Ionel</span><i class="fas fa-times"></i></a></li>
                         <li><a href="#"><i class="fas fa-circle offline"></i></i><span>Ioana Marcu</span><i class="fas fa-times"></i></a></li> -->
@@ -51,10 +51,11 @@
                 </div>
                 <div class="input-area">
                     <div class="input-wrapper">
-                        <input type="text" value="" class="send-input">
+                        <input type="text" value="" class="send-input" style="width: 100%;">
                     </div>
                     <i class="fas fa-paperclip"></i>
-                    <input type="button" value="Send" class="send-btn">
+                    <button type="button" value="Send" class="send-btn">Send
+                    </button>
                 </div>
             </div>
             <div class="right-tabs">
@@ -67,9 +68,41 @@
                 </ul>
                 <ul class="tabs-container">
                     <li class="add-contact fa fa-plus"> <a href="#">Add contact</a></li>
-                    <li class="contact-input" style="display: none;">
+                    <li class="contact-input-add" style="display: none;">
                         <input type="text" placeholder="Enter contact ID">
                         <button class="add-btn">Add</button>
+                    </li>
+
+                    <li class="delete-contact fa fa-x"> <a href="#">Delete contact</a></li>
+                    <li class="contact-input-delete" style="display: none;">
+                        <input type="text" placeholder="Enter contact ID">
+                        <button class="delete-btn">Delete</button>
+                    </li>
+                    <hr>
+
+                    <li class="create-pot fa fa-plus"> <a href="#">Create Pot</a></li>
+                    <li class="pot-input-create" style="display: none;">
+                        <input type="text" placeholder="Enter pot name">
+                        <input type="text" id="pot-descrip" placeholder="Enter pot description">
+                        <button class="create-pot-btn">Create</button>
+                    </li>
+
+                    <li class="join-pot fa fa-plus"> <a href="#">Join Pot</a></li>
+                    <li class="pot-input-join" style="display: none;">
+                        <input type="text" placeholder="Enter pot ID">
+                        <button class="join-pot-btn">Join</button>
+                    </li>
+
+                    <li class="leave-pot fa fa-x"> <a href="#">Leave Pot</a></li>
+                    <li class="pot-input-leave" style="display: none;">
+                        <input type="text" placeholder="Enter pot ID">
+                        <button class="leave-pot-btn">Leave</button>
+                    </li>
+
+                    <li class="delete-pot fa fa-x"> <a href="#">Delete Pot</a></li>
+                    <li class="pot-input-delete" style="display: none;">
+                        <input type="text" placeholder="Enter pot ID">
+                        <button class="delete-pot-btn">Delete</button>
                     </li>
                 </ul>
             </div>

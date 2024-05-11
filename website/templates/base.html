@@ -21,74 +21,71 @@
         <div class="row container-fluid">
             <!-- Sidebar -->
             <div class="" id="wrapper">
-                <div class="bg-light border-right push-down1" id="sidebar-wrapper">
-                    <div class="list-group list-group-flush tabs push-down1.2" >
-                        <!-- <a href="http://13.53.70.208:8050/" class="list-group-item list-group-item-action bg-light">
+                <div class="bg-light border-right push-down1 bg-dark" id="sidebar-wrapper">
+                    <!-- <div class="list-group list-group-flush  tabs  push-down1.2 " > -->
+                        <!-- <a href="http://13.53.70.208:8050/" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a> -->
-                        <a href="/inventory" id="inventory" class="list-group-item list-group-item-action bg-light">
+                        <div class="all">
+                        <a href="/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-boxes icon"></i>
                             <span>Inventory</span>
                         </a>
-                        <a href="/expiration" id="inventory" class="list-group-item list-group-item-action bg-light">
+                        <a href="/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-calendar-times icon"></i>
                             <span>Expiration</span>
                         </a>
-                        <a href="/in-use" class="list-group-item list-group-item-action bg-light">
+                        <a href="/in-use" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-play"></i>
                             <span>In Use</span>
                         </a>
-                        <a href="/channels" class="list-group-item list-group-item-action bg-light"  >
+                        <a href="/channels" class="list-group-item list-group-item-action bg-dark"  >
                             <i class="fas fa-road icon"></i>
                             <span>Channels</span>
                         </a>
-                        <a href="/port" class="list-group-item list-group-item-action bg-light" >
-                            <i class="fas fa-ship icon"></i>
-                            <span>Port</span>
-                        </a>
-                        <a href="/chat" class="list-group-item list-group-item-action bg-light"  style="border-radius: 30px;">
+
+                        <a href="/chat" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-users icon"></i>
                             <span>Team</span>
                         </a>
+                        </div>
                            <!--
                         <a href="/chat" class="list-group-item list-group-item-action bg-light"  style="border-radius: 30px;">
                             <i class="fas fa-comments"></i>
                             <span>Labpal</span>
                         </a> -->
-                        <a href="/user-profile" class="list-group-item list-group-item-action bg-light">
+                        <div class="su">
+                        <a href="/user-profile" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-user icon"></i>
-                            <span>User profile</span>
-                            <!-- <div class="my-account">
-                                <div class="image">
-                                    <img src="https://secure.gravatar.com/avatar/de76e03aa6b5b0bf675c1e8a990da52f?s=64">
-                                    <i class="fa fa-circle online"></i>
-                                </div>
-                                <div class="name">
-                                    <span>Cucu Ionel</span>
-                                    <i class="fa fa-angle-down"></i>
-                                    <span class="availability">Available</span>
-                                </div>
-                            </div> -->
+                            <span>Profile</span>
                         </a>
-                    </div>
+                        <a href="/settings" class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        </div>
+                    <!-- </div> -->
                 </div>
             </div>
             <!-- Page Content -->
             <div class="bodyof">
-                <nav class="search">
+                <br>
+                <br>
+                <!-- <nav class="search">
                     <form class="form-inline s-search">
                         <div class="location">
                             <input class="form-control mr-sm-2" type="search" id="InputItemMain" placeholder="Item" aria-label="Search">
                             <button class="btn btn-outline-danger my-2 my-sm-0"  type="submit">Search</button>
                         </div>
                     </form>
-                </nav>
+                </nav> -->
 
                 <div class="bodyofbody">
                     {% block body %}
                     {% endblock %}
                 </div>
+                <ul id="alerts"></ul>
                 <footer>
                    
                 </footer>

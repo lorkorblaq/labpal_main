@@ -1,7 +1,7 @@
 $(function () {
     console.log("user-profile.js loaded");
-    Baseurl= 'http://13.53.70.208:3000/api'
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // Baseurl= 'http://13.53.70.208:3000/api'
+    BaseUrl = "http://0.0.0.0:3000/api";
 
     function setCookie(name, value, hours) {
         var expires = "";
@@ -27,8 +27,8 @@ $(function () {
         return null;
     }
     const user_id = getCookie('user_id');
-    const userUrl = `${BaseUrl}user/get/${user_id}`
-    const put_url = `${BaseUrl}user/put/${user_id}/`;
+    const userUrl = `${BaseUrl}/user/get/${user_id}`
+    const put_url = `${BaseUrl}/user/put/${user_id}/`;
     // const url_item_get = `${BaseUrl}/user/put/`;
     // const url_item_put = `${BaseUrl}/item/put/`;
     $.get(userUrl, function(userData) {
