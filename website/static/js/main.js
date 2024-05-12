@@ -93,9 +93,24 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
+    toastr.options = {
+        "timeOut": 0,          // Set timeOut to 0 to keep the notification until closed
+        "extendedTimeOut": 0,  // Set extendedTimeOut to 0 to keep the notification until closed
+        "tapToDismiss": true, // Disable tap to dismiss
+        "positionClass": "toast-bottom-right", // Position of the notification
+        "iconClass": 'toast-success-icon', // Custom icon class
+        "escapeHtml": true,    // Escape HTML in message
+        "showMethod": 'slideDown', // Show animation method
+        "hideMethod": 'slideUp',    // Hide animation method
+        "showEasing": 'swing',  // Show animation easing
+        "hideEasing": 'linear', // Hide animation easing
+        "showDuration": 300,    // Show animation duration
+        "hideDuration": 300     // Hide animation duration
+    };
     socket.on('notifications', function(data) {
         // Handle notification received from the server
         console.log('Notification:', data.message);
+        toastr.success(data.message, 'Notification');
         // Display the notification to the user (e.g., using a toast or alert)
     });
     

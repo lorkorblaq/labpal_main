@@ -1,6 +1,6 @@
 from celery import shared_task
 from .db_clinicalx import db
-from flask_socketio import SocketIO, emit
+from .extensions import socketio
 from .celery_config import celery
 # from .mailer import mailer
 # from .mailer import mailer
@@ -12,13 +12,11 @@ ITEMS_COLLECTION = db['items']
 @celery.task()
 def watch_inventory_changes():
     pipeline = [{'$match': {'operationType': 'update'}}]
-    # with app.ap/p_context():
     while True:
         try:
             with ITEMS_COLLECTION.watch(pipeline, full_document='updateLookup') as stream:
                 print("watcher stocks")
                 subject = "Stock Alert"
-                print(stream)
                 for change in stream:
                     print(change)
                     if (
@@ -28,10 +26,8 @@ def watch_inventory_changes():
                     ):
                         item_name = change["fullDocument"]["item"]
                         stock_level = change["fullDocument"]["in stock"]
-                        alert_message = f'{item_name}:{stock_level}'
-                        
-                        # emit('notification', {'message': alert_message}, broadcast=True)
-                        return print(alert_message)
-
+                        alert_message = f'{item_name} is below reorder level with {stock_level} vial(s) left,\nKindly restock'
+                        socketio.emit('notifications', {'message': alert_message})
+                        # print(alert_message)  # Print for debugging purposes
         except Exception as e:
             print(f"An error occurred: {e}")
