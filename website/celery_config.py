@@ -23,4 +23,4 @@ celery = Celery(
 #     celery.conf.update(app.config)
 #     return celery
 # print(celery)
-# celery.conf.broker_connection_retry_on_startup = True
+celery.conf.broker_connection_retry_on_startup = True
