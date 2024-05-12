@@ -73,3 +73,9 @@ body {
     width: 100%; /* Set the width of the div */
 }
 
+.toast-container {
+    font-family: "Font Awesome"; /* If you're using a font icon library like Font Awesome */
+    font-size: 24px; /* Adjust the font size of the icon */
+    margin-right: 10px; /* Optional: Adjust the spacing between the icon and the notification message */
+    background-color: antiquewhite;
+}
