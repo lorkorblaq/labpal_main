@@ -26,7 +26,7 @@ def watch_inventory_changes():
                     ):
                         item_name = change["fullDocument"]["item"]
                         stock_level = change["fullDocument"]["in stock"]
-                        alert_message = f'{item_name} is below reorder level with {stock_level} vial(s) left,\nKindly restock'
+                        alert_message = f"{item_name} is below reorder level with {stock_level} vial(s) left, kindly restock"
                         socketio.emit('notifications', {'message': alert_message})
                         # print(alert_message)  # Print for debugging purposes
         except Exception as e:
