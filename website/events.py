@@ -4,14 +4,13 @@ from flask import request, session
 from .redis_config import redis_client
 from datetime import datetime
 import requests
-# from .taskMaster import watch_inventory_changes
+from flask import Flask
+import redis
 
-
+# socketio = SocketIO(message_queue='redis://localhost:6379/0')
+# print(redis_client.hgetall('users'))
 API_BASE = 'http://127.0.0.1:3000/api/'
-# users = []
-# redis_client.set('foo', 'car')
-# a=redis_client.get('foo')
-# print(a)
+
 def get_rooms_for_user(user_id):
     user_id = session.get('id') 
 
@@ -23,24 +22,16 @@ def get_rooms_for_user(user_id):
         for pot in pots_data:
             room_info = {'room_id': str(pot['_id']), 'name': pot['name']}
             rooms.append(room_info)   
-    # Implement your logic to fetch rooms associated with the user_id from the database
-    # This function should return a list of dictionaries, each containing room information
-    # For example:
-    # rooms = [{'room_id': 'room1'}, {'room_id': 'room2'}, ...]
-    # Replace this with your actual database query
     else:
         print("Error fetching user's pots:", response.text)
     
     return rooms
 
-
- # Get the user ID from the session
-
 @socketio.on('connect')
 def handle_connect():
     print('Client events connected')
     user_id = session.get('id') 
-
+    print(user_id)
     session_id = request.sid  # Get the session ID from the request
     
     # Check if user_id is already present in the 'users' hash
@@ -52,8 +43,8 @@ def handle_connect():
         print(f"Added User ID '{user_id}' to users hash.")
     
     # Store session ID and user ID in the 'sessions' hash
-    # redis_client.hset('sessions', session_id, user_id)
-    # print('Users:', redis_client.hgetall('users'))
+    redis_client.hset('sessions', session_id, user_id)
+    print('Users:', redis_client.hgetall('users'))
 
 
     rooms = get_rooms_for_user(user_id)
@@ -66,14 +57,10 @@ def handle_connect():
     # watch_inventory_changes()
     # print(watch_inventory_changes)
 
-@socketio.on('notifications')
-def stock_alerts(data):
-    emit('stock_alerts', data, broadcast=True)
-    print('Client notification connected')
-
 @socketio.on('private_message')
 def handle_private_message(data):
     payload = data['payload']
+    print(payload)
     recipient_id = data['recipient_id']
     sender_session_id = request.sid
     payload = {'senderName':session.get('name'),
@@ -113,7 +100,3 @@ def handle_public_message(data):
         # Handle the case when the recipient ID does not exist in the 'users' hash
         print(f"Room ID '{room_id}' not found")
 
-@socketio.on('stock_alerts')
-def stock_alerts(data):
-    emit('stock_alertt', data, broadcast=True)
-    print('Client notification connected')

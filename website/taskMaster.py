@@ -2,13 +2,10 @@ from celery import shared_task
 from .db_clinicalx import db
 from .extensions import socketio
 from .celery_config import celery
-# from .mailer import mailer
-# from .mailer import mailer
-# from celery import shared_task
+
 
 ITEMS_COLLECTION = db['items']
-# # items = ITEMS_COLLECTION.find()
-# app, celery = create_app()
+
 @celery.task()
 def watch_inventory_changes():
     pipeline = [{'$match': {'operationType': 'update'}}]
@@ -31,3 +28,10 @@ def watch_inventory_changes():
                         # print(alert_message)  # Print for debugging purposes
         except Exception as e:
             print(f"An error occurred: {e}")
+
+
+@celery.task()
+def chat_notification():
+    print("chat notification")
+    socketio.emit('notifications', {'message': 'New message received'})
+    print("New message received")
