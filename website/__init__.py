@@ -4,7 +4,8 @@ from flask import Flask
 from flask_mail import Mail, Message
 from flask_redis import FlaskRedis
 
-from website.events import socketio
+# from website.events import socketio
+from .extensions import socketio
 from website.auth import auth
 from website.settings import settings
 from website.views import views
@@ -32,6 +33,7 @@ def create_app():
     app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 
     # Initialize extensions
+    
     socketio.init_app(app)
     mail = Mail(app)
     # celery = make_celery(app)

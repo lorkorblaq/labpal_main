@@ -9958,3 +9958,294 @@ INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-12 09:45:10.024225
+INFO:root:user:baddo oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-05-12 09:46:52.738207
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-12 10:15:03.098278
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-12 10:15:12.465136
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+ERROR:engineio.server:connect handler error
+Traceback (most recent call last):
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/engineio/server.py", line 434, in run_handler
+    return self.handlers[event](*args)
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/server.py", line 623, in _handle_eio_connect
+    self.manager.initialize()
+  File "/home/blaq/Desktop/clinicalx/clinicalx_main/mainenv/lib/python3.10/site-packages/socketio/redis_manager.py", line 64, in initialize
+    raise RuntimeError(
+RuntimeError: Redis requires a monkey patched socket library to work with eventlet
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-12 11:00:49.500228
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-12 11:00:57.446166
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-05-12 11:02:20.685679
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-12 11:02:27.067778
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/redis_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/redis_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-13 04:31:54.140672
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/redis_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/redis_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/redis_config.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:root:user:Olorunfemi Oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-05-13 10:14:14.250719
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/events.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 108-565-297
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/taskMaster.py', reloading
+INFO:werkzeug: * Restarting with stat

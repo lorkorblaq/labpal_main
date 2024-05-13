@@ -319,11 +319,12 @@ $(function(){
  
 	function performPrivSend() {
 		const the_message = $('.send-input').val();
+        console.log(clickedUserId);
         data = {
             recipient_id: clickedUserId,
             payload: the_message
         }
-        // console.log(data);
+        console.log(data);
 		socket.emit('private_message', data);
 
 		$('.send-input').val('');
@@ -385,6 +386,7 @@ $(function(){
     }
 
 	function handleGroupChat(data) {
+        console.log('i dy here')
         const ul = $('.chat-list ul');
         const li = $('<li class="chat-list-item"></li>');
  
