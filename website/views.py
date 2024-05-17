@@ -6,6 +6,7 @@ from flask_mail import Message, Mail
 from .extensions import socketio
 from flask_socketio import send, emit
 from  .taskMaster import *
+from .forms import Newpassword
 
 
 BASE = "http://0.0.0.0:3000/api"
@@ -79,4 +80,5 @@ def userProfile():
 @views.route("/settings",  strict_slashes=False)
 @auth_required
 def settings():
-    return render_template("settings.html", name=session['name'], email=session['email'])
+    new_pass = Newpassword()
+    return render_template("settings.html", new_pass=new_pass, name=session['name'], email=session['email'])

@@ -1,6 +1,6 @@
 from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response,jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from .forms import RegistrationForm, LoginForm, Resetpassword
+from .forms import RegistrationForm, LoginForm, Newpassword
 from .extensions import socketio
 from flask_socketio import send, emit
 from .db_clinicalx import db
@@ -177,17 +177,33 @@ def logout():
     response.delete_cookie('token')
     return response
 
-@auth.route('/reset-password', methods=['GET','POST'])
+@auth.route('/settings', methods=['POST'])
 def password_reset():
-    resetForm = Resetpassword()
+    new_pass = Newpassword()
     if request.method == 'POST':
-        email = resetForm.email.data
-        user = USERS_COLLECTION.find({"email":email})
-        if user:
-            flash("The reset link has been sent to your mail.")
-            return redirect(url_for('auth.auth_page'))
-
+        current_pass = new_pass.current_password.data
+        new_pass = new_pass.new_password.data
+        confirm_pass = new_pass.confirm_password.data
+        if new_pass == confirm_pass:
+            user = USERS_COLLECTION.find_one({"email":session['email']})
+            if user and check_password_hash(user['password'], current_pass):
+                hashed_password = generate_password_hash(new_pass)
+                USERS_COLLECTION.update_one({"email":session['email']}, {"$set": {"password": hashed_password}})
+                flash("Password reset successful")
+                return redirect(url_for('auth.auth_page'))
+            else:
+                flash("Invalid password")
+                return redirect(url_for('auth.password_reset'))
         else:
-            flash('Email address does not exist')
+            flash("Passwords do not match")
             return redirect(url_for('auth.password_reset'))
+        
+        # user = USERS_COLLECTION.find({"email":email})
+        # if user:
+        #     flash("The reset link has been sent to your mail.")
+        #     return redirect(url_for('auth.auth_page'))
+
+        # else:
+        #     flash('Email address does not exist')
+        #     return redirect(url_for('auth.password_reset'))
 

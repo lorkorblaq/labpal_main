@@ -77,7 +77,7 @@ $(function () {
             }
         });
     });
-        
+
     // Function to display the response data in a table
     function fetchData(url) {
         // Fetch data from the provided URL
@@ -113,6 +113,100 @@ $(function () {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
         }
+
+    function exportJSONData(data) {
+        // Convert JSON data to CSV format
+        var csvContent = convertJSONToCSV(data);
+        
+        // Create a blob object from the CSV content
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        
+        // Create a temporary anchor element to trigger the download
+        var link = document.createElement('a');
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'data.csv');
+        document.body.appendChild(link);
+        
+        // Trigger the download
+        link.click();
+        document.body.removeChild(link);
+    }
+    // Function to convert JSON data to CSV format
+    function convertJSONToCSV(data) {
+        var csv = [];
+        // Extract column headers from the first object in the array
+        var headers = Object.keys(data[0]);
+        csv.push(headers.join(','));
+        
+        // Iterate over each object in the array
+        data.forEach(function(obj) {
+            var row = [];
+            // Iterate over each property in the object
+            headers.forEach(function(header) {
+                // Add the property value to the row array
+                row.push(obj[header]);
+            });
+            // Join row array with comma and push to CSV array
+            csv.push(row.join(','));
+        });
+        
+        // Combine rows into a single CSV string
+        var csvContent = csv.join('\n');
+        return csvContent;
+    }
+    // Function to print the table content
+    function printJSONDataAsCSV(jsonData) {
+        // Add header row
+        var headerRow = [];
+        for (var key in jsonData[0]) {
+            if (jsonData[0].hasOwnProperty(key)) {
+                headerRow.push(key);
+            }
+        }
+        var csvContent = '<table border="2">';
+        // Add header row to CSV content
+        csvContent += '<thead><tr>';
+        headerRow.forEach(function(header) {
+            csvContent += `<th>${header}</th>`;
+        });
+        csvContent += '</tr></thead>';
+        
+        // Convert JSON data to CSV format
+        jsonData.forEach(function(item) {
+            var row = [];
+            for (var key in item) {
+                if (item.hasOwnProperty(key)) {
+                    row.push(item[key]);
+                }
+            }
+            csvContent += '<tr>'; // Add row start tag
+            row.forEach(function(cell) {
+                csvContent += `<td>${cell}</td>`;
+            });
+            csvContent += '</tr>'; // Add row end tag
+            csvContent += '<tr><td colspan="' + headerRow.length + '"><hr></td></tr>'; // Add horizontal line
+        });
+        csvContent += '</table>';
+    
+        // Open a new window to display the CSV content
+        var printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Table Print</title></head><body>');
+        printWindow.document.write(csvContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+    // Event listeners for export and print buttons
+    $('#export_request_button').click(function() {
+        console.log("export button clicked");
+        exportTableToCSV('request_invent_table');
+    });
+
+    $('#print_request_button').click(function() {
+        printTable('request_invent_table');
+    });
+
     function renderInventoryTable(data, columns) {
         if ($.fn.DataTable.isDataTable('#inventory_table')) {
             $('#inventory_table').DataTable().clear().destroy();
@@ -124,6 +218,7 @@ $(function () {
             // responsive: true
         });
         }
+
     async function loadInventoryData() {
         try {
             const data = await fetchData(`${BaseUrl}/items/get/`);
@@ -231,96 +326,5 @@ $(function () {
         });
     }
     // Function to export JSON data to CSV
-    function exportJSONData(data) {
-        // Convert JSON data to CSV format
-        var csvContent = convertJSONToCSV(data);
-        
-        // Create a blob object from the CSV content
-        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        
-        // Create a temporary anchor element to trigger the download
-        var link = document.createElement('a');
-        var url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'data.csv');
-        document.body.appendChild(link);
-        
-        // Trigger the download
-        link.click();
-        document.body.removeChild(link);
-    }
-    // Function to convert JSON data to CSV format
-    function convertJSONToCSV(data) {
-        var csv = [];
-        // Extract column headers from the first object in the array
-        var headers = Object.keys(data[0]);
-        csv.push(headers.join(','));
-        
-        // Iterate over each object in the array
-        data.forEach(function(obj) {
-            var row = [];
-            // Iterate over each property in the object
-            headers.forEach(function(header) {
-                // Add the property value to the row array
-                row.push(obj[header]);
-            });
-            // Join row array with comma and push to CSV array
-            csv.push(row.join(','));
-        });
-        
-        // Combine rows into a single CSV string
-        var csvContent = csv.join('\n');
-        return csvContent;
-    }
-    // Function to print the table content
-    function printJSONDataAsCSV(jsonData) {
-        // Add header row
-        var headerRow = [];
-        for (var key in jsonData[0]) {
-            if (jsonData[0].hasOwnProperty(key)) {
-                headerRow.push(key);
-            }
-        }
-        var csvContent = '<table border="2">';
-        // Add header row to CSV content
-        csvContent += '<thead><tr>';
-        headerRow.forEach(function(header) {
-            csvContent += `<th>${header}</th>`;
-        });
-        csvContent += '</tr></thead>';
-        
-        // Convert JSON data to CSV format
-        jsonData.forEach(function(item) {
-            var row = [];
-            for (var key in item) {
-                if (item.hasOwnProperty(key)) {
-                    row.push(item[key]);
-                }
-            }
-            csvContent += '<tr>'; // Add row start tag
-            row.forEach(function(cell) {
-                csvContent += `<td>${cell}</td>`;
-            });
-            csvContent += '</tr>'; // Add row end tag
-            csvContent += '<tr><td colspan="' + headerRow.length + '"><hr></td></tr>'; // Add horizontal line
-        });
-        csvContent += '</table>';
-    
-        // Open a new window to display the CSV content
-        var printWindow = window.open('', '_blank');
-        printWindow.document.write('<html><head><title>Table Print</title></head><body>');
-        printWindow.document.write(csvContent);
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
-    // Event listeners for export and print buttons
-    $('#export_request_button').click(function() {
-        console.log("export button clicked");
-        exportTableToCSV('request_invent_table');
-    });
 
-    $('#print_request_button').click(function() {
-        printTable('request_invent_table');
-    });
 });

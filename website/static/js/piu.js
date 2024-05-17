@@ -1,6 +1,8 @@
 $(function () {
     console.log("piu.js loaded");
+    const columnsPIS = ['created at', 'user', 'item', 'bench', 'machine', 'quantity', 'description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine', 'quantity', 'description', ''];
+
     BaseUrl = "http://0.0.0.0:3000/api";
     // BaseUrl = "http://13.53.70.208:3000/api"
     
@@ -112,7 +114,7 @@ $(function () {
         });
     }
     // Call refreshTable every 5 seconds (5000 milliseconds)
-    setInterval(refreshTable, 5000);
+    // setInterval(refreshTable, 5000);
 
     async function loadData () {
         $('.body').empty();
@@ -279,38 +281,6 @@ $(function () {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
         }
-
-    $('#r_table tbody').on('click', '#btn-delete', function () {
-        var row = dataTableInstance.row($(this).parents('tr'));
-        console.log(row);
-        deletePIU(row);
-        });
-
-    $('#piu_btn').click(loadData());
-    
-
-    function deletePIU(row) {
-        var rowId = row.data()._id;
-        console.log(rowId)
-        $.ajax({
-            url: `${BaseUrl}/piu/delete/${rowId}/`,
-            method: "DELETE",
-            success: function () {
-                // deleteRowById(channelId);
-                // Remove the row from the DataTable on successful deletion
-                row.remove().draw();
-            },
-            error: function (error) {
-                console.error("Error deleting Put in use data:", error);
-                // Handle the error and provide feedback to the user
-            }
-        });
-    }
-    
-
-
-
-
     function exportJSONData(data) {
         // Convert JSON data to CSV format
         var csvContent = convertJSONToCSV(data);
@@ -322,7 +292,7 @@ $(function () {
         var link = document.createElement('a');
         var url = URL.createObjectURL(blob);
         link.setAttribute('href', url);
-        link.setAttribute('download', 'data.csv');
+        link.setAttribute('download', 'Put in use data.csv');
         document.body.appendChild(link);
         
         // Trigger the download
@@ -394,13 +364,40 @@ $(function () {
         printWindow.document.close();
         printWindow.print();
     }
-    // Event listeners for export and print buttons
-    $('#export_request_button').click(function() {
-        console.log("export button clicked");
-        exportTableToCSV('request_invent_table');
-    });
+        // Event listeners for export and print buttons
+        $('#export_request_button').click(function() {
+            console.log("export button clicked");
+            exportTableToCSV('request_invent_table');
+        });
+    
+        $('#print_request_button').click(function() {
+            printTable('request_invent_table');
+        });
+    $('#r_table tbody').on('click', '#btn-delete', function () {
+        var row = dataTableInstance.row($(this).parents('tr'));
+        console.log(row);
+        deletePIU(row);
+        });
 
-    $('#print_request_button').click(function() {
-        printTable('request_invent_table');
-    });
+    $('#piu_btn').click(loadData());
+    
+
+    function deletePIU(row) {
+        var rowId = row.data()._id;
+        console.log(rowId)
+        $.ajax({
+            url: `${BaseUrl}/piu/delete/${rowId}/`,
+            method: "DELETE",
+            success: function () {
+                // deleteRowById(channelId);
+                // Remove the row from the DataTable on successful deletion
+                row.remove().draw();
+            },
+            error: function (error) {
+                console.error("Error deleting Put in use data:", error);
+                // Handle the error and provide feedback to the user
+            }
+        });
+    }
+    
 });

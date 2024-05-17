@@ -12,8 +12,8 @@
                 <nav class="nav nav-borders">
                     <a class="nav-link" id="sec-btn" >Security</a>
                     <a class="nav-link" id="not-btn">Notifications</a>
-                    <a class="nav-link" id="data-btn">Data</a>
-                    <a class="nav-link" id="bill-btn">Billing</a>
+                    <!-- <a class="nav-link" id="data-btn">Data</a> -->
+                    <!-- <a class="nav-link" id="bill-btn">Billing</a> -->
                 </nav>
                 <hr>
                 <div class="row" id="security">
@@ -24,23 +24,12 @@
                             <div class="card mb-4">
                                 <div class="card-header">Change Password</div>
                                 <div class="card-body">
-                                    <form id="pwform">
-                                        <!-- Form Group (current password)-->
-                                        <div class="mb-3">
-                                            <label class="small mb-1" for="currentPassword">Current Password</label>
-                                            <input class="form-control" id="currentPassword" type="password" placeholder="Enter current password">
-                                        </div>
-                                        <!-- Form Group (new password)-->
-                                        <div class="mb-3">
-                                            <label class="small mb-1" for="newPassword">New Password</label>
-                                            <input class="form-control" id="newPassword" type="password" placeholder="Enter new password">
-                                        </div>
-                                        <!-- Form Group (confirm password)-->
-                                        <div class="mb-3">
-                                            <label class="small mb-1" for="confirmPassword">Confirm Password</label>
-                                            <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm new password">
-                                        </div>
-                                        <button class="btn btn-primary" type="button">Save</button>
+                                    <form id="pwForm" method="POST" action="{{ url_for('auth.password_reset') }}">                                        <!-- Form Group (current password)-->
+                                        {{ new_pass.hidden_tag() }}                                      
+                                        <div class="mb-3">{{ new_pass.current_password }}</div> 
+                                        <div class="mb-3">{{ new_pass.new_password }}</div> 
+                                        <div class="mb-3">{{ new_pass.confirm_password }}</div> 
+                                        <button class="form-btn dx" type="submit" name="reset">Save</button>
                                     </form>
                                 </div>
                             </div>
