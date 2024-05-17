@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #ffc185;
+  background: #fdad5c;
 }
 
 .container{
@@ -50,6 +50,11 @@ h3 {
   text-transform: uppercase;
   color: #87613d;
   margin-bottom: 30px;
+}
+h1 {
+  font-family: 'Dosis';
+  color: #87613d;
+  margin-top: 20px;
 }
 
 input,

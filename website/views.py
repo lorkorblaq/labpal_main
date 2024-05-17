@@ -5,7 +5,7 @@ from .auth import auth_required
 from flask_mail import Message, Mail
 from .extensions import socketio
 from flask_socketio import send, emit
-from  .taskMaster import watch_inventory_changes
+from  .taskMaster import *
 
 
 BASE = "http://0.0.0.0:3000/api"
@@ -54,6 +54,11 @@ def port():
 def chat():
     return render_template("/templates_for_messenger/messenger.html", data=data)
 
+@views.route("/gpt",  strict_slashes=False)
+@auth_required
+def gpt():
+    return render_template("/templates_for_gpt/gpt.html", data=data)
+
 @views.route("/user-profile",  strict_slashes=False)
 @auth_required
 def userProfile():
@@ -71,7 +76,7 @@ def userProfile():
     }
     return render_template("user-profile.html", name=session['name'], data=data)
 
-# @views.route("/settings",  strict_slashes=False)
-# @auth_required
-# def settings():
-#     return render_template("settings.html", name=session['name'], email=session['email'])
+@views.route("/settings",  strict_slashes=False)
+@auth_required
+def settings():
+    return render_template("settings.html", name=session['name'], email=session['email'])

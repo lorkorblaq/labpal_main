@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Clinicalx</title>
+        <title>LabPal</title>
         <link rel="stylesheet" href="../static/css/body.css">
         <link rel="icon" type="image/png" href="#">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <!-- table data boot -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.1/css/buttons.dataTables.min.css">
+
         <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" ></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         {% block head %} 
@@ -50,12 +52,13 @@
                             <i class="fas fa-users icon"></i>
                             <span>Team</span>
                         </a>
-                        </div>
-                           <!--
-                        <a href="/chat" class="list-group-item list-group-item-action bg-light"  style="border-radius: 30px;">
-                            <i class="fas fa-comments"></i>
+
+                        <a href="/gpt" class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-comment"></i>
                             <span>Labpal</span>
-                        </a> -->
+                        </a> 
+                        </div>
+
                         <div class="su">
                         <a href="/user-profile" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-user icon"></i>
@@ -64,6 +67,10 @@
                         <a href="/settings" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
+                        </a>
+                        <a href="{{url_for('auth.logout')}}"class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-door-open"></i>
+                            <span>Log out</span>
                         </a>
                         </div>
                     <!-- </div> -->
@@ -105,6 +112,10 @@
         <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js" integrity="sha512-2QlM5mg7EfNpRUysHkWm3jV3rQYzbx2NBqB7Gv9CrzzY1OEOz4NYARxWWLw57So30o1JZRIiQUSpFW9qzCkOxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        
+        <script src="https://cdn.datatables.net/buttons/2.1.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.1.1/js/buttons.html5.min.js"></script>
         {% block scripts %}
         {% endblock scripts %}
     </body> 

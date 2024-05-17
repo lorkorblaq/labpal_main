@@ -27,6 +27,7 @@ def get_rooms_for_user(user_id):
     
     return rooms
 
+print(redis_client.hkeys('users'))
 @socketio.on('connect')
 def handle_connect():
     print('Client events connected')
