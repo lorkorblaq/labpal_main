@@ -10,7 +10,7 @@ celery = Celery(
     'taskMaster', 
     broker=CELERY_BROKER_URL, 
     backend=CELERY_RESULT_BACKEND,
-    include=['website.taskMaster']
+    include=['website.taskMaster', 'website.chatMaster']
 )
 
 # def make_celery(app):

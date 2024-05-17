@@ -77,14 +77,12 @@ $(function () {
             }
         });
     });
-
-// Function to display the response data in a table
-
+        
+    // Function to display the response data in a table
     function fetchData(url) {
         // Fetch data from the provided URL
         return $.get(url);
     }
-
     // Function to render a DataTable instance for the specified table ID
     function renderTable(tableId, exTableId, data, columns, headers) {
         // Destroy the existing DataTable instance for the specified table ID (if it exists)
@@ -115,7 +113,6 @@ $(function () {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
         }
-
     function renderInventoryTable(data, columns) {
         if ($.fn.DataTable.isDataTable('#inventory_table')) {
             $('#inventory_table').DataTable().clear().destroy();
@@ -187,7 +184,6 @@ $(function () {
             console.error("Error fetching data:", error);
             }
         });
-
     // $('#expiry_filter').change(async function () {
     //     const filter = $(this).val();
     //     if (filter === "") {
@@ -234,8 +230,7 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
-
-// Function to export JSON data to CSV
+    // Function to export JSON data to CSV
     function exportJSONData(data) {
         // Convert JSON data to CSV format
         var csvContent = convertJSONToCSV(data);
@@ -254,11 +249,9 @@ $(function () {
         link.click();
         document.body.removeChild(link);
     }
-
     // Function to convert JSON data to CSV format
     function convertJSONToCSV(data) {
         var csv = [];
-        
         // Extract column headers from the first object in the array
         var headers = Object.keys(data[0]);
         csv.push(headers.join(','));
@@ -279,7 +272,7 @@ $(function () {
         var csvContent = csv.join('\n');
         return csvContent;
     }
-        // Function to print the table content
+    // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
         // Add header row
         var headerRow = [];
@@ -321,7 +314,6 @@ $(function () {
         printWindow.document.close();
         printWindow.print();
     }
- 
     // Event listeners for export and print buttons
     $('#export_request_button').click(function() {
         console.log("export button clicked");

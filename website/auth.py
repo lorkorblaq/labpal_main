@@ -11,7 +11,6 @@ import datetime
 from functools import wraps
 from .mailer import *
 import logging
-from .notifications import *
 from .taskMaster import *
 
 # Configure the logging settings
@@ -104,6 +103,7 @@ def signup_signin():
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
             watch_inventory_changes.delay()
+            # chat_watcher.delay()
 
             identity ={}
             full_id = str(user['_id'])
@@ -138,7 +138,7 @@ def signup_signin():
             session['image'] = user.get('image', "")
 
             # stockAlert(email, name)
-            print(watch_inventory_changes)
+
             secret_key = "LVUC5jSkp7jjR3O-"
             # secret_key = "LVUC5jSkp7jjR3O-"
             # print(secret_key)
