@@ -5,7 +5,6 @@ $(function(){
         const responseElement = $('.chat-messages');
         responseElement.html(''); // Clear previous response
 
-        // const apiKey = '';
         const url = 'https://api.openai.com/v1/completions';
         
         $.ajax({
