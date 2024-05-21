@@ -11,7 +11,8 @@ import datetime
 from functools import wraps
 from .mailer import *
 import logging
-from .taskMaster import *
+from .taskMaster import watch_inventory_changes
+from .chatMaster import chat_watcher
 
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.INFO)
@@ -29,6 +30,8 @@ def auth_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if 'email' in session and 'token' in session:
+            chat_watcher.delay()
+
             return f(*args, **kwargs)
         else:
             return redirect(url_for('auth.auth_page'))
@@ -103,7 +106,6 @@ def signup_signin():
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
             watch_inventory_changes.delay()
-            chat_watcher.delay()
 
             identity ={}
             full_id = str(user['_id'])
