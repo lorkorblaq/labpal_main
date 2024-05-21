@@ -5,7 +5,7 @@ $(function(){
         const responseElement = $('.chat-messages');
         responseElement.html(''); // Clear previous response
 
-        const apiKey = 'sk-proj-AjEglvr7K5DXKbOUy1LaT3BlbkFJmwG7h1UM7mW8Wa9GgLq0';
+        // const apiKey = '';
         const url = 'https://api.openai.com/v1/completions';
         
         $.ajax({

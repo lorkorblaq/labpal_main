@@ -91,7 +91,6 @@ def handle_private_message(data):
         # Handle the case when the recipient ID does not exist in the 'users' hash
         print(f"Recipient ID '{recipient_id}' not found in users hash")
 
-
 @socketio.on('public_message')
 def handle_public_message(data):
     payload = data['payload']
