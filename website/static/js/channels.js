@@ -15,14 +15,15 @@ $(function () {
         }
         return null;
     }
-
+    
+    let dataTableInstance;
+    let editedCell;
     const user_id = getCookie('user_id');
     const url = `${BaseUrl}/channel/push/${user_id}/`;
     const url_item_get = `${BaseUrl}/item/get/`;
     const url_item_put = `${BaseUrl}/item/put/`;
 
-    let dataTableInstance;
-    let editedCell;
+   
     function fetchData(url) {
         // Fetch data from the provided URL
         return $.get(url);
@@ -118,12 +119,13 @@ $(function () {
             dataTableInstance.clear();
             dataTableInstance.rows.add(data.channels);
             dataTableInstance.draw();
+            console.log('dd')
         }).catch(error => {
             console.error("Error fetching data:", error);
         });
     }
     // Call refreshTable every 5 seconds (5000 milliseconds)
-    setInterval(refreshTable, 10000);
+    // setInterval(refreshTable, 10000);
     async function loadData () {
         $('.body').empty();
         $('#reports_h').empty();
@@ -169,7 +171,7 @@ $(function () {
         // Get the column index
         var columnIndex = editedCell.index();
         console.log(columnIndex);
-        var columnsChannels={0:'created at',1:'user',2:'item',3:'lot',4:'direction', 5:'location',6:'quantity',7:'description',};
+        var columnsChannels={0:'created at',1:'user',2:'item',3:'lot_numb',4:'direction', 5:'location',6:'quantity',7:'description',};
         var columnNameChannels = columnsChannels[columnIndex];
 
         editedCell.text(updatedValue);
@@ -226,6 +228,7 @@ $(function () {
             console.log("Lot exists");
             // Handle form submission without expiration date
             await submitForm();
+            refreshTable();
         }
     });
     // Function to handle form submission with expiration date

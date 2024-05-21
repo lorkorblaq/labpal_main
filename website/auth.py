@@ -23,6 +23,7 @@ API_BASE_URL = "http://13.53.70.208:3000/api/user/push/"
 
 auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
 
+USERS_COLLECTION = db['users']   
 
 def auth_required(f):
     @wraps(f)
@@ -48,7 +49,6 @@ def time_left_until_expiration(token, secret_key):
         # Invalid token
         return None
 
-USERS_COLLECTION = db['users']   
 @auth.route("/signin-signup", methods=['GET'])
 def auth_page():
     login_form = LoginForm()
@@ -103,7 +103,7 @@ def signup_signin():
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
             watch_inventory_changes.delay()
-            # chat_watcher.delay()
+            chat_watcher.delay()
 
             identity ={}
             full_id = str(user['_id'])
@@ -177,33 +177,27 @@ def logout():
     response.delete_cookie('token')
     return response
 
-@auth.route('/settings', methods=['POST'])
+@auth.route('confirm_password/settings', methods=['POST'], strict_slashes=False)
 def password_reset():
     new_pass = Newpassword()
-    if request.method == 'POST':
-        current_pass = new_pass.current_password.data
-        new_pass = new_pass.new_password.data
-        confirm_pass = new_pass.confirm_password.data
-        if new_pass == confirm_pass:
-            user = USERS_COLLECTION.find_one({"email":session['email']})
-            if user and check_password_hash(user['password'], current_pass):
-                hashed_password = generate_password_hash(new_pass)
-                USERS_COLLECTION.update_one({"email":session['email']}, {"$set": {"password": hashed_password}})
-                flash("Password reset successful")
-                return redirect(url_for('auth.auth_page'))
-            else:
-                flash("Invalid password")
-                return redirect(url_for('auth.password_reset'))
-        else:
+    if new_pass.validate_on_submit():
+        current_password = new_pass.current_password.data
+        new_password = new_pass.new_password.data
+        confirm_password = new_pass.confirm_password.data
+        
+        if new_password != confirm_password:
             flash("Passwords do not match")
             return redirect(url_for('auth.password_reset'))
-        
-        # user = USERS_COLLECTION.find({"email":email})
-        # if user:
-        #     flash("The reset link has been sent to your mail.")
-        #     return redirect(url_for('auth.auth_page'))
 
-        # else:
-        #     flash('Email address does not exist')
-        #     return redirect(url_for('auth.password_reset'))
-
+        user = USERS_COLLECTION.find_one({"email": session.get('email')})
+        if user and check_password_hash(user['password'], current_password):
+            hashed_password = generate_password_hash(new_password)
+            USERS_COLLECTION.update_one({"email": session['email']}, {"$set": {"password": hashed_password}})
+            flash("Password reset successful")
+            return render_template("settings.html", new_pass=new_pass)
+        else:
+            flash("Invalid current password")
+            return render_template("settings.html", new_pass=new_pass)
+    else:
+        flash("Form validation failed")
+        return render_template("settings.html", new_pass=new_pass)

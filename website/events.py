@@ -1,16 +1,29 @@
 from .extensions import socketio
-from flask_socketio import send, emit, join_room, leave_room
+from flask_socketio import send, emit, join_room, leave_room, SocketIO
 from flask import request, session
 from .redis_config import redis_client
 from datetime import datetime
 import requests
 from flask import Flask
 import redis
-
+from . import create_app
+import eventlet
+print('socketio:')
+# socketio = socketio()
+# app = create_app()
+# app.app_context().push()
+# eventlet.monkey_patch(socket=True)
 # socketio = SocketIO(message_queue='redis://localhost:6379/0')
+# socketio.init_app(app)
+print(socketio)
+
 # print(redis_client.hgetall('users'))
 API_BASE = 'http://127.0.0.1:3000/api/'
+print('API_BASE:', API_BASE)
+def notify_clients(data):
+    socketio.emit('dataUpdated', data)
 
+    
 def get_rooms_for_user(user_id):
     user_id = session.get('id') 
 
@@ -34,7 +47,6 @@ def handle_connect():
     user_id = session.get('id') 
     print(user_id)
     session_id = request.sid  # Get the session ID from the request
-    
     # Check if user_id is already present in the 'users' hash
     if user_id in redis_client.hkeys('users'):
         print(f"User ID '{user_id}' already present in users hash.")
@@ -100,4 +112,3 @@ def handle_public_message(data):
     else:
         # Handle the case when the recipient ID does not exist in the 'users' hash
         print(f"Room ID '{room_id}' not found")
-

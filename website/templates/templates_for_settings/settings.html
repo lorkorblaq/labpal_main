@@ -11,15 +11,26 @@
             <div class="container-xl px-4 mt-4">
                 <nav class="nav nav-borders">
                     <a class="nav-link" id="sec-btn" >Security</a>
-                    <a class="nav-link" id="not-btn">Notifications</a>
+                    <!-- <a class="nav-link" id="not-btn">Notifications</a> -->
                     <!-- <a class="nav-link" id="data-btn">Data</a> -->
                     <!-- <a class="nav-link" id="bill-btn">Billing</a> -->
                 </nav>
                 <hr>
                 <div class="row" id="security">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="flash-messages">
+                            {% for message in messages %}
+                                <script>
+                                alert("{{ message }}");
+                                </script>
+                            {% endfor %}
+                            </div>
+                            {% endif %}
+                    {% endwith %}
                     <div class="row">
                         
-                        <div class="col-8">
+                        <div class="col-5">
                             <!-- Change password card-->
                             <div class="card mb-4">
                                 <div class="card-header">Change Password</div>
@@ -34,20 +45,7 @@
                                 </div>
                             </div>
                         </div>  
-                        <div class="col-lg-4">
-                            <!-- Delete account card-->
-                                <div class="card mb-4">
-                                    <div class="card-header">Delete Account</div>
-                                    <div class="card-body" style="text-align: center;">
-                                        <h6>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, click the button below.</h6>
-                                        <button class="" type="button"style="text-align:center">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-7">
                             <!-- Security preferences card-->
                             <div class="card mb-4">
                                 <div class="card-header">Security Preferences</div>
@@ -68,7 +66,15 @@
                                 </div>
                             </div>
                         </div>
-                       
+                        <!-- <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">Delete Account</div>
+                                    <div class="card-body" style="text-align: center;">
+                                        <h6>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, click the button below.</h6>
+                                        <button class="" type="button"style="text-align:center">Delete</button>
+                                    </div>
+                                </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="row" id="notifications">
