@@ -7,8 +7,8 @@ CELERY_BROKER_URL = 'redis://localhost:6379//'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 celery = Celery(
-    'taskMaster', 
-    broker=CELERY_BROKER_URL, 
+    'taskMaster',
+    broker=CELERY_BROKER_URL,
     backend=CELERY_RESULT_BACKEND,
     include=['website.taskMaster', 'website.chatMaster']
 )

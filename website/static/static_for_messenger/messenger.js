@@ -423,10 +423,9 @@ $(function(){
             }
         });        
     }
-    socket.on('public_chat', handleGroupChat);
 	socket.on('priv_chat', handlePrivChat);
+    socket.on('public_chat', handleGroupChat);
     
-
     // Function to handle setting conversation type class on send input
     function setConversationTypeClass(conversationType) {
         // Remove existing conversation type classes

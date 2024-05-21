@@ -40,6 +40,7 @@ def expiration():
 def put_in_use():
     return render_template("put-in-use.html", data=data)
 
+
 @views.route("/channels",  strict_slashes=False)
 @auth_required
 def channels():
@@ -77,7 +78,7 @@ def userProfile():
     }
     return render_template("user-profile.html", name=session['name'], data=data)
 
-@views.route("/settings",  strict_slashes=False)
+@views.route("/settings", methods=['GET'], strict_slashes=False)
 @auth_required
 def settings():
     new_pass = Newpassword()

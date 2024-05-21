@@ -212,6 +212,7 @@ $(function () {
 
         // Get the values from the input fields
         await submitForm();
+        refreshTable();
     });
 
     // function renderTablePISChannels(data, columns) {

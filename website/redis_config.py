@@ -5,7 +5,6 @@ import redis
 
 # redis_client = FlaskRedis(app)
 redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
-a =redis_client.hkeys('users')
 if b'65ebaa02968dd0cc263cda6b' in redis_client.hkeys('users'):
     print(f"User ID present in users hash.")
 # from flask_socketio import SocketIO
