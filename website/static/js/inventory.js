@@ -1,15 +1,30 @@
 $(function () {
     console.log("inventory.js loaded");
-    const HeadersItem = ['Items','In Stock(vials)', 'Tests/Vial',  'Category', 'Bench'];
-    const ColumnsItem = ['item',  'in stock', 'tests/vial', 'category', 'bench'];
+    const HeadersItem = ['Items','Q. in Stock(vials)', 'Tests/Vial',  'Category', 'Bench'];
+    const ColumnsItem = ['item',  'quantity', 'tests/vial', 'category', 'bench'];
 
-    const ColumnsRequest = ['bench','item', 'in_stock', 'tests_per_day', 'total_tests_in_stock', 'quantity_test_requested', 'total_days_to_last', 'amount_needed'];
-    const HeadersRequest = ['Bench','Item', 'In Stock(vials)', 'Tests/Day', 'Total Stock(tests)', 'Quantity Requested(tests)', 'In-Stock To Last(days)', 'Amount needed(vials)'];
-    const import_heading = ['bench', 'category', 'item', 'vials/pack', 'tests/vial', 'in stock', 'reOrderLevel', 'class', 'tests/day']
+    const ColumnsRequest = ['bench', 'item', 'quantity', 'tests_per_day', 'total_tests_in_stock', 'quantity_test_requested', 'total_days_to_last', 'amount_needed'];
+    const HeadersRequest = ['Bench', 'Item', 'Q. in Stock(vials)', 'Tests/Day', 'Total Stock(tests)', 'Quantity Requested(tests)', 'In-Stock To Last(days)', 'Amount needed(vials)'];
+    const import_heading = ['bench', 'category', 'item', 'vials/pack', 'tests/vial', 'quantity', 'reOrderLevel', 'class', 'tests/day']
 
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
-
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
+    function getCookie(name) {
+        let cookieArr = document.cookie.split("; ");
+        for(let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if(name == cookiePair[0]) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+    const lab_name = getCookie("lab_name");
+    const user_id = getCookie("user_id");
+    const get_items_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
+    const get_requistion_url = `${BaseUrl}/items/requisite/${user_id}/${lab_name}/`;
+    const delete_items_url = `${BaseUrl}/items/deleteall/${user_id}/${lab_name}/`;
+    const import_items_url = `${BaseUrl}/items/bulkpush/${user_id}/${lab_name}/`;
 
     $('#inventory_b').click(function() {
         console.log("drawer clicked");
@@ -47,7 +62,7 @@ $(function () {
         console.log("Request data:", requestData);
         // Send the requisition data to the API using AJAX
         $.ajax({
-            url: `${BaseUrl}/items/requisite/`,
+            url: get_requistion_url,
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(requestData),
@@ -109,20 +124,28 @@ $(function () {
         });
 
         deleteDB.click(function() {
-            fetch(`${BaseUrl}/items/deleteall/`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                alert('Items deleted successfully!');
-                renderTable(tableId, exTableId, [], columns, headers); // Re-render table with empty data
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error deleting items');
-            });
+            // Ask the user for confirmation
+            if (confirm('Are you sure you want to delete all the items? This action cannot be undone.')) {
+                // If the user confirms, proceed with the deletion
+                fetch(delete_items_url, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Items deleted successfully!');
+                    renderTable(tableId, exTableId, [], columns, headers); // Re-render table with empty data
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Error deleting items');
+                });
+            } else {
+                // If the user cancels, do nothing
+                alert('Deletion canceled');
+            }
         });
+        
 
         // Append buttons to exTableId if not already appended
         var buttonContainer = $(`#${exTableId}`);
@@ -149,7 +172,6 @@ $(function () {
                 readCSVFile(file);
             }
         });
-        
         // Trigger file input click
         fileInput.click();
     });
@@ -165,21 +187,27 @@ $(function () {
     }
 
     function sendJSONDataToAPI(jsonData) {
-        fetch(`${BaseUrl}/items/bulkpush/`, {
+        fetch(import_items_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(jsonData)
         })
-        .then(response => response.json())
+        .then(async response => {
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.message || 'Error importing data');
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Success:', data);
             alert('Data imported successfully!');
         })
-        .catch((error) => {
+        .catch(error => {
             console.error('Error:', error);
-            alert('Error importing data');
+            alert(`Error importing your inventory data:\n${error.message}`);
         });
     }
 
@@ -232,7 +260,7 @@ $(function () {
         var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
         
         // Set of fields that should be converted to numbers
-        var numericFields = new Set(['in stock', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
+        var numericFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
 
         for (var i = 1; i < lines.length; i++) {
             var obj = {};
@@ -302,7 +330,7 @@ $(function () {
         var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
         
         // Set of fields that should be converted to numbers
-        var numericFields = new Set(['in stock', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
+        var numericFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
 
         for (var i = 1; i < lines.length; i++) {
             var obj = {};
@@ -335,7 +363,7 @@ $(function () {
 
     async function loadInventoryData() {
         try {
-            const data = await fetchData(`${BaseUrl}/items/get/`);
+            const data = await fetchData(get_items_url);
             // console.log(data);
             renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
             }
@@ -348,7 +376,7 @@ $(function () {
     $('#all-items').click(async function() {
         console.log("All items clicked");
         try {
-            const data = await fetchData(`${BaseUrl}/items/get/`);
+            const data = await fetchData(get_items_url);
             renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
             console.log(data.items);
         } catch (error) {
@@ -359,8 +387,8 @@ $(function () {
     $('#reorderable').click(async function() {
         console.log("reorderable clicked");
         try {
-            const data = await fetchData(`${BaseUrl}/items/get/`);
-            const reorderableItems = data.items.filter(item => item['in stock'] <= item['reOrderLevel']);
+            const data = await fetchData(get_items_url);
+            const reorderableItems = data.items.filter(item => item['quantity'] <= item['reOrderLevel']);
             renderTable('inventory_table', 'ex-inventory_table', reorderableItems, ColumnsItem, HeadersItem);
             console.log(reorderableItems);
             }
@@ -384,7 +412,7 @@ $(function () {
     });
 
     function refreshTable() {
-        fetchData(`${BaseUrl}/channels/get/`).then(data => {
+        fetchData(get_items_url).then(data => {
             dataTableInstance.clear();
             dataTableInstance.rows.add(data.channels);
             dataTableInstance.draw();
@@ -392,6 +420,7 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
+    // refreshTable();
 
     // tooltips
     $('[data-toggle="tooltip"]').tooltip();

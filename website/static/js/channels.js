@@ -1,8 +1,8 @@
 $(function () {
     const headersChannel = ['_id','created at', 'user', 'item', 'lot_numb', 'direction', 'location', 'quantity', 'description', 'action'];
     console.log("channels.js loaded");
-    // BaseUrl = "http://13.53.70.208:3000/api";
     BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://127.0.0.1:3000/api";
 
     // const user_d = $.cookie('user_id');
     function getCookie(name) {
@@ -19,14 +19,17 @@ $(function () {
     let dataTableInstance;
     let editedCell;
     const user_id = getCookie('user_id');
-    const url = `${BaseUrl}/channel/push/${user_id}/`;
-    const url_item_get = `${BaseUrl}/item/get/`;
-    const url_item_put = `${BaseUrl}/item/put/`;
+    const lab_name = getCookie("lab_name");
+    const url_channel_get = `${BaseUrl}/channels/get/${user_id}/${lab_name}/`
+    const url_channel_push = `${BaseUrl}/channel/push/${user_id}/${lab_name}/`;
+    const url_channel_put = `${BaseUrl}/channel/put/${user_id}/${lab_name}/`;
+    const url_channel_delete = `${BaseUrl}/channel/delete/${user_id}/${lab_name}/`;    
+    const url_item_put = `${BaseUrl}/item/put/${user_id}/${lab_name}/`;
 
    
-    function fetchData(url) {
+    function fetchData(url_channel_push) {
         // Fetch data from the provided URL
-        return $.get(url);
+        return $.get(url_channel_push);
     }
     
     async function fetchLotNumbers() {
@@ -73,7 +76,7 @@ $(function () {
                 // console.log(formData);
                 // console.log(user_id);
                 $.post({
-                        url: url,
+                        url: url_channel_push,
                         contentType: "application/json",
                         data: JSON.stringify(formData),
                         success: function (response) {
@@ -132,7 +135,7 @@ $(function () {
             $('#reports_h').append(`<th>${header}</th>`);
             });
         try {
-            const data = await fetchData(`${BaseUrl}/channels/get/`);
+            const data = await fetchData(url_channel_get);
             // console.log(data);
             // renderTablePISChannels(data.channels, headersChannel);
             renderTablePISChannels('r_table', 'ex-r_table', data.channels, headersChannel);
@@ -142,7 +145,7 @@ $(function () {
             console.error("Error fetching data:", error);
             }
     }
-    $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2))',function () {
+    $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5))',function () {
         // Check if there's no other cell being edited
         if (!editedCell) {
             // Store the currently edited cell
@@ -152,58 +155,64 @@ $(function () {
             // Replace the cell's content with an input field, using the cell's current text as the initial value
             $(this).html('<input type="text" class="edit-input" value="' + cellText + '">');
 
-            // Focus on the input field1`
+            // Focus on the input field
             $('.edit-input').focus();
-            }
-        });
+        }
+    });
 
     $('#r_table tbody').on('blur', '.edit-input', function () {
         // Get the updated value from the input field
         var updatedValue = $(this).val();
         // Get the channel ID from the data attribute of the row
         var row = dataTableInstance.row(editedCell.closest('tr'));
-        // var row = dataTableInstance.row($(this).closest('tr'));
         var rowData = row.data();
-        // console.log(rowData);
         var rowId = rowData._id;
-        // console.log(channelId);
-        // Get the column index
         var columnIndex = editedCell.index();
-        console.log(columnIndex);
-        var columnsChannels={0:'created at',1:'user',2:'item',3:'lot_numb',4:'direction', 5:'location',6:'quantity',7:'description',};
+        var columnsChannels = {
+            0: 'created at',
+            1: 'user',
+            2: 'item',
+            3: 'lot_numb',
+            4: 'direction',
+            5: 'location',
+            6: 'quantity',
+            7: 'description'
+        };
         var columnNameChannels = columnsChannels[columnIndex];
-
+    
         editedCell.text(updatedValue);
-        // console.log(updatedValue);
-        // Reset the editedCell variable
         editedCell = null;
-        console.log(rowId);
-        console.log(columnNameChannels);
-        console.log(updatedValue);
+    
         // Update the channel data in the database
         updateChannel(rowId, columnNameChannels, updatedValue);
-
+    
         function updateChannel(rowId, columnNameChannels, updatedValue) {
             $.ajax({
-                url: `${BaseUrl}/channel/put/${rowId}/`,
+                url: url_channel_put + rowId + '/',
                 method: "PUT",
                 contentType: "application/json",
-                data:  JSON.stringify({ [columnNameChannels]: updatedValue }),
-                success: function () {
-                    // alert('Channel updated successfully')
-                    // Optionally, handle success actions
-                    console.log(`The channel id:${rowId} updated successfully.`);
+                data: JSON.stringify({ [columnNameChannels]: updatedValue }),
+                success: function (result) {
+                    if (result && result.message) {
+                        console.log(`The channel id:${rowId} updated successfully.`);
+                    } else {
+                        console.error("Unexpected response:", result);
+                        alert("Error updating channels. Please try again or contact support");
+                    }
                 },
                 error: function (error) {
                     console.error("Error updating Channels:", error);
-                    // editedCell.text(originalValue);
-                    // Handle the error and provide feedback to the user
-                    alert("Error updating channels. Please try again or call Femo");
+                    if (error.responseJSON && error.responseJSON.message) {
+                        alert(error.responseJSON.message);
+                    } else {
+                        alert("Error updating channels. Please try again or contact support");
+                    }
                 }
             });
         }
-        
-        });
+    });
+    
+    
     // Event listener for Enter key press
     $('#r_table tbody').on('keypress', '.edit-input', function (event) {
         // Check if the pressed key is Enter (key code 13)
@@ -391,7 +400,7 @@ $(function () {
     function deleteChannel(row) {
         var rowId = row.data()._id;
         $.ajax({
-            url: `${BaseUrl}/channel/delete/${rowId}/`,
+            url: url_channel_delete+rowId+'/',
             method: "DELETE",
             success: function () {
                 // deleteRowById(channelId);

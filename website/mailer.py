@@ -13,10 +13,10 @@ def mailer(emailh, subjecth, htmlh):
         return mail.send(message)
 
 
-def welcomeMail(email, name):
+def welcomeMail(email, firstname):
     subject = "Hi, I'm LabPal"
-    html = f'<h1>Welcome {name}</h1>'
-    message = Message(subject=subject, recipients=[email], html=html)
+    html_content = render_template("welcome.html", firstname=firstname)
+    message = Message(subject=subject, recipients=[email], html=html_content)
     try:
         mail.send(message)
         return 'Welcome email sent!'

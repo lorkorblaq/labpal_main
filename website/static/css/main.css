@@ -45,11 +45,11 @@ button {
     border-radius: 45px;
     color: black;
     width: 150px;
-    background-color: hsl(208, 56%, 67%);
+    background-color: #B8DAF0;
     justify-self: flex-start;
     cursor: pointer;
-    border: 1px solid rgb(62,128,185);
-    box-shadow: 2px 2px 2px rgb(62,128,185);
+    border: 1px solid rgb(12, 12, 12);
+    box-shadow: 2px 2px 2px #D8D8D8;
 }
 
 button:hover {

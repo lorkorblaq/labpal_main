@@ -1,10 +1,22 @@
 $(function () {
     console.log("expiration.js loaded");
     const columnsLot = ['item', 'lot_numb', 'expiration', 'quantity', 'created at'];
-    const headersLot = ['Item', 'Lot','Expiration', 'Quantity', 'Created At'];
+    const headersLot = ['Item', 'Lot number','Expiration', 'Quantity', 'Created'];
+    function getCookie(name) {
+        let cookieArr = document.cookie.split("; ");
+        for(let i = 0; i < cookieArr.length; i++) {
+            let cookiePair = cookieArr[i].split("=");
+            if(name == cookiePair[0]) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        return null;
+    }
+    user_id = getCookie("user_id");
+    lab_name = getCookie("lab_name");
     BaseUrl = "https://labpal.com.ng/api"
     // BaseUrl = "http://0.0.0.0:3000/api";
-
+    lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}`;
     async function fetchData(url) {
         const response = await fetch(url);
         if (!response.ok) {
@@ -53,7 +65,7 @@ $(function () {
         var link = document.createElement('a');
         var url = URL.createObjectURL(blob);
         link.setAttribute('href', url);
-        link.setAttribute('download', 'data.csv');
+        link.setAttribute('download', 'lot_exp.csv');
         document.body.appendChild(link);
         
         // Trigger the download
@@ -134,53 +146,13 @@ $(function () {
     $('#print_request_button').click(function() {
         printTable('request_invent_table');
     });
-
-    function renderInventoryTable(data, columns) {
-        if ($.fn.DataTable.isDataTable('#inventory_table')) {
-            $('#inventory_table').DataTable().clear().destroy();
-        }
-        // const items = data.items;
-        $('#inventory_table').DataTable({
-            data: data,
-            columns: columns.map(col => ({ data: col })),
-            // responsive: true
-        });
-        } 
-    // function renderExpireTable(data, columns) {
-    //     // if (dataTableInstance) {
-    //     //     dataTableInstance.destroy();
-    //     //     }
-    //     // Destroy the existing DataTable instance (if it exists)
-    //     if ($.fn.DataTable.isDataTable('#expire_table')) {
-    //         $('#expire_table').DataTable().clear().destroy();
-    //     }
-    
-    //     // Initialize a new DataTable instance
-    //     $('#expire_table').DataTable({
-    //         data: data,
-    //         columns: columns.map(col => ({ data: col }))
-    //     });
-        // }
-    // async function loadInventoryData() {
-    //     headersItem.forEach(function (header_inventory) {
-    //         $('#inventory_head').append(`<th>${header_inventory}</th>`);
-    //     });
-    //     try {
-    //         const data = await fetchData(`${BaseUrl}/items/get/`);
-    //         // console.log(data);
-    //         renderInventoryTable(data.items, ColumnsItem);
-    //         } 
-    //     catch (error) {
-    //         console.error("Error fetching data:", error);
-    //         }
-    //     };
-    // loadInventoryData();   
+  
     async function loadexpireData(){
         headersLot.forEach(function (header_expire) {
             $('#expire_head').append(`<th>${header_expire}</th>`);
         });
         try {
-            const data = await fetchData(`${BaseUrl}/lotexp/get/`);
+            const data = await fetchData(lotexpUrl);
             console.log(data.lotexp);
             // renderExpireTable(data.lotexp, columnsLot);
             renderTable('expire_table', 'ex-expire_table', data.lotexp, columnsLot, headersLot);
@@ -195,29 +167,30 @@ $(function () {
 
     $('#expiry_filter').on('input', async function () {
         const filterValue = $(this).val();
-        
-        if (filterValue === "") {
-            // Clear the table if input is empty
-            $('#expire_table').DataTable().clear().draw();
-            return;
-        }
-    
-        const filterDays = parseInt(filterValue, 10);
-    
-        if (isNaN(filterDays)) {
-            console.error("Invalid input: Not a number");
-            return;
-        }
     
         try {
-            const data = await fetchData(`${BaseUrl}/lotexp/get/`);
+            const data = await fetchData(lotexpUrl);
+            if (filterValue === "") {
+                // Load all data if input is empty
+                renderTable('expire_table', 'ex-expire_table', data.lotexp, columnsLot, headersLot);
+                return;
+            }
+    
+            const filterDays = parseInt(filterValue, 10);
+    
+            if (isNaN(filterDays)) {
+                alert("Invalid input, please enter a number");
+                console.error("Invalid input: Not a number");
+                return;
+            }
+    
             const currentDate = new Date();
             const targetDate = new Date();
             targetDate.setDate(currentDate.getDate() + filterDays);
     
             const filteredData = data.lotexp.filter(item => {
                 const expirationDate = new Date(item['expiration']);
-                return expirationDate > currentDate && expirationDate <= targetDate;
+                return expirationDate <= targetDate;
             });
     
             renderTable('expire_table', 'ex-expire_table', filteredData, columnsLot, headersLot);
@@ -227,16 +200,4 @@ $(function () {
         }
     });
     
-
-    
-    //    Expired items data
-    // $('#inventory_b').click(async function () {
-    //     $('#drawer_invent').show();
-    //     $('#drawer_expire').hide();
-    //     });
-    // $('#expire_b').click(async function () {
-    //     $('#drawer_invent').hide();
-    //     $('#drawer_expire').show();
-    // });
-
 });

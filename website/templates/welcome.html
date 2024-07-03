@@ -5,7 +5,7 @@
     <style>
         body { font-family: Arial, sans-serif;}
         .button {
-            background-color: #F17705; /* Orange */
+            background-color: #f10505; /* Orange */
             border: none;
             color: white;
             padding: 10px 10px;
@@ -26,16 +26,21 @@
             background-color: #6b8bd6; /* Dark blue */
             text-align: center;
         }
+        .footer {
+            background-color: #b8b8b8; /* Dark blue */
+            text-align: center;
+            font-size: 10px;
+        }
         .table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #e6f7ff; /* Light blue */
+            background-color: #E6F7FF; /* Light blue */
             text-align: center;
         }
         .body  {
             font-size: 17px;
             text-align: center;
-            margin: 25px;
+            padding: 60px;
             justify-content: center;
  
         }
@@ -59,7 +64,20 @@
             <td class="body">
                 <h3>Hi {{firstname}},</h3>
                 <h4>Welcome to LabPal,</h4>
-                <p>Please for any further assistance contact our support we are always ready to help<</p>
+                <p>We are glad to have you onboard,
+                    <br>we can't wait to make your work easy and fun.
+                    <br>Please give us any feedback thru any of our channels,
+                    <br>this will help us improve and better your experience while using Labpal.
+                </p>
+                
+                <p>For more information on how to use LabPal vist our Youtube channel below</p>
+                <a href="https://www.youtube.com/channel/UCHbaVkJGisIGVJvWX0b5HNQ" class="button">Youtube</a>
+            </td>   
+        </tr>
+        <tr>
+            <td class="footer">
+                <p>Please for any assistance contact our support we are always ready to help</p>
+                <p>© 2024 LabPal</p>
             </td>
         </tr>
     </table>

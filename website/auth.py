@@ -14,7 +14,6 @@ from .mailer import welcomeMail, send_verification_email
 import logging
 from .celeryMasters.inventoryMaster import watch_inventory_changes
 from flask import current_app
-from pymongo import MongoClient
 from bson.errors import InvalidId
 # from .celeryMasters.chatMaster import chat_watcher
 
@@ -33,7 +32,6 @@ USERS_COLLECTION = db_org_users['users']
 # ORG_COLLECTION = db['org']
 ORG_COLLECTION = db_org_users['org']
 
-# LABS_COLLECTION = db['labs']
 
 def auth_required(f):
     @wraps(f)
@@ -153,7 +151,6 @@ def signup_signin():
 
     elif 'signin' in request.form:
         email = login_form.email.data.strip().lower()
-        print(email)
         password = login_form.password.data
         # Fetch user from MongoDB based on the provided email
         user = USERS_COLLECTION.find_one({'email': email})
@@ -168,6 +165,7 @@ def signup_signin():
             lab_name = user.get('labs_access', "")[0]
             session['id'] = full_id
             session['lab_name'] = lab_name
+            print(session['lab_name'])
             session['org_name'] = org_name
             org_db = client[f'{org_name}_db']
             ip_address = request.remote_addr
@@ -295,7 +293,7 @@ def register_lab():
 
         if password != confirm_password:
             flash("Passwords do not match.", "danger")
-            return redirect(url_for('auth.register_lab'))
+            return redirect(url_for('auth.register_lab', org_name=org_name, lab_name=lab_name, managers_firstname=managers_firstname, managers_lastname=managers_lastname, managers_email=managers_email))
 
         try:
             hashed_password = generate_password_hash(password)
@@ -313,7 +311,6 @@ def register_lab():
             # Register the lab and organization
             if user_id:
                 org_db = client[f'{org_name}_db']
-                print(org_db)
                 ORG_LABS_COLLECTION = org_db['labs']
                 lab_data = {
                     "lab_name": lab_name,
@@ -340,8 +337,8 @@ def register_lab():
                          "$push": {"labs_access": lab_name}
                         }
                     )
-                    welcomeMail(managers_email, managers_firstname)
                     flash("Registration successful, you can now login", "success")
+                    welcomeMail(managers_email, managers_firstname)
                     return redirect(url_for('auth.auth_page'))
                 else:
                     flash("Failed to register organization. Please try again or contact support", "danger")
@@ -396,5 +393,5 @@ def password_reset():
             flash("Invalid current password")
             return render_template("settings.html", new_pass=new_pass)
     else:
-        flash("Form validation failed")
+        flash("Please check your input and try again failed")
         return render_template("settings.html", new_pass=new_pass)

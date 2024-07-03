@@ -1,8 +1,13 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from dotenv import load_dotenv, find_dotenv
+import os
+load_dotenv(find_dotenv())
+
+uri_development = os.getenv('URI_DEVELOPMENT')
+uri_production = os.getenv('URI_PRODUCTION')
 # MongoDB connection
-password = "518Oloko."
-uri_production = f"mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
+# uri_production = f"mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri_production, server_api=ServerApi('1'))
 try:
     client.admin.command('ping')
@@ -13,3 +18,4 @@ except Exception as e:
 db_admin = client.admin
 db = client.clinicalx
 db_org_users = client.org_users
+print(db_org_users)

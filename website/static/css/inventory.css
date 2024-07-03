@@ -7,12 +7,17 @@
 }
 
 #importButton{
-    background-color: #F77200;
+    background-color: #677b88;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 3px 20px;
     cursor: pointer;
+    box-shadow: 0 0 0 0.1rem black;
+
+}
+#importButton:hover{
+    box-shadow: 0 0 0 0.1rem #ffffff;
 }
 
 
