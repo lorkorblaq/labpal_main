@@ -1,7 +1,7 @@
 $(function () {
     console.log("user-profile.js loaded");
-    // Baseurl= 'http://13.53.70.208:3000/api'
     BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://127.0.0.1:3000/api";
 
     function setCookie(name, value, hours) {
         var expires = "";
@@ -77,7 +77,7 @@ $(function () {
             lastname: contents[1],
             title: contents[2],
             email: contents[3],
-            mobile: contents[4],
+            mobile: contents[4] !== '' ? parseInt(contents[4]) : null,
             address: contents[5]
         };
         console.log(datas);
@@ -88,11 +88,7 @@ $(function () {
             data: jsonString,
             contentType: 'application/json',            
             success: function(response) {
-                for (var key in datas) {
-                    if (datas.hasOwnProperty(key)) {
-                        setCookie(key, datas[key], 1);  // Set each cookie with a 7-day expiration (adjust as needed)
-                    }
-                }                
+                // alert('Profile updated successfully');      
             },
             error: function(error) {
                 // Handle error here

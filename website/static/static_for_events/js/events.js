@@ -1,6 +1,6 @@
 $(function() {
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://127.0.0.1:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://127.0.0.1:3000/api";
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -14,11 +14,12 @@ $(function() {
     
 
     const user_id = getCookie('user_id');
-    const url_event_push = `${BaseUrl}/event/push/${user_id}/`;
-    const url_event_put = `${BaseUrl}/event/put/${user_id}/`;
-    const url_event_get_one = `${BaseUrl}/event/get/${user_id}/`;
-    const url_event_get_all = `${BaseUrl}/events/get/${user_id}/`;
-    const url_event_del = `${BaseUrl}/event/del/${user_id}/`;
+    const lab_name = getCookie('lab_name');
+    const url_event_push = `${BaseUrl}/event/push/${user_id}/${lab_name}/`;
+    const url_event_put = `${BaseUrl}/event/put/${user_id}/${lab_name}/`;
+    const url_event_get_one = `${BaseUrl}/event/get/${user_id}/${lab_name}/`;
+    const url_event_get_all = `${BaseUrl}/events/get/${user_id}/${lab_name}/`;
+    const url_event_del = `${BaseUrl}/event/del/${user_id}/${lab_name}/`;
     const url_event_todo_push = `${BaseUrl}/event/to-do-push/${user_id}/`;
     const url_event_todo_get_one = `${BaseUrl}/event/to-do-get/${user_id}/`;
     const url_event_todo_get_all = `${BaseUrl}/event/to-do-get-all/${user_id}/`;
@@ -595,29 +596,28 @@ $(function() {
             });
         }
     
-        cardHeader.text(`${formattedEventDate} - ${eventData.user}`);
-
-
+        cardHeader.text(`${formattedEventDate} - ${eventData.user || 'Unknown User'}`);
+    
         var cardBody = $('<div>').addClass('card-body').attr('id', `${eventData.event_id}`);
         cardHeader.click(function() {
             console.log('eventData.event_id :', eventData.event_id);
             $(`#${eventData.event_id}`).slideToggle(); // Toggle only the card-body within this card
-            
         });
+    
         // Customize card body based on event type
         if (eventData.event_type === 'qc') {
-            var itemsTag = eventData.items.join(', '); // Join array elements with ', ' separator
+            var itemsTag = eventData.items ? eventData.items.join(', ') : 'No items specified'; // Join array elements with ', ' separator or provide default text
     
             cardBody.append(
-                $('<p>').text(`Machine: ${eventData.machine}`),
+                $('<p>').text(`Machine: ${eventData.machine || 'N/A'}`),
                 $('<p>').text(`Items: ${itemsTag}`),
-                $('<p>').text(`Root Cause: ${eventData.rootCause}`),
-                $('<p>').text(`Actioning: ${eventData.actioning}`)
+                $('<p>').text(`Root Cause: ${eventData.rootCause || 'N/A'}`),
+                $('<p>').text(`Actioning: ${eventData.actioning || 'N/A'}`)
             );
         } else if (eventData.event_type === 'machine') {
             cardBody.append(
-                $('<p>').text(`Machine: ${eventData.machine}`),
-                $('<p>').text(`Category: ${eventData.category}`)
+                $('<p>').text(`Machine: ${eventData.machine || 'N/A'}`),
+                $('<p>').text(`Type: ${eventData.category || 'N/A'}`)
             );
     
             if (eventData.category === 'Maintenance') {
@@ -629,20 +629,20 @@ $(function() {
                 }
     
                 cardBody.append(
-                    $('<p>').text(`Comments: ${eventData.comments}`)
+                    $('<p>').text(`Comments: ${eventData.comments || 'N/A'}`)
                 );
             } else {
                 cardBody.append(
-                    $('<p>').text(`Resolved: ${eventData.resolved}`),
-                    $('<p>').text(`Root Cause: ${eventData.rootCause}`),
-                    $('<p>').text(`Actioning: ${eventData.actioning}`)
+                    $('<p>').text(`Resolved: ${eventData.resolved || 'N/A'}`),
+                    $('<p>').text(`Root Cause: ${eventData.rootCause || 'N/A'}`),
+                    $('<p>').text(`Actioning: ${eventData.actioning || 'N/A'}`)
                 );
             }
         } else if (eventData.event_type === 'operations') {
-            var occurrenceTag = eventData.occurrence.join(', '); // Join array elements with ', ' separator
+            var occurrenceTag = eventData.occurrence ? eventData.occurrence.join(', ') : 'No occurrences specified'; // Join array elements with ', ' separator or provide default text
             cardBody.append(
                 $('<p>').text(`Occurrence: ${occurrenceTag}`),
-                $('<p>').text(`Actioning: ${eventData.actioning}`)
+                $('<p>').text(`Actioning: ${eventData.actioning || 'N/A'}`)
             );
         } else {
             cardBody.append(
@@ -655,6 +655,7 @@ $(function() {
     
         return card;
     }
+    
     
     
     // Example default event type to load initially

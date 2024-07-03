@@ -43,3 +43,4 @@ pytest
 eventlet
 flask_redis
 redis
+python-dotenv

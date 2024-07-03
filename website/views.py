@@ -132,7 +132,7 @@ def userProfile():
         "id": session['id'],
         "title": session['title'],
         "name": session['name'],
-        "org": session['org'],
+        "org": session['org_name'],
         "email": session['email'],
         "address": session['address'],
         "mobile": session['mobile']

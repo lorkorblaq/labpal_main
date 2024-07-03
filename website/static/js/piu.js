@@ -1,10 +1,10 @@
 $(function () {
     console.log("piu.js loaded");
-    const columnsPIS = ['created at', 'user', 'item', 'bench', 'machine', 'quantity', 'description', ''];
-    const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine', 'quantity', 'description', ''];
+    const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity', 'Description', ''];
+    const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
-    // BaseUrl = "http://0.0.0.0:3000/api";
-    BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api"
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
@@ -17,17 +17,22 @@ $(function () {
         return null;
     }
     const user_id = getCookie('user_id');
-    const url = `${BaseUrl}/piu/push/${user_id}/`;
+    const lab_name = getCookie('lab_name');
+    const piu_push = `${BaseUrl}/piu/push/${user_id}/${lab_name}/`;
+    const piu_get = `${BaseUrl}/piu/get/${user_id}/${lab_name}/`
+    const piu_put = `${BaseUrl}/piu/put/${user_id}/${lab_name}/`
+    const piu_delete = `${BaseUrl}/piu/delete/${user_id}/${lab_name}/`
+    const url_item_put = `${BaseUrl}/item/put/${user_id}/${lab_name}/`;
+    const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
+    const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     let dataTableInstance ;
     let editedCell;
-    const url_item_put = `${BaseUrl}/item/put/`;
 
     // dataTableInstance = $('#r_table').DataTable();
-    function fetchData(url) {
+    function fetchData(piu_get) {
         // Fetch data from the provided URL
-        return $.get(url);
-        }
-
+        return $.get(piu_get);
+    }
     
     async function submitForm() {
         let bench = $('#dropDownBench').val();
@@ -47,65 +52,59 @@ $(function () {
             case !machine:
                 alert("Please enter a machine.");
                 break;
-            // case !bench:
-            //     alert("Please enter a bench.");
-            //     break;
+            case !lot:
+                alert("Please enter a lot number.");
+                break;
             default:
-                // Create an object with the form data
-                let formData = {
-
-                    bench: bench,
-                    machine: machine,
-                    item: item,
-                    // lot: lot,
-                    quantity: quantity,
-                    description: description
-                };
-                console.log(formData);
-                $.post({
-                    url: url,
-                    contentType: "application/json",
-                    data: JSON.stringify(formData),
-                    success: function (response) {
-                        alert("Item put in use successfully");
-                        console.log(response);
-                    },
-                    error: function (error) {
-                        alert("Could not insert data. Please make sure the item is in the inventory and the lot number is correct");
-                        console.error(error);
-                    }
-                });
                 try {
-                    // updateing items database
-                    itemform = {
-                        direction: "To",
-                        item: item,
-                        'in stock': quantity,
+                    const item_data = await fetchData(item_url);
+                    const lot_data = await fetchData(lot_url);
+    
+                    // Check if the item is present in the fetched data
+                    const itemExists = item_data.items.some(dataItem => dataItem.item === item);
+                    const lotExists = lot_data.lotexp.some(dataLot => dataLot.lot_numb === lot);
+    
+                    if (!itemExists) {
+                        alert("Item not present.");
+                    } else if (!lotExists) {
+                        alert("Lot number not present.");
+                    } else {
+                        let formData = {
+                            bench: bench,
+                            machine: machine,
+                            item: item,
+                            lot_numb: lot,
+                            quantity: quantity,
+                            description: description
+                        };
+                        $.post({
+                            url: piu_push,
+                            contentType: "application/json",
+                            data: JSON.stringify(formData),
+                            success: function (response) {
+                                alert("Item put in use successfully");
+                                console.log(response);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                let errorMessage = "Could not insert data. Please make sure the item is in the inventory as is";
+                                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
+                                    errorMessage = jqXHR.responseJSON.message;
+                                }
+                                alert(errorMessage);
+                                console.error(errorThrown);
+                            }
+                        });
                     }
-                    console.log(itemform);
-                    $.ajax({
-                        url: url_item_put,
-                        contentType: "application/json",
-                        method: "PUT",
-                        data: JSON.stringify(itemform),
-                        success: function (response) {
-                            // alert("update qty successfully");
-                            console.log(response);
-                        },
-                        error: function (error) {
-                            alert("Could'nt updating Quantity of items");
-                            console.error(error);
-                        }
-                    });
+    
+                } catch (error) {
+                    console.error("Error fetching data:", error);
                 }
-                catch (error) {
-                    console.error("Error updating items quantity:", error);
-                }
-            }
-        refreshTable() 
         }
+        refreshTable();
+    }
+    
     function refreshTable() {
-        fetchData(`${BaseUrl}/piu/get/`).then(data => {
+        fetchData(piu_get).then(data => {
             dataTableInstance.clear();
             dataTableInstance.rows.add(data.piu);
             dataTableInstance.draw();
@@ -123,16 +122,15 @@ $(function () {
             $('#reports_h').append(`<th>${header}</th>`);
             });
         try {
-            const data = await fetchData(`${BaseUrl}/piu/get/`);
+            const data = await fetchData(piu_get);
             console.log(data);
-            // renderTablePISChannels(data.piu, headersPIS);
             renderTablePISChannels('r_table', 'ex-r_table', data.piu, headersPIS);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     }
     // Event listener for out mouse press
-    $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2))',function () {
+    $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5))',function () {
         // Check if there's no other cell being edited
         if (!editedCell) {
             // Store the currently edited cell
@@ -180,7 +178,7 @@ $(function () {
         
         function updatePIS(rowId, columnNamePIS, updatedValue) {
             $.ajax({
-                url: `${BaseUrl}/piu/put/${rowId}/`,
+                url: piu_put+rowId+"/",
                 method: "PUT",
                 contentType: "application/json",
                 data:  JSON.stringify({ [columnNamePIS]: updatedValue }),
@@ -215,33 +213,6 @@ $(function () {
         refreshTable();
     });
 
-    // function renderTablePISChannels(data, columns) {
-    //     // Destroy the existing DataTable instance (if it exists)
-    //     if (dataTableInstance) {
-    //         dataTableInstance.destroy();
-    //         }
-    //     // Empty the table body and header before rendering a new table
-    //     // $('#r_table tbody').empty();
-    //     $('#r_table thead').empty();
-    //     $('#r_table thead').append('<tr>' + columns.map(header => `<th>${header}</th>`));
-    
-    //     // Initialize a new DataTable instance
-    //     dataTableInstance = $('#r_table').DataTable({
-    //         data: data,
-    //         columns: columns.map(col => ({ data: col })),
-    //         columnDefs: [
-    //             {
-    //                 targets: -1, // Target the last column
-    //                 data: null,
-    //                 defaultContent:
-    //                 '<button class="tablebtn" id="btn-delete"><i class="fas fa-trash-alt"></i></button>'
-    //             },
-    //         ],
-    //         order: [[1, 'desc']]
-    //     });
-    //     dataTableInstance.column(0).visible(false);
-
-    //     }
     function renderTablePISChannels(tableId, exTableId, data, columns) {
         // Destroy the existing DataTable instance for the specified table ID (if it exists)
         if (dataTableInstance) {
@@ -366,32 +337,32 @@ $(function () {
         printWindow.print();
     }
         // Event listeners for export and print buttons
-        $('#export_request_button').click(function() {
-            console.log("export button clicked");
-            exportTableToCSV('request_invent_table');
-        });
-    
-        $('#print_request_button').click(function() {
-            printTable('request_invent_table');
-        });
+    $('#export_request_button').click(function() {
+        console.log("export button clicked");
+        exportTableToCSV('request_invent_table');
+    });
+
+    $('#print_request_button').click(function() {
+        printTable('request_invent_table');
+    });
     $('#r_table tbody').on('click', '#btn-delete', function () {
         var row = dataTableInstance.row($(this).parents('tr'));
         console.log(row);
         deletePIU(row);
-        });
+    });
 
     $('#piu_btn').click(loadData());
     
-
     function deletePIU(row) {
         var rowId = row.data()._id;
         console.log(rowId)
         $.ajax({
-            url: `${BaseUrl}/piu/delete/${rowId}/`,
+            url: piu_delete+rowId+"/",
             method: "DELETE",
             success: function () {
                 // deleteRowById(channelId);
                 // Remove the row from the DataTable on successful deletion
+                alert("Put in use item deleted successfully");
                 row.remove().draw();
             },
             error: function (error) {

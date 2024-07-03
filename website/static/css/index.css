@@ -1,0 +1,59 @@
+.toDoContanier {
+    display: flex;
+}
+button {
+    padding: 5px 10px;
+    border: 1px solid #0e0c0c;
+
+
+    cursor: pointer;
+}
+button:hover {
+    /* border-bottom-right-radius: 25px; */
+    border-top-right-radius: 50px;
+    border-top-left-radius:0px;
+    border-bottom-left-radius: 0px;
+    /* border-top-right-radius: 25px; */
+}
+.carder {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 25%;
+    margin-top: 10px;
+    max-height: auto;
+    width: 100%;
+    overflow-x:auto;
+    overscroll-behavior-inline: contain;
+}
+.mycard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5px;
+    border-radius: 50px;
+    height: 80%;
+} 
+
+.mycard img {
+    inline-size: 100%;
+}
+
+
+
+.card-body:hover {
+    box-shadow: 0px 0px 10px 0.2rem rgb(255, 255, 255);
+    border-radius: 25px;
+}
+
+.snap-inline {
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 5px;
+}
+
+.snap-inline * {
+    scroll-snap-align: start;
+}
+
+.hr {
+    margin-top: 2%;
+}
