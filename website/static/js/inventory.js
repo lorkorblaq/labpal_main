@@ -7,8 +7,8 @@ $(function () {
     const HeadersRequest = ['Bench', 'Item', 'Q. in Stock(vials)', 'Tests/Day', 'Total Stock(tests)', 'Quantity Requested(tests)', 'In-Stock To Last(days)', 'Amount needed(vials)'];
     const import_heading = ['bench', 'category', 'item', 'vials/pack', 'tests/vial', 'quantity', 'reOrderLevel', 'class', 'tests/day']
 
-    // BaseUrl = "https://labpal.com.ng/api"
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api"
+    // BaseUrl = "http://0.0.0.0:3000/api";
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {

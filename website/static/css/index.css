@@ -38,7 +38,14 @@ button:hover {
     inline-size: 100%;
 }
 
-
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #343A40;
+    color: white;
+}
 
 .card-body:hover {
     box-shadow: 0px 0px 10px 0.2rem rgb(255, 255, 255);
@@ -56,4 +63,51 @@ button:hover {
 
 .hr {
     margin-top: 2%;
+}
+
+
+
+.completed {
+    text-decoration: line-through;
+}
+
+.draggable {
+    cursor: move;
+}
+
+
+
+
+.card{
+    margin:20px;
+}
+
+.task-list, .completed-list {
+    padding-left: 0;
+}
+.task-list li, .completed-list li {
+    list-style-type: none;
+}
+.task-list input[type="checkbox"], .completed-list input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+
+
+.delete-date-card {
+    display: flex;
+    padding: 5px;
+    width: auto;
+    background: none;
+    border: none;
+    align-self: end;
+    color: #FF7E22;
+    border-radius: 25px 25px 25px 25px;
+    box-shadow: none;
+}
+.delete-date-card:hover {
+    background-color: #FF7E22;
+    color: white;
+    border-radius: 25px 25px 25px 25px;
+    box-shadow: none;
 }
