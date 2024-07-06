@@ -16,7 +16,7 @@ $(function () {
     lab_name = getCookie("lab_name");
     BaseUrl = "https://labpal.com.ng/api"
     // BaseUrl = "http://0.0.0.0:3000/api";
-    lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}`;
+    lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     async function fetchData(url) {
         const response = await fetch(url);
         if (!response.ok) {

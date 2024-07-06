@@ -2,6 +2,7 @@
 {% block head %}
 	{{ super() }}
 	<link rel="stylesheet" href="../static/css/index.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Bootstrap Datepicker CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
 {% endblock head %}
@@ -12,7 +13,7 @@
 			<canvas id="canvas" width="500" height="500" ></canvas>
 		</div> -->
 		<div class="carder snap-inline mb-3 horizontal">
-			<a href="https://labpal.com.ng/app/events" class="card-link">
+			<a href="/app/events" class="card-link">
 			<div class="mycard ">
 					<div class="card-body">
 						<h5 class="card-title">Events</h5>
@@ -20,7 +21,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="https://labpal.com.ng/app/inventory" class="card-link">
+			<a href="/app/inventory" class="card-link">
 			<div class="mycard">
 					<div class="card-body">
 						<h5 class="card-title">Inventory</h5>
@@ -28,7 +29,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="https://labpal.com.ng/app/expiration" class="card-link">
+			<a href="/app/expiration" class="card-link">
 			<div class="mycard">
 					<div class="card-body">
 						<h5 class="card-title">Lots and Expiration</h5>
@@ -36,7 +37,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="https://labpal.com.ng/app/in-use" class="card-link">
+			<a href="/app/in-use" class="card-link">
 			<div class="mycard">
 					<div class="card-body">
 						<h5 class="card-title">Put in Use</h5>
@@ -44,7 +45,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="https://labpal.com.ng/app/in-use" class="card-link">
+			<a href="/app/in-use" class="card-link">
 			<div class="mycard">
 					<div class="card-body">
 							<h5 class="card-title">Channels</h5>
@@ -52,7 +53,7 @@
 					</div>
 				</div>
 			</a>
-			<!-- <a href="https://labpal.com.ng/app/gpt" class="card-link"> -->
+			<!-- <a href="/app/gpt" class="card-link"> -->
 			<div class="mycard">
 					<div class="card-body">
 						<h5 class="card-title">Labpal</h5>
@@ -61,7 +62,7 @@
 					</div>
 				</div>
 			<!-- </a> -->
-			<!-- <a href="https://labpal.com.ng/app/gpt" class="card-link"> -->
+			<!-- <a href="/app/messaging" class="card-link"> -->
 			<div class="mycard">
 					<div class="card-body">
 						<h5 class="card-title">Messaging</h5>
@@ -95,6 +96,8 @@
     <!-- Bootstrap JS -->
     <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="../static/js/index.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="../static/js/index.js" type="text/javascript"></script>
 
 {% endblock %}

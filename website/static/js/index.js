@@ -21,7 +21,7 @@ $(document).ready(function() {
     const url_event_todo_delete = `${BaseUrl}/to-do/del/${user_id}/`;
 
     $('.datePicker').datepicker({
-        format: 'yyyy-mm-dd',
+        dateFormat: 'yy-mm-dd', 
         autoclose: true,
         todayHighlight: true,
     });
@@ -92,12 +92,12 @@ $(document).ready(function() {
 
     function updateOrCreateCard(todoData) {
         var existingCard = $('#todo-list').find(`#${todoData.date}-card`);
-
+    
         if (existingCard.length > 0) {
             // Card already exists for this date, update tasks list
             var taskList = existingCard.find('.task-list');
             var completedList = existingCard.find('.completed-list');
-
+    
             todoData.tasks.forEach(function(task) {
                 if (task.completed) {
                     completedList.append(createTaskItem(task.text, task.completed, todoData.date));
@@ -109,16 +109,16 @@ $(document).ready(function() {
             // Create new card for this date
             var card = $('<div>').addClass('card').attr('id', `${todoData.date}-card`);
             var cardHeader = $('<div>').addClass('card-header').text(todoData.date);
-            
+    
             var deleteButton = $('<button>').addClass('delete-date-card').html('<i class="fas fa-trash"></i>').css('margin-left', '10px');
             deleteButton.on('click', function() {
                 deleteDateCard(todoData.date);
             });
-
+    
             cardHeader.append(deleteButton);
-            
+    
             var cardBody = $('<div>').addClass('card-bodyer').css('padding', '40px').css('background-color', '#f8f9fa');
-
+    
             var taskList = $('<ul>').addClass('task-list').css('padding-left', '0');
             var completedList = $('<ul>').addClass('completed-list').css('padding-left', '0');
             todoData.tasks.forEach(function(task) {
@@ -128,13 +128,14 @@ $(document).ready(function() {
                     taskList.append(createTaskItem(task.text, task.completed, todoData.date));
                 }
             });
-
+    
             cardBody.append(taskList, $('<hr>').css('border', '1px solid #FF7E22'), $('<h5>').css('font-weight', 'bold').css('color', '#FF7E22').text('Done'), completedList);
             card.append(cardHeader, cardBody);
-
-            $('#todo-list').append(card);
+    
+            $('#todo-list').prepend(card);  // Prepend the new card to the beginning of the list
         }
     }
+    
     
     function createTaskItem(text, completed, date) {
         var listItem = $('<li>').addClass('task-item');
