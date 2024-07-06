@@ -698,65 +698,6 @@ $(function() {
             eventContainer.append(card); // Append card to display in ascending order
         });
     }
-    
-
-
-
-    // Function to fetch all to-do events for a user
-    function fetchAllToDoEvents(user_id) {
-
-        $.ajax({
-            type: 'GET',
-            url: url_event_todo_get_all,
-            success: function(response) {
-                displayToDoEvents(response);
-            },
-            error: function(error) {
-                console.error('Error fetching to-do events:', error);
-                alert('Error fetching to-do events. Please try again later.');
-            }
-        });
-    }
-
-    // Function to display fetched to-do events
-    function displayToDoEvents(events) {
-        const todoContainer = $('#todoContainer');
-        todoContainer.empty(); // Clear existing content
-
-        events.forEach(todo => {
-            const card = $('<div>').addClass('card mb-3');
-            const cardHeader = $('<div>').addClass('card-header').text(todo.date);
-            const cardBody = $('<div>').addClass('card-body');
-            const ul = $('<ul>').addClass('list-group sortable').attr('id', `checklist-${todo.date}`);
-
-            todo.tasks.forEach(task => {
-                const li = $('<li>').addClass('list-group-item checklist-item');
-                li.append(
-                    $('<span>').text(task),
-                    $('<div>').addClass('checklist-actions').append(
-                        $('<button>').addClass('edit-btn').text('✏️'),
-                        $('<button>').addClass('delete-btn').text('🗑️')
-                    )
-                );
-                ul.append(li);
-            });
-
-            cardBody.append(ul);
-            card.append(cardHeader, cardBody);
-            todoContainer.append(card);
-        });
-    }
-
-    // Example: Fetch to-do events for user with ID 'user123'
-    fetchAllToDoEvents(user_id);
-
-
-
-
-
-
-
-
 
 
         // Function to render to-do items

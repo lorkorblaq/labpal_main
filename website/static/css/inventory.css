@@ -9,15 +9,15 @@
 #importButton{
     background-color: #677b88;
     color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 3px 20px;
+    border-radius: 3px;
+    padding: 3px 15px;
     cursor: pointer;
-    box-shadow: 0 0 0 0.1rem black;
+    margin: 5px;
+    box-shadow: 0 0 0 1px black;
 
 }
 #importButton:hover{
-    box-shadow: 0 0 0 0.1rem #ffffff;
+    box-shadow: 0 0 0 1px #ffffff;
 }
 
 
