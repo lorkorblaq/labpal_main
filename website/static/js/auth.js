@@ -17,19 +17,23 @@ $(document).ready(function() {
     showSignUpForm();
   });
 
+  $('#reg_org').on('click', function() {
+    // alert('Registration for labs is not available at the moment. Please check back later.');
+    $('#myModal_org').css('display', 'block');
+  });
   $('#reg_lab').on('click', function() {
     // alert('Registration for labs is not available at the moment. Please check back later.');
-    $('#myModal').css('display', 'block');
+    $('#myModal_lab').css('display', 'block');
   });
 
   $('.close').on('click', function() {
-    $('#myModal').css('display', 'none');
+    $('.modal').css('display', 'none');
   });
 
   // Optionally, close the modal when clicking outside of the modal content
   $(window).on('click', function(event) {
-    if ($(event.target).is('#myModal')) {
-        $('#myModal').css('display', 'none');
+    if ($(event.target).is('.modal')) {
+        $('.modal').css('display', 'none');
     }
   });
 });

@@ -1,6 +1,6 @@
 from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from .forms import RegistrationForm, LoginForm, Newpassword, LabForm
+from .forms import RegistrationForm, LoginForm, Newpassword, LabForm, OrgForm
 # from .extensions import socketio
 from flask_socketio import send, emit
 from .db_clinicalx import db, db_admin, db_org_users, client
@@ -20,10 +20,6 @@ from bson.errors import InvalidId
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
-
-
-# jwt = JWTManager()
-API_BASE_URL = "https://labpal.com.ng/api/user/push/"
 
 auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
 
@@ -63,31 +59,33 @@ def auth_page():
     login_form = LoginForm()
     register_form = RegistrationForm()
     labform = LabForm()
-    return render_template("auth.html", login_form=login_form, register_form=register_form, labform=labform)
+    orgform = OrgForm()
+    return render_template("auth.html", login_form=login_form, register_form=register_form, orgform=orgform, labform=labform)
 
 @auth.route("/signin-signup", methods=['POST'])
 def signup_signin():
     login_form = LoginForm()
     register_form = RegistrationForm()
     labform = LabForm()
+    orgform = OrgForm()
     
     if 'signup' in request.form:
         # Form submission for sign up
-        if not register_form.validate_on_submit():
-            flash("Please fill in your data correctly", "danger")
-            return redirect(url_for('auth.auth_page'))
+        # if not register_form.validate_on_submit():
+        #     flash("Please fill in your data correctly", "danger")
+        #     return redirect(url_for('auth.auth_page'))
 
+        org_id = register_form.org_id.data
         lab_name = register_form.lab.data.strip().lower()
-        org_id = register_form.org_id.data.strip().lower()
         firstname = register_form.firstname.data
         lastname = register_form.lastname.data
         email = register_form.email.data.strip().lower()
-        password = register_form.password.data
-        confirm_password = register_form.confirm_password.data
+        # password = register_form.password.data
+        # confirm_password = register_form.confirm_password.data
         
-        if password != confirm_password:
-            flash("Passwords do not match.", "danger")
-            return redirect(url_for('auth.auth_page'))
+        # if password != confirm_password:
+        #     flash("Passwords do not match.", "danger")
+        #     return redirect(url_for('auth.auth_page'))
 
         try:
             org_object_id = ObjectId(org_id)
@@ -96,56 +94,25 @@ def signup_signin():
             return redirect(url_for('auth.auth_page'))
         
         org = ORG_COLLECTION.find_one({'_id': org_object_id})
-        
         if not org:
-            flash("Organisation not registered. Please confirm your lab token or register your Lab.", "warning")
+            flash("Organisation not registered. Please confirm your org id or register your Org..", "warning")
+            return redirect(url_for('auth.auth_page'))
+        
+        user = USERS_COLLECTION.find_one({'email': email})
+        if user:
+            flash("A user with this email address already exists, .", "danger")
+            return redirect(url_for('auth.auth_page'))
+        
+        lab_exists = ORG_COLLECTION.find_one({'_id': org_object_id, 'labs': lab_name})
+        if not lab_exists:
+            flash("Laboratory not found. Please confirm your lab name or register your Lab.", "warning")
             return redirect(url_for('auth.auth_page'))
 
         org_name = org.get('org_name')
-
-        lab_exists = ORG_COLLECTION.find_one({'_id': org_object_id, 'labs': lab_name})
-        
-        if not lab_exists:
-            flash("Laboratory not found. Please confirm your lab name from your manager.", "warning")
-            return redirect(url_for('auth.auth_page'))
-
-        user = USERS_COLLECTION.find_one({'email': email})
-        
-        if user:
-            flash("Email already exists.", "danger")
-            return redirect(url_for('auth.auth_page'))
-
-        hashed_password = generate_password_hash(password)
-        form_data = {
-            "firstname": firstname,
-            "lastname": lastname,
-            "email": email,
-            "password": hashed_password,
-            "role": "user",
-            "org_id": str(org_id),
-            "labs_access": [lab_name]
-        }
-
-        name = f"{firstname} {lastname}"
-        
-        try:
-            user_id = USERS_COLLECTION.insert_one(form_data).inserted_id
-            if not user_id:
-                flash("Failed to register user. Please try again or contact support.", "danger")
-                return redirect(url_for('auth.auth_page'))
-
-            organisation = client[f'{org_name}_db']
-            LABS_COLLECTION = organisation['labs']
-            
-            LABS_COLLECTION.update_one({"lab_name": lab_name}, {"$push": {"users": str(user_id)}})
-            ORG_COLLECTION.update_one({"_id": org_object_id}, {"$push": {"users": str(user_id)}})
-            
-            flash("Registration successful, you can now login", "success")
-            welcomeMail(email, name)
-            return redirect(url_for('auth.auth_page'))
-        except Exception as e:
-            flash(f"An error occurred: {str(e)}", "danger")
-            return redirect(url_for('auth.auth_page'))
+        url = f"https://labpal.com.ng/register-user?org_id={org_id}&lab_name={lab_name}&firstname={firstname}&lastname={lastname}&email={email}"
+        send_verification_email(email, firstname, url)
+        flash("Kindly check the inbox of the email you provided for verification to proceed", "success")
+        return redirect(url_for('auth.auth_page'))
     
     
 
@@ -162,10 +129,12 @@ def signup_signin():
             org_id = user.get('org_id')
             # session['session_id'] = session_id
             org_name = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}).get('org_name')
+            print(org_id)
+            print(org_name)
             lab_name = user.get('labs_access', "")[0]
             session['id'] = full_id
+            session['org_id'] = org_id
             session['lab_name'] = lab_name
-            print(session['lab_name'])
             session['org_name'] = org_name
             org_db = client[f'{org_name}_db']
             ip_address = request.remote_addr
@@ -190,7 +159,6 @@ def signup_signin():
             session['lastname'] = lastname
             session['name'] = name
             session['title'] = user.get('title', "")
-            session['org'] = user.get('org', "")
             session['address'] = user.get('address', "")
             session['mobile'] = user.get('mobile', "")
             session['image'] = user.get('image', "")
@@ -223,15 +191,15 @@ def signup_signin():
             # Either user does not exist or password is incorrect
             flash("Invalid login credentials.", "danger")
             return redirect(url_for('auth.auth_page'))
-        
-    elif 'create lab' in request.form:
-        if labform.validate_on_submit():
-            org_name = labform.org_name.data.strip().lower()
-            lab_name = labform.lab_name.data.strip().lower()            
-            managers_firstname = labform.managers_firstname.data
-            managers_lastname = labform.managers_lastname.data
-            managers_email = labform.managers_email.data.strip().lower()
-            user = USERS_COLLECTION.find_one({'email': managers_email})
+
+    elif 'create org' in request.form:
+        if orgform.validate_on_submit():
+            org_name = orgform.org_name.data.strip().lower()
+            lab_name = orgform.lab_name.data.strip().lower()            
+            firstname = orgform.firstname.data
+            lastname = orgform.lastname.data
+            email = orgform.email.data.strip().lower()
+            user = USERS_COLLECTION.find_one({'email': email})
 
             # try:
             if not user:
@@ -240,68 +208,84 @@ def signup_signin():
                     flash("Organization already exists, please provide another name.", "warning")
                     return redirect(url_for('auth.auth_page'))
                 else:
-                    url = f"https://labpal.com.ng/registerlab?org_name={org_name}&lab_name={lab_name}&managers_firstname={managers_firstname}&managers_lastname={managers_lastname}&managers_email={managers_email}"
-                    send_verification_email(managers_email, managers_firstname, url)
+                    url = f"https://labpal.com.ng/register-org?org_name={org_name}&lab_name={lab_name}&firstname={firstname}&lastname={lastname}&email={email}"
+                    send_verification_email(email, firstname, url)
                     flash("Kindly check the inbox of the email you provided for verification to proceed", "success")
                     return redirect(url_for('auth.auth_page'))
             elif user:
-                    org_id = user.get('org_id')
-                    user_id = user.get('_id')
-                    # org_id = user.get('org_id')
-                    org = ORG_COLLECTION.find_one( {'_id': ObjectId(org_id)})
-                    if org:
-                        sub = org.get('subscription')
-                        if sub == "basic":
-                            flash(f"Please you are on the free teir and entitled to only one Lab. Kindly upgrade to proceed.", "warning")
-                            return redirect(url_for('auth.auth_page'))
-                        elif sub == "pro":
-                            org_name = org.get('org_name')
-                            org_db = client[f'{org_name}_db']
-                            ORG_LABS_COLLECTION = org_db['labs']
-                            lab = ORG_LABS_COLLECTION.find_one({'lab_name': lab_name})
-                            if lab:
-                                flash("Lab already exists, please provide another name.", "warning")
-                                return redirect(url_for('auth.auth_page'))
-                            elif not lab:
-                                lab_data = {
-                                    "lab_name": lab_name,
-                                    "managers_email": managers_email,
-                                    "users": [str(user_id)],
-                                    "created_at": datetime.datetime.now(),
-                                }
-                                ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
-                                USERS_COLLECTION.update_one({"email": managers_email}, {"$push": {"labs_access": lab_name}})
-                                ORG_COLLECTION.update_one({"_id": ObjectId(org_id)}, {"$push": {"labs": lab_name}})
-                                flash("Lab created successfully", "success")
-                                return redirect(url_for('auth.auth_page'))
-            # except:
-            #     flash("Failed to create lab., please try again or contact support", "danger")
-            #     return redirect(url_for('auth.auth_page'))
+                flash("This user already belongs to an Organisation.", "danger")
+                return redirect(url_for('auth.auth_page'))
+        else: 
+            flash("Please fill in your data correctly", "danger")
+            return redirect(url_for('auth.auth_page'))
 
-@auth.route('/registerlab', methods=['GET', 'POST'])
-def register_lab():
+    elif 'create lab' in request.form:
+        lab_name = labform.lab_name.data.strip().lower()            
+        # managers_firstname = labform.managers_firstname.data
+        # managers_lastname = labform.managers_lastname.data
+        managers_email = labform.managers_email.data.strip().lower()
+        user = USERS_COLLECTION.find_one({'email': managers_email})
+
+        if not user:
+            flash("This user does not exist. Please register your organisation before proceeding.", "danger")
+            return redirect(url_for('auth.auth_page'))
+           
+        elif user:
+                org_id = user.get('org_id')
+                user_id = user.get('_id')
+                # org_id = user.get('org_id')
+                org = ORG_COLLECTION.find_one( {'_id': ObjectId(org_id)})
+                if org:
+                    sub = org.get('subscription')
+                    if sub == "basic":
+                        flash(f"Please you are on the free teir and entitled to only one Lab. Kindly upgrade to proceed.", "warning")
+                        return redirect(url_for('auth.auth_page'))
+                    elif sub == "pro":
+                        org_name = org.get('org_name')
+                        org_db = client[f'{org_name}_db']
+                        ORG_LABS_COLLECTION = org_db['labs']
+                        lab = ORG_LABS_COLLECTION.find_one({'lab_name': lab_name})
+                        if lab:
+                            flash("Lab already exists, please provide another name.", "warning")
+                            return redirect(url_for('auth.auth_page'))
+                        elif not lab:
+                            lab_data = {
+                                "lab_name": lab_name,
+                                "managers_email": managers_email,
+                                "users": [str(user_id)],
+                                "created_at": datetime.datetime.now(),
+                                "org_id": org_id
+                            }
+                            ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
+                            USERS_COLLECTION.update_one({"email": managers_email}, {"$push": {"labs_access": lab_name}})
+                            ORG_COLLECTION.update_one({"_id": ObjectId(org_id)}, {"$push": {"labs": lab_name}})
+                            flash("Lab created successfully", "success")
+                            return redirect(url_for('auth.auth_page'))
+
+       
+
+@auth.route('/register-org', methods=['GET', 'POST'])
+def register_org():
     register_form = RegistrationForm()
     org_name = request.args.get('org_name')
     lab_name = request.args.get('lab_name')
-    managers_firstname = request.args.get('managers_firstname')
-    managers_lastname = request.args.get('managers_lastname')
-    managers_email = request.args.get('managers_email')
+    firstname = request.args.get('firstname')
+    lastname = request.args.get('lastname')
+    email = request.args.get('email')
 
     if request.method == 'POST':
         password = register_form.password.data
         confirm_password = register_form.confirm_password.data
-
         if password != confirm_password:
             flash("Passwords do not match.", "danger")
-            return redirect(url_for('auth.register_lab', org_name=org_name, lab_name=lab_name, managers_firstname=managers_firstname, managers_lastname=managers_lastname, managers_email=managers_email))
-
-        try:
+            return redirect(url_for('auth.register_org', org_name=org_name, lab_name=lab_name, firstname=firstname, lastname=lastname, email=email))
+        if password == confirm_password:
             hashed_password = generate_password_hash(password)
             # Register the user
             user_data = {
-                "firstname": managers_firstname,
-                "lastname": managers_lastname,
-                "email": managers_email,
+                "firstname": firstname,
+                "lastname": lastname,
+                "email": email,
                 "password": hashed_password,
                 "role": "creator",
                 "created_at": datetime.datetime.now()
@@ -310,14 +294,11 @@ def register_lab():
             print(user_id)
             # Register the lab and organization
             if user_id:
-                org_db = client[f'{org_name}_db']
+                print("this is org name:", org_name)
+                org_db = client[f"{org_name}_db"]
+                print("this is org db:",org_db)
                 ORG_LABS_COLLECTION = org_db['labs']
-                lab_data = {
-                    "lab_name": lab_name,
-                    "managers_email": managers_email,
-                    "users": [str(user_id)],
-                    "created_at": datetime.datetime.now(),
-                }
+                print("this is org labs collection", ORG_LABS_COLLECTION)
                 org_data = {
                     "org_name": org_name,
                     "labs": [lab_name],
@@ -327,31 +308,83 @@ def register_lab():
                     "created_at": datetime.datetime.now(),
                 }
                 org_id = ORG_COLLECTION.insert_one(org_data).inserted_id
-                ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
-
+                print("this is org id:",org_id)
+                lab_data = {
+                    "lab_name": lab_name,
+                    "managers_email": email,
+                    "users": [str(user_id)],
+                    "created_at": datetime.datetime.now(),
+                    "org_id": str(org_id)
+                }
+                lab = ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
+                print(lab)
                 if org_id:
                     USERS_COLLECTION.update_one(
-                        {"email": managers_email},
+                        {"email": email},
                         {
                          "$set": {"org_id": str(org_id)},
                          "$push": {"labs_access": lab_name}
                         }
                     )
                     flash("Registration successful, you can now login", "success")
-                    welcomeMail(managers_email, managers_firstname)
+                    welcomeMail(email, firstname)
                     return redirect(url_for('auth.auth_page'))
                 else:
                     flash("Failed to register organization. Please try again or contact support", "danger")
-                    return redirect(url_for('auth.register_lab'))
+                    return redirect(url_for('auth.register_org'))
             else:
                 flash("Failed to register user. Please try again or contact support", "danger")
-                return redirect(url_for('auth.register_lab'))
+                return redirect(url_for('auth.register_org'))
 
-        except Exception as e:
-            flash(f"Failed to register. Error: {str(e)}", "danger")
-            return redirect(url_for('auth.register_lab'))
+        else:
+            flash(f"Failed to register. Error: ", "danger")
+            return redirect(url_for('auth.register_org'))
 
-    return render_template("reg_lab.html", lab=lab_name, lastname=managers_lastname, firstname=managers_firstname, register_form=register_form)
+    return render_template("reg_org.html", lab=lab_name, lastname=lastname, firstname=firstname, register_form=register_form)
+
+@auth.route('/register-user', methods=['GET', 'POST'])
+def register_user():
+    register_form = RegistrationForm()
+    org_id = request.args.get('org_id')
+    lab_name = request.args.get('lab_name')
+    firstname = request.args.get('firstname')
+    lastname = request.args.get('lastname')
+    email = request.args.get('email')
+    print(org_id)
+
+    if request.method == 'POST':
+        password = register_form.password.data
+        confirm_password = register_form.confirm_password.data
+        if password != confirm_password:
+            flash("Passwords do not match.", "danger")
+            return redirect(url_for('auth.register_org', org_id=org_id, lab_name=lab_name, firstname=firstname, lastname=lastname, email=email, register_form=register_form))
+        if password == confirm_password:
+            hashed_password = generate_password_hash(password)
+            # Register the user
+            user_data = {
+                "firstname": firstname,
+                "lastname": lastname,
+                "email": email,
+                "password": hashed_password,
+                "role": "user",
+                "org_id": str(org_id),
+                "created_at": datetime.datetime.now(),
+                "labs_access": [lab_name]
+            }
+            user_id = USERS_COLLECTION.insert_one(user_data).inserted_id
+            org_name = ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"users": str(user_id)}}).get('org_name')
+            # org_name = org.get('org_name')
+            # Register the lab and organization
+            org_db = client[f"{org_name}_db"]
+            ORG_LABS_COLLECTION = org_db['labs']
+            ORG_LABS_COLLECTION.update_one(
+                {"lab_name": lab_name},
+                {"$push": {"users": str(user_id)}}
+            )
+            welcomeMail(email, firstname)
+            flash("Registration successful, you can now login", "success")
+            return redirect(url_for('auth.auth_page'))
+    return render_template("reg_org.html", org_id=org_id, lab_name=lab_name, firstname=firstname, lastname=lastname, email=email, register_form=register_form)
 
 
 @auth.route('/subscription', methods=['GET', 'POST'])

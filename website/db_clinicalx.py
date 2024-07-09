@@ -7,7 +7,6 @@ load_dotenv(find_dotenv())
 uri_development = os.getenv('URI_DEVELOPMENT')
 uri_production = os.getenv('URI_PRODUCTION')
 # MongoDB connection
-# uri_production = f"mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri_production, server_api=ServerApi('1'))
 try:
     client.admin.command('ping')

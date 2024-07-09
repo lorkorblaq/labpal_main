@@ -20,7 +20,7 @@ form {
   text-align: center;
   background: #fff;
   width: 310px;
-  height: 470px;
+  height: 430px;
   border-radius: 5px;
   padding: 30px 20px 0 20px;
   box-shadow: 0 10px 50px 0 rgba(77, 85, 92, 0.842);
@@ -171,8 +171,7 @@ input {
     z-index: 1;
     transform: perspective(100px) translate3d(100px, 0px, -30px);
     position: absolute;
-    width: 300px;
-    min-height:520px;
+    width: 100%;
 }
 
 .signIn {
@@ -206,7 +205,23 @@ input {
 
 
 /* The Modal (background) */
-
+#lab_org{
+  display: flex;
+  width: 310px;
+  justify-content: space-between;
+}
+#reg_org {
+  background-color: #ff7e5f;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 3px 3px;
+  border-start-start-radius:7px ;
+  margin-right: 5px;
+  /* margin: 10px 0; */
+  width: 50%;
+}
 #reg_lab {
   background-color: #ff7e5f;
   color: white;
@@ -216,7 +231,13 @@ input {
   padding: 3px 3px;
   border-start-start-radius:7px ;
   /* margin: 10px 0; */
-  width: 100%;
+  width: 50%;
+}
+
+
+#reg_org:hover {
+  background-color: #4facfe;
+  color: white;
 }
 #reg_lab:hover {
   background-color: #4facfe;

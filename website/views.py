@@ -132,12 +132,15 @@ def userProfile():
         "id": session['id'],
         "title": session['title'],
         "name": session['name'],
-        "org": session['org_name'],
+        "org_id": session['org_id'],
+        "org_name": session['org_name'],
+        "lab_name": session['lab_name'],
         "email": session['email'],
         "address": session['address'],
         "mobile": session['mobile']
     }
-    return render_template("user-profile.html", name=session['name'], data=data)
+    print(data)
+    return render_template("user-profile.html", data=data)
 
 @views.route("/app/settings", methods=['GET'], strict_slashes=False)
 @auth_required

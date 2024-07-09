@@ -10,18 +10,25 @@ from .extensions import socketio, mail
 from website.auth import auth
 from website.settings import settings
 from website.views import views
+from dotenv import load_dotenv, find_dotenv
+import os
+load_dotenv(find_dotenv())
+
+uri_production = os.getenv('URI_PRODUCTION')
+secret_key = os.getenv('SECRET')
+password = os.getenv('PASSWORD')
 # from flask import session
 # from website.celery_config import make_celery
 
 def create_app():
     app = Flask(__name__)
     # Configuration settings
-    app.config['SECRET_KEY'] = 'LVUC5jSkp7jjR3O-'
-    app.config['MONGO_URI'] = "mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
+    app.config['SECRET_KEY'] = secret_key
+    app.config['MONGO_URI'] = uri_production
     app.config['MAIL_SERVER'] = '51.195.190.75'
     app.config['MAIL_PORT'] = 465
     app.config['MAIL_USERNAME'] = 'labpal@labpal.com.ng'
-    app.config['MAIL_PASSWORD'] = '518Oloko.'
+    app.config['MAIL_PASSWORD'] = password
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_DEFAULT_SENDER'] = ('LabPal','labpal@labpal.com.ng')
     app.config['MAIL_DEBUG'] = True
