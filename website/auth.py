@@ -369,7 +369,8 @@ def register_user():
                 "role": "user",
                 "org_id": str(org_id),
                 "created_at": datetime.datetime.now(),
-                "labs_access": [lab_name]
+                "labs_access": [lab_name],
+                "image":"../static/images/users/male_default.png"
             }
             user_id = USERS_COLLECTION.insert_one(user_data).inserted_id
             org_name = ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"users": str(user_id)}}).get('org_name')
