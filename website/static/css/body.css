@@ -94,7 +94,9 @@ h1 {
     margin-top: 5px;
 }
 
-
+#sidebar-wrapper a{
+    color: #B8DAF0;
+}
 
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {

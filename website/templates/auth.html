@@ -14,18 +14,19 @@
         <h1 style="text-align: center;">LABPAL</h1>
     </a>
     <div class="container">
+        <div id="lab_org">
+            <button id="reg_org">To register Org...<i class="fas fa-hand-point-up"></i>.</button>
+            <button id="reg_lab">To register Lab...<i class="fas fa-hand-point-up"></i>.</button>
+        </div>
         <div class="signUp">
-            <button id="reg_lab">Don't have an Org. Id? Register here☝🏽.</button>
             <form class="signUp" action="{{ url_for('auth.signup_signin') }}" method="post">
-                <h5>Create Account</h5>
+                <h5>Create User Account</h5>
                 {{ register_form.hidden_tag() }}
                 {{ register_form.org_id }}
                 {{ register_form.lab }}
                 {{ register_form.firstname }}
                 {{ register_form.lastname }}
                 {{ register_form.email }}
-                {{ register_form.password }}
-                {{ register_form.confirm_password }}
                 <button class="form-btn sx log-in" type="button" onclick="showSignInForm()">Log In</button>
                 <button class="form-btn dx" type="submit" name="signup">Sign Up</button>
             </form>
@@ -53,21 +54,36 @@
         {% endwith %}
     </div>
     <!-- Modal -->
-   <div id="myModal" class="modal">
+   <div id="myModal_org" class="modal">
        <form class="regLab modal-content" action="{{ url_for('auth.signup_signin') }}" method="post">
             <span class="close">&times;</span>
-            <h5>Register Your Lab</h5>
-            <p>Fill in the details to register your lab.</p>
-            {{ labform.hidden_tag() }}
-            {{ labform.org_name }}
-            {{ labform.lab_name }}
-            {{ labform.managers_firstname }}
-            {{ labform.managers_lastname }}
-            {{ labform.managers_email }}
+            <h5>Register Your Organisation</h5>
+            <p>Fill in the details to register your Org.</p>
+            {{ orgform.hidden_tag() }}
+            {{ orgform.org_name }}
+            {{ orgform.lab_name }}
+            {{ orgform.firstname }}
+            {{ orgform.lastname }}
+            {{ orgform.email }}
             <button class="form-btn sx log-in close" type="button">Go back</button>
-            <button class="reg form-btn dx" type="submit" name="create lab">Register</button>
+            <button class="reg form-btn dx" type="submit" name="create org">Register</button>
         </form>
     </div>
+    <div id="myModal_lab" class="modal">
+        <form class="regOrg modal-content" action="{{ url_for('auth.signup_signin') }}" method="post">
+             <span class="close">&times;</span>
+             <h5>Register Your Laboratory</h5>
+             <p>Fill in the details to register your Lab.</p>
+             {{ labform.hidden_tag() }}
+             <!-- {{ labform.org_id }} -->
+             {{ labform.lab_name }}
+             <!-- {{ labform.managers_firstname }}
+             {{ labform.managers_lastname }} -->
+             {{ labform.managers_email }}
+             <button class="form-btn sx log-in close" type="button">Go back</button>
+             <button class="reg form-btn dx" type="submit" name="create lab">Register</button>
+         </form>
+     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="../static/js/auth.js" type="text/javascript"></script>
 </body>

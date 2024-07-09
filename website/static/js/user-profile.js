@@ -37,9 +37,10 @@ $(function () {
         
         // Update specific elements with user data
         const userName = userData.firstname + ' ' + userData.lastname;
+        userDataContainer.find('#image').attr('src', userData.image);
         userDataContainer.find('#name').text(userName);
         userDataContainer.find('.title').text(userData.title);
-        userDataContainer.find('#org').text(userData.org);
+        userDataContainer.find('#lab_acess').text(userData.lab_acess);
         userDataContainer.find('#firstName').text(userData.firstname);
         userDataContainer.find('#lastName').text(userData.lastname);
         userDataContainer.find('#emailAddr').text(userData.email);   

@@ -3,8 +3,16 @@ from wtforms import StringField, PasswordField, SubmitField, DateField, BooleanF
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 import email_validator
 
-class LabForm(FlaskForm):
+class OrgForm(FlaskForm):
     org_name = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation name"})
+    lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})
+    lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Last name"})
+    email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Email address"})
+    submit = SubmitField('create org')
+
+class LabForm(FlaskForm):
+    org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation Id"})
     lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
     managers_firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"Managers first name"})
     managers_lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Managers last name"})
@@ -13,7 +21,7 @@ class LabForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation Id"})
+    org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation ID"})
     lab = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Last name"})
