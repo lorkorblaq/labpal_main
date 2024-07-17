@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, make_response, session
+from flask import Blueprint, render_template, request, url_for, redirect, session
 import requests
 from flask_cors import CORS
 from .auth import auth_required
@@ -147,4 +147,3 @@ def userProfile():
 def settings():
     new_pass = Newpassword()
     return render_template("settings.html", new_pass=new_pass, name=session['name'], email=session['email'])
-

@@ -25,6 +25,7 @@ $(function () {
     const url_channel_put = `${BaseUrl}/channel/put/${user_id}/${lab_name}/`;
     const url_channel_delete = `${BaseUrl}/channel/delete/${user_id}/${lab_name}/`;    
     const url_item_put = `${BaseUrl}/item/put/${user_id}/${lab_name}/`;
+    const url_lot_exp = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
 
    
     function fetchData(url_channel_push) {
@@ -34,7 +35,7 @@ $(function () {
     
     async function fetchLotNumbers() {
         try {
-            const data = await $.get(`${BaseUrl}/lotexp/get/`);
+            const data = await $.get(url_lot_exp);
             return data.lotexp.map(lot => lot.lot_numb);
         } catch (error) {
             console.error('Error fetching lot numbers:', error);
@@ -88,37 +89,37 @@ $(function () {
                             console.error(error);
                         }
                     });
-                try {
-                    itemform = {
-                        direction: direction,
-                        item: item,
-                        'in stock': quantity,
-                    }
-                    console.log(itemform);
-                    $.ajax({
-                        url: url_item_put,
-                        contentType: "application/json",
-                        method: "PUT",
-                        data: JSON.stringify(itemform),
-                        success: function (response) {
-                            // alert("update qty successfully");
-                            console.log(response);
-                        },
-                        error: function (error) {
-                            alert("Could'nt update Quantity of items");
-                            console.error(error);
-                        }
-                    });
-                }
-                catch (error) {
-                    console.error("Error updating items quantity:", error);
-                }
+                // try {
+                //     itemform = {
+                //         direction: direction,
+                //         item: item,
+                //         quantity: quantity,
+                //     }
+                //     console.log(itemform);
+                //     $.ajax({
+                //         url: url_item_put,
+                //         contentType: "application/json",
+                //         method: "PUT",
+                //         data: JSON.stringify(itemform),
+                //         success: function (response) {
+                //             // alert("update qty successfully");
+                //             console.log(response);
+                //         },
+                //         error: function (error) {
+                //             alert("Could'nt update Quantity of items");
+                //             console.error(error);
+                //         }
+                //     });
+                // }
+                // catch (error) {
+                //     console.error("Error updating items quantity:", error);
+                // }
                 
             }
         refreshTable()
         }
     function refreshTable() {
-        fetchData(`${BaseUrl}/channels/get/`).then(data => {
+        fetchData(url_channel_get).then(data => {
             dataTableInstance.clear();
             dataTableInstance.rows.add(data.channels);
             dataTableInstance.draw();

@@ -83,10 +83,18 @@ button:hover {
 
 .card-body  {
     flex: 1 1 auto;
-    min-height: 1px;
     padding: 1rem;
     border:5px solid rgba(131, 146, 212, 0.125);
-}       
+    height: 450px;
+}   
+   
+.user_deck{
+    display: flex;
+    width: 450p;
+}
+.card-user{
+    height: 450px;
+}
 
 .table-responsive {
     flex: 1 1 auto;
@@ -95,20 +103,5 @@ button:hover {
     background-color: #f0f0f0;
 }       
 
-.loading-spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+/* CSS for loading spinner */
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}

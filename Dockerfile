@@ -20,7 +20,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 8080
 
 # Define environment variable
-ENV FLASK_APP=main.py
 
 # Command to run supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:3000", "main:app"]

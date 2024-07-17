@@ -1,25 +1,30 @@
-  {% extends "base.html" %}
-  {% block head %}
-      {{ super() }}
-      <link rel="stylesheet" href="../static/css/chat.css">
-  {% endblock head %}
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../../static/static_for_gpt/chat.css">
+{% endblock head %}
 
-  {% block body %}
-          <main>
-            <div class="container mt-5 mb-2">
-              <h1>LabPal</h1>
-              <div class="chat-header"><i class="fas fa-brain"></i> Laboratory assitant</div>
-              <div class="chat-messages">
-                  <div class="chatbot-message" id="assitant">Hy, i'm your lab pal... <br> How can I help you?</div>
-              </div>
-              <div class="chat-input">
-                  <input type="text" placeholder="..." id="prompt">
-                  <button id="sendButton" disabled><i class="fas fa-paper-plane"></i></button>
-              </div>
+{% block body %}
+    <main>
+        <div class="chat-box">
+            <div class="chat-header">
+                <div class="icon-container">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="loadergpt" id="loadingIndicatorgpt"></div> <!-- Loading indicator -->
             </div>
-          </main>
-  {% endblock %}
-  
-  {% block scripts %}
-  <script src="../../static/static_for_gpt/js/gpt.js" type="text/javascript"></script>
-  {% endblock %}
+            <div class="chat-messages" id="chatMessages">
+                <div class="chatbot-message">Hi, I'm Labpal, your assistant. How can I help you?</div>
+                <!-- Chat messages will be appended here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="prompt">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+<script src="../../static/static_for_gpt/gpt.js" type="text/javascript"></script>
+{% endblock %}
