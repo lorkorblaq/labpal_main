@@ -70,43 +70,41 @@ def signup_signin():
     orgform = OrgForm()
     
     if 'signup' in request.form:
-        # Form submission for sign up
-        # if not register_form.validate_on_submit():
-        #     flash("Please fill in your data correctly", "danger")
-        #     return redirect(url_for('auth.auth_page'))
-
         org_id = register_form.org_id.data
         lab_name = register_form.lab.data.strip().lower()
         firstname = register_form.firstname.data
         lastname = register_form.lastname.data
         email = register_form.email.data.strip().lower()
-        # password = register_form.password.data
-        # confirm_password = register_form.confirm_password.data
-        
-        # if password != confirm_password:
-        #     flash("Passwords do not match.", "danger")
-        #     return redirect(url_for('auth.auth_page'))
-
         try:
             org_object_id = ObjectId(org_id)
         except InvalidId:
             flash("Invalid organisation ID format. Please check your input.", "danger")
             return redirect(url_for('auth.auth_page'))
         
-        org = ORG_COLLECTION.find_one({'_id': org_object_id})
+        org = ORG_COLLECTION.find_one({'_id': org_object_id}, {'subscription': 1, 'users': 1, 'labs': 1, 'org_name': 1})
         if not org:
-            flash("Organisation not registered. Please confirm your org id or register your Org..", "warning")
+            flash("Organisation not registered. Please confirm your org ID or register your Org.", "warning")
             return redirect(url_for('auth.auth_page'))
         
-        user = USERS_COLLECTION.find_one({'email': email})
-        if user:
-            flash("A user with this email address already exists, .", "danger")
+        num_users = len(org.get('users', []))
+        sub = org.get('subscription')
+        user_limits = {'free': 7, 'basic': 20, 'premium': 45}
+
+        if num_users >= user_limits.get(sub, float('inf')):
+            plan_upgrades = {'free': 'Basic or Premium', 'basic': 'Premium', 'premium': 'Enterprise'}
+            flash(f"Your organization has reached the maximum number of {user_limits[sub]} users for the current plan. "
+                  f"Please upgrade your plan to {plan_upgrades.get(sub, '')} to add more users.", "warning")
             return redirect(url_for('auth.auth_page'))
         
-        lab_exists = ORG_COLLECTION.find_one({'_id': org_object_id, 'labs': lab_name})
-        if not lab_exists:
+
+        if lab_name not in org.get('labs', []):
             flash("Laboratory not found. Please confirm your lab name or register your Lab.", "warning")
             return redirect(url_for('auth.auth_page'))
+        
+        if USERS_COLLECTION.find_one({'email': email}):
+            flash("A user with this email address already exists.", "danger")
+            return redirect(url_for('auth.auth_page'))
+        
 
         org_name = org.get('org_name')
         url = f"https://labpal.com.ng/register-user?org_id={org_id}&lab_name={lab_name}&firstname={firstname}&lastname={lastname}&email={email}"
@@ -114,83 +112,69 @@ def signup_signin():
         flash("Kindly check the inbox of the email you provided for verification to proceed", "success")
         return redirect(url_for('auth.auth_page'))
     
-    
-
     elif 'signin' in request.form:
         email = login_form.email.data.strip().lower()
         password = login_form.password.data
-        # Fetch user from MongoDB based on the provided email
+
         user = USERS_COLLECTION.find_one({'email': email})
-        if user is not None and check_password_hash(user['password'], password):
-            # chat_watcher.delay()
-            identity ={}
-            full_id = str(user['_id'])
+        if user and check_password_hash(user['password'], password):
             org_id = user.get('org_id')
-            # session['session_id'] = session_id
-            org_name = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}).get('org_name')
-            print(org_id)
-            print(org_name)
-            lab_name = user.get('labs_access', "")[0]
-            session['id'] = full_id
-            session['org_id'] = org_id
-            session['lab_name'] = lab_name
-            session['org_name'] = org_name
-            org_db = client[f'{org_name}_db']
-            ip_address = request.remote_addr
-            # user_agent = request.user_agent.string
+            org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'org_name': 1})
+
+            if not org:
+                flash("Organisation not found.", "danger")
+                return redirect(url_for('auth.auth_page'))
+
             full_id = str(user['_id'])
-            part_id = full_id[-7:]
+            org_name = org.get('org_name')
+            lab_name = user.get('labs_access', [""])[0]
+            ip_address = request.remote_addr
             firstname = user['firstname']
             lastname = user['lastname']
-            name = firstname + " " + lastname
+            name = f"{firstname} {lastname}"
+            part_id = full_id[-7:]
+
             logging.info(f"user:{name}, email:{email}, ip:{ip_address} at {datetime.datetime.now()}")
-            # Passwords match, allow login
-            # auth.logger.info(f"User logged in: {session['email']}")
 
-            # flash("Login successful!", "success")
-            # Your redirect logic here, e.g., redirect to dashboard
-            session['ip_address'] = ip_address
-            session['logged_in'] = True
-            session['id'] = full_id
-            session['part_id'] = part_id
-            session['email'] = email
-            session['firstname'] = firstname
-            session['lastname'] = lastname
-            session['name'] = name
-            session['title'] = user.get('title', "")
-            session['address'] = user.get('address', "")
-            session['mobile'] = user.get('mobile', "")
-            session['image'] = user.get('image', "")
-
-            # stockAlert(email, name)
+            session.update({
+                'id': full_id,
+                'org_id': org_id,
+                'lab_name': lab_name,
+                'org_name': org_name,
+                'ip_address': ip_address,
+                'logged_in': True,
+                'part_id': part_id,
+                'email': email,
+                'firstname': firstname,
+                'lastname': lastname,
+                'name': name,
+                'title': user.get('title', ""),
+                'address': user.get('address', ""),
+                'mobile': user.get('mobile', ""),
+                'image': user.get('image', ""),
+            })
 
             secret_key = "LVUC5jSkp7jjR3O-"
-            # secret_key = "LVUC5jSkp7jjR3O-"
-            # print(secret_key)
             token = jwt.encode({
-                'email': email, 
-                'user': name, 
-                'exp': str(datetime.datetime.now() + datetime.timedelta(minutes=240))
-             }, 
-            secret_key)
+                'email': email,
+                'user': name,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=240)
+            }, secret_key)
             session['time_left'] = time_left_until_expiration(token, secret_key)
             session['token'] = token
-            # print(token)
+
             response = make_response(redirect(url_for('views.home')))
             response.set_cookie('user_id', full_id)
             response.set_cookie('email', email)
             response.set_cookie('name', name)
             response.set_cookie('org_name', org_name)
             response.set_cookie('lab_name', lab_name)
-            # response.set_cookie('id', session_id)
-            response.set_cookie('token', session['token'] )
-            # watch_inventory_changes.delay(lab_name)
+            response.set_cookie('token', token)
+
             return response
-            # return make_response
-        else:
-            # Either user does not exist or password is incorrect
-            flash("Invalid login credentials.", "danger")
-            return redirect(url_for('auth.auth_page'))
+
+        flash("Invalid login credentials.", "danger")
+        return redirect(url_for('auth.auth_page'))
 
     elif 'create org' in request.form:
         if orgform.validate_on_submit():
@@ -220,47 +204,65 @@ def signup_signin():
             return redirect(url_for('auth.auth_page'))
 
     elif 'create lab' in request.form:
-        lab_name = labform.lab_name.data.strip().lower()            
-        # managers_firstname = labform.managers_firstname.data
-        # managers_lastname = labform.managers_lastname.data
+        lab_name = labform.lab_name.data.strip().lower()
         managers_email = labform.managers_email.data.strip().lower()
-        user = USERS_COLLECTION.find_one({'email': managers_email})
+        
+        # Use projection to fetch only the required fields
+        user = USERS_COLLECTION.find_one({'email': managers_email}, {'org_id': 1, '_id': 1})
 
         if not user:
             flash("This user does not exist. Please register your organisation before proceeding.", "danger")
             return redirect(url_for('auth.auth_page'))
-           
-        elif user:
-                org_id = user.get('org_id')
-                user_id = user.get('_id')
-                # org_id = user.get('org_id')
-                org = ORG_COLLECTION.find_one( {'_id': ObjectId(org_id)})
-                if org:
-                    sub = org.get('subscription')
-                    if sub == "basic":
-                        flash(f"Please you are on the free teir and entitled to only one Lab. Kindly upgrade to proceed.", "warning")
-                        return redirect(url_for('auth.auth_page'))
-                    elif sub == "pro":
-                        org_name = org.get('org_name')
-                        org_db = client[f'{org_name}_db']
-                        ORG_LABS_COLLECTION = org_db['labs']
-                        lab = ORG_LABS_COLLECTION.find_one({'lab_name': lab_name})
-                        if lab:
-                            flash("Lab already exists, please provide another name.", "warning")
-                            return redirect(url_for('auth.auth_page'))
-                        elif not lab:
-                            lab_data = {
-                                "lab_name": lab_name,
-                                "managers_email": managers_email,
-                                "users": [str(user_id)],
-                                "created_at": datetime.datetime.now(),
-                                "org_id": org_id
-                            }
-                            ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
-                            USERS_COLLECTION.update_one({"email": managers_email}, {"$push": {"labs_access": lab_name}})
-                            ORG_COLLECTION.update_one({"_id": ObjectId(org_id)}, {"$push": {"labs": lab_name}})
-                            flash("Lab created successfully", "success")
-                            return redirect(url_for('auth.auth_page'))
+
+        org_id = user.get('org_id')
+        user_id = user.get('_id')
+        
+        # Use projection to fetch only the required fields
+        org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'subscription': 1, 'org_name': 1})
+
+        if not org:
+            flash("Organisation not found.", "danger")
+            return redirect(url_for('auth.auth_page'))
+
+        sub = org.get('subscription')
+        org_name = org.get('org_name')
+        org_db = client[f'{org_name}_db']
+        ORG_LABS_COLLECTION = org_db['labs']
+        
+        # Check if lab already exists
+        lab = ORG_LABS_COLLECTION.find_one({'lab_name': lab_name}, {'_id': 1})
+
+        if sub == "free":
+            flash("You are on the free tier and entitled to only one Lab. Kindly upgrade to a Basic or Premium plan to proceed.", "warning")
+            return redirect(url_for('auth.auth_page'))
+
+        if sub == "basic":
+            labs_count = ORG_LABS_COLLECTION.count_documents({})
+            if labs_count >= 5:
+                flash("You have reached the limit of 5 labs for a basic subscription. Please upgrade to Premium to create more labs.", "warning")
+                return redirect(url_for('auth.auth_page'))
+            
+        if sub == "premium":
+            labs_count = ORG_LABS_COLLECTION.count_documents({})
+            if labs_count >= 10:
+                flash("You have reached the limit of 10 labs for a premium subscription. Please upgrade to Enterprise to create more labs.", "warning")
+                return redirect(url_for('auth.auth_page'))
+        if lab:
+            flash("Lab already exists, please provide another name.", "warning")
+            return redirect(url_for('auth.auth_page'))
+
+        lab_data = {
+            "lab_name": lab_name,
+            "managers_email": managers_email,
+            "users": [str(user_id)],
+            "created_at": datetime.datetime.now(),
+            "org_id": org_id
+        }
+        ORG_LABS_COLLECTION.insert_one(lab_data)
+        USERS_COLLECTION.update_one({"email": managers_email}, {"$push": {"labs_access": lab_name}})
+        ORG_COLLECTION.update_one({"_id": ObjectId(org_id)}, {"$push": {"labs": lab_name}})
+        flash("Lab created successfully", "success")
+        return redirect(url_for('auth.auth_page'))
 
        
 
@@ -302,7 +304,7 @@ def register_org():
                 org_data = {
                     "org_name": org_name,
                     "labs": [lab_name],
-                    "subscription": "basic",
+                    "subscription": "free",
                     "creator": str(user_id),
                     "users": [str(user_id)],
                     "created_at": datetime.datetime.now(),
@@ -317,7 +319,7 @@ def register_org():
                     "org_id": str(org_id)
                 }
                 lab = ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
-                print(lab)
+                # print(lab)
                 if org_id:
                     USERS_COLLECTION.update_one(
                         {"email": email},

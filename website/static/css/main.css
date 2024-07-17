@@ -81,12 +81,7 @@ button:hover {
     color:  #9794cb;
 }
 
-.card-body  {
-    flex: 1 1 auto;
-    padding: 1rem;
-    border:5px solid rgba(131, 146, 212, 0.125);
-    height: 450px;
-}   
+ 
    
 .user_deck{
     display: flex;

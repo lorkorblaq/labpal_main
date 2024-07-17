@@ -11,7 +11,7 @@
             <a class="nav-link" id="sec-btn" >Security</a>
             <!-- <a class="nav-link" id="not-btn">Notifications</a> -->
             <!-- <a class="nav-link" id="data-btn">Data</a> -->
-            <!-- <a class="nav-link" id="bill-btn">Billing</a> -->
+            <a class="nav-link" id="bill-btn">Billing</a>
         </nav>
         <hr>
         <div class="row" id="security">
@@ -233,8 +233,8 @@
                     <!-- Billing card 1-->
                     <div class="card h-100 border-start-lg border-start-primary">
                         <div class="card-body">
-                            <div class="small text-muted">Current monthly bill</div>
-                            <div class="h3">$20.00</div>
+                            <div class="small text-muted">Current period bill</div>
+                            <div class="h3">Monthly $20.00</div>
                             <a class="text-arrow-icon small" href="#!">
                                 Switch to yearly billing
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -246,10 +246,10 @@
                     <!-- Billing card 2-->
                     <div class="card h-100 border-start-lg border-start-secondary">
                         <div class="card-body">
-                            <div class="small text-muted">Next payment due</div>
+                            <div id="due_date" class="small text-muted">Next payment due</div>
                             <div class="h3">July 15</div>
                             <a class="text-arrow-icon small text-secondary" href="#!">
-                                View payment history
+                                Make payment
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                         </div>
@@ -260,7 +260,7 @@
                     <div class="card h-100 border-start-lg border-start-success">
                         <div class="card-body">
                             <div class="small text-muted">Current plan</div>
-                            <div class="h3 d-flex align-items-center">Freelancer</div>
+                            <div id="plan" class="h3 d-flex align-items-center">Free</div>
                             <a class="text-arrow-icon small text-success" href="#!">
                                 Upgrade plan
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -271,14 +271,13 @@
             </div>
             <!-- Payment methods card-->
             <div class="row">
-                <div class="col-lg-12">
+                <!-- <div class="col-lg-12">
                     <div class="card card-header-actions mb-4">
                         <div class="card-header">
                             Payment Methods
                             <button class="btn btn-sm btn-primary" type="button">Add Payment Method</button>
                         </div>
                         <div class="card-body px-0">
-                            <!-- Payment method 1-->
                             <div class="d-flex align-items-center justify-content-between px-4">
                                 <div class="d-flex align-items-center">
                                     <i class="fab fa-cc-visa fa-2x cc-color-visa"></i>
@@ -293,7 +292,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <!-- Payment method 2-->
+
                             <div class="d-flex align-items-center justify-content-between px-4">
                                 <div class="d-flex align-items-center">
                                     <i class="fab fa-cc-mastercard fa-2x cc-color-mastercard"></i>
@@ -308,7 +307,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <!-- Payment method 3-->
+
                             <div class="d-flex align-items-center justify-content-between px-4">
                                 <div class="d-flex align-items-center">
                                     <i class="fab fa-cc-amex fa-2x cc-color-amex"></i>
@@ -324,7 +323,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-12">
                     <div class="card mb-4">
                         <div class="card-header">Billing History</div>
