@@ -6,6 +6,7 @@
 
 {% block body %}
     <main>
+        
         <div class="container mt-5 mb-2" >
             <!-- Trigger/Open The Modal -->
             <h1>Events</h1>
@@ -179,9 +180,15 @@
         </div>
         <br>
 
-       
         <div class="events" id="QCEvents">
             <h3>Quality Control Events</h3>
+            <div class="filterContainer">
+                <h6>Select a date range:</h6>
+                <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
+                <input type="text" id="QCfilterMachine" placeholder="Enter Machine">
+                <input type="text" id="filterItems" placeholder="Enter items(comma sep.)">
+                <button class="applyFilter">Apply Filter</button>
+            </div>
             <div class="eventContainer" id="QCeventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>
@@ -189,6 +196,26 @@
         
         <div class="events" id="machineEvents">
             <h3>Machine Events</h3>
+            <div class="filterContainer">
+                <h6>Select a date range:</h6>
+                <input type="text" class="date-range" id="machine-date-range" placeholder="Select date range">
+                <input type="text" id="MfilterMachine" placeholder="Enter Machine name">
+
+                <input type="text" id="filterType" placeholder="Enter Type of machine event">
+                
+                <!-- <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <a class="dropdown-item" type="button">Action</a>
+                      <a class="dropdown-item" type="button">Another action</a>
+                      <a class="dropdown-item" type="button">Something else here</a>
+                    </div>
+                  </div> -->
+                <!-- <input class="form-check-input" id="filterResolved" type="radio" name="exampleRadios" value="all" checked> -->
+                <button class="applyFilter">Apply Filter</button>
+            </div>
             <div class="eventContainer" id="machineEventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>
@@ -196,10 +223,16 @@
         
         <div class="events" id="operationEvents">
             <h3>Operations Events</h3>
+            <div class="filterContainer">
+                <h6>Select a date range:</h6>
+                <input type="text" class="date-range" id="operation-date-range" placeholder="Select date range">
+                <button class="applyFilter">Apply Filter</button>
+            </div>
             <div class="eventContainer" id="operationEventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>
         </div>
+        
         
         
         <div class="events" id="to-doEvents">

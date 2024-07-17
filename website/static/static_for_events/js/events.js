@@ -53,6 +53,16 @@ $(function() {
         $(target).addClass('active');
     });
 
+    // # date range picker
+    $('.date-range').daterangepicker({
+        opens: 'left',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    });
+
     // date picker 
     $('.datePicker').datepicker({
         dateFormat: 'yy-mm-dd', // Year first format
@@ -401,7 +411,6 @@ $(function() {
             }
         });
     }
-    
 
     //operations submit button 
     $('#submit-operations').on('click', function(event) {
@@ -497,86 +506,172 @@ $(function() {
             }
         });
     }
-    // var activevents = $('.nav-link.active');
-    // var activevent = activevents.attr('id');
-    // console.log(activevent)
-    // Get all events
+
+    let activeEventType = 'qc'; // Default active event type
+
+    // Event listener for the nav links
     $('.nav-link').click(function() {
         var activevent = $(this).attr('id'); // Get the id of the clicked link
         console.log('Active event:', activevent);
 
+        // Update the active event type based on the clicked nav link
         switch (activevent) {
             case 'qc-btn':
-                fetchEvents('qc');
+                activeEventType = 'qc';
                 break;
             case 'machine-btn':
-                fetchEvents('machine');
+                activeEventType = 'machine';
                 break;
             case 'operations-btn':
-                fetchEvents('operations');
+                activeEventType = 'operations';
                 break;
             default:
-                // console.log('No active content found');
+                activeEventType = 'qc'; // Fallback to default if no match
+                break;
         }
+
+        console.log('Current active event type:', activeEventType);
+
+        // Fetch events based on the updated active event type
+        fetchEvents(activeEventType);
     });
 
+    // Initial fetch of events for the default active event type
+    fetchEvents(activeEventType);
 
-    // function displayEvents(events) {
-    //     const eventContainer = $('#eventContainer');
-    //     eventContainer.empty(); // Clear existing events
+    // Function to filter events based on the selected machine and items
+    function getDateRange(selector) {
+        const dateRangeInput = $(selector).val().trim();
+        const [start, end] = dateRangeInput.split(' - ');
 
-    //     events.forEach(event => {
-    //         const card = $('<div>').addClass('card');
-    //         const user = $('<h2>').text(`User: ${event.user}`);
-    //         const eventType = $('<p>').text(`Event Type: ${event.event_type}`);
-    //         const createdAt = $('<p>').text(`Created At: ${new Date(event.created_at).toLocaleString()}`);
-            
-    //         card.append(user, eventType, createdAt);
+        const startDate = start ? new Date(start) : null;
+        const endDate = end ? new Date(end) : null;
+        console.log("Date Range:", startDate, endDate);
+        return { startDate, endDate };
+    }
 
-    //         if (event.event_type === 'qc') {
-    //             card.append(
-    //                 $('<p>').text(`Date: ${new Date(event.date).toLocaleDateString()}`),
-    //                 $('<p>').text(`Machine: ${event.machine}`),
-    //                 $('<p>').text(`Items: ${event.items}`),
-    //                 $('<p>').text(`Root Cause: ${event.rootCause}`),
-    //                 $('<p>').text(`Actioning: ${event.actioning}`)
-    //             );
-    //         } else if (event.event_type === 'machine') {
-    //             card.append(
-    //                 $('<p>').text(`Datetime: ${new Date(event.datetime).toLocaleString()}`),
-    //                 $('<p>').text(`Machine: ${event.machine}`),
-    //                 $('<p>').text(`Category: ${event.category}`)
-    //             );
+    function filterQC(events, machine, items, startDate, endDate) {
+        return events.filter(event => {
+            const eventDate = new Date(event.date);
+            const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
+            const matchesItems = items ? items.every(item => event.items.includes(item)) : true;
+            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+            return matchesMachine && matchesItems && withinDateRange;
+        });
+    }
+    
+    function filterMachine(events, machine, type, startDate, endDate) {
+        return events.filter(event => {
+            const eventDate = new Date(event.datetime);
+            const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
+            const matchesType = type ? event.category.toLowerCase() === type.toLowerCase() : true;
+            // const matchesResolved = resolved === 'all' || (resolved === 'resolved' && event.resolved) || (resolved === 'unresolved' && !event.resolved);
+            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+            // return matchesMachine && matchesType && matchesResolved && withinDateRange;
+            return matchesMachine && matchesType && withinDateRange;
+        });
+    }
+    
+    function filterOperations(events, startDate, endDate) {
+        return events.filter(event => {
+            const eventDate = new Date(event.date);
+            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+            return withinDateRange;
+        });
+    }
+    
+    
+    // Event listener for the filter button
+   
+    // Update .applyFilter click handler
+    $('.applyFilter').on('click', function() {
+        console.log('applyFilter');
+        const QCmachine = $('#QCfilterMachine').val().trim();
+        const Mmachine = $('#MfilterMachine').val().trim();
+        const type = $('#filterType').val().trim();
+        const items = $('#filterItems').val().trim().split(',').map(item => item.trim()).filter(item => item);
 
-    //             if (event.category === 'maintenance') {
-    //                 card.append(
-    //                     $('<p>').text(`Frequency: ${event.frequency}`),
-    //                     $('<p>').text(`Comments: ${event.comments}`)
-    //                 );
-    //             } else {
-    //                 card.append(
-    //                     $('<p>').text(`Resolved: ${event.resolved}`),
-    //                     $('<p>').text(`Root Cause: ${event.rootCause}`),
-    //                     $('<p>').text(`Actioning: ${event.actioning}`)
-    //                 );
-    //             }
-    //         } else if (event.event_type === 'operations') {
-    //             card.append(
-    //                 $('<p>').text(`Date: ${new Date(event.date).toLocaleDateString()}`),
-    //                 $('<p>').text(`Occurrence: ${event.occurrence}`),
-    //                 $('<p>').text(`Actioning: ${event.actioning}`)
-    //             );
-    //         }
+        let startDate, endDate;
+        switch (activeEventType) {
+            case 'qc':
+                ({ startDate, endDate } = getDateRange('#qc-date-range'));
+                break;
+            case 'machine':
+                ({ startDate, endDate } = getDateRange('#machine-date-range'));
+                break;
+            case 'operations':
+                ({ startDate, endDate } = getDateRange('#operation-date-range'));
+                break;
+            default:
+                console.error('Unknown event type:', activeEventType);
+                alert('Unknown event type. Please try again.');
+                return;
+        }
+        console.log('Date Range:', { startDate, endDate });
 
-    //         eventContainer.append(card);
-    //     });
-    // }
-    fetchEvents('qc'); // Example default event type to load initially
-
-
-    // Function to create a card dynamically based on event data
+        // Fetch and filter events
+        $.ajax({
+            type: 'GET',
+            url: url_event_get_all + activeEventType + '/',
+            success: function(response) {
+                console.log('Raw Data:', response);
+                let filteredEvents;
+                switch (activeEventType) {
+                    case 'qc':
+                        filteredEvents = filterQC(response, QCmachine, items, startDate, endDate);
+                        console.log('Filtered QC Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    case 'machine':
+                        filteredEvents = filterMachine(response, Mmachine, type, startDate, endDate);
+                        console.log('Filtered Machine Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    case 'operations':
+                        filteredEvents = filterOperations(response, startDate, endDate);
+                        console.log('Filtered Operations Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    default:
+                        console.error('Unknown event type:', activeEventType);
+                        alert('Unknown event type. Please try again.');
+                        break;
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching data. Please try again later.');
+            }
+        });
+    });
+    
+    // Function to display events in the UI
+    function displayEventCards(events) {
+        const eventContainer = $('.eventContainer');
+        eventContainer.empty(); // Clear existing cards
+    
+        // Sort events array in descending order based on date and time
+        events.sort((a, b) => {
+            const dateA = new Date(a.datetime || a.date);
+            const dateB = new Date(b.datetime || b.date);
+            if (dateA.getTime() === dateB.getTime()) {
+            // If dates are equal, compare times
+            const timeA = new Date(a.datetime || a.date).getTime();
+            const timeB = new Date(b.datetime || b.date).getTime();
+            return timeB - timeA;
+            } else {
+            // If dates are not equal, compare dates
+            return dateB - dateA;
+            }
+        });
+    
+        events.forEach(eventData => {
+            var card = createCard(eventData);
+            eventContainer.append(card); // Append card
+        });
+    }
+    
     function createCard(eventData) {
-        // Construct the card HTML
         var card = $('<div>').addClass('card').attr('id', eventData.id); // Set ID of the card element to eventData.id
         var cardHeader = $('<div>').addClass('card-header');
     
@@ -588,7 +683,8 @@ $(function() {
                 year: 'numeric', month: 'short', day: 'numeric', timeZone: 'GMT'
             });
         } else if (eventData.event_type === 'machine') {
-            formattedEventDate = new Date(eventData.datetime).toLocaleString('en-US', {
+            formattedEventDate = new Date(eventData.datetime).toLocaleString('en-US', 
+            {
                 year: 'numeric', month: 'short', day: 'numeric',
                 hour: 'numeric', minute: 'numeric', second: 'numeric',
                 hour12: false,
@@ -655,12 +751,8 @@ $(function() {
     
         return card;
     }
-    
-    
-    
-    // Example default event type to load initially
 
-    // Function to fetch events from API
+    // REAL REAK Function to fetch events from API
     function fetchEvents(eventType) {
         var url = url_event_get_all + eventType + '/';
         console.log(eventType);
@@ -677,28 +769,6 @@ $(function() {
             }
         });
     }
-
-    // Function to display events in the UI
-    function displayEventCards(events) {
-        const eventContainer = $('.eventContainer');
-        eventContainer.empty(); // Clear existing cards
-    
-        // Sort events array in ascending order based on date and time
-        events.sort((a, b) => {
-            // Convert dates to Date objects
-            const dateA = new Date(a.datetime || a.date); // Use datetime if available, otherwise use date
-            const dateB = new Date(b.datetime || b.date);
-    
-            // Sort in descending order (latest date/time first)
-            return dateB - dateA;
-        });
-    
-        events.forEach(eventData => {
-            var card = createCard(eventData);
-            eventContainer.append(card); // Append card to display in ascending order
-        });
-    }
-
 
         // Function to render to-do items
     function renderTodoItem(todoText) {
@@ -815,129 +885,5 @@ $(function() {
             item.data('previousParent', ui.sender);
         }
     }).disableSelection();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Add todo on button click
-    // $addTodoButton.on('click', function(event) {
-    //     event.preventDefault(); // Prevent default form submission behavior
-    //     addTodo();
-    // });
-
-    // $todoInput.on('keypress', function(e) {
-    //     if (e.which === 13) {
-    //         e.preventDefault(); // Prevent default form submission behavior on Enter key
-    //         addTodo();
-    //     }
-    // });
-    // // adding todo function
-    // function addTodo() {
-    //     const todoText = $todoInput.val().trim();
-    //     if (todoText === '') return;
-
-    //     const $li = $('<li></li>').html(`
-    //         <span>${todoText}</span>
-    //         <div class="todo-actions">
-    //             <button onclick="editTodoItem(this)">✏️</button>
-    //             <button onclick="deleteTodoItem(this)">🗑️</button>
-    //         </div>
-    //     `);
-    //     $todoList.append($li);
-    //     $todoInput.val('');
-    // }
-    // // edit and delete todo
-    // window.editTodoItem = function(button) {
-    //     const $todoItem = $(button).parent().prev();
-    //     const newText = prompt('Edit your task', $todoItem.text());
-    //     if (newText !== null) {
-    //         $todoItem.text(newText);
-    //     }
-    // };
-
-    // window.deleteTodoItem = function(button) {
-    //     $(button).closest('li').remove();
-    // };
-    // // to do card display
-    // // Make the lists sortable and connect them
-    // $('.sortable').sortable({
-    //     connectWith: '.sortable',
-    //     placeholder: 'sortable-placeholder',
-    //     start: function(event, ui) {
-    //         const item = ui.item;
-    //         const parent = item.parent();
-    
-    //         // Check if it is the last item in the list
-    //         if (parent.children('.checklist-item').length === 1 && !parent.data('delete-confirmed')) {
-    //             const confirmed = confirm("You are about to move the last checklist item. This card will be deleted.");
-    //             if (!confirmed) {
-    //                 $(this).sortable('cancel');
-    //             } else {
-    //                 // Mark the parent to be deleted after the move
-    //                 parent.data('delete-confirmed', true);
-    //             }
-    //         }
-    //     },
-    //     stop: function(event, ui) {
-    //         const item = ui.item;
-    //         const previousParent = item.data('previousParent');
-    
-    //         // Remove the card if the last item was moved and confirmation was given
-    //         if (previousParent && previousParent.data('delete-confirmed')) {
-    //             previousParent.closest('.card').remove();
-    //         }
-    
-    //         // Clean up data attribute to allow further deletion without prompt
-    //         if (previousParent) {
-    //             previousParent.removeData('delete-confirmed');
-    //         }
-    
-    //         // Remove the temporary storage of previous parent
-    //         item.removeData('previousParent');
-    //     },
-    //     receive: function(event, ui) {
-    //         const item = ui.item;
-    //         item.data('previousParent', ui.sender);
-    //     }
-    // }).disableSelection();
-        
-    
-    // // Edit item in checklist
-    // $(document).on('click', '.edit-btn', function() {
-    //     const taskSpan = $(this).closest('.checklist-item').find('span');
-    //     const newText = prompt('Edit your task', taskSpan.text());
-    //     if (newText !== null) {
-    //         taskSpan.text(newText);
-    //     }
-    // });
-    
-    // // Delete item from checklist
-    // $(document).on('click', '.delete-btn', function() {
-    //     const item = $(this).closest('.checklist-item');
-    //     const parent = item.parent();
-    
-    //     item.remove();
-    
-    //     // If the parent list is empty after deletion, remove the card
-    //     if (parent.children('.checklist-item').length === 0) {
-    //         parent.closest('.card').remove();
-    //     }
-    // });
     
 });

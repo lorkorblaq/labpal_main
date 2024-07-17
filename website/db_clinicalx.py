@@ -17,4 +17,4 @@ except Exception as e:
 db_admin = client.admin
 db = client.clinicalx
 db_org_users = client.org_users
-print(db_org_users)
+# print(db_org_users)

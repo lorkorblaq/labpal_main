@@ -1,51 +1,40 @@
-import os
+# import eventlet
+# eventlet.monkey_patch(socket=True)
 from datetime import timedelta
 from flask import Flask
-from flask_redis import FlaskRedis
-import smtplib
-from flask_mail import Mail, Message
-
-# from website.events import socketio
-from .extensions import socketio, mail
+from .extensions import mail
 from website.auth import auth
 from website.settings import settings
 from website.views import views
-from dotenv import load_dotenv, find_dotenv
-import os
-load_dotenv(find_dotenv())
-
-uri_production = os.getenv('URI_PRODUCTION')
-secret_key = os.getenv('SECRET')
-password = os.getenv('PASSWORD')
 # from flask import session
-# from website.celery_config import make_celery
+# from website.celery_config import create_celery_app
 
 def create_app():
     app = Flask(__name__)
     # Configuration settings
-    app.config['SECRET_KEY'] = secret_key
-    app.config['MONGO_URI'] = uri_production
+    app.config['SECRET_KEY'] = 'LVUC5jSkp7jjR3O-'
+    app.config['MONGO_URI'] = "mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
     app.config['MAIL_SERVER'] = '51.195.190.75'
     app.config['MAIL_PORT'] = 465
     app.config['MAIL_USERNAME'] = 'labpal@labpal.com.ng'
-    app.config['MAIL_PASSWORD'] = password
+    app.config['MAIL_PASSWORD'] = '518Oloko.'
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_DEFAULT_SENDER'] = ('LabPal','labpal@labpal.com.ng')
     app.config['MAIL_DEBUG'] = True
     # app.config['SESSION_TYPE'] = 'redis'
-    # app.config['SESSION_REDIS'] = 'redis://localhost:6379/0'
+    # app.config['SESSION_REDIS'] = redis_connection
     app.config['SESSION_PERMANENT'] = True
     app.config['SESSION_USE_SIGNER'] = True
     app.config['SESSION_KEY_PREFIX'] = 'labpal'
     app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=2)
-    # app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0/'
-    # app.config['REDIS_URL'] = "redis://localhost:6379/0"
-    # app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
+    # app.config['CELERY_BROKER_URL'] = redis_connection
+    # app.config['REDIS_URL'] = redis_connection
 
     # Initialize extensions
     
-    socketio.init_app(app)
+    # socketio.init_app(app)
     mail.init_app(app)
+    # celery = create_celery_app(app)
     # with app.app_context():
     #     app.mail = mail
     #     try:

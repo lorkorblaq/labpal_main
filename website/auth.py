@@ -1,9 +1,9 @@
-from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response, jsonify, session
+from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import RegistrationForm, LoginForm, Newpassword, LabForm, OrgForm
 # from .extensions import socketio
 from flask_socketio import send, emit
-from .db_clinicalx import db, db_admin, db_org_users, client
+from .db_clinicalx import db_org_users, client
 from bson import ObjectId
 import requests
 import os
@@ -12,7 +12,7 @@ import datetime
 from functools import wraps
 from .mailer import welcomeMail, send_verification_email
 import logging
-from .celeryMasters.inventoryMaster import watch_inventory_changes
+# from .celeryMasters.inventoryMaster import watch_inventory_changes
 from flask import current_app
 from bson.errors import InvalidId
 # from .celeryMasters.chatMaster import chat_watcher
@@ -122,7 +122,6 @@ def signup_signin():
         # Fetch user from MongoDB based on the provided email
         user = USERS_COLLECTION.find_one({'email': email})
         if user is not None and check_password_hash(user['password'], password):
-            # watch_inventory_changes.delay()
             # chat_watcher.delay()
             identity ={}
             full_id = str(user['_id'])
@@ -185,6 +184,7 @@ def signup_signin():
             response.set_cookie('lab_name', lab_name)
             # response.set_cookie('id', session_id)
             response.set_cookie('token', session['token'] )
+            # watch_inventory_changes.delay(lab_name)
             return response
             # return make_response
         else:
@@ -369,8 +369,7 @@ def register_user():
                 "role": "user",
                 "org_id": str(org_id),
                 "created_at": datetime.datetime.now(),
-                "labs_access": [lab_name],
-                "image":"../static/images/users/male_default.png"
+                "labs_access": [lab_name]
             }
             user_id = USERS_COLLECTION.insert_one(user_data).inserted_id
             org_name = ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"users": str(user_id)}}).get('org_name')
