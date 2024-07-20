@@ -10,19 +10,7 @@ $(function() {
                 console.error('Error fetching data:', error);
             });
     }
-    // function convertToCSV(channelsData) {
-    //     const channels = channelsData.channels;
-    
-    //     if (!channels || channels.length === 0) {
-    //         console.error('No data to convert to CSV.');
-    //         return '';
-    //     }
-    
-    //     // Convert the data to CSV format
-    //     const header = Object.keys(channels[0]).join(',');
-    //     const rows = channels.map(channel => Object.values(channel).join(','));
-    //     return `${header}\n${rows.join('\n')}`;
-    // }
+
     function convertToCSV(data, prefix) {
         const exporter = data[prefix];
     

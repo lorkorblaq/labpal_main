@@ -217,25 +217,17 @@
                         </div>
                     </div>
             </div>
-            <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div onclick="document.getElementById('file-input').click();" id="drop-area" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
-                        <p>Drag & Drop</p>
-                        <input type="file" id="file-input" onchange="handleFileSelect(this.files)">
-                    </div>
-                </div>
-                <button onclick="document.getElementById('file-input').click();">Browse</button>
-            </div>
+            
         </div>
         <div class="row" id ="billing">
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <!-- Billing card 1-->
-                    <div class="card h-100 border-start-lg border-start-primary">
+                    <div class="card h-100 border-start-lg border-start-primary card1">
                         <div class="card-body">
                             <div class="small text-muted">Current period bill</div>
-                            <div class="h3">Monthly $20.00</div>
-                            <a class="text-arrow-icon small" href="#!">
+                            <div class="h3"></div>
+                            <a class="text-arrow-icon small" id="yearlySwitch" href="#!">
                                 Switch to yearly billing
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
@@ -244,24 +236,24 @@
                 </div>
                 <div class="col-lg-4 mb-4">
                     <!-- Billing card 2-->
-                    <div class="card h-100 border-start-lg border-start-secondary">
+                    <div class="card h-100 border-start-lg border-start-secondary card2">
                         <div class="card-body">
                             <div id="due_date" class="small text-muted">Next payment due</div>
-                            <div class="h3">July 15</div>
-                            <a class="text-arrow-icon small text-secondary" href="#!">
+                            <div class="h3"></div>
+                            <a class="text-arrow-icon small text-secondary" id="currentPlanUpgrade" href="#!">
                                 Make payment
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>  
                 <div class="col-lg-4 mb-4">
                     <!-- Billing card 3-->
-                    <div class="card h-100 border-start-lg border-start-success">
+                    <div class="card h-100 border-start-lg border-start-success card3">
                         <div class="card-body">
                             <div class="small text-muted">Current plan</div>
-                            <div id="plan" class="h3 d-flex align-items-center">Free</div>
-                            <a class="text-arrow-icon small text-success" href="#!">
+                            <div id="plan" class="h3 d-flex align-items-center"></div>
+                            <a class="text-arrow-icon small text-success" id="upgrade-btn" href="#!">
                                 Upgrade plan
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </a>
@@ -324,6 +316,10 @@
                         </div>
                     </div>
                 </div> -->
+               
+            </div>
+            <!-- Billing history card-->
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="card mb-4">
                         <div class="card-header">Billing History</div>
@@ -371,10 +367,43 @@
                     </div>
                 </div>
             </div>
-            <!-- Billing history card-->
-            <div class="row">
-                
+            <!-- modals -->
+            <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <!-- Card 1 -->
+                                    <div class="col-md-6">
+                                        <div class="card mb-4 pricing-plan">
+                                            <h3>Basic</h3>
+                                            <p>₦4500/month</p>
+                                            <button id="basic-btn" >Choose plan</button>
+                                        </div>
+                                    </div>
+            
+                                    <!-- Card 2 -->
+                                    <div class="col-md-6">
+                                        <div class="card mb-4 pricing-plan">
+                                            <h3>Premium</h3>
+                                            <p>₦7500/month</p>
+                                            <button id="premium-btn" >Choose plan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         </div>
     </main>
 {% endblock %}
