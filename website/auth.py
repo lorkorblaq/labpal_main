@@ -88,7 +88,7 @@ def signup_signin():
         
         num_users = len(org.get('users', []))
         sub = org.get('subscription')
-        user_limits = {'free': 7, 'basic': 20, 'premium': 45}
+        user_limits = {'free': 5, 'Basic monthly plan': 20, 'Basic yearly plan': 20, 'Premium monthly plan ': 45, 'Premium yearly plan ': 45}
 
         if num_users >= user_limits.get(sub, float('inf')):
             plan_upgrades = {'free': 'Basic or Premium', 'basic': 'Premium', 'premium': 'Enterprise'}
@@ -119,7 +119,7 @@ def signup_signin():
         user = USERS_COLLECTION.find_one({'email': email})
         if user and check_password_hash(user['password'], password):
             org_id = user.get('org_id')
-            org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'org_name': 1})
+            org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'org_name': 1, 'subscription':1})
 
             if not org:
                 flash("Organisation not found.", "danger")
@@ -127,13 +127,15 @@ def signup_signin():
 
             full_id = str(user['_id'])
             org_name = org.get('org_name')
+            org_plan = org.get('subscription')
+            role = user.get('role')
             lab_name = user.get('labs_access', [""])[0]
             ip_address = request.remote_addr
             firstname = user['firstname']
             lastname = user['lastname']
             name = f"{firstname} {lastname}"
             part_id = full_id[-7:]
-
+            print(org_plan)
             logging.info(f"user:{name}, email:{email}, ip:{ip_address} at {datetime.datetime.now()}")
 
             session.update({
@@ -141,6 +143,8 @@ def signup_signin():
                 'org_id': org_id,
                 'lab_name': lab_name,
                 'org_name': org_name,
+                'org_plan': org_plan,
+                'role': role,
                 'ip_address': ip_address,
                 'logged_in': True,
                 'part_id': part_id,
@@ -158,7 +162,7 @@ def signup_signin():
             token = jwt.encode({
                 'email': email,
                 'user': name,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=240)
+                'exp': datetime.datetime.now() + datetime.timedelta(minutes=240)
             }, secret_key)
             session['time_left'] = time_left_until_expiration(token, secret_key)
             session['token'] = token
@@ -168,6 +172,10 @@ def signup_signin():
             response.set_cookie('email', email)
             response.set_cookie('name', name)
             response.set_cookie('org_name', org_name)
+            response.set_cookie('org_plan', org_plan)
+            response.set_cookie('role', role)
+            response.set_cookie('org_id', org_id)
+            response.set_cookie('lab_name', lab_name)
             response.set_cookie('lab_name', lab_name)
             response.set_cookie('token', token)
 
@@ -231,25 +239,26 @@ def signup_signin():
         
         # Check if lab already exists
         lab = ORG_LABS_COLLECTION.find_one({'lab_name': lab_name}, {'_id': 1})
-
+        if lab:
+            flash("Lab already exists, please provide another name.", "warning")
+            return redirect(url_for('auth.auth_page'))
+        
         if sub == "free":
             flash("You are on the free tier and entitled to only one Lab. Kindly upgrade to a Basic or Premium plan to proceed.", "warning")
             return redirect(url_for('auth.auth_page'))
 
-        if sub == "basic":
+        if sub == "Basic monthly plan" or sub == "Basic yearly plan":
             labs_count = ORG_LABS_COLLECTION.count_documents({})
             if labs_count >= 5:
                 flash("You have reached the limit of 5 labs for a basic subscription. Please upgrade to Premium to create more labs.", "warning")
                 return redirect(url_for('auth.auth_page'))
             
-        if sub == "premium":
+        if sub == "Premium monthly plan" or sub == "Premium yearly plan":
             labs_count = ORG_LABS_COLLECTION.count_documents({})
             if labs_count >= 10:
                 flash("You have reached the limit of 10 labs for a premium subscription. Please upgrade to Enterprise to create more labs.", "warning")
                 return redirect(url_for('auth.auth_page'))
-        if lab:
-            flash("Lab already exists, please provide another name.", "warning")
-            return redirect(url_for('auth.auth_page'))
+
 
         lab_data = {
             "lab_name": lab_name,
@@ -306,6 +315,7 @@ def register_org():
                     "labs": [lab_name],
                     "subscription": "free",
                     "creator": str(user_id),
+                    "creators_email": email,
                     "users": [str(user_id)],
                     "created_at": datetime.datetime.now(),
                 }
@@ -318,7 +328,7 @@ def register_org():
                     "created_at": datetime.datetime.now(),
                     "org_id": str(org_id)
                 }
-                lab = ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
+                ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
                 # print(lab)
                 if org_id:
                     USERS_COLLECTION.update_one(

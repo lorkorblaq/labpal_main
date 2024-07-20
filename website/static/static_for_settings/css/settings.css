@@ -48,3 +48,21 @@
     display: block;
 }
 
+/* #upgradeModal {
+    
+} */
+/* Styles for the modal */
+.pricing-plan {
+    border: #007BFF 1px solid;
+    padding: 20px;
+    border-radius: 30px;
+    width: 100%; /* Make sure it takes full width of the column */
+    background-image: url('../../images/payment.svg'); /* Update with your image path */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: black;
+    text-align: center; /* Center align text and button */
+}
+
+

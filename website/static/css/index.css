@@ -27,7 +27,6 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 5px;
-    border-radius: 50px;
     height: 250px;
 } 
 
@@ -42,6 +41,11 @@
     padding: 10px;
     background-color: #343A40;
     color: white;
+}
+
+.card-body{
+    border: 1px solid #82C8F7;
+    border-radius: 25px;
 }
 
 .card-body:hover {
