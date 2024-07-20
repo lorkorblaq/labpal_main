@@ -13,15 +13,38 @@ header {
     top: 0;
     z-index: 1000;
     /* background: linear-gradient(to right, #4facfe, #ff7e5f); */
-    background-color: #DF5332;
+    background-color: #3B57A3;
     color: white;
     padding: 10px;
     text-align: center;
     height: 40px;
     margin: 0;
+    border-bottom: #61dafb 1px solid;
+    animation: colorChange 5s infinite;
 }
+
+/* Apply the animation to the desired element */
+.headboy{
+    animation: colorChange 5s infinite;
+}
+/* Define the keyframes for the color animation */
+@keyframes colorChange {
+    0% {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100% {
+        color: red;
+    }
+}
+
+
+
+
 body footer {
-    background-color: #3B57A3;
+    background-color: #DF5332;
 }
 h1, h2, p {
     color: white;
@@ -38,17 +61,16 @@ h3 {
     width: 100%; /* Ensure the nav container spans the full width */
     max-width: 100%; /* Optional: Limit the maximum width for better alignment */
 }
+
 .logo {
-    display: flex;
-    align-items: center;
+    margin-top: -10px;
     }
 
 .logo img {
-    height: 200%; /* Make the logo take full height of its container */
+    height: 75px; /* Make the logo take full height of its container */
     width: auto; /* Maintain aspect ratio */
-    padding-top: 10px;
-    /* padding-right: 40px; */
-    
+    margin: auto;
+    padding-bottom: 50px;  
 }
 
 .signup_signin {
@@ -146,7 +168,7 @@ h3 {
 .btn {
     background: #61dafb;
     color: black;
-    padding: 7px;
+    padding: 10px;
     text-decoration: none;
     border-radius: 50px;
     cursor: pointer;
@@ -154,7 +176,8 @@ h3 {
 }
 
 .btn:hover {
-    background: #BED0DE;
+    background: #2F2E41;
+    color: white;
 }
 
 section {
@@ -219,6 +242,8 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 20px;
+    color: black;
+
 }
 
 .pricing-plan, .testimonial {
@@ -230,12 +255,20 @@ h1 {
 
 .pricing-plan {
     border-radius: 30px;
-    background-image: url('../images/payment.svg'); /* Update with your image path */
+    background-image: url('../images/pricing.svg'); /* Update with your image path */
     /* background-position: contain; */
     background-size: contain;
     background-repeat: no-repeat;
     position: sticky;
-    color: black;
+    box-shadow: 7px 15px 1px rgba(0, 0, 0, 0.253);
+    padding: 50px;
+}
+.pricing2{
+    background-image: url('../images/premium.svg'); /* Update with your image path */
+}
+
+.pricing-plan:hover {
+    box-shadow: 7px 15px 1px rgba(255, 250, 250, 0.1);
 }
 
 

@@ -3,6 +3,7 @@
 from celery import Celery
 from .redis_config import redis_client,redis_connection
 from flask import Flask
+from flask_redis import FlaskRedis
 # to run celery
 # celery -A celery_config.celery worker --pool=solo --loglevel=info
 # celery -A website.celery_config.celery worker --pool=eventlet --loglevel=info -Q inventory
@@ -25,21 +26,21 @@ from flask import Flask
 # )
 
 
-# def create_celery_app(app: Flask) -> Celery:
-#     celery = Celery(
-#         app.import_name,
-#         backend=app.config['CELERY_RESULT_BACKEND'],
-#         broker=app.config['CELERY_BROKER_URL']
-#     )
-#     celery.conf.update(app.config)
-#     celery.autodiscover_tasks(['website.celeryMasters'], force=True)
+def create_celery_app(app: Flask) -> Celery:
+    celery = Celery(
+        app.import_name,
+        backend=app.config['CELERY_RESULT_BACKEND'],
+        broker=app.config['CELERY_BROKER_URL']
+    )
+    celery.conf.update(app.config)
+    celery.autodiscover_tasks(['website.celeryMasters'], force=True)
     
-#     class ContextTask(celery.Task):
-#         def __call__(self, *args, **kwargs):
-#             with app.app_context():
-#                 return self.run(*args, **kwargs)
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
                 
-#     celery.Task = ContextTask
+    celery.Task = ContextTask
 #     return celery
 
 # # celery.conf.broker_connection_retry_on_startup = True
