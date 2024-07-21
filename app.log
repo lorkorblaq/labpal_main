@@ -40683,3 +40683,68 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 727-800-340
 INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 13:54:33.286342
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 18:38:44.783959
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 20:24:32.098555
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-07-21 20:30:54.803111
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 20:31:04.284678
+WARNING:kombu.connection:No hostname was supplied. Reverting to default 'localhost'
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/celeryMasters/inventoryMaster.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 20:33:24.851928
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340

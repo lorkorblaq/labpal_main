@@ -8,7 +8,8 @@ WORKDIR /clinicalx_main/
 COPY . /clinicalx_main/
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Install supervisord
 RUN apt-get update && apt-get install -y supervisor

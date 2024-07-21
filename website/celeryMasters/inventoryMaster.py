@@ -1,7 +1,8 @@
-# # celery -A website.celery_config.celery worker --pool=eventlet --loglevel=info -Q inventory
+# celery -A website.celery_config.celery worker --pool=eventlet --loglevel=info -Q inventory
 from ..extensions import socketio
 from ..celery_config import celery
 from ..db_clinicalx import client
+from celery import shared_task
 print(celery)
 @celery.task()
 def watch_inventory_changes(org_name, lab_name):
