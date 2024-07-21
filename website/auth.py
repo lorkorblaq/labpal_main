@@ -1,7 +1,7 @@
 from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import RegistrationForm, LoginForm, Newpassword, LabForm, OrgForm
-# from .extensions import socketio
+from .extensions import socketio, redis_client
 from flask_socketio import send, emit
 from .db_clinicalx import db_org_users, client
 from bson import ObjectId
@@ -12,10 +12,11 @@ import datetime
 from functools import wraps
 from .mailer import welcomeMail, send_verification_email
 import logging
-# from .celeryMasters.inventoryMaster import watch_inventory_changes
+from .celeryMasters.inventoryMaster import watch_inventory_changes
 from flask import current_app
 from bson.errors import InvalidId
 # from .celeryMasters.chatMaster import chat_watcher
+# from .redis_config import redis_client
 
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.INFO)
@@ -157,7 +158,7 @@ def signup_signin():
                 'mobile': user.get('mobile', ""),
                 'image': user.get('image', ""),
             })
-
+            print(session)
             secret_key = "LVUC5jSkp7jjR3O-"
             token = jwt.encode({
                 'email': email,
@@ -178,7 +179,7 @@ def signup_signin():
             response.set_cookie('lab_name', lab_name)
             response.set_cookie('lab_name', lab_name)
             response.set_cookie('token', token)
-
+            watch_inventory_changes.delay(org_name, lab_name)
             return response
 
         flash("Invalid login credentials.", "danger")
@@ -409,11 +410,15 @@ def logout():
     logging.info(f"{session['email']} logout, {session['ip_address']} at {datetime.datetime.now()}")
     session.clear()
     flash("You have been successfully logged out.", "success")
+        # Delete the session key from Redis
+    session_id = session.get('id')
+    if session_id:
+        session_key = f"labpal_session:{session_id}"
+        redis_client.delete(session_key)
+    
     response = make_response(redirect(url_for('auth.auth_page')))
-    response.delete_cookie('user_id')
-    response.delete_cookie('email')
-    response.delete_cookie('name')
-    response.delete_cookie('token')
+    for cookie in request.cookies:
+        response.delete_cookie(cookie)
     return response
 
 @auth.route('confirm_password/settings', methods=['POST'], strict_slashes=False)
