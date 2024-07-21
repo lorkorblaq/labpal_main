@@ -10,11 +10,10 @@ import os
 
 load_dotenv(find_dotenv())
 password = os.getenv('PASSWORD')
-redis_URL = os.getenv('REDIS_URL_LOCAL')
+redis_URL = os.getenv('REDIS_URL')
 mail = Mail()
 # socketio = SocketIO()
 redis_client = Redis.from_url(redis_URL)
-# redis_connection = 'redis://default:PghQh8AjOXYkUIMBrCJare4INQ89j5xR@redis-11786.c326.us-east-1-3.ec2.redns.redis-cloud.com:11786/0'
 
 socketio = SocketIO(message_queue=redis_URL)
 # print(socketio)
