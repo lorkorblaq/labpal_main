@@ -4,7 +4,6 @@ from flask_cors import CORS
 from .auth import auth_required
 from flask_mail import Message, Mail
 
-BASE = "http://16.171.42.4:3000/api"
 settings = Blueprint("settings", __name__, static_folder="static/static_for_settings", template_folder="templates/templates_for_settings")
 CORS(settings)
 data=""
@@ -14,7 +13,6 @@ data=""
 @auth_required
 def homeSettings():
     return render_template("settings.html", name=session['name'], email=session['email'])
-
 
 @settings.route("/security",  strict_slashes=False)
 @auth_required
