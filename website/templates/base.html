@@ -38,17 +38,16 @@
                         <a href="https://labpal.com.ng/app" class="logo">
                             <img src="../static/images/labpal_small.png" alt="">
                         </a>
+                        <!-- <a href="#" class="list-group-item list-group-item-action bg-dark bar" style="padding-bottom: 20px; margin: auto;">
+                            <div class="fas fa-bars"></div>
+                        </a>  -->
+                        <a href="/app/gpt" class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-brain"></i> 
+                            <span>LabGPT</span>
+                        </a> 
                         <a href="/app/events" id="events" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-feather-alt"></i>
                             <span>Events</span>
-                        </a>
-                        <a href="/app/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-warehouse"></i>
-                            <span>Inventory</span>
-                        </a>
-                        <a href="/app/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-calendar-times icon"></i>
-                            <span>Lots & Exp.</span>
                         </a>
                         <a href="/app/in-use" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-play"></i>
@@ -58,16 +57,22 @@
                             <i class="fas fa-exchange-alt"></i>
                             <span>Channels</span>
                         </a>
+                        <a href="/app/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-calendar-times icon"></i>
+                            <span>Lots & Exp.</span>
+                        </a>
+                        <a href="/app/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
+                            <i class="fas fa-dolly"></i>
+                            <span>Inventory</span>
+                        </a>
+
+             
+
 
                         <!-- <a href="/chat" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-users icon"></i>
                             <span>Team</span>
                         </a> -->
-
-                        <a href="/app/gpt" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-brain"></i> 
-                            <span>Labpal</span>
-                        </a> 
                     </div>
 
                     <div class="su">
@@ -126,7 +131,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script>
+              // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
 
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        </script>
         {% block scripts %}
         {% endblock scripts %}
     </body> 

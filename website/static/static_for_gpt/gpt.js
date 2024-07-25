@@ -40,7 +40,7 @@ $(function () {
     
                     chatbotMessage += `<br><br><strong>Sources:</strong><ul>`;
                     uniqueSources.forEach(function(source) {
-                        chatbotMessage += `<li><a href="${source}" target="_blank">${source}</a></li>`;
+                        chatbotMessage += `<li>${source}</li>`;
                     });
                     chatbotMessage += `</ul>`;
                 }
