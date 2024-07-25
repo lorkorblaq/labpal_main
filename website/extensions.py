@@ -11,6 +11,8 @@ import os
 load_dotenv(find_dotenv())
 password = os.getenv('PASSWORD')
 redis_URL = os.getenv('REDIS_URL')
+# redis_URL = os.getenv('REDIS_URL_LOCAL')
+
 mail = Mail()
 # socketio = SocketIO()
 redis_client = Redis.from_url(redis_URL)

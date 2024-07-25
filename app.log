@@ -40748,3 +40748,77 @@ INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 727-800-340
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-21 22:55:29.777812
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-22 05:19:21.528565
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-22 12:24:07.253910
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-22 17:58:08.711201
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-852-451
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 126-819-940
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 126-819-940
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/clinicalx_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 126-819-940
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-23 13:54:29.213553
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 126-819-940
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 235-621-369
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 134-961-073
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 134-961-073
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-25 01:45:36.364261
+ERROR:website:Failed to serialize session data: Encoding objects of type Int64 is unsupported
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-25 01:45:48.590013
+ERROR:website:Failed to serialize session data: Encoding objects of type Int64 is unsupported
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-25 01:47:26.180376
+ERROR:website:Failed to serialize session data: Encoding objects of type Int64 is unsupported
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-07-25 02:27:04.266039
+ERROR:website:Failed to serialize session data: Encoding objects of type Int64 is unsupported

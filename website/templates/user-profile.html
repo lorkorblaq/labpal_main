@@ -17,7 +17,12 @@
                             <div class="d-flex flex-column align-items-center text-center">
                               <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"> -->
                               <div class="mt- user_desk">
-                                <img id="image" src="" alt="Profile image">
+                                <div id="upload_image" onclick="document.getElementById('image_input').click();">
+                                <img id="image_profile" src="" alt="No profile image? Upload.">
+                                  <input type="file" id="image_input" style="display: none;">
+                                  <i class="fas fa-upload upload_btn"></i>
+                                </div>
+                                <br>
                                 <h4 id="name"></h4>
                                 <h5 class="mb-1 title"></h5>
                                 <h6 class="mb-1" id="orgi">Organisation ID: {{data.org_id}}</h6>

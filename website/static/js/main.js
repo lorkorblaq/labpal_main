@@ -114,4 +114,19 @@ $(function () {
         toastr.warning(data.message, 'Notification');
         // Display the notification to the user (e.g., using a toast or alert)
     });  
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCblrG_QMF34EkvQDVNERUbgkIau4xymiI",
+        authDomain: "labpal-28980.firebaseapp.com",
+        projectId: "labpal-28980",
+        storageBucket: "labpal-28980.appspot.com",
+        messagingSenderId: "292842656635",
+        appId: "1:292842656635:web:d27ed2319914e9baed63de",
+        measurementId: "G-D0ECY39XF8"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 });
