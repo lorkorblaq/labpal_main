@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect, session
+from flask import Blueprint, render_template, request, url_for, redirect, session, Response
 import requests
 from flask_cors import CORS
 from .auth import auth_required
@@ -7,23 +7,19 @@ from flask_mail import Message, Mail
 from flask_socketio import send, emit
 # from  .celeryMasters.inventoryMaster import *
 from .forms import Newpassword
-from .db_clinicalx import db, db_admin
-
-
-
-
-BASE = "https://labpal.com.ng/api"
-views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
-CORS(views)
-data=""
-from flask import redirect, session
-
+from .db_clinicalx import db_labpal
+from pywebpush import webpush
+from .subscription import add_subscription
+from dotenv import load_dotenv, find_dotenv
+import os, json
+load_dotenv(find_dotenv())
+valid_pub_key = os.getenv('VAPID_PUB_KEY')
+valid_pri_key = os.getenv('VAPID_PRI_KEY')
 
 BASE = "https://labpal.com.ng/api"
 views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
 CORS(views)
 data=""
-
 
 def login_required(route_func):
     def wrapper(*args, **kwargs):
@@ -33,7 +29,6 @@ def login_required(route_func):
             return render_template("/templates_for_landingpage/landingpage.html")
     return wrapper
 
-
 @views.route("/",  strict_slashes=False)
 @login_required
 def landing():
@@ -41,7 +36,7 @@ def landing():
 
 @views.route("/features",  strict_slashes=False)
 def features():
-    FEATURE = db['features']
+    FEATURE = db_labpal['features']
     # FEATURE = db_admin['features']
     features = FEATURE.find()
 
@@ -122,6 +117,11 @@ def chat():
 def gpt():
     return render_template("/templates_for_gpt/gpt.html", data=data)
 
+@views.route("/app/logistics",  strict_slashes=False)
+@auth_required
+def logistics():
+    return render_template("/templates_for_logistics/logistics.html", data=data)
+
 @views.route("/app/user-profile",  strict_slashes=False)
 @auth_required
 def userProfile():
@@ -147,3 +147,22 @@ def userProfile():
 def settings():
     new_pass = Newpassword()
     return render_template("settings.html", new_pass=new_pass, name=session['name'], email=session['email'])
+# subscriptions = []
+@views.route("/subscription", methods=["GET", "POST"])
+def subscription():
+    """
+        POST creates a subscription
+        GET returns vapid public key which clients uses to send around push notification
+    """
+
+    if request.method == "GET":
+        return Response(response=json.dumps({"public_key": valid_pub_key}),
+            headers={"Access-Control-Allow-Origin": "*"}, content_type="application/json")
+
+    subscription = request.get_json()
+    add_subscription(subscription)
+    # db_labpal['subscriptions'].insert_one(subscription)
+    # subscriptions.append(subscription)
+    # print('subscrsi',subscriptions)
+    return {"message": "Subscription added"}, 201
+

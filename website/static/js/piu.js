@@ -3,8 +3,8 @@ $(function () {
     const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity', 'Description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
-    // BaseUrl = "http://0.0.0.0:3000/api";
     BaseUrl = "https://labpal.com.ng/api"
+    // BaseUrl = "http://0.0.0.0:3000/api";
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
@@ -36,9 +36,9 @@ $(function () {
     
     async function submitForm() {
         let bench = $('#dropDownBench').val();
-        let machine = $('#dropDownMachine').val();
-        let item = $('#autoInputItem').val();
-        let lot = $('#autoInputLot').val();
+        let machine = $('#inputMachine').val();
+        let item = $('#inputItem').val();
+        let lot = $('#inputLot').val();
         let quantity = $('#quantityInputPIS').val();
         let description = $('#DescripInputPIS').val();
         

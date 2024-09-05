@@ -15,6 +15,6 @@ except Exception as e:
     print(f"error in connection:{e}")
 
 db_admin = client.admin
-db = client.clinicalx
+db_labpal = client.labpal
 db_org_users = client.org_users
 # print(db_org_users) 

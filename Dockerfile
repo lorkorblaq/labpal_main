@@ -2,10 +2,10 @@
 FROM python:3.11
 
 # Set the working directory to /clinicalx_main
-WORKDIR /clinicalx_main/
+WORKDIR /labpal_main/
 
 # Copy the current directory contents into the container at /clinicalx_main
-COPY . /clinicalx_main/
+COPY . /labpal_main/
 
 # Install any needed packages specified in requirements.txt
 # RUN pip install --no-cache-dir -r requirements.txt
