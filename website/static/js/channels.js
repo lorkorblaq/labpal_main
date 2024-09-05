@@ -43,11 +43,11 @@ $(function () {
         }
     }
     async function submitForm() {
-        let item = $('#autoInputItem').val();
-        let lot = $('#autoInputLot').val();
+        let item = $('#inputItem').val();
+        let lot = $('#inputLot').val();
         let quantity = $('#QtyInputChannel').val();
         let direction = $('#dropDownDirectionChannel').val();
-        let location = $('#dropDownLocationsChannel').val();
+        let location = $('#locationsChannel').val();
         let description = $('#DescripInputChannel').val();
         switch (true) {
             case !item:
@@ -117,7 +117,8 @@ $(function () {
                 
             }
         refreshTable()
-        }
+    }
+
     function refreshTable() {
         fetchData(url_channel_get).then(data => {
             dataTableInstance.clear();
@@ -226,7 +227,7 @@ $(function () {
     $('#postChannelForm').submit(async function (event) {
         event.preventDefault();
         let lotNumbers = await fetchLotNumbers();
-        let lot = $('#autoInputLot').val();
+        let lot = $('#inputLot').val();
 
         if (!lotNumbers.includes(lot)) {
             console.log("Lot doesn't exist");
@@ -307,7 +308,8 @@ $(function () {
         if ($(`#${exTableId}`).find('.button').length === 0) {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
-        }
+    }
+
     function exportJSONData(data) {
         // Convert JSON data to CSV format
         var csvContent = convertJSONToCSV(data);
@@ -351,6 +353,17 @@ $(function () {
     }
     // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
+        // Check if jsonData is an array; if not, attempt to access the array within it.
+        if (!Array.isArray(jsonData)) {
+            // If jsonData has an 'events' property (like your example data structure), use that.
+            jsonData = jsonData.events || [];
+        }
+    
+        // If jsonData is still not an array after this, return or throw an error.
+        if (!Array.isArray(jsonData) || jsonData.length === 0) {
+            alert("No data available for printing.");
+            return;
+        }
         // Add header row
         var headerRow = [];
         for (var key in jsonData[0]) {
@@ -391,6 +404,7 @@ $(function () {
         printWindow.document.close();
         printWindow.print();
     }
+
     $('#r_table tbody').on('click', '#btn-delete', function () {
         var row = dataTableInstance.row($(this).parents('tr'));
         deleteChannel(row);

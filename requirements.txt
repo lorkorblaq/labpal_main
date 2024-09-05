@@ -44,3 +44,4 @@ eventlet
 redis
 python-dotenv
 flask_session
+pywebpush

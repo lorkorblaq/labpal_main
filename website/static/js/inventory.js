@@ -222,7 +222,7 @@ $(function () {
         var link = document.createElement('a');
         var url = URL.createObjectURL(blob);
         link.setAttribute('href', url);
-        link.setAttribute('download', 'data.csv');
+        link.setAttribute('download', 'inventory_data.csv');
         document.body.appendChild(link);
 
         // Trigger the download
@@ -280,7 +280,6 @@ $(function () {
         }
         return result;
     }
-
     // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
         // Add header row
@@ -322,33 +321,6 @@ $(function () {
         printWindow.document.write('</body></html>');
         printWindow.document.close();
         printWindow.print();
-    }
-
-    function convertCSVToJSON(csvData) {
-        var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
-        var result = [];
-        var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
-        
-        // Set of fields that should be converted to numbers
-        var numericFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
-
-        for (var i = 1; i < lines.length; i++) {
-            var obj = {};
-            var currentLine = lines[i].split(',').map(cell => cell.trim()); // Trim cell values
-
-            for (var j = 0; j < headers.length; j++) {
-                var header = headers[j];
-                var value = currentLine[j];
-                // Convert numeric fields to numbers
-                if (numericFields.has(header)) {
-                    obj[header] = Number(value);
-                } else {
-                    obj[header] = value;
-                }
-            }
-            result.push(obj);
-        }
-        return result;
     }
 
     // Event listeners for export and print buttons

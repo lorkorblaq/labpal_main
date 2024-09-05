@@ -15,6 +15,8 @@ import logging
 from .celeryMasters.inventoryMaster import watch_inventory_changes
 from flask import current_app
 from bson.errors import InvalidId
+import re
+
 # from .celeryMasters.chatMaster import chat_watcher
 # from .redis_config import redis_client
 
@@ -29,7 +31,134 @@ USERS_COLLECTION = db_org_users['users']
 # ORG_COLLECTION = db['org']
 ORG_COLLECTION = db_org_users['org']
 
+import datetime
 
+def create_demo_data(org_db, org_id, lab_name):
+    org_db[f'{lab_name}_events'].insert_many([
+        {
+            "event_name": "qc",
+            "event_date": datetime.datetime.now(),
+            "event_location": "Demo Location",
+            "event_description": "Demo Description",
+            "created_at": datetime.datetime.now()
+        },
+        {
+            "user": "Demo User",
+            "event_type": "machine",
+            "created_at": {"$date": "2024-08-31T16:55:08.585Z"},
+            "category": "Troubleshooting",
+            "machine": "Demo Machine",
+            "datetime": {"$date": "2024-08-31T16:48:00.000Z"},
+            "resolved": True,
+            "rootCause": "Demo Root Cause",
+            "actioning": "Demo Actioning",
+        },
+        {
+            "user": "Demo User",
+            "event_type": "machine",
+            "created_at": {"$date": "2024-09-01T04:32:15.460Z"},
+            "category": "Maintenance",
+            "machine": "DXI 800",
+            "datetime": {"$date": "2024-09-02T04:31:00.000Z"},
+            "frequency": ["Daily"],
+            "comments": ""
+        },
+        {
+            "user": "Demo User",
+            "event_type": "operations",
+            "created_at": {"$date": "2024-08-31T17:04:11.557Z"},
+            "date": {"$date": "2024-08-31T00:00:00.000Z"},
+            "occurrence": ["Demo Occurrence"],
+            "actioning": "Demo Actioning",
+        }
+     ])
+    #  not done
+    org_db[f'{lab_name}_items'].insert_one({
+        "bench": "Demo Bench",
+        "category": "Demo Category",
+        "item": "Demo Item",
+        "vials/pack": 1,
+        "tests/vial": 1,
+        "quantity": 1,
+        "reOrderLevel": 1,
+        "class": "A",
+        "tests/day": 1
+    })
+    # done
+    org_db['labs'].insert_one({
+        "lab_name": "Demo Lab",
+        "managers_email": "Demo@demo.com",
+        "users": [],
+        "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
+        "org_id": org_id
+    })
+    org_db[f'{lab_name}_shipments'].insert_one({
+        "created_by": "Demo User",
+        "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
+        "shipment_id": "lcwylX7",
+        "numb_of_packs": 3,
+        "pickup_loc": "Demo Store",
+        "dropoff_loc": "Demo Lab",
+        "create_lat_lng": "6.5568768,3.3456128",
+        "description": "Demo Description",
+        "completed": "Yes",
+        "picked_by": "Demo User1",
+        "pickup_lat_lng": "6.5568768,3.3456128",
+        "pickup_time": {"$date": "2024-08-26T10:41:26.381Z"},
+        "updated_at": {"$date": "2024-08-26T10:51:01.759Z"},
+        "dropoff_by": "Demo User2",
+        "dropoff_lat_lng": "6.5568768,3.3456128",
+        "dropoff_time": {"$date": "2024-08-26T10:51:01.759Z"},
+        "duration": "0D:0H:9M:52S"
+    })
+    org_db[f'{lab_name}_piu'].insert_one({
+        "user": "Demo User",
+        "item": "Demo Item",
+        "bench": "Demo Bench",
+        "machine": "Demo Machine",
+        "lot_numb": "0000",
+        "quantity": 1,
+        "description": "Demo Description",
+        "created_at": {"$date": "2024-07-16T05:58:05.338Z"}
+    })
+    org_db[f'{lab_name}_machines'].insert_one({
+        "created_at": {"$date": "2024-08-29T19:41:40.801Z"},
+        "name": "Demo Machine",
+        "serial_number": "00000abcde",
+        "manufacturer": "Demo Manufacturer",
+        "name_engineer": "Demo Engineer",
+        "contact_engineer": "+234987654321"
+    })
+    org_db[f'{lab_name}_channels'].insert_one({
+        "user": "Olorunfemi Oloko",
+        "item": "demo_item",
+        "lot_numb": "0000",
+        "direction": "To",
+        "location": "Demo Store",
+        "quantity": 3,
+        "description": "Demo Description",
+        "created_at": {"$date": "2024-07-11T22:42:13.316Z"}
+    })
+    org_db[f'{lab_name}_events'].insert_one({
+        "user": "Demo User",
+        "event_type": "qc",
+        "created_at": {"$date": "2024-08-29T10:43:41.301Z"},
+        "date": {"$date": "2024-08-30T00:00:00.000Z"},
+        "machine": "Demo Machine",
+        "items": ["Demo Item"],
+        "rootCause": "Demo Root Cause",
+        "subrootCause": "Demo Sub Root Cause",
+        "rootCauseDescription": "Demo Root Cause Description",
+        "actioning": "Demo Actioning"
+    })
+    org_db[f'{lab_name}_lot_exp'].insert_one({
+        "item": "Demo Item",
+        "lot_numb": "0000",
+        "expiration": {"$date": "2024-07-13T00:00:00.000Z"},
+        "quantity": 1,
+        "created_at": {"$date": "2024-07-11T22:42:13.309Z"}
+    })
+      
 def auth_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -72,7 +201,8 @@ def signup_signin():
     
     if 'signup' in request.form:
         org_id = register_form.org_id.data
-        lab_name = register_form.lab.data.strip().lower()
+        # lab_name = register_form.lab.data.strip().lower()
+        lab_name = re.sub(r'[^\w]', '_', register_form.lab.data.strip().lower())
         firstname = register_form.firstname.data
         lastname = register_form.lastname.data
         email = register_form.email.data.strip().lower()
@@ -134,7 +264,7 @@ def signup_signin():
             ip_address = request.remote_addr
             firstname = user['firstname']
             lastname = user['lastname']
-            name = f"{firstname} {lastname}"
+            name = f'{firstname} {lastname}'
             part_id = full_id[-7:]
             print(org_plan)
             logging.info(f"user:{name}, email:{email}, ip:{ip_address} at {datetime.datetime.now()}")
@@ -187,7 +317,7 @@ def signup_signin():
 
     elif 'create org' in request.form:
         if orgform.validate_on_submit():
-            org_name = orgform.org_name.data.strip().lower()
+            org_name = orgform.org_name.data.strip().lower().replace(' ', '_')
             lab_name = orgform.lab_name.data.strip().lower()            
             firstname = orgform.firstname.data
             lastname = orgform.lastname.data
@@ -213,7 +343,7 @@ def signup_signin():
             return redirect(url_for('auth.auth_page'))
 
     elif 'create lab' in request.form:
-        lab_name = labform.lab_name.data.strip().lower()
+        lab_name = labform.org_name.data.strip().lower().replace(' ', '_')
         managers_email = labform.managers_email.data.strip().lower()
         
         # Use projection to fetch only the required fields
@@ -306,7 +436,9 @@ def register_org():
             print(user_id)
             # Register the lab and organization
             if user_id:
-                print("this is org name:", org_name)
+                # sanitized_org_name = re.sub(r'[^\w]', '_', org_name)  # Replaces any character that is not alphanumeric or underscore
+                # org_db_name = f"{sanitized_org_name}_db"
+                # print("this is org name:", org_name)
                 org_db = client[f"{org_name}_db"]
                 print("this is org db:",org_db)
                 ORG_LABS_COLLECTION = org_db['labs']
@@ -340,6 +472,7 @@ def register_org():
                         }
                     )
                     flash("Registration successful, you can now login", "success")
+                    create_demo_data(org_db, org_id, lab_name)
                     welcomeMail(email, firstname)
                     return redirect(url_for('auth.auth_page'))
                 else:
@@ -388,7 +521,7 @@ def register_user():
             org_name = ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"users": str(user_id)}}).get('org_name')
             # org_name = org.get('org_name')
             # Register the lab and organization
-            org_db = client[f"{org_name}_db"]
+            org_db = client[f"{org_name}"]
             ORG_LABS_COLLECTION = org_db['labs']
             ORG_LABS_COLLECTION.update_one(
                 {"lab_name": lab_name},
@@ -398,7 +531,6 @@ def register_user():
             flash("Registration successful, you can now login", "success")
             return redirect(url_for('auth.auth_page'))
     return render_template("reg_org.html", org_id=org_id, lab_name=lab_name, firstname=firstname, lastname=lastname, email=email, register_form=register_form)
-
 
 @auth.route('/subscription', methods=['GET', 'POST'])
 def subscription():

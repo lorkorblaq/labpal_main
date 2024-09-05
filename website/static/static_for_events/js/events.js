@@ -11,6 +11,18 @@ $(function() {
         }
         return null;
     }
+
+    const HeadersQcEvents = ['Created At','User', 'Machine',  'Item', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning'];
+    const ColumnsQcEvents = ['created_at','user', 'machine',  'items', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning'];
+
+    const HeadersMaintenanceEvents = ['Created At','User', 'Machine',  'Frequency','Comments'];
+    const ColumnsMaintenanceEvents = ['created_at','user', 'machine',  'frequency', 'comments'];
+
+    const HeadersMachineEvents = ['Created At','User', 'Machine',  'Type of event','Resolved', 'Root Cause', 'Actioning'];
+    const ColumnsMachineEvents = ['created_at','user', 'machine',  'category', 'resolved','rootCause',  'actioning'];
+
+    const HeadersOperationsEvents = ['Created At','User', 'occurrence', 'Actioning'];
+    const ColumnsOperationsEvents = ['created_at','user', 'occurrence',   'actioning'];
     
 
     const user_id = getCookie('user_id');
@@ -24,8 +36,21 @@ $(function() {
     const url_event_todo_get_one = `${BaseUrl}/event/to-do-get/${user_id}/`;
     const url_event_todo_get_all = `${BaseUrl}/event/to-do-get-all/${user_id}/`;
 
+    function fetchData(url) {
+        // Fetch data from the provided URL
+        return $.get(url);
+    }
 
-
+    // async function loadData(url, ) {
+    //     try {
+    //         const data = await fetchData(url);
+    //         // console.log(data);
+    //         renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
+    //         }
+    //     catch (error) {
+    //         console.error("Error fetching data:", error);
+    //         }
+    //     };
     // nav buttons 
     $('.nav-link').on('click', function() {
         // Remove 'active' class from all links
@@ -67,6 +92,7 @@ $(function() {
     $('.datePicker').datepicker({
         dateFormat: 'yy-mm-dd', // Year first format
     });
+
     // time picker
     var currentTime = new Date();
     var currentHours = currentTime.getHours();
@@ -89,7 +115,6 @@ $(function() {
         appendTo: 'body',         // Append to body
         show2400: false   
     });
-
 
     // modal logic
     var modal = $('#myModal');
@@ -132,7 +157,7 @@ $(function() {
     handleTagInput($('#QCtags'), $('#qcTagger'));
     handleTagInput($('#OperationsTags'), $('#operationsTagger'));
 
-    //tag handler 
+    // tag handler 
     function handleTagInput($input, tagContainer) {
         $input.on('keydown', function(event) {
             if (event.key === ',' || event.key === 'Enter') {
@@ -166,6 +191,7 @@ $(function() {
         $('#downtimes-tab').removeClass('active');
         $('#troubleshooting-tab').removeClass('active');
     });
+
     // downtimes tab on the page
     $('#downtimes-tab').on('click', function() {
         $('#maintenance-content').hide();
@@ -175,6 +201,7 @@ $(function() {
         $('#maintenance-tab').removeClass('active');
         $('#troubleshooting-tab').removeClass('active');
     });
+
     // troubleshooting tab on the page
     $('#troubleshooting-tab').on('click', function() {
         $('#maintenance-content').hide();
@@ -202,12 +229,86 @@ $(function() {
 
     });
 
+    $('#rootcause').on('change', function() {
+        var selectedValue = $(this).val();
+        var submenuHtml = '';
+
+        // Define submenu options based on the selected value
+        switch (selectedValue) {
+            case 'procedures':
+                submenuHtml = `
+                    <label for="peopleSubmenu">Select a procedure subcause:</label>
+                    <select class="form-control " id="submenu">
+                        <option value="timing">Timing</option>
+                        <option value="equilibration">Equilibration</option>
+                    </select>
+                `;
+                break;
+
+            case 'methods':
+                submenuHtml = `
+                    <label for="methodSubmenu">Select a method subcause:</label>
+                    <select class="form-control" id="submenu">
+                        <option value="Method1">Method 1</option>
+                        <option value="Method2">Method 2</option>
+                    </select>
+                `;
+                break;
+
+            case 'machines':
+                submenuHtml = `
+                    <label for="machinesSubmenu">Select a machine subcause:</label>
+                    <select class="form-control" id="submenu">
+                        <option value="pre-maintenance">Pre-maintenance</option>
+                        <option value="post-maintenance">Post-maintenance</option>
+                        <option value="pipettor-aspiration">Pipettor aspiration</option>
+                    </select>
+                `;
+                break;
+            case 'materials':
+                submenuHtml = `
+                    <label for="machinesSubmenu">Select a material subcause:</label>
+                    <select class="form-control" id="submenu">
+                        <option value="QC-material-deterioration">QC material deterioration</option>
+                        <option value="reagent-exipration">Reagent exipration</option>
+                        <option value="calibrator-exipration">Calibrator exipration</option>
+                        <option value="wrong-lot">Wrong lot</option>
+                    </select>
+                `;
+                break;
+            case 'measurements':
+                submenuHtml = `
+                    <label for="machinesSubmenu">Select a measurement subcause:</label>
+                    <select class="form-control" id="submenu">
+                        <option value="unfit-calibration-curve">Unfit calibration curve</option>
+                        <option value="wrong-lots">Wrong lots</option>
+                    </select>
+                `;
+                break;
+            case 'systems':
+                submenuHtml = `
+                    <label for="machinesSubmenu">Select a system subcause:</label>
+                    <select class="form-control" id="submenu">
+                        <option value="inconsistent-calibration">Inconsistent Calibration</option>
+                        <option value="inadequate-Standard-Operating-Procedures">Inadequate Standard Operating Procedures</option>
+                        <option value="maintenance-frequency">Maintenance frequency</option>
+
+                    </select>
+                `;
+                break; 
+
+            default:
+                submenuHtml = '';  // Clear submenu if no valid option is selected
+        }
+
+        // Append or replace the submenu in the container
+        $('#submenuContainer').html(submenuHtml);
+    });
 
     // logic for the to-do modal
     const $todoInput = $('#new-todo');
     const $addTodoButton = $('#add-todo');
     const $todoList = $('#todo-list');
-
 
     //QC submit button
     $('#submit-qc').on('click', function(event) {
@@ -240,19 +341,33 @@ $(function() {
             alert('Please enter at least one tag');
             return; // Exit function if no tags are entered
         }
-
-        var RCQC = $('#RCQC').val();
-        qcData.push(RCQC);
+        var root_cause = $('#rootcause').val();
+        qcData.push(root_cause);
+        var subMenu = $('#submenu').val();
+        qcData.push(subMenu);
+        var RCQC_des = $('#RCQC_des').val();
+        qcData.push(RCQC_des);
         var CAQC = $('#CAQC').val();
         qcData.push(CAQC);
+
+
+        
+    
+
+
+
+
+        console.log(qcData);
         const filteredQC = qcData.filter(item => item !== '×');
         console.log(filteredQC)
         data = {
-            'date': filteredQC[0],
-            'machine': filteredQC[1],
-            'items': filteredQC.slice(2, filteredQC.length -2),
-            'rootCause': filteredQC[filteredQC.length -2],
-            'actioning': filteredQC[filteredQC.length -1]
+            "date": filteredQC[0],
+            "machine": filteredQC[1],
+            "items": filteredQC.slice(2, filteredQC.length -4),
+            "rootCause": filteredQC[filteredQC.length -4],  
+            "subrootCause": filteredQC[filteredQC.length -3],
+            "rootCauseDescription": filteredQC[filteredQC.length -2],
+            "actioning": filteredQC[filteredQC.length -1]
         }
         console.log(data);
         url = url_event_push + 'qc/';
@@ -346,6 +461,7 @@ $(function() {
         function handleDowntimesFormSubmission() {
             var resolved = $('#downtimes-content input[type="checkbox"]').prop('checked');
             var RCdowntime = $('#RCdowntime').val();
+            var RCdownTimeDes = $('#RCdowntimeDes').val();
             var CAdowntime = $('#CAdowntime').val();
     
             machineData.push(resolved);
@@ -359,6 +475,7 @@ $(function() {
                 'category': 'Downtime', // Fixed category for downtimes
                 'resolved': resolved,
                 'rootCause': RCdowntime,
+                'rootCauseDes': RCdownTimeDes,
                 'actioning': CAdowntime
             };
     
@@ -395,22 +512,21 @@ $(function() {
     });
     
     // Function to post data to API
-    function postSubmitsToApi(url, data) {
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            success: function(response) {
-                console.log('Data successfully submitted:', response);
-                // Handle success scenario as needed
-            },
-            error: function(error) {
-                console.error('Error submitting data:', error);
-                alert('Error submitting data. Please try again later.');
-            }
-        });
-    }
+    // function postSubmitsToApi(url, data) {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: url,
+    //         data: JSON.stringify(data),
+    //         contentType: 'application/json',
+    //         success: function(response) {
+    //             console.log('Data successfully submitted:', response);
+    //         },
+    //         error: function(error) {
+    //             console.error('Error submitting data:', error);
+    //             alert('Error submitting data. Please try again later.');
+    //         }
+    //     });
+    // }
 
     //operations submit button 
     $('#submit-operations').on('click', function(event) {
@@ -508,36 +624,84 @@ $(function() {
     }
 
     let activeEventType = 'qc'; // Default active event type
+    $('#qc-btn').click(function(){
+        var url = url_event_get_all + 'qc' + '/';
+        renderTable('QCr_table', 'ex-QCr_table', url, ColumnsQcEvents, HeadersQcEvents);``
+    });
+    $('#qc-btn').click();
 
-    // Event listener for the nav links
-    $('.nav-link').click(function() {
-        var activevent = $(this).attr('id'); // Get the id of the clicked link
-        console.log('Active event:', activevent);
 
-        // Update the active event type based on the clicked nav link
-        switch (activevent) {
-            case 'qc-btn':
-                activeEventType = 'qc';
-                break;
-            case 'machine-btn':
-                activeEventType = 'machine';
-                break;
-            case 'operations-btn':
-                activeEventType = 'operations';
-                break;
-            default:
-                activeEventType = 'qc'; // Fallback to default if no match
-                break;
-        }
+    $('#maintenance-btn').click(function() {
+        var url = url_event_get_all + 'machine' + '/';
 
-        console.log('Current active event type:', activeEventType);
-
-        // Fetch events based on the updated active event type
-        fetchEvents(activeEventType);
+        fetchData(url).then(data => {
+            console.log(data);
+            let filteredData = data.events.filter(event => event.category === "Maintenance");
+            let fdata = {events: filteredData};
+            console.log(filteredData);
+            renderTable('main_table', 'ex-main_table', fdata, ColumnsMaintenanceEvents, HeadersMaintenanceEvents);
+        }).catch(error => {
+            console.error("Error fetching data:", error);
+        });
     });
 
-    // Initial fetch of events for the default active event type
-    fetchEvents(activeEventType);
+    $('#machine-btn').click(function(){
+        var url = url_event_get_all + 'machine' + '/';
+        fetchData(url)
+        .then(data => {
+            console.log(data);
+
+            // Filter the data to exclude events with category "Maintenance"
+            let filteredData = data.events.filter(event => event.category !== "Maintenance");
+
+            // Prepare the filtered data object
+            let fdata = { events: filteredData };
+
+            console.log(filteredData);
+
+            // Render the table with the filtered data
+            renderTable('machine-r_table', 'ex-machine-r_table', fdata, ColumnsMachineEvents, HeadersMachineEvents);
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    });
+
+    $('#operations-btn').click(function(){
+        var url = url_event_get_all + 'operations' + '/';
+        renderTable('oper-r_table', 'ex-oper-r_table', url, ColumnsOperationsEvents, HeadersOperationsEvents);``
+    });
+
+    
+    // // Event listener for the nav links
+    // $('.nav-link').click(function() {
+    //     var activevent = $(this).attr('id'); // Get the id of the clicked link
+    //     console.log('Active event:', activevent);
+
+    //     // Update the active event type based on the clicked nav link
+    //     switch (activevent) {
+    //         case 'qc-btn':
+    //             activeEventType = 'qc';
+    //             break;
+    //         case 'machine-btn':
+    //             activeEventType = 'machine';
+    //             break;
+    //         case 'operations-btn':
+    //             activeEventType = 'operations';
+    //             break;
+    //         default:
+    //             activeEventType = 'qc'; // Fallback to default if no match
+    //             break;
+    //     }
+
+    //     console.log('Current active event type:', activeEventType);
+
+    //     // Fetch events based on the updated active event type
+    //     fetchEvents(activeEventType);
+    // });
+
+    // // Initial fetch of events for the default active event type
+    // fetchEvents(activeEventType);
 
     // Function to filter events based on the selected machine and items
     function getDateRange(selector) {
@@ -580,70 +744,97 @@ $(function() {
         });
     }
     
+    // Function to render a DataTable instance for the specified table ID
+    async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
+        try {
+            let data;
     
-    // Event listener for the filter button
-   
-    // Update .applyFilter click handler
-    $('.applyFilter').on('click', function() {
-        console.log('applyFilter');
-        const QCmachine = $('#QCfilterMachine').val().trim();
-        const Mmachine = $('#MfilterMachine').val().trim();
-        const type = $('#filterType').val().trim();
-        const items = $('#filterItems').val().trim().split(',').map(item => item.trim()).filter(item => item);
-
-        let startDate, endDate;
-        switch (activeEventType) {
-            case 'qc':
-                ({ startDate, endDate } = getDateRange('#qc-date-range'));
-                break;
-            case 'machine':
-                ({ startDate, endDate } = getDateRange('#machine-date-range'));
-                break;
-            case 'operations':
-                ({ startDate, endDate } = getDateRange('#operation-date-range'));
-                break;
-            default:
-                console.error('Unknown event type:', activeEventType);
-                alert('Unknown event type. Please try again.');
-                return;
-        }
-        console.log('Date Range:', { startDate, endDate });
-
-        // Fetch and filter events
-        $.ajax({
-            type: 'GET',
-            url: url_event_get_all + activeEventType + '/',
-            success: function(response) {
-                console.log('Raw Data:', response);
-                let filteredEvents;
-                switch (activeEventType) {
-                    case 'qc':
-                        filteredEvents = filterQC(response, QCmachine, items, startDate, endDate);
-                        console.log('Filtered QC Data:', filteredEvents);
-                        displayEventCards(filteredEvents);
-                        break;
-                    case 'machine':
-                        filteredEvents = filterMachine(response, Mmachine, type, startDate, endDate);
-                        console.log('Filtered Machine Data:', filteredEvents);
-                        displayEventCards(filteredEvents);
-                        break;
-                    case 'operations':
-                        filteredEvents = filterOperations(response, startDate, endDate);
-                        console.log('Filtered Operations Data:', filteredEvents);
-                        displayEventCards(filteredEvents);
-                        break;
-                    default:
-                        console.error('Unknown event type:', activeEventType);
-                        alert('Unknown event type. Please try again.');
-                        break;
-                }
-            },
-            error: function(error) {
-                console.error('Error fetching data:', error);
-                alert('Error fetching data. Please try again later.');
+            // Check if urlOrData is a string (URL) or an object (data)
+            if (typeof urlOrData === 'string') {
+                // If it's a URL, fetch data from the provided URL
+                console.log("Fetching data from URL:", urlOrData);
+                let response = await fetch(urlOrData);
+                data = await response.json(); // Assuming the API returns a JSON object
+            } else if (typeof urlOrData === 'object') {
+                // If it's an object, use it directly as data
+                console.log("Using provided data object:", urlOrData);
+                data = urlOrData;
+            } else {
+                throw new Error("Invalid data source: Must provide either a URL or a data object.");
             }
-        });
-    });
+    
+            console.log("Final data to render:", data);
+    
+            // Check if DataTable is already initialized and destroy it if it is
+            if ($.fn.DataTable.isDataTable(`#${tableId}`)) {
+                console.log("DataTable exists, destroying...");
+                $(`#${tableId}`).DataTable().clear().destroy();
+            }
+    
+            // Clear the existing table headers
+            console.log("Clearing and appending new headers");
+            $(`#${tableId} thead`).empty(); // Ensure the header is cleared
+    
+            // Append new headers to the table
+            let headerRow = $('<tr>');
+            headers.forEach(function(header) {
+                headerRow.append(`<th>${header}</th>`);
+            });
+            $(`#${tableId} thead`).append(headerRow);
+    
+            // Initialize a new DataTable instance with the provided columns and data
+            console.log("Initializing DataTable with new data");
+            $(`#${tableId}`).DataTable({
+                data: data.events || [],  // Adjust if your data structure differs
+                columns: columns.map(col => ({ data: col })),
+                // Add any other DataTable options as needed
+            });
+    
+            // Button setup (Ensure these buttons are correctly set up every time)
+            let exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
+            let printButton = $('<button>').text(' Print').addClass('button fas fa-print');
+            // let deleteDB = $('<button>').text(' Delete').addClass('button fas fa-trash-alt');
+    
+            // Define button actions
+            exportButton.click(function() {
+                exportJSONData(data.events || data); // Pass data.events if available, otherwise pass data directly
+            });
+
+            printButton.click(function() {
+                printJSONDataAsCSV(data);
+            });
+    
+            // deleteDB.click(function() {
+            //     if (confirm('Are you sure you want to delete all the items? This action cannot be undone.')) {
+            //         fetch(delete_items_url, {
+            //             method: 'DELETE'
+            //         })
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             console.log('Success:', data);
+            //             alert('Items deleted successfully!');
+            //             renderTable(tableId, exTableId, [], columns, headers); // Re-render table with empty data
+            //         })
+            //         .catch((error) => {
+            //             console.error('Error:', error);
+            //             alert('Error deleting items');
+            //         });
+            //     } else {
+            //         alert('Deletion canceled');
+            //     }
+            // });
+    
+            // Append buttons to exTableId if not already appended
+            let buttonContainer = $(`#${exTableId}`);
+            if (buttonContainer.find('.button').length === 0) {
+                buttonContainer.append(exportButton).append(printButton);
+                // .append(deleteDB)
+            }
+    
+        } catch (error) {
+            console.error("Error in renderTable:", error);
+        }
+    }
     
     // Function to display events in the UI
     function displayEventCards(events) {
@@ -752,24 +943,6 @@ $(function() {
         return card;
     }
 
-    // REAL REAK Function to fetch events from API
-    function fetchEvents(eventType) {
-        var url = url_event_get_all + eventType + '/';
-        console.log(eventType);
-        $.ajax({
-            type: 'GET',
-            url: url, // Replace with your actual API URL
-            success: function(response) {
-                console.log('Data successfully fetched:', response);
-                displayEventCards(response);
-            },
-            error: function(error) {
-                console.error('Error fetching data:', error);
-                alert('Error fetching data. Please try again later.');
-            }
-        });
-    }
-
         // Function to render to-do items
     function renderTodoItem(todoText) {
         const $li = $('<li class="list-group-item checklist-item"></li>').html(`
@@ -803,6 +976,233 @@ $(function() {
             $parent.closest('.card').remove();
         }
     }
+
+    function readCSVFile(file) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var csvData = event.target.result;
+            var jsonData = convertCSVToJSON(csvData);
+            sendJSONDataToAPI(jsonData);
+        };
+        reader.readAsText(file);
+    }
+
+    function sendJSONDataToAPI(jsonData) {
+        fetch(import_items_url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.message || 'Error importing data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert('Data imported successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Error importing your inventory data:\n${error.message}`);
+        });
+    }
+
+    function exportJSONData(data) {
+        if (!data || data.length === 0) {
+            alert("No data available to export.");
+            return;
+        }
+    
+        // Convert JSON data to CSV format
+        var csvContent = convertJSONToCSV(data);
+    
+        // Create a blob object from the CSV content
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    
+        // Create a temporary anchor element to trigger the download
+        var link = document.createElement('a');
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'inventory_data.csv');
+        document.body.appendChild(link);
+    
+        // Trigger the download
+        link.click();
+        document.body.removeChild(link);
+    }
+    
+    // Function to convert JSON data to CSV format
+    function convertJSONToCSV(data) {
+        if (!data || !data.length) {
+            return ''; // Return empty string if no data
+        }
+
+        var csv = [];
+        // Extract column headers from the first object in the array
+        var headers = Object.keys(data[0]);
+        csv.push(headers.join(','));
+
+        // Iterate over each object in the array
+        data.forEach(function(obj) {
+            var row = [];
+            headers.forEach(function(header) {
+                row.push(obj[header] !== undefined ? obj[header] : '');
+            });
+            csv.push(row.join(','));
+        });
+
+        // Combine rows into a single CSV string
+        return csv.join('\n');
+    }
+
+
+    function convertCSVToJSON(csvData) {
+        var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
+        var result = [];
+        var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
+        
+        // Set of fields that should be converted to numbers
+        var numericFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
+
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentLine = lines[i].split(',').map(cell => cell.trim()); // Trim cell values
+
+            for (var j = 0; j < headers.length; j++) {
+                var header = headers[j];
+                var value = currentLine[j];
+                // Convert numeric fields to numbers
+                if (numericFields.has(header)) {
+                    obj[header] = Number(value);
+                } else {
+                    obj[header] = value;
+                }
+            }
+            result.push(obj);
+        }
+        return result;
+    }
+    // Function to print the table content
+    function printJSONDataAsCSV(jsonData) {
+        // Check if jsonData is an array; if not, attempt to access the array within it.
+        if (!Array.isArray(jsonData)) {
+            // If jsonData has an 'events' property (like your example data structure), use that.
+            jsonData = jsonData.events || [];
+        }
+
+        // If jsonData is still not an array after this, return or throw an error.
+        if (!Array.isArray(jsonData) || jsonData.length === 0) {
+            alert("No data available for printing.");
+            return;
+        }
+
+        // Add header row
+        var headerRow = [];
+        for (var key in jsonData[0]) {
+            if (jsonData[0].hasOwnProperty(key)) {
+                headerRow.push(key);
+            }
+        }
+        var csvContent = '<table border="2">';
+        csvContent += '<thead><tr>';
+        headerRow.forEach(function(header) {
+            csvContent += `<th>${header}</th>`;
+        });
+        csvContent += '</tr></thead>';
+
+        // Convert JSON data to CSV format
+        jsonData.forEach(function(item) {
+            var row = [];
+            for (var key in item) {
+                if (item.hasOwnProperty(key)) {
+                    row.push(item[key]);
+                }
+            }
+            csvContent += '<tr>'; // Add row start tag
+            row.forEach(function(cell) {
+                csvContent += `<td>${cell}</td>`;
+            });
+            csvContent += '</tr>'; // Add row end tag
+            csvContent += '<tr><td colspan="' + headerRow.length + '"><hr></td></tr>'; // Add horizontal line
+        });
+        csvContent += '</table>';
+
+        // Open a new window to display the CSV content
+        var printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Table Print</title></head><body>');
+        printWindow.document.write(csvContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+
+    
+    // Update .applyFilter click handler
+    $('.applyFilter').on('click', function() {
+        console.log('applyFilter');
+        const QCmachine = $('#QCfilterMachine').val().trim();
+        const Mmachine = $('#MfilterMachine').val().trim();
+        const type = $('#filterType').val().trim();
+        const items = $('#filterItems').val().trim().split(',').map(item => item.trim()).filter(item => item);
+
+        let startDate, endDate;
+        switch (activeEventType) {
+            case 'qc':
+                ({ startDate, endDate } = getDateRange('#qc-date-range'));
+                break;
+            case 'machine':
+                ({ startDate, endDate } = getDateRange('#machine-date-range'));
+                break;
+            case 'operations':
+                ({ startDate, endDate } = getDateRange('#operation-date-range'));
+                break;
+            default:
+                console.error('Unknown event type:', activeEventType);
+                alert('Unknown event type. Please try again.');
+                return;
+        }
+        console.log('Date Range:', { startDate, endDate });
+
+        // Fetch and filter events
+        $.ajax({
+            type: 'GET',
+            url: url_event_get_all + activeEventType + '/',
+            success: function(response) {
+                console.log('Raw Data:', response);
+                let filteredEvents;
+                switch (activeEventType) {
+                    case 'qc':
+                        filteredEvents = filterQC(response, QCmachine, items, startDate, endDate);
+                        console.log('Filtered QC Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    case 'machine':
+                        filteredEvents = filterMachine(response, Mmachine, type, startDate, endDate);
+                        console.log('Filtered Machine Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    case 'operations':
+                        filteredEvents = filterOperations(response, startDate, endDate);
+                        console.log('Filtered Operations Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
+                    default:
+                        console.error('Unknown event type:', activeEventType);
+                        alert('Unknown event type. Please try again.');
+                        break;
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching data. Please try again later.');
+            }
+        });
+    });
 
     // Event listener for adding a new to-do item
     $addTodoButton.on('click', function(event) {

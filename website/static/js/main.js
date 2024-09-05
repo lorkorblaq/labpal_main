@@ -18,6 +18,9 @@ $(function () {
     const lab_name = getCookie('lab_name');
     const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
     const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
+    const machine_url = `${BaseUrl}/machines/get/${user_id}/${lab_name}/`;
+    const labs_url = `${BaseUrl}/labs/get/${user_id}/`;
+    
 
 // Check if socket is already initialized
     if (!window.socket) {
@@ -26,25 +29,44 @@ $(function () {
     }
     // In your other file (let's call it otherFile.js)
 
-    $('#InputItemMain').typeahead({
+    // $('.InputItemMain').typeahead({
+    //     source: function (request, response) {
+    //         $.ajax({
+    //             url: item_url, // Replace with your API endpoint for item search
+    //             method: "GET",
+    //             data: { term: request.term },
+    //             dataType: "json",
+    //             success: function (data) {
+    //                 console.log("Retrieved data:", data);
+    //                 const itemNames = data.items.map(item => item.item);
+    //                     response(itemNames);
+    //                 },
+    //             error: function (error) {
+    //                 console.error("Error fetching item data:", error);
+    //                 }
+    //             });
+    //         },
+    //     });
+    $('.autoInputLabs').typeahead({
         source: function (request, response) {
             $.ajax({
-                url: item_url, // Replace with your API endpoint for item search
+                url: labs_url, // Replace with your API endpoint for item search
                 method: "GET",
                 data: { term: request.term },
                 dataType: "json",
                 success: function (data) {
-                    console.log("Retrieved data:", data);
-                    const itemNames = data.items.map(item => item.item);
-                        response(itemNames);
+                    // console.log("Retrieved data:", data);
+                    const labs_name = data.labs.map(lab => lab.lab_name);
+                    // console.log(lotNumb);
+                    response(labs_name);
                     },
                 error: function (error) {
-                    console.error("Error fetching item data:", error);
+                    console.error("Error fetching lot data:", error);
                     }
                 });
             },
         });
-    $('#autoInputItem').typeahead({
+    $('.autoInputItem').typeahead({
         source: function (request, response) {
             $.ajax({
                 url: item_url, // Replace with your API endpoint for item search
@@ -62,7 +84,26 @@ $(function () {
                 });
             },
         });
-    $('#autoInputLot').typeahead({
+    $('.autoInputMachine').typeahead({
+        source: function (request, response) {
+            $.ajax({
+                url: machine_url, // Replace with your API endpoint for item search
+                method: "GET",
+                data: { term: request.term },
+                dataType: "json",
+                success: function (data) {
+                    // console.log("Retrieved data:", data);
+                    const Machines_name = data.machines.map(machine => machine.name);
+                    // console.log(lotNumb);
+                    response(Machines_name);
+                    },
+                error: function (error) {
+                    console.error("Error fetching lot data:", error);
+                    }
+                });
+            },
+        });
+    $('.autoInputLot').typeahead({
         source: function (request, response) {
             $.ajax({
                 url: lot_url, // Replace with your API endpoint for item search
