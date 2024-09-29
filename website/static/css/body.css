@@ -98,18 +98,34 @@ h1 {
     color: #B8DAF0;
 }
 
+/* Container to center the loader */
+.loader-container {
+    position: fixed; /* Fix it to the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5); /* Optional background overlay */
+    z-index: 9999; /* Make sure it stays on top */
+}
+
+/* The loader itself */
 .loader {
     border: 4px solid #e78a10; /* Light grey */
-    border-top: 4px solid #000000; /* Blue */
+    border-top: 4px solid #000000; /* Dark color */
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    align-items: center;
     animation: spin 2s linear infinite;
-    display: none; /* Hidden by default */
-    margin: auto;
-    padding: 7px;
-    margin:7px
+}
+
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Media Queries for Mobile Responsiveness */
