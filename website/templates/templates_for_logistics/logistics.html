@@ -9,131 +9,158 @@
 
 {% block body %}
 <main>
-<div class="container mt-5">
-    <h2 class="text-center">Shipments Tracking</h2>
-    <div style="text-align: center;">
-        <button type="button" class="" id="openCreateModalBtn" data-toggle="modal" data-target="#createModal">
-            Create
-        </button>
-        <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
-            Pick up
-        </button>
-        <button type="button" class="" data-toggle="modal" data-target="#dropUpModal">
-            Drop Off
-        </button>
-    </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Create Shipment</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="container mt-5">
+        <h2 class="text-center">Shipments Tracking</h2>
+        <div style="text-align: center;">
+            <button type="button" class="" id="openCreateModalBtn" data-toggle="modal" data-target="#createModal">
+                Create
+            </button>
+            <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
+                Pick up
+            </button>
+            <button type="button" class="" data-toggle="modal" data-target="#dropUpModal">
+                Drop Off
+            </button>
+            <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
+                Shipment Mapping
+            </button>
+
+        </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Create Shipment</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="logistics-form" class="mt-4">
+                            <div class="form-group">
+                                <h6>Shipment ID: <i id='shipment_id'></i> </h6>
+                                <label for="pickup-location">Enter Pickup Lab</label>
+                                <input type="text" class="form-control autoInputLabs" id="pickup-location" placeholder="Enter Locations...">
+            
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dropoff-location">Select Drop-off Location</label>
+                                <input type="text" class="form-control autoInputLabs" id="dropoff-location" placeholder="Enter Locations...">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-box">Number of packs</label>
+                                <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of packs" required>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" placeholder="Enter description" required>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="create" class="">Create</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="logistics-form" class="mt-4">
-                        <div class="form-group">
-                            <h6>Shipment ID: <i id='shipment_id'></i> </h6>
-                            <label for="pickup-location">Enter Pickup Lab</label>
-                            <input type="text" class="form-control autoInputLabs" id="pickup-location" placeholder="Enter Locations...">
+            </div>
+        </div>
         
-                        </div>
-
-                        <div class="form-group">
-                            <label for="dropoff-location">Select Drop-off Location</label>
-                            <input type="text" class="form-control autoInputLabs" id="dropoff-location" placeholder="Enter Locations...">
-                        </div>
-                        <div class="form-group">
-                            <label for="input-box">Number of packs</label>
-                            <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of packs" required>
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <input type="text" class="form-control" id="description" placeholder="Enter description" required>
-                        </div>
-                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="create" class="">Create</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="pickUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Pick Up Shipment</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="logistics-form" class="mt-4">
-                        <div class="form-group">
-                            <label for="input-box">Shipment ID</label>
-                            <input type="text" class="form-control" id="pick-shipment-id" placeholder="Enter shipment ID" required>
-                        </div>                      
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="pick-up" class="">Pick Up</button>
+        <div class="modal fade" id="pickUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Pick Up Shipment</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="logistics-form" class="mt-4">
+                            <div class="form-group">
+                                <label for="input-box">Shipment ID</label>
+                                <input type="text" class="form-control" id="pick-shipment-id" placeholder="Enter shipment ID" required>
+                            </div>                      
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="pick-up" class="">Pick Up</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="dropUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Drop Shipment</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="logistics-form" class="mt-4">
-                        <div class="form-group">
-                            <label for="input-box">Shipment ID</label>
-                            <input type="text" class="form-control" id="drop-shipment-id" placeholder="Enter shipment ID" required>
-                        </div>  
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="drop-off" class="">Dropped</button>
+        <div class="modal fade" id="dropUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Drop Shipment</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="logistics-form" class="mt-4">
+                            <div class="form-group">
+                                <label for="input-box">Shipment ID</label>
+                                <input type="text" class="form-control" id="drop-shipment-id" placeholder="Enter shipment ID" required>
+                            </div>  
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="drop-off" class="">Dropped</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="mappingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Shipment View</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="plot-shipment-form">
+                            <input type="text" id="shipment-id-input" placeholder="Enter Shipment ID">
+                            <button type="submit">Map Shipment</button>
+                        </form>
+                        <br>
+                        <div id="map" style="width: 100%; height: 500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive" id ="ex-r_table">
+                    <h4>Movement History</h4>
+
+            <table class="table table-bordered table-striped" id="r_table">
+                <thead class="head thead-dark">
+                    <tr id="reports_h">
+                    </tr>
+                </thead>
+                <tbody id="tbody" class="body" >
+                    <tr id='reports_r'>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="location-status" class="mt-3"></div>
+
+
     </div>
-
-    <div class="table-responsive" id ="ex-r_table">
-                <h4>Movement History</h4>
-
-        <table class="table table-bordered table-striped" id="r_table">
-            <thead class="head thead-dark">
-                <tr id="reports_h">
-                </tr>
-            </thead>
-            <tbody id="tbody" class="body" >
-                <tr id='reports_r'>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-
-    <div id="location-status" class="mt-3"></div>
-
-    <div id="map" style="width: 100%; height: 500px;"></div>
-
-</div>
 </main>
 {% endblock %}
 

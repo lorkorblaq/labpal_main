@@ -16,13 +16,12 @@ from .celeryMasters.inventoryMaster import watch_inventory_changes
 from flask import current_app
 from bson.errors import InvalidId
 import re
-
+# from datetime import datetime
 # from .celeryMasters.chatMaster import chat_watcher
 # from .redis_config import redis_client
 
 # Configure the logging settings
 logging.basicConfig(filename='app.log', level=logging.INFO)
-
 
 auth = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
 
@@ -31,47 +30,50 @@ USERS_COLLECTION = db_org_users['users']
 # ORG_COLLECTION = db['org']
 ORG_COLLECTION = db_org_users['org']
 
-import datetime
-
 def create_demo_data(org_db, org_id, lab_name):
-    org_db[f'{lab_name}_events'].insert_many([
-        {
-            "event_name": "qc",
-            "event_date": datetime.datetime.now(),
-            "event_location": "Demo Location",
-            "event_description": "Demo Description",
-            "created_at": datetime.datetime.now()
-        },
-        {
-            "user": "Demo User",
-            "event_type": "machine",
-            "created_at": {"$date": "2024-08-31T16:55:08.585Z"},
-            "category": "Troubleshooting",
-            "machine": "Demo Machine",
-            "datetime": {"$date": "2024-08-31T16:48:00.000Z"},
-            "resolved": True,
-            "rootCause": "Demo Root Cause",
-            "actioning": "Demo Actioning",
-        },
-        {
-            "user": "Demo User",
-            "event_type": "machine",
-            "created_at": {"$date": "2024-09-01T04:32:15.460Z"},
-            "category": "Maintenance",
-            "machine": "DXI 800",
-            "datetime": {"$date": "2024-09-02T04:31:00.000Z"},
-            "frequency": ["Daily"],
-            "comments": ""
-        },
-        {
-            "user": "Demo User",
-            "event_type": "operations",
-            "created_at": {"$date": "2024-08-31T17:04:11.557Z"},
-            "date": {"$date": "2024-08-31T00:00:00.000Z"},
-            "occurrence": ["Demo Occurrence"],
-            "actioning": "Demo Actioning",
-        }
-     ])
+    # org_db[f'{lab_name}_events'].insert_many([
+    #     {
+    #     "user": "Demo User",
+    #     "event_type": "qc",
+    #     "created_at": datetime.now(),
+    #     "date": datetime.now(),
+    #     "machine": "Demo Machine",
+    #     "items": ["Demo Item"],
+    #     "rootCause": "Demo Root Cause",
+    #     "subrootCause": "Demo Sub Root Cause",
+    #     "rootCauseDescription": "Demo Root Cause Description",
+    #     "actioning": "Demo Actioning"
+    #     },
+    #     {
+    #         "user": "Demo User",
+    #         "event_type": "machine",
+    #         "created_at": datetime.now(),
+    #         "category": "Troubleshooting",
+    #         "machine": "Demo Machine",
+    #         "datetime": datetime.now(),
+    #         "resolved": True,
+    #         "rootCause": "Demo Root Cause",
+    #         "actioning": "Demo Actioning",
+    #     },
+    #     {
+    #         "user": "Demo User",
+    #         "event_type": "machine",
+    #         "created_at": {"$date": "2024-09-01T04:32:15.460Z"},
+    #         "category": "Maintenance",
+    #         "machine": "DXI 800",
+    #         "datetime": {"$date": "2024-09-02T04:31:00.000Z"},
+    #         "frequency": ["Daily"],
+    #         "comments": ""
+    #     },
+    #     {
+    #         "user": "Demo User",
+    #         "event_type": "operations",
+    #         "created_at": {"$date": "2024-08-31T17:04:11.557Z"},
+    #         "date": {"$date": "2024-08-31T00:00:00.000Z"},
+    #         "occurrence": ["Demo Occurrence"],
+    #         "actioning": "Demo Actioning",
+    #     }
+    #  ])
     #  not done
     org_db[f'{lab_name}_items'].insert_one({
         "bench": "Demo Bench",
@@ -84,33 +86,33 @@ def create_demo_data(org_db, org_id, lab_name):
         "class": "A",
         "tests/day": 1
     })
-    # done
-    org_db['labs'].insert_one({
-        "lab_name": "Demo Lab",
-        "managers_email": "Demo@demo.com",
-        "users": [],
-        "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
-        "org_id": org_id
-    })
-    org_db[f'{lab_name}_shipments'].insert_one({
-        "created_by": "Demo User",
-        "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
-        "shipment_id": "lcwylX7",
-        "numb_of_packs": 3,
-        "pickup_loc": "Demo Store",
-        "dropoff_loc": "Demo Lab",
-        "create_lat_lng": "6.5568768,3.3456128",
-        "description": "Demo Description",
-        "completed": "Yes",
-        "picked_by": "Demo User1",
-        "pickup_lat_lng": "6.5568768,3.3456128",
-        "pickup_time": {"$date": "2024-08-26T10:41:26.381Z"},
-        "updated_at": {"$date": "2024-08-26T10:51:01.759Z"},
-        "dropoff_by": "Demo User2",
-        "dropoff_lat_lng": "6.5568768,3.3456128",
-        "dropoff_time": {"$date": "2024-08-26T10:51:01.759Z"},
-        "duration": "0D:0H:9M:52S"
-    })
+    
+    # org_db['labs'].insert_one({
+    #     "lab_name": "Demo Lab",
+    #     "managers_email": "Demo@demo.com",
+    #     "users": [],
+    #     "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
+    #     "org_id": org_id
+    # # })
+    # org_db[f'{lab_name}_shipments'].insert_one({
+    #     "created_by": "Demo User",
+    #     "created_at": {"$date": "2024-08-26T10:41:09.054Z"},
+    #     "shipment_id": "lcwylX7",
+    #     "numb_of_packs": 3,
+    #     "pickup_loc": "Demo Store",
+    #     "dropoff_loc": "Demo Lab",
+    #     "create_lat_lng": "6.5568768,3.3456128",
+    #     "description": "Demo Description",
+    #     "completed": "Yes",
+    #     "picked_by": "Demo User1",
+    #     "pickup_lat_lng": "6.5568768,3.3456128",
+    #     "pickup_time": {"$date": "2024-08-26T10:41:26.381Z"},
+    #     "updated_at": {"$date": "2024-08-26T10:51:01.759Z"},
+    #     "dropoff_by": "Demo User2",
+    #     "dropoff_lat_lng": "6.5568768,3.3456128",
+    #     "dropoff_time": {"$date": "2024-08-26T10:51:01.759Z"},
+    #     "duration": "0D:0H:9M:52S"
+    # })
     org_db[f'{lab_name}_piu'].insert_one({
         "user": "Demo User",
         "item": "Demo Item",
@@ -119,16 +121,16 @@ def create_demo_data(org_db, org_id, lab_name):
         "lot_numb": "0000",
         "quantity": 1,
         "description": "Demo Description",
-        "created_at": {"$date": "2024-07-16T05:58:05.338Z"}
+        "created_at": datetime.datetime.now()
     })
-    org_db[f'{lab_name}_machines'].insert_one({
-        "created_at": {"$date": "2024-08-29T19:41:40.801Z"},
-        "name": "Demo Machine",
-        "serial_number": "00000abcde",
-        "manufacturer": "Demo Manufacturer",
-        "name_engineer": "Demo Engineer",
-        "contact_engineer": "+234987654321"
-    })
+    # org_db[f'{lab_name}_machines'].insert_one({
+    #     "created_at": {"$date": "2024-08-29T19:41:40.801Z"},
+    #     "name": "Demo Machine",
+    #     "serial_number": "00000abcde",
+    #     "manufacturer": "Demo Manufacturer",
+    #     "name_engineer": "Demo Engineer",
+    #     "contact_engineer": "+234987654321"
+    # })
     org_db[f'{lab_name}_channels'].insert_one({
         "user": "Olorunfemi Oloko",
         "item": "demo_item",
@@ -137,27 +139,15 @@ def create_demo_data(org_db, org_id, lab_name):
         "location": "Demo Store",
         "quantity": 3,
         "description": "Demo Description",
-        "created_at": {"$date": "2024-07-11T22:42:13.316Z"}
+        "created_at": datetime.datetime.now()
     })
-    org_db[f'{lab_name}_events'].insert_one({
-        "user": "Demo User",
-        "event_type": "qc",
-        "created_at": {"$date": "2024-08-29T10:43:41.301Z"},
-        "date": {"$date": "2024-08-30T00:00:00.000Z"},
-        "machine": "Demo Machine",
-        "items": ["Demo Item"],
-        "rootCause": "Demo Root Cause",
-        "subrootCause": "Demo Sub Root Cause",
-        "rootCauseDescription": "Demo Root Cause Description",
-        "actioning": "Demo Actioning"
-    })
-    org_db[f'{lab_name}_lot_exp'].insert_one({
-        "item": "Demo Item",
-        "lot_numb": "0000",
-        "expiration": {"$date": "2024-07-13T00:00:00.000Z"},
-        "quantity": 1,
-        "created_at": {"$date": "2024-07-11T22:42:13.309Z"}
-    })
+    # org_db[f'{lab_name}_lot_exp'].insert_one({
+    #     "item": "Demo Item",
+    #     "lot_numb": "0000",
+    #     "expiration": {"$date": "2024-07-13T00:00:00.000Z"},
+    #     "quantity": 1,
+    #     "created_at": {"$date": "2024-07-11T22:42:13.309Z"}
+    # })
       
 def auth_required(f):
     @wraps(f)
@@ -182,7 +172,6 @@ def time_left_until_expiration(token, secret_key):
     except jwt.InvalidTokenError:
         # Invalid token
         return None
-
 
 @auth.route("/signin-signup", methods=['GET'])
 def auth_page():
@@ -219,7 +208,7 @@ def signup_signin():
         
         num_users = len(org.get('users', []))
         sub = org.get('subscription')
-        user_limits = {'free': 5, 'Basic monthly plan': 20, 'Basic yearly plan': 20, 'Premium monthly plan ': 45, 'Premium yearly plan ': 45}
+        user_limits = {'free': 3, 'Basic monthly plan': 20, 'Basic yearly plan': 20, 'Premium monthly plan ': 45, 'Premium yearly plan ': 45}
 
         if num_users >= user_limits.get(sub, float('inf')):
             plan_upgrades = {'free': 'Basic or Premium', 'basic': 'Premium', 'premium': 'Enterprise'}
@@ -343,7 +332,7 @@ def signup_signin():
             return redirect(url_for('auth.auth_page'))
 
     elif 'create lab' in request.form:
-        lab_name = labform.org_name.data.strip().lower().replace(' ', '_')
+        lab_name = labform.lab_name.data.strip().lower().replace(' ', '_')
         managers_email = labform.managers_email.data.strip().lower()
         
         # Use projection to fetch only the required fields
@@ -386,8 +375,8 @@ def signup_signin():
             
         if sub == "Premium monthly plan" or sub == "Premium yearly plan":
             labs_count = ORG_LABS_COLLECTION.count_documents({})
-            if labs_count >= 10:
-                flash("You have reached the limit of 10 labs for a premium subscription. Please upgrade to Enterprise to create more labs.", "warning")
+            if labs_count >= 15:
+                flash("You have reached the limit of 15 labs for a premium subscription. Please upgrade to Enterprise to create more labs.", "warning")
                 return redirect(url_for('auth.auth_page'))
 
 
@@ -403,8 +392,6 @@ def signup_signin():
         ORG_COLLECTION.update_one({"_id": ObjectId(org_id)}, {"$push": {"labs": lab_name}})
         flash("Lab created successfully", "success")
         return redirect(url_for('auth.auth_page'))
-
-       
 
 @auth.route('/register-org', methods=['GET', 'POST'])
 def register_org():
@@ -472,7 +459,7 @@ def register_org():
                         }
                     )
                     flash("Registration successful, you can now login", "success")
-                    create_demo_data(org_db, org_id, lab_name)
+                    # create_demo_data(org_db, org_id, lab_name)
                     welcomeMail(email, firstname)
                     return redirect(url_for('auth.auth_page'))
                 else:

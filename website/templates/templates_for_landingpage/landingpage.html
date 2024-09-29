@@ -44,19 +44,40 @@
     </section>
     <section id="pricing">
         <h1>Pricing</h1>
-        <div class="pricing-container">
-            <div class="pricing-plan">
-                <h4>Basic</h4>
-                <p>₦4500/month</p>
-                <!-- <a href="#signup" class="btn">More details...</a> -->
+        <div class="pricing-table">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+              <h2>Free</h2>
+              <h2>Zero cost</h2>
+              <h3 class="fas fa-user"> Up to 3 Users</h3>
+              <h3 class="fas fa-clinic-medical"> And 1 Center</h3>
+              <hr>
+              <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
-            <div class="pricing-plan pricing2">
-                <h4>Premium</h4>
-                <p>₦7500/month</p>
-                <!-- <a href="#signup" class="btn">More details...</a> -->
+          
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+              <h2>Basic</h2>
+              <h2>Starting at ₦7500/month</h2>
+              <h3 class="fas fa-user"> Up to 20 Users</h3>
+              <h3 class="fas fa-clinic-medical"> And 5 Centers</h3>
+              <hr>
+              <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
-            <!-- Add more plans as needed -->
-        </div>
+          
+            <!-- Premium Plan -->
+            <div class="pricing-card">
+                <h2>Premium</h2>
+                <h2>Starting at ₦9500/month</h2>
+                <h3 class="fas fa-user"> Up to 45 Users</h3>
+                <h3 class="fas fa-clinic-medical"> And 15 Centers</h3>
+                <h3 class="fas fa-microchip"> Custom trained AI Lab Assistant</h3>
+                <hr>
+                <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
+            </div>
+
+          
+          </div>
     </section>
     <div class="video-container">
         <h2>Watch how to get started</h2>

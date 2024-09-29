@@ -10,7 +10,10 @@ def mailer(emailh, subjecth, htmlh):
             recipients=[emailh],
         )
         message.html = htmlh
-        return mail.send(message)
+        try:
+            return mail.send(message)
+        except Exception as e:
+            return f'Failed to send email: {str(e)}'
 
 
 def welcomeMail(email, firstname):

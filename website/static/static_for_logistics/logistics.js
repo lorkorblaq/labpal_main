@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -306,6 +307,168 @@ $(document).ready(function() {
         return $.get(logistics_get);
     }
 
+
+
+    var map;
+
+    // Function to initialize the map on the created location of the last shipment
+    async function loadMapWithLastShipment() {
+        // Clear any previous map markers or polylines
+        $('#map').empty();
+    
+        try {
+            // Fetch all shipment data
+            const data = await fetchData(url_shipment_get);
+            const shipments = data.shipments;
+    
+            // Get the last shipment
+            const lastShipment = shipments[shipments.length - 1];
+    
+            if (!lastShipment) {
+                alert('No shipments found.');
+                return;
+            }
+    
+            // Extract coordinates for the created location
+            let createLatLng = lastShipment.create_lat_lng.split(",").map(Number);
+    
+            // Initialize the map (if it's not already initialized)
+            if (!map) {
+                map = L.map('map').setView(createLatLng, 13); // Center map on created location
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(map);
+            }
+    
+            let createdAddress = await reverseGeocode(createLatLng);
+            // Add marker for the created location
+            let createMarker = L.marker(createLatLng).addTo(map)
+                .bindPopup(`<b>Last created shipment:</b> ${lastShipment.created_at}, ${createdAddress}`).openPopup();
+    
+            // Reverse geocode to get the address from the coordinates
+    
+        } catch (error) {
+            console.error("Error fetching shipment data:", error);
+        }
+    }
+    
+    // Function to reverse geocode the coordinates to a human-readable address
+    async function reverseGeocode(latlng) {
+        const [lat, lng] = latlng;
+        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+    
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            const address = data.display_name;  // Full address    
+            return address;
+        } catch (error) {
+            console.error("Error with reverse geocoding:", error);
+        }
+    }
+    
+    // Function to plot shipment by its ID
+
+    async function plotShipmentByID(shipment_id) {
+        try {
+            // Fetch the shipment data from the backend for the user
+            const data = await fetchData(url_shipment_get);
+            const shipments = data.shipments;
+    
+            // Filter the shipment by the entered shipment ID
+            const filteredShipment = shipments.find(shipment => shipment.shipment_id === shipment_id);
+    
+            if (!filteredShipment) {
+                alert('Shipment ID not found.');
+                return;
+            }
+    
+            // Extract coordinates from the filtered shipment
+            let createLatLng = filteredShipment.create_lat_lng.split(",").map(Number);
+            let pickupLatLng = filteredShipment.pickup_lat_lng.split(",").map(Number);
+            let dropoffLatLng = filteredShipment.dropoff_lat_lng.split(",").map(Number);
+    
+            // Check if the map already exists and destroy it if necessary
+            if (map !== null) {
+                map.remove();  // This destroys the previous map instance
+            }
+    
+            // Initialize the map, centering on the "created" coordinates
+            map = L.map('map').setView(createLatLng, 13); // Dynamically set the center
+    
+            // Add the tile layer (map base)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            let createdAddress = await reverseGeocode(createLatLng);
+            let pickedAddress = await reverseGeocode(pickupLatLng);
+            let droppedAddress = await reverseGeocode(dropoffLatLng);
+
+            // Plot markers for each stage (created, picked up, dropped off)
+            let createMarker = L.marker(createLatLng).addTo(map)
+                .bindPopup(`<b>Created:</b> ${filteredShipment.created_at}, ${createdAddress}`).openPopup();
+            let pickupMarker = L.marker(pickupLatLng).addTo(map)
+                .bindPopup(`<b>Picked Up:</b> ${filteredShipment.pickup_time}, ${pickedAddress}`).openPopup();
+            let dropoffMarker = L.marker(dropoffLatLng).addTo(map)
+                .bindPopup(`<b>Dropped Off:</b> ${filteredShipment.dropoff_time},${filteredShipment.duration} ${droppedAddress}`).openPopup();
+    
+    
+            // // Plot markers for each stage (created, picked up, dropped off)
+            // L.marker(createLatLng).addTo(map)
+            //     .bindPopup(`<b>Created:</b> ${filteredShipment.created_at}`).openPopup();
+    
+            // L.marker(pickupLatLng).addTo(map)
+            //     .bindPopup(`<b>Picked Up:</b> ${filteredShipment.pickup_time}`).openPopup();
+    
+            // L.marker(dropoffLatLng).addTo(map)
+            //     .bindPopup(`<b>Dropped Off:</b> ${filteredShipment.dropoff_time}`).openPopup();
+    
+            // Plot the route as a polyline connecting the created, picked up, and dropped off points
+            let polyline = L.polyline([createLatLng, pickupLatLng, dropoffLatLng], { color: 'blue' }).addTo(map);
+    
+            // Zoom the map to fit all markers and route
+            map.fitBounds(polyline.getBounds());
+        } catch (error) {
+            console.error("Error fetching shipment data:", error);
+        }
+    }
+    
+
+
+    // Event listener for the "Plot Shipment" button
+    $('#plot-shipment-form').submit(function(event) {
+        event.preventDefault();
+        const shipment_id = $('#shipment-id-input').val(); // Assuming you have an input field for shipment ID
+        if (shipment_id) {
+            plotShipmentByID(shipment_id);
+        } else {
+            alert("Please enter a shipment ID.");
+        }
+    });
+    loadMapWithLastShipment();
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     async function loadData () {
         $('.body').empty();
         $('#reports_h').empty();
@@ -462,39 +625,4 @@ $(document).ready(function() {
         return result;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-     // Initialize the map, centered on a location (first marker's location) with a specific zoom level
-     var map = L.map('map').setView([6.5568768, 3.3456128], 13);
-
-     // Load and display OpenStreetMap tiles
-     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-         maxZoom: 19,
-         attribution: '© OpenStreetMap'
-     }).addTo(map);
-
-     // Array of locations (latitude, longitude)
-     var locations = [
-         [6.5568768, 3.3456128],
-         [6.4578768, 3.2456128],
-         [6.6568768, 3.1456128]
-     ];
-
-     // Loop through the locations and add a marker for each
-     $.each(locations, function(index, location) {
-         L.marker(location).addTo(map)
-             .bindPopup('Location ' + (index + 1))
-             .openPopup();
-     });
 });
