@@ -194,26 +194,28 @@
             </div>       
         </div>
         <div class="row" id ="data">
-            <div class="col-9">
-                    <div class="porter">
-                            
-                            <div class="card-body d-flex justify-content-left align-items-center">                                
-                                <button type="button" class="" id="addItemModal"data-toggle="modal" data-target="#itemModal" ><i class="fas fa-plus"></i><br>Items</button>
-                            </div>
-                        </iv>
-                        <br>
-                            <div class="card-body d-flex justify-content-left align-items-center">                                
-                                <button type="button" class="" id="addMachineModal" data-toggle="modal" data-target="#machineModal"><i class="fas fa-plus"></i><br>Machines</button>
-                            </div>
-
+            <div class="col-12">
+                <div class="porter">
+                    <!-- Use Flexbox to arrange buttons side by side -->
+                    <div class="card-body d-flex justify-content-left align-items-center">
+                        <!-- Button 1 -->
+                        <button type="button" class="mx-2" id="addItemModal" data-toggle="modal" data-target="#itemModal">
+                            <i class="fas fa-plus"></i><br>Items
+                        </button>
+                        <!-- Button 2 -->
+                        <button type="button" class="mx-2" id="addMachineModal" data-toggle="modal" data-target="#machineModal">
+                            <i class="fas fa-plus"></i><br>Machines
+                        </button>
                     </div>
+                </div>
             </div>
+            
             <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="myModalLabel">Add Items</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -270,7 +272,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="myModalLabel">Add machine</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -401,7 +403,7 @@
                                     <div class="col-md-6">
                                         <div class="card mb-4 pricing-plan">
                                             <h3>Basic</h3>
-                                            <p>₦4500/month</p>
+                                            <p>₦7500/month</p>
                                             <button id="basic-btn" >Choose plan</button>
                                         </div>
                                     </div>
@@ -410,7 +412,7 @@
                                     <div class="col-md-6">
                                         <div class="card mb-4 pricing-plan">
                                             <h3>Premium</h3>
-                                            <p>₦7500/month</p>
+                                            <p>₦9500/month</p>
                                             <button id="premium-btn" >Choose plan</button>
                                         </div>
                                     </div>

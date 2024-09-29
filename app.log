@@ -41125,3 +41125,703 @@ INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 134-307-699
 INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-05 13:58:50.537231
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 134-307-699
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-05 16:47:38.473103
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/db_clinicalx.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:root:user:firemi oloko, email:tund3oloko@gmail.com, ip:127.0.0.1 at 2024-09-07 14:34:42.308947
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-07 15:02:59.389896
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-07 15:03:03.474587
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 123-661-670
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 771-084-086
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-09 09:08:26.633372
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-09 09:13:10.786532
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 771-084-086
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-09 11:23:20.937202
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+ERROR:socketio:Cannot receive from redis... retrying in 16 secs
+ERROR:socketio:Cannot receive from redis... retrying in 32 secs
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-09 13:30:45.528168
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-09 13:43:22.445184
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-09 14:08:03.542315
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 771-084-086
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 771-084-086
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 771-084-086
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 113-694-114
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-09 22:05:26.165268
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+ERROR:socketio:Cannot receive from redis... retrying in 16 secs
+ERROR:socketio:Cannot receive from redis... retrying in 32 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 548-942-791
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-10 21:32:57.494304
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+ERROR:socketio:Cannot receive from redis... retrying in 16 secs
+ERROR:socketio:Cannot receive from redis... retrying in 32 secs
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-10 21:40:24.431619
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 115-737-462
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-16 19:14:39.422468
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 147-665-695
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 147-665-695
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 147-665-695
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 147-665-695
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-19 13:37:20.636339
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 125-586-237
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-882-853
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-21 15:32:29.921269
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 105-155-730
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 105-155-730
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-23 11:35:00.304861
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-23 11:39:30.367893
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/extensions.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/db_clinicalx.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/mailer.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/db_clinicalx.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 927-096-196
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-24 18:27:00.859061
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 127-149-957
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-25 02:47:51.143047
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-09-25 02:47:58.938080
+INFO:werkzeug: * Detected change in '/home/blaq/Desktop/clinicalx/labpal_main/website/auth.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 127-149-957
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-25 02:52:13.076364
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+ERROR:socketio:Cannot receive from redis... retrying in 16 secs
+ERROR:socketio:Cannot receive from redis... retrying in 32 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 423-184-973
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-25 18:31:51.725050
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 305-666-023
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-09-29 14:59:51.055974

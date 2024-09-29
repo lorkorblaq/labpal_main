@@ -4,7 +4,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 load_dotenv(find_dotenv())
 
-uri_development = os.getenv('URI_DEVELOPMENT')
+# uri_production = os.getenv('URI_DEVELOPMENT')
 uri_production = os.getenv('URI_PRODUCTION')
 # MongoDB connection
 client = MongoClient(uri_production, server_api=ServerApi('1'))

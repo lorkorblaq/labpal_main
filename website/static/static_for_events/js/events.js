@@ -312,6 +312,7 @@ $(function() {
 
     //QC submit button
     $('#submit-qc').on('click', function(event) {
+
         event.preventDefault(); // Prevent default form submission behavior
         const qcData = [];
         const datePickerValue = $('#datePicker-qc').val();
@@ -611,8 +612,7 @@ $(function() {
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: function(response) {
-                alert(response.message);                
-                console.log('Data successfully posted:', response);
+                alert(response.message);   
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // Check if the responseJSON exists and has a message property

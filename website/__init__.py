@@ -10,24 +10,30 @@ import redis
 from dotenv import load_dotenv, find_dotenv
 import os
 load_dotenv(find_dotenv())
-mongo_url = os.getenv('MONGO_URL')
+mongo_url = os.getenv('URI_PRODUCTION')
+# mongo_url = os.getenv('URI_DEVELOPMENT')
+
 secret_key = os.getenv('SECRET_KEY')
 password = os.getenv('PASSWORD')
-# redis_URL = 'redis://default:PghQh8AjOXYkUIMBrCJare4INQ89j5xR@redis-11786.c326.us-east-1-3.ec2.redns.redis-cloud.com:11786/0'
-# redis_URL = 'redis://redis-server:6379/0' for docker
-# redis_URL = 'redis://:518Oloko.@localhost:6379/0'
+mail_password = os.getenv('MAIL_PASSWORD')
 def create_app():
     app = Flask(__name__)
     # Configuration settings
     app.config['SECRET_KEY'] = secret_key
-    app.config['MONGO_URI'] = "mongodb+srv://clinicalx:{password}@clinicalx.aqtbwah.mongodb.net/?retryWrites=true&w=majority"
-    app.config['MAIL_SERVER'] = '51.195.190.75'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = 'labpal@labpal.com.ng'
-    app.config['MAIL_PASSWORD'] = password
-    app.config['MAIL_USE_SSL'] = True
-    app.config['MAIL_DEFAULT_SENDER'] = ('LabPal','labpal@labpal.com.ng')
+    app.config['MONGO_URI'] = mongo_url
+    
+    # Email configuration for AWS SES SMTP
+    app.config['MAIL_SERVER'] = 'email-smtp.eu-north-1.amazonaws.com'
+    app.config['MAIL_PORT'] = 465  # TLS Wrapper port
+    app.config['MAIL_USERNAME'] = 'AKIAQ3EGUQIIZITNA2FX'  # Replace with your SMTP username
+    app.config['MAIL_PASSWORD'] = mail_password  # Replace with your SMTP password
+    app.config['MAIL_USE_SSL'] = True  # Using SSL on port 465
+    app.config['MAIL_USE_TLS'] = False  # SSL and TLS are mutually exclusive here
+    app.config['MAIL_DEFAULT_SENDER'] = ('LabPal', 'noreply@labpal.com.ng')
+    app.config['MAIL_SUPPRESS_SEND'] = False
+    app.config['MAIL_ASCII_ATTACHMENTS'] = False
     app.config['MAIL_DEBUG'] = True
+
     app.config['SESSION_TYPE'] = 'redis'
     app.config['SESSION_REDIS'] = redis.from_url(redis_URL)
     app.config['SESSION_PERMANENT'] = True
@@ -58,3 +64,8 @@ def create_app():
 # def get_lab_name():
 #     if session.get('lab'):
 #         return session.get('lab')
+
+
+
+# docker tag lorkorblaq/labpal_redis:latest public.ecr.aws/a3h1q7q4/labpal/redis:latest
+
