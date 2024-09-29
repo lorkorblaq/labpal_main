@@ -1,11 +1,28 @@
 $(function () {
     console.log("inventory.js loaded");
-    const HeadersItem = ['Items','Q. in Stock(vials)', 'Tests/Vial',  'Category', 'Bench'];
-    const ColumnsItem = ['item',  'quantity', 'tests/vial', 'category', 'bench'];
+    const HeadersItem = ['Items','Qty-in-Store', 'Unit', 'Category', 'Bench', 
+                        'Class', 'BU', 'SU', 'PU', 
+                        'BU per SU', 'SU per PU', 
+                        'price per PU(₦)'];
 
-    const ColumnsRequest = ['bench', 'item', 'quantity', 'tests_per_day', 'total_tests_in_stock', 'quantity_test_requested', 'total_days_to_last', 'amount_needed'];
-    const HeadersRequest = ['Bench', 'Item', 'Q. in Stock(vials)', 'Tests/Day', 'Total Stock(tests)', 'Quantity Requested(tests)', 'In-Stock To Last(days)', 'Amount needed(vials)'];
-    const import_heading = ['bench', 'category', 'item', 'vials/pack', 'tests/vial', 'quantity', 'reOrderLevel', 'class', 'tests/day']
+    const ColumnsItem = ['item',  'quantity','storeUnit','category', 'bench', 
+                        'class',  'baseUnit', 'storeUnit', 'purchaseUnit', 
+                        'baseUnit/storeUnit', 'storeUnit/purchaseUnit', 
+                        'price/purchaseUnit'];
+
+    const ColumnsRequest = ['bench', 'item', 'quantity', 'storeUnit', 'baseUnit', 'baseUnit_per_day', 
+                            'total_baseUnit_in_store', 'quantity_baseUnit_requested', 
+                            'total_days_to_last', 'amount_needed'];
+
+    const HeadersRequest = ['Bench', 'Item', 'Qty in-Store','unit(SU)','BU', 
+                            'Qty(BU)/day', 'Total Qty(BU) in-store', 
+                            'Qty(BU) requested)', 'In-Stock Qty. To last(days)', 
+                            'Amount needed(SU)'];
+
+    const import_heading = ['item', 'bench', 'category', 'class', 'quantity', 
+                            'reOrderLevel', 'baseUnit/day', 'baseUnit', 
+                            'storeUnit', 'purchaseUnit', 'baseUnit/storeUnit', 
+                            'storeUnit/purchaseUnit', 'price/purchaseUnit']
 
     BaseUrl = "https://labpal.com.ng/api"
     // BaseUrl = "http://0.0.0.0:3000/api";
@@ -41,6 +58,7 @@ $(function () {
 
     $("#submit_request").click(function() {
         // Retrieve selected bench, categories, and number of days
+        $('#loadingIndicator').show();
         var bench = $("#bench_filter").val();
         var categories = $(".category_filter:checked").map(function() {
             return $(this).val();
@@ -50,7 +68,9 @@ $(function () {
         if (!bench || !days) {
             // Display an error message or perform any other action
             alert("Please enter the bench and number of days to proceed.");
+            $('#loadingIndicator').hide();
             return; // Exit the function early
+
         }
 
         // Prepare data to send to the API
@@ -71,12 +91,16 @@ $(function () {
                 console.log("Requisition submitted successfully:", response);
                 // You can display a success message or perform any other action here
                 $("#ex-request_invent_table").show();
-                renderTable('request_invent_table', 'ex-request_invent_table', response.requested, ColumnsRequest, HeadersRequest);``
+                renderTable('request_invent_table', 'ex-request_invent_table', response.requested, ColumnsRequest, HeadersRequest);
             },
             error: function(xhr, status, error) {
                 // Handle errors from the API
                 console.error("Error submitting requisition:", error);
                 // You can display an error message or perform any other action here
+            },
+            complete: function() {
+                // Hide the loader after the request completes (whether success or failure)
+                $('#loadingIndicator').hide();
             }
         });
     });
@@ -187,6 +211,7 @@ $(function () {
     }
 
     function sendJSONDataToAPI(jsonData) {
+        // Show the loading indicator when the fetch starts
         fetch(import_items_url, {
             method: 'POST',
             headers: {
@@ -203,11 +228,24 @@ $(function () {
         })
         .then(data => {
             console.log('Success:', data);
-            alert('Data imported successfully!');
+            // Extract the success message from the response and show it in the alert
+            const successMessage = data.message;
+            const skippedItems = data['skipped_items due to duplication'];  // Handle skipped items if present
+    
+            let alertMessage = successMessage;
+            if (skippedItems && skippedItems.length > 0) {
+                alertMessage += `\nSkipped items due to duplication: ${skippedItems.join(', ')}`;
+            }
+    
+            alert(alertMessage);  // Show the success message in the alert
         })
         .catch(error => {
             console.error('Error:', error);
             alert(`Error importing your inventory data:\n${error.message}`);
+        })
+        .finally(() => {
+            // Hide the loading indicator after the request finishes
+            loadingIndicator.style.display = 'none';
         });
     }
 
@@ -335,6 +373,7 @@ $(function () {
 
     async function loadInventoryData() {
         try {
+            $('#loadingIndicator').show();
             const data = await fetchData(get_items_url);
             // console.log(data);
             renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
@@ -342,6 +381,7 @@ $(function () {
         catch (error) {
             console.error("Error fetching data:", error);
             }
+        $('#loadingIndicator').hide();        
         };
     loadInventoryData();
 

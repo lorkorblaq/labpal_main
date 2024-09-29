@@ -1,6 +1,6 @@
 $(function () {
     console.log("piu.js loaded");
-    const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity', 'Description', ''];
+    const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity(store-unit)', 'Description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
     BaseUrl = "https://labpal.com.ng/api"
