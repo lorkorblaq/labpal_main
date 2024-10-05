@@ -1,0 +1,29 @@
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: orange;
+}
+
+.axis-label {
+    font: 12px sans-serif;
+}
+
+
+
+
+
+#overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
+    grid-gap: 20px; /* Space between charts */
+    padding: 20px;
+}
+
+#overview div {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

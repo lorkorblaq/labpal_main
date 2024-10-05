@@ -71,10 +71,10 @@ def features():
 def home():
     return render_template("index.html")
 
-@views.route("/dashboard",  strict_slashes=False)
+@views.route("/app/dashboard",  strict_slashes=False)
 @auth_required
 def dashboard():
-    return render_template('dashboard.html', dash_app_url='http://localhost:8050')
+    return render_template("/templates_for_dashboard/dashboard.html", data=data)
 
 @views.route("/app/events",  strict_slashes=False)
 @auth_required

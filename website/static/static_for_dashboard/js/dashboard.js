@@ -747,7 +747,6 @@ $(function() {
     // Function to render a DataTable instance for the specified table ID
     async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
         try {
-            
             let data;
     
             // Check if urlOrData is a string (URL) or an object (data)
@@ -1061,6 +1060,7 @@ $(function() {
         return csv.join('\n');
     }
 
+
     function convertCSVToJSON(csvData) {
         var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
         var result = [];
@@ -1141,6 +1141,7 @@ $(function() {
         printWindow.print();
     }
 
+    
     // Update .applyFilter click handler
     $('.applyFilter').on('click', function() {
         console.log('applyFilter');
