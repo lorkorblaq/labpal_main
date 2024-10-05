@@ -49,6 +49,7 @@ $(function () {
         let direction = $('#dropDownDirectionChannel').val();
         let location = $('#locationsChannel').val();
         let description = $('#DescripInputChannel').val();
+    
         switch (true) {
             case !item:
                 alert("Please enter an item.");
@@ -64,6 +65,7 @@ $(function () {
                 break;
             case !lot:
                 alert("Please enter a lot number.");
+                break;
             default:
                 // Create an object with the form data
                 const formData = {
@@ -74,50 +76,41 @@ $(function () {
                     location: location,
                     description: description
                 };
-                // console.log(formData);
-                // console.log(user_id);
-                $.post({
-                        url: url_channel_push,
-                        contentType: "application/json",
-                        data: JSON.stringify(formData),
-                        success: function (response) {
-                            alert("Channel created successfully");
-                            console.log(response);
-                        },
-                        error: function (error) {
-                            alert("Could not insert Data into Channels. Please make sure the item is in the inventory and the lot number is correct");
-                            console.error(error);
-                        }
-                    });
-                // try {
-                //     itemform = {
-                //         direction: direction,
-                //         item: item,
-                //         quantity: quantity,
-                //     }
-                //     console.log(itemform);
-                //     $.ajax({
-                //         url: url_item_put,
-                //         contentType: "application/json",
-                //         method: "PUT",
-                //         data: JSON.stringify(itemform),
-                //         success: function (response) {
-                //             // alert("update qty successfully");
-                //             console.log(response);
-                //         },
-                //         error: function (error) {
-                //             alert("Could'nt update Quantity of items");
-                //             console.error(error);
-                //         }
-                //     });
-                // }
-                // catch (error) {
-                //     console.error("Error updating items quantity:", error);
-                // }
                 
-            }
-        refreshTable()
+                // Show the loading indicator
+                $('#loadingIndicator').show();
+    
+                // Make the post request
+                $.post({
+                    url: url_channel_push,
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        alert("Channel created successfully");
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Extract the error message from the server response
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            alert(xhr.responseJSON.message);  // Show the custom error message
+                        } else {
+                            alert("An error occurred: " + error);  // Fallback for unknown errors
+                        }
+                        console.error(xhr.responseText);  // Log the full response for debugging
+                    },
+                    complete: function () {
+                        // Hide the loading indicator after the request completes (success or error)
+                        $('#loadingIndicator').hide();
+                    }
+                });
+    
+                // Optionally, you can add the PUT request logic here if you need it
+                // e.g. after successfully creating the channel, update the item quantity.
+                
+                refreshTable(); // Refresh the table after the form submission is done
+        }
     }
+    
 
     function refreshTable() {
         fetchData(url_channel_get).then(data => {
@@ -131,6 +124,7 @@ $(function () {
     // Call refreshTable every 5 seconds (5000 milliseconds)
     // setInterval(refreshTable, 10000);
     async function loadData () {
+        $('#loadingIndicator').show();
         $('.body').empty();
         $('#reports_h').empty();
         headersChannel.forEach(function (header) {
@@ -146,6 +140,8 @@ $(function () {
         catch (error) {
             console.error("Error fetching data:", error);
             }
+        $('#loadingIndicator').hide();        
+
     }
     $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5))',function () {
         // Check if there's no other cell being edited

@@ -148,6 +148,7 @@ $(function () {
     });
   
     async function loadexpireData(){
+        $('#loadingIndicator').show();
         headersLot.forEach(function (header_expire) {
             $('#expire_head').append(`<th>${header_expire}</th>`);
         });
@@ -161,6 +162,8 @@ $(function () {
         catch (error) {
             console.error("Error fetching data:", error);
             }
+        $('#loadingIndicator').hide();        
+
         };
     loadexpireData();
     

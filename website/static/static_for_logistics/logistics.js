@@ -470,6 +470,7 @@ $(document).ready(function() {
 
 
     async function loadData () {
+        $('#loadingIndicator').show();
         $('.body').empty();
         $('#reports_h').empty();
         headershipments.forEach(function (header) {
@@ -482,6 +483,7 @@ $(document).ready(function() {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+        $('#loadingIndicator').hide();        
     }
     loadData();
 

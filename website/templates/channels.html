@@ -1,171 +1,171 @@
-    {% extends "base.html" %}
-    {% block head %}
-        {{ super() }}
-        <link rel="stylesheet" href="../static/css/channels.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/channels.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-    {% endblock head %}
+{% endblock head %}
 
-    {% block body %}
-        <main>
-            <div class="container mt-5 mb-2" >
-                <h1>Channels</h1>
-                <form id="postChannelForm" action="https://labpal.com.ng/api/channel/push/" method="Enter Post">
-                    <div class="form-row">
+{% block body %}
+    <main>
+        <div class="container mt-5 mb-2" >
+            <h1>Channels</h1>
+            <form id="postChannelForm" action="https://labpal.com.ng/api/channel/push/" method="Enter Post">
+                <div class="form-row">
 
-                        <div class="form-group col-md-3">
-                            <input type="text" class="form-control autoInputItem" id="inputItem" placeholder="Enter Item">
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <input type="text" class="form-control autoInputLot" id="inputLot" placeholder="Enter Lot">
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <select class="form-control" id="dropDownDirectionChannel">
-                                <option selected disabled>Direction</option>
-                                <option>To</option>
-                                <option>From</option>
-                            </select>
-                        </div>
-                    
-                        <div class="form-group col-md-3">
-                            <input type="text" class="form-control autoInputLabs" id="locationsChannel" placeholder="Enter Locations...">
-
-                            
-                        </div>
-
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control autoInputItem" id="inputItem" placeholder="Enter Item">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <input type="number" class="form-control" id="QtyInputChannel" placeholder="Enter quantity in store-unit">
-                        </div>
 
-                        <div class="form-group  col-md-9">
-                            <input type="text" class="form-control" id="DescripInputChannel" placeholder="Description">
-                        </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control autoInputLot" id="inputLot" placeholder="Enter Lot">
                     </div>
-                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dateModal">
-                        Open Date Modal
-                    </button> -->
-                    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="dateModalLabel">New lot Alert!<br>Please enter expiring date.🙏🏽</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Your date input field goes here -->
-                                    <label for="expirationDate">Expiring Date:</label>
-                                    <input type="date" id="expirationDate" class="form-control">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="saveExpirationDate()">Save</button>
-                                </div>
-                                <script>
-                                    function saveExpirationDate() {
-                                        // Get the value of the expiration date input
-                                        let item = $('#inputItem').val();
-                                        let quantity = $('#QtyInputChannel').val();
-                                        let lot = $('#inputLot').val();
-                                        let direction = $('#dropDownDirectionChannel').val();
-                                        let location = $('#dropDownLocationsChannel').val();
-                                        const expirationDate = $('#expirationDate').val();
-                                        const formDataLotExp = {
-                                                    item: item,
-                                                    direction: direction,
-                                                    lot_numb: lot,
-                                                    location: location,
-                                                    quantity: quantity,
-                                                    expiration: expirationDate,
-                                                };
-                                        function getCookie(name) {
-                                            let cookieArr = document.cookie.split("; ");
-                                            for(let i = 0; i < cookieArr.length; i++) {
-                                                let cookiePair = cookieArr[i].split("=");
-                                                if(name == cookiePair[0]) {
-                                                    return decodeURIComponent(cookiePair[1]);
-                                                }
+
+                    <div class="form-group col-md-3">
+                        <select class="form-control" id="dropDownDirectionChannel">
+                            <option selected disabled>Direction</option>
+                            <option>To</option>
+                            <option>From</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control autoInputLabs" id="locationsChannel" placeholder="Enter Locations...">
+
+                        
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <input type="number" class="form-control" id="QtyInputChannel" placeholder="Enter quantity in store-unit">
+                    </div>
+
+                    <div class="form-group  col-md-9">
+                        <input type="text" class="form-control" id="DescripInputChannel" placeholder="Description">
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dateModal">
+                    Open Date Modal
+                </button> -->
+                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="dateModalLabel">New lot Alert!<br>Please enter expiring date.🙏🏽</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Your date input field goes here -->
+                                <label for="expirationDate">Expiring Date:</label>
+                                <input type="date" id="expirationDate" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="saveExpirationDate()">Save</button>
+                            </div>
+                            <script>
+                                function saveExpirationDate() {
+                                    // Get the value of the expiration date input
+                                    let item = $('#inputItem').val();
+                                    let quantity = $('#QtyInputChannel').val();
+                                    let lot = $('#inputLot').val();
+                                    let direction = $('#dropDownDirectionChannel').val();
+                                    let location = $('#dropDownLocationsChannel').val();
+                                    const expirationDate = $('#expirationDate').val();
+                                    const formDataLotExp = {
+                                                item: item,
+                                                direction: direction,
+                                                lot_numb: lot,
+                                                location: location,
+                                                quantity: quantity,
+                                                expiration: expirationDate,
+                                            };
+                                    function getCookie(name) {
+                                        let cookieArr = document.cookie.split("; ");
+                                        for(let i = 0; i < cookieArr.length; i++) {
+                                            let cookiePair = cookieArr[i].split("=");
+                                            if(name == cookiePair[0]) {
+                                                return decodeURIComponent(cookiePair[1]);
                                             }
-                                            return null;
                                         }
-                                        const user_id = getCookie('user_id');
-                                        const lab_name = getCookie('lab_name')
-                                        const urlLotExp = `https://labpal.com.ng/api/lotexp/push/${user_id}/${lab_name}/`;
-                                        // const urlLotExp = `http://127.0.0.1:3000/api/lotexp/push/${user_id}/${lab_name}/`;
-                                        const urlChannel = `https://labpal.com.ng/api/channel/push/${user_id}/${lab_name}/`;
-                                        // const urlChannel = `http://127.0.0.1:3000/api/channel/push/${user_id}/${lab_name}/`;
-                                        $.post({
-                                                url: urlLotExp,
-                                                contentType: "application/json",
-                                                data: JSON.stringify(formDataLotExp),
-                                                success: function (response) {
-                                                    alert("Lot created successfully");
-                                                    console.log(response);
-                                                },
-                                                error: function (error) {
-                                                    alert("Could not push lot, make sure the item is valid");
-                                                    console.error(error);
-                                                }
-                                            });
-                                        $.post({
-                                            url: urlChannel,
+                                        return null;
+                                    }
+                                    const user_id = getCookie('user_id');
+                                    const lab_name = getCookie('lab_name')
+                                    const urlLotExp = `https://labpal.com.ng/api/lotexp/push/${user_id}/${lab_name}/`;
+                                    // const urlLotExp = `http://127.0.0.1:3000/api/lotexp/push/${user_id}/${lab_name}/`;
+                                    const urlChannel = `https://labpal.com.ng/api/channel/push/${user_id}/${lab_name}/`;
+                                    // const urlChannel = `http://127.0.0.1:3000/api/channel/push/${user_id}/${lab_name}/`;
+                                    $.post({
+                                            url: urlLotExp,
                                             contentType: "application/json",
                                             data: JSON.stringify(formDataLotExp),
                                             success: function (response) {
-                                                alert("Channel created successfully");
+                                                alert("Lot created successfully");
                                                 console.log(response);
                                             },
                                             error: function (error) {
-                                                alert("Could not push channel, make sure the item is valid");
+                                                alert("Could not push lot, make sure the item is valid");
                                                 console.error(error);
                                             }
                                         });
-                                
-                                // Log the expiration date (you can perform any desired action here)
-                                console.log('Expiration Date:', expirationDate);
-                                $('#expirationDate').val('');
-                                console.log('Expiration Date:', expirationDate);
-                                // Close the modal (assuming you are using Bootstrap)
-                                $('#dateModal').modal('hide');
-                            }
-                        
-                            // Attach a click event listener to the "Save" button
-                            $('#saveExpirationBtn').on('click', saveExpirationDate);
-                            </script>
-                            </div>
+                                    $.post({
+                                        url: urlChannel,
+                                        contentType: "application/json",
+                                        data: JSON.stringify(formDataLotExp),
+                                        success: function (response) {
+                                            alert("Channel created successfully");
+                                            console.log(response);
+                                        },
+                                        error: function (error) {
+                                            alert("Could not push channel, make sure the item is valid");
+                                            console.error(error);
+                                        }
+                                    });
+                            
+                            // Log the expiration date (you can perform any desired action here)
+                            console.log('Expiration Date:', expirationDate);
+                            $('#expirationDate').val('');
+                            console.log('Expiration Date:', expirationDate);
+                            // Close the modal (assuming you are using Bootstrap)
+                            $('#dateModal').modal('hide');
+                        }
+                    
+                        // Attach a click event listener to the "Save" button
+                        $('#saveExpirationBtn').on('click', saveExpirationDate);
+                        </script>
                         </div>
                     </div>
-                    <button type="submit">Push</button>
-                </form>
-            </div>
-            <div class="container mt-5 mb-2">
-                <button  id="channel_btn" data-toggle="collapse" data-target="#drawer" aria-expanded="true" aria-controls="drawer">
-                <i class="fas fa-database"></i> Channels log</button>
-                <div class="collapse show" id="drawer">
-                    <!-- Drawer Content Goes Here -->
-                    <div class="table-responsive" id ="ex-r_table">
-                        <p>Quantity is in store-unit</p>
-                        <table class="table table-bordered table-striped" id="r_table">
-                            <thead class="head thead-dark">
-                                <tr id="reports_h">
-                                </tr>
-                            </thead>
-                            <tbody id="tbody" class="body" >
-                                <tr id='reports_r'>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <button type="submit">Push</button>
+            </form>
+        </div>
+        <div class="container mt-5 mb-2">
+            <button  id="channel_btn" data-toggle="collapse" data-target="#drawer" aria-expanded="true" aria-controls="drawer">
+            <i class="fas fa-database"></i> Channels log</button>
+            <div class="collapse show" id="drawer">
+                <!-- Drawer Content Goes Here -->
+                <div class="table-responsive" id ="ex-r_table">
+                    <p>Quantity is in store-unit</p>
+                    <table class="table table-bordered table-striped" id="r_table">
+                        <thead class="head thead-dark">
+                            <tr id="reports_h">
+                            </tr>
+                        </thead>
+                        <tbody id="tbody" class="body" >
+                            <tr id='reports_r'>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </main>
-    {% endblock %}
+        </div>
+    </main>
+{% endblock %}
 
-    {% block scripts %}
-        <script src="../static/js/channels.js" type="text/javascript"></script>
-    {% endblock %}
+{% block scripts %}
+    <script src="../static/js/channels.js" type="text/javascript"></script>
+{% endblock %}

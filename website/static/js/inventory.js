@@ -1,5 +1,7 @@
 $(function () {
     console.log("inventory.js loaded");
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
     const HeadersItem = ['Items','Qty-in-Store', 'Unit', 'Category', 'Bench', 
                         'Class', 'BU', 'SU', 'PU', 
                         'BU per SU', 'SU per PU', 
@@ -24,8 +26,6 @@ $(function () {
                             'storeUnit', 'purchaseUnit', 'baseUnit/storeUnit', 
                             'storeUnit/purchaseUnit', 'price/purchaseUnit']
 
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -396,18 +396,48 @@ $(function () {
         }
     });
         // Replace the existing click event with change event for the dropdown
-    $('#reorderable').click(async function() {
-        console.log("reorderable clicked");
-        try {
+    // $('#reorderable').click(async function() {
+    //     console.log("reorderable clicked");
+    //     try {
+    //         const data = await fetchData(get_items_url);
+    //         const reorderableItems = data.items.filter(item => item['quantity'] <= item['reOrderLevel']);
+    //         renderTable('inventory_table', 'ex-inventory_table', reorderableItems, ColumnsItem, HeadersItem);
+    //         console.log(reorderableItems);
+    //         }
+    //     catch (error) {
+    //         console.error("Error fetching data:", error);
+    //         }
+    //     });
+    $('#reorderable').on('change', async function() {
+        let selectedValue = $(this).val();  // Get the value of the selected option
+        if (selectedValue === 'all-items') {
+            try {
+                $('#loadingIndicator').show();
+                const data = await fetchData(get_items_url);
+                renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
+                console.log(data.items);
+            }
+            catch (error) {
+                console.error("Error fetching data:", error);
+            }
+            $('#loadingIndicator').hide();
+            // Action when "All Items" is selected
+            console.log("All Items selected");
+            // Perform your action here
+        } else if (selectedValue === 'reorderable') {
+            try {
+            $('#loadingIndicator').show();
             const data = await fetchData(get_items_url);
             const reorderableItems = data.items.filter(item => item['quantity'] <= item['reOrderLevel']);
             renderTable('inventory_table', 'ex-inventory_table', reorderableItems, ColumnsItem, HeadersItem);
             console.log(reorderableItems);
             }
-        catch (error) {
-            console.error("Error fetching data:", error);
-            }
-        });
+            catch (error) {
+                console.error("Error fetching data:", error);
+                }
+            $('#loadingIndicator').hide();
+        }
+    });
     
     $('#check_all').change(function() {
         $('.category_filter').prop('checked', this.checked);

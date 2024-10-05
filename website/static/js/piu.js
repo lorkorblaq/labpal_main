@@ -3,8 +3,8 @@ $(function () {
     const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity(store-unit)', 'Description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
@@ -41,7 +41,7 @@ $(function () {
         let lot = $('#inputLot').val();
         let quantity = $('#quantityInputPIS').val();
         let description = $('#DescripInputPIS').val();
-        
+    
         switch (true) {
             case !item:
                 alert("Please enter an item.");
@@ -57,6 +57,9 @@ $(function () {
                 break;
             default:
                 try {
+                    // Show the loading indicator before data fetch starts
+                    $('#loadingIndicator').show();
+    
                     const item_data = await fetchData(item_url);
                     const lot_data = await fetchData(lot_url);
     
@@ -77,6 +80,8 @@ $(function () {
                             quantity: quantity,
                             description: description
                         };
+    
+                        // Submit the form data via POST request
                         $.post({
                             url: piu_push,
                             contentType: "application/json",
@@ -92,16 +97,24 @@ $(function () {
                                 }
                                 alert(errorMessage);
                                 console.error(errorThrown);
+                            },
+                            complete: function () {
+                                // Hide the loading indicator after the request completes (success or error)
+                                $('#loadingIndicator').hide();
                             }
                         });
                     }
     
                 } catch (error) {
                     console.error("Error fetching data:", error);
+                    // Ensure loading indicator is hidden in case of fetch errors
+                    $('#loadingIndicator').hide();
                 }
         }
+    
         refreshTable();
     }
+    
     
     function refreshTable() {
         fetchData(piu_get).then(data => {
@@ -116,6 +129,7 @@ $(function () {
     // setInterval(refreshTable, 5000);
 
     async function loadData () {
+        $('#loadingIndicator').show();
         $('.body').empty();
         $('#reports_h').empty();
         headersPIS.forEach(function (header) {
@@ -128,6 +142,8 @@ $(function () {
         } catch (error) {
             console.error("Error fetching data:", error);
         }
+        $('#loadingIndicator').hide();        
+
     }
     // Event listener for out mouse press
     $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5))',function () {
