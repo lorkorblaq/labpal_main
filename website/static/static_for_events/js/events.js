@@ -12,17 +12,17 @@ $(function() {
         return null;
     }
 
-    const HeadersQcEvents = ['Created At','User', 'Machine',  'Item', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning'];
-    const ColumnsQcEvents = ['created_at','user', 'machine',  'items', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning'];
+    const HeadersQcEvents = ['event_id','Created At','User', 'Machine',  'Item', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning',''];
+    const ColumnsQcEvents = ['event_id','created_at','user', 'machine',  'items', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning', ''];
 
-    const HeadersMaintenanceEvents = ['Created At','User', 'Machine',  'Frequency','Comments'];
-    const ColumnsMaintenanceEvents = ['created_at','user', 'machine',  'frequency', 'comments'];
+    const HeadersMaintenanceEvents = ['event_id','Created At','User', 'Machine',  'Frequency','Comments',''];
+    const ColumnsMaintenanceEvents = ['event_id','created_at','user', 'machine',  'frequency', 'comments',''];
 
-    const HeadersMachineEvents = ['Created At','User', 'Machine',  'Type of event','Resolved', 'Root Cause', 'Actioning'];
-    const ColumnsMachineEvents = ['created_at','user', 'machine',  'category', 'resolved','rootCause',  'actioning'];
+    const HeadersMachineEvents = ['event_id','Created At','User', 'Machine',  'Type of event','Resolved', 'Root Cause', 'Actioning',''];
+    const ColumnsMachineEvents = ['event_id','created_at','user', 'machine',  'category', 'resolved','rootCause',  'actioning', ''];
 
-    const HeadersOperationsEvents = ['Created At','User', 'occurrence', 'Actioning'];
-    const ColumnsOperationsEvents = ['created_at','user', 'occurrence',   'actioning'];
+    const HeadersOperationsEvents = ['event_id','Created At','User', 'occurrence', 'Actioning',''];
+    const ColumnsOperationsEvents = ['event_id','created_at','user', 'occurrence',   'actioning',''];
     
 
     const user_id = getCookie('user_id');
@@ -40,18 +40,7 @@ $(function() {
         // Fetch data from the provided URL
         return $.get(url);
     }
-
-    // async function loadData(url, ) {
-    //     try {
-    //         const data = await fetchData(url);
-    //         // console.log(data);
-    //         renderTable('inventory_table', 'ex-inventory_table', data.items, ColumnsItem, HeadersItem);
-    //         }
-    //     catch (error) {
-    //         console.error("Error fetching data:", error);
-    //         }
-    //     };
-    // nav buttons 
+ 
     $('.nav-link').on('click', function() {
         // Remove 'active' class from all links
         $('.nav-link').removeClass('active');
@@ -226,7 +215,6 @@ $(function() {
                 $(this).remove();
             });
         });
-
     });
 
     $('#rootcause').on('change', function() {
@@ -240,11 +228,11 @@ $(function() {
                     <label for="peopleSubmenu">Select a procedure subcause:</label>
                     <select class="form-control " id="submenu">
                         <option value="timing">Timing</option>
-                        <option value="equilibration">Equilibration</option>
+                        <option value="pipetting">Pipetting</option>
+                        <option value="others">Others</option>
                     </select>
                 `;
                 break;
-
             case 'methods':
                 submenuHtml = `
                     <label for="methodSubmenu">Select a method subcause:</label>
@@ -254,14 +242,17 @@ $(function() {
                     </select>
                 `;
                 break;
-
             case 'machines':
                 submenuHtml = `
                     <label for="machinesSubmenu">Select a machine subcause:</label>
                     <select class="form-control" id="submenu">
                         <option value="pre-maintenance">Pre-maintenance</option>
                         <option value="post-maintenance">Post-maintenance</option>
-                        <option value="pipettor-aspiration">Pipettor aspiration</option>
+                        <option value="hard-ware">Hard-ware</option>
+                        <option value="soft-ware">Soft-ware</option>
+                        <option value="power">Power</option>
+                        <option value="aspiration">Aspiration</option>
+                        <option value="others">Others</option>
                     </select>
                 `;
                 break;
@@ -270,9 +261,12 @@ $(function() {
                     <label for="machinesSubmenu">Select a material subcause:</label>
                     <select class="form-control" id="submenu">
                         <option value="QC-material-deterioration">QC material deterioration</option>
+                        <option value="material-mixup">Material mixup</option>
+                        <option value="onboard-exipration">Onboard exipration</option>
                         <option value="reagent-exipration">Reagent exipration</option>
                         <option value="calibrator-exipration">Calibrator exipration</option>
                         <option value="wrong-lot">Wrong lot</option>
+                        <option value="others">others</option>
                     </select>
                 `;
                 break;
@@ -280,8 +274,9 @@ $(function() {
                 submenuHtml = `
                     <label for="machinesSubmenu">Select a measurement subcause:</label>
                     <select class="form-control" id="submenu">
-                        <option value="unfit-calibration-curve">Unfit calibration curve</option>
-                        <option value="wrong-lots">Wrong lots</option>
+                        <option value="calibration-curve">Calibration curve</option>
+                        <option value="unit-of-measurements">Units of measurements</option>
+                        <option value="others">Others</option>
                     </select>
                 `;
                 break;
@@ -289,10 +284,10 @@ $(function() {
                 submenuHtml = `
                     <label for="machinesSubmenu">Select a system subcause:</label>
                     <select class="form-control" id="submenu">
-                        <option value="inconsistent-calibration">Inconsistent Calibration</option>
-                        <option value="inadequate-Standard-Operating-Procedures">Inadequate Standard Operating Procedures</option>
+                        <option value="personnel">Personnel</option>
+                        <option value="standard-operating-procedures">Standard Operating Procedures</option>
                         <option value="maintenance-frequency">Maintenance frequency</option>
-
+                        <option value="others">Others</option>
                     </select>
                 `;
                 break; 
@@ -303,6 +298,22 @@ $(function() {
 
         // Append or replace the submenu in the container
         $('#submenuContainer').html(submenuHtml);
+
+        $('#submenu').on('change', function() {
+            var submenuSelectedValue = $(this).val();
+            var otherInputHtml = '';
+    
+            // Check if 'others' is selected
+            if (submenuSelectedValue === 'others') {
+                otherInputHtml = `
+                    <label for="otherSubcause">Please specify:</label>
+                    <input type="text" class="form-control" id="otherSubcause" placeholder="Enter other subcause">
+                `;
+            }
+    
+            // Append or remove the input box
+            $('#otherInputContainer').html(otherInputHtml);
+        });
     });
 
     // logic for the to-do modal
@@ -311,27 +322,77 @@ $(function() {
     const $todoList = $('#todo-list');
 
     //QC submit button
-    $('#submit-qc').on('click', function(event) {
+    // $('#submit-qc').on('click', function(event) {
+    //     event.preventDefault(); // Prevent default form submission behavior
+    //     const qcData = [];
+    //     const datePickerValue = $('#datePicker-qc').val();
+    //     let tagsEntered = false; // Flag to check if at least one tag is entered
 
+    //     if (datePickerValue !== '') {
+    //         qcData.push(datePickerValue);
+    //     } else {
+    //         alert('Please select a date');
+    //     }
+    //     machine = $('#machineIndicatorQC').val();
+    //     qcData.push(machine);
+
+    //     $('#qcTagger .tag span').each(function() {
+    //         const text = $(this).text().trim();
+            
+    //         if (text !== '') {
+    //             qcData.push(text);
+    //             tagsEntered = true; // Set flag to true if at least one tag is entered
+    //         }
+    //     });
+    
+    //     if (!tagsEntered) {
+    //         alert('Please enter at least one tag');
+    //         return; // Exit function if no tags are entered
+    //     }
+    //     var root_cause = $('#rootcause').val();
+    //     qcData.push(root_cause);
+    //     var subMenu = $('#submenu').val();
+    //     qcData.push(subMenu);
+    //     var RCQC_des = $('#RCQC_des').val();
+    //     qcData.push(RCQC_des);
+    //     var CAQC = $('#CAQC').val();
+    //     qcData.push(CAQC);
+
+    //     console.log(qcData);
+    //     const filteredQC = qcData.filter(item => item !== '×');
+    //     console.log(filteredQC)
+    //     data = {
+    //         "date": filteredQC[0],
+    //         "machine": filteredQC[1],
+    //         "items": filteredQC.slice(2, filteredQC.length -4),
+    //         "rootCause": filteredQC[filteredQC.length -4],  
+    //         "subrootCause": filteredQC[filteredQC.length -3],
+    //         "rootCauseDescription": filteredQC[filteredQC.length -2],
+    //         "actioning": filteredQC[filteredQC.length -1]
+    //     }
+    //     console.log(data);
+    //     url = url_event_push + 'qc/';
+    //     postSubmitsToApi(url, data);
+    // });
+
+    $('#submit-qc').on('click', function(event) {
         event.preventDefault(); // Prevent default form submission behavior
         const qcData = [];
         const datePickerValue = $('#datePicker-qc').val();
         let tagsEntered = false; // Flag to check if at least one tag is entered
-
+    
         if (datePickerValue !== '') {
             qcData.push(datePickerValue);
         } else {
             alert('Please select a date');
+            return; // Exit function if date is not selected
         }
-        machine = $('#machineIndicatorQC').val();
+    
+        let machine = $('#machineIndicatorQC').val();
         qcData.push(machine);
-        // $('#qcTagger .tag span').each(function() {
-        //     qcData.push($(this).text());
-        // });
-
+    
         $('#qcTagger .tag span').each(function() {
             const text = $(this).text().trim();
-            
             if (text !== '') {
                 qcData.push(text);
                 tagsEntered = true; // Set flag to true if at least one tag is entered
@@ -342,38 +403,52 @@ $(function() {
             alert('Please enter at least one tag');
             return; // Exit function if no tags are entered
         }
+    
         var root_cause = $('#rootcause').val();
         qcData.push(root_cause);
+    
         var subMenu = $('#submenu').val();
-        qcData.push(subMenu);
+    
+        // Check if "others" is selected in the submenu
+        if (subMenu === 'others') {
+            var otherSubcause = $('#otherSubcause').val().trim(); // Get value from the custom input
+            if (otherSubcause === '') {
+                alert('Please specify the "other" subcause');
+                return; // Exit function if "others" is selected but no value is entered
+            }
+            qcData.push(otherSubcause); // Add the custom subcause value to qcData
+        } else {
+            qcData.push(subMenu); // Otherwise, add the selected subcause
+        }
+    
         var RCQC_des = $('#RCQC_des').val();
         qcData.push(RCQC_des);
+    
         var CAQC = $('#CAQC').val();
         qcData.push(CAQC);
-
-
+    
+        console.log(qcData);
+        const filteredQC = qcData.filter(item => item !== '×'); // Filter out unwanted characters (like "×")
+        console.log(filteredQC);
+    
+        const data = {
+            "date": filteredQC[0],
+            "machine": filteredQC[1],
+            "items": filteredQC.slice(2, filteredQC.length - 4),
+            "rootCause": filteredQC[filteredQC.length - 4],  
+            "subrootCause": filteredQC[filteredQC.length - 3],
+            "rootCauseDescription": filteredQC[filteredQC.length - 2],
+            "actioning": filteredQC[filteredQC.length - 1]
+        };
         
+        console.log(data);
+        
+        const url = url_event_push + 'qc/';
+        postSubmitsToApi(url, data);
+    });
     
 
 
-
-
-        console.log(qcData);
-        const filteredQC = qcData.filter(item => item !== '×');
-        console.log(filteredQC)
-        data = {
-            "date": filteredQC[0],
-            "machine": filteredQC[1],
-            "items": filteredQC.slice(2, filteredQC.length -4),
-            "rootCause": filteredQC[filteredQC.length -4],  
-            "subrootCause": filteredQC[filteredQC.length -3],
-            "rootCauseDescription": filteredQC[filteredQC.length -2],
-            "actioning": filteredQC[filteredQC.length -1]
-        }
-        console.log(data);
-        url = url_event_push + 'qc/';
-        postSubmitsToApi(url, data);
-    });
 
     // machine submit button
     $('#submit-machine').on('click', function(event) {
@@ -511,23 +586,6 @@ $(function() {
         }
     
     });
-    
-    // Function to post data to API
-    // function postSubmitsToApi(url, data) {
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: url,
-    //         data: JSON.stringify(data),
-    //         contentType: 'application/json',
-    //         success: function(response) {
-    //             console.log('Data successfully submitted:', response);
-    //         },
-    //         error: function(error) {
-    //             console.error('Error submitting data:', error);
-    //             alert('Error submitting data. Please try again later.');
-    //         }
-    //     });
-    // }
 
     //operations submit button 
     $('#submit-operations').on('click', function(event) {
@@ -672,37 +730,6 @@ $(function() {
         renderTable('oper-r_table', 'ex-oper-r_table', url, ColumnsOperationsEvents, HeadersOperationsEvents);``
     });
 
-    
-    // // Event listener for the nav links
-    // $('.nav-link').click(function() {
-    //     var activevent = $(this).attr('id'); // Get the id of the clicked link
-    //     console.log('Active event:', activevent);
-
-    //     // Update the active event type based on the clicked nav link
-    //     switch (activevent) {
-    //         case 'qc-btn':
-    //             activeEventType = 'qc';
-    //             break;
-    //         case 'machine-btn':
-    //             activeEventType = 'machine';
-    //             break;
-    //         case 'operations-btn':
-    //             activeEventType = 'operations';
-    //             break;
-    //         default:
-    //             activeEventType = 'qc'; // Fallback to default if no match
-    //             break;
-    //     }
-
-    //     console.log('Current active event type:', activeEventType);
-
-    //     // Fetch events based on the updated active event type
-    //     fetchEvents(activeEventType);
-    // });
-
-    // // Initial fetch of events for the default active event type
-    // fetchEvents(activeEventType);
-
     // Function to filter events based on the selected machine and items
     function getDateRange(selector) {
         const dateRangeInput = $(selector).val().trim();
@@ -745,97 +772,217 @@ $(function() {
     }
     
     // Function to render a DataTable instance for the specified table ID
+    // async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
+    //     try {
+            
+    //         let data;
+    
+    //         // Check if urlOrData is a string (URL) or an object (data)
+    //         if (typeof urlOrData === 'string') {
+    //             // If it's a URL, fetch data from the provided URL
+    //             console.log("Fetching data from URL:", urlOrData);
+    //             let response = await fetch(urlOrData);
+    //             data = await response.json(); // Assuming the API returns a JSON object
+    //         } else if (typeof urlOrData === 'object') {
+    //             // If it's an object, use it directly as data
+    //             console.log("Using provided data object:", urlOrData);
+    //             data = urlOrData;
+    //         } else {
+    //             throw new Error("Invalid data source: Must provide either a URL or a data object.");
+    //         }
+    
+    //         console.log("Final data to render:", data);
+    
+    //         // Check if DataTable is already initialized and destroy it if it is
+    //         if ($.fn.DataTable.isDataTable(`#${tableId}`)) {
+    //             console.log("DataTable exists, destroying...");
+    //             $(`#${tableId}`).DataTable().clear().destroy();
+    //         }
+    
+    //         // Clear the existing table headers
+    //         console.log("Clearing and appending new headers");
+    //         $(`#${tableId} thead`).empty(); // Ensure the header is cleared
+    
+    //         // Append new headers to the table
+    //         let headerRow = $('<tr>');
+    //         headers.forEach(function(header) {
+    //             headerRow.append(`<th>${header}</th>`);
+    //         });
+    //         $(`#${tableId} thead`).append(headerRow);
+    
+    //         // Initialize a new DataTable instance with the provided columns and data
+    //         console.log("Initializing DataTable with new data");
+    //         $(`#${tableId}`).DataTable({
+    //             data: data.events || [],  // Adjust if your data structure differs
+    //             columns: columns.map(col => ({ data: col })),
+    //             order: [[0, 'dsc']],  // Sort by the first column (index 0) in ascending order
+    //         });
+    
+    //         // Button setup (Ensure these buttons are correctly set up every time)
+    //         let exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
+    //         let printButton = $('<button>').text(' Print').addClass('button fas fa-print');
+    //         // let deleteDB = $('<button>').text(' Delete').addClass('button fas fa-trash-alt');
+    
+    //         // Define button actions
+    //         exportButton.click(function() {
+    //             exportJSONData(data.events || data); // Pass data.events if available, otherwise pass data directly
+    //         });
+
+    //         printButton.click(function() {
+    //             printJSONDataAsCSV(data);
+    //         });
+    
+    
+    //         // Append buttons to exTableId if not already appended
+    //         let buttonContainer = $(`#${exTableId}`);
+    //         if (buttonContainer.find('.button').length === 0) {
+    //             buttonContainer.append(exportButton).append(printButton);
+    //             // .append(deleteDB)
+    //         }
+    
+    //     } catch (error) {
+    //         console.error("Error in renderTable:", error);
+    //     }
+    // }
+    
+
+
+
+
+
+
+
     async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
         try {
-            
             let data;
     
-            // Check if urlOrData is a string (URL) or an object (data)
+            // Fetch the data if it's a URL
             if (typeof urlOrData === 'string') {
-                // If it's a URL, fetch data from the provided URL
                 console.log("Fetching data from URL:", urlOrData);
                 let response = await fetch(urlOrData);
                 data = await response.json(); // Assuming the API returns a JSON object
             } else if (typeof urlOrData === 'object') {
-                // If it's an object, use it directly as data
-                console.log("Using provided data object:", urlOrData);
                 data = urlOrData;
             } else {
                 throw new Error("Invalid data source: Must provide either a URL or a data object.");
             }
     
-            console.log("Final data to render:", data);
-    
-            // Check if DataTable is already initialized and destroy it if it is
+            // Ensure the DataTable is re-initialized if it already exists
             if ($.fn.DataTable.isDataTable(`#${tableId}`)) {
                 console.log("DataTable exists, destroying...");
                 $(`#${tableId}`).DataTable().clear().destroy();
             }
     
-            // Clear the existing table headers
-            console.log("Clearing and appending new headers");
-            $(`#${tableId} thead`).empty(); // Ensure the header is cleared
-    
-            // Append new headers to the table
+            // Clear and append new headers
+            $(`#${tableId} thead`).empty();
             let headerRow = $('<tr>');
             headers.forEach(function(header) {
                 headerRow.append(`<th>${header}</th>`);
             });
             $(`#${tableId} thead`).append(headerRow);
     
-            // Initialize a new DataTable instance with the provided columns and data
-            console.log("Initializing DataTable with new data");
-            $(`#${tableId}`).DataTable({
-                data: data.events || [],  // Adjust if your data structure differs
+            // Initialize DataTable with the correct columns, ensuring '_id' is mapped
+            console.log("Initializing DataTable");
+            const dataTableInstance = $(`#${tableId}`).DataTable({
+                data: data.events || [],  // Adjust according to your data structure
                 columns: columns.map(col => ({ data: col })),
-                // Add any other DataTable options as needed
+
+                columnDefs: [
+                    {
+                        targets: -1, // Target the last column for the delete button
+                        data: null,
+                        defaultContent:
+                            '<button class="tablebtn btn-delete"><i class="fas fa-trash-alt"></i></button>',
+                    },
+                ],
+                order: [[1, 'desc']] 
+                
+            });
+            dataTableInstance.column(0).visible(false);
+    
+            // Handle delete button click event
+            $(`#${tableId} tbody`).on('click', '.btn-delete', function () {
+                const row = dataTableInstance.row($(this).parents('tr')); // Get the row
+                const rowData = row.data(); // Get the row data
+                console.log("Row data:", rowData); // Log the row data to check
+                const eventId = rowData.event_id; // Extract the _id from the row data
+    
+                if (eventId) {
+                    if (confirm("Are you sure you want to delete this event?")) {
+                        deleteEvent(row, eventId);
+                    }
+                } else {
+                    console.error("Event ID not found!");
+                    alert("Error: Event ID not found.");
+                }
             });
     
-            // Button setup (Ensure these buttons are correctly set up every time)
+            // Button setup (Ensure these buttons are set up every time)
             let exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
             let printButton = $('<button>').text(' Print').addClass('button fas fa-print');
-            // let deleteDB = $('<button>').text(' Delete').addClass('button fas fa-trash-alt');
     
-            // Define button actions
             exportButton.click(function() {
-                exportJSONData(data.events || data); // Pass data.events if available, otherwise pass data directly
+                exportJSONData(data.events || data); // Export function
             });
-
+    
             printButton.click(function() {
-                printJSONDataAsCSV(data);
+                printJSONDataAsCSV(data); // Print function
             });
     
-            // deleteDB.click(function() {
-            //     if (confirm('Are you sure you want to delete all the items? This action cannot be undone.')) {
-            //         fetch(delete_items_url, {
-            //             method: 'DELETE'
-            //         })
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             console.log('Success:', data);
-            //             alert('Items deleted successfully!');
-            //             renderTable(tableId, exTableId, [], columns, headers); // Re-render table with empty data
-            //         })
-            //         .catch((error) => {
-            //             console.error('Error:', error);
-            //             alert('Error deleting items');
-            //         });
-            //     } else {
-            //         alert('Deletion canceled');
-            //     }
-            // });
-    
-            // Append buttons to exTableId if not already appended
             let buttonContainer = $(`#${exTableId}`);
             if (buttonContainer.find('.button').length === 0) {
                 buttonContainer.append(exportButton).append(printButton);
-                // .append(deleteDB)
             }
     
         } catch (error) {
             console.error("Error in renderTable:", error);
         }
     }
+    
+    // Function to handle the deletion of a row
+    async function deleteEvent(row, eventId) {
+        try {
+            let response = await fetch(`${url_event_del}${eventId}/`, {
+                method: 'DELETE'
+            });
+    
+            if (response.ok) {
+                // Remove the row from the DataTable on successful deletion
+                row.remove().draw();
+                alert("Event deleted successfully");
+            } else {
+                console.error("Error deleting event:", response.statusText);
+                alert("Error deleting event. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error in deleteEvent:", error);
+            alert("Error deleting event. Please try again.");
+        }
+    }
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     // Function to display events in the UI
     function displayEventCards(events) {

@@ -158,6 +158,7 @@ $(function () {
         }
     });
 
+    
     $('#r_table tbody').on('blur', '.edit-input', function () {
         // Get the updated value from the input field
         var updatedValue = $(this).val();

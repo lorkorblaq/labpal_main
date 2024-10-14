@@ -41869,3 +41869,63 @@ INFO:werkzeug: * Debugger PIN: 771-935-636
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 771-935-636
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 801-453-947
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-06 12:03:12.925233
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 437-668-983
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-06 18:33:45.264549
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 145-963-779
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-12 08:30:21.292255
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+ERROR:socketio:Cannot receive from redis... retrying in 16 secs
+ERROR:socketio:Cannot receive from redis... retrying in 32 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+ERROR:socketio:Cannot receive from redis... retrying in 60 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 105-711-458
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-12 09:51:13.924493
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 8 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 131-742-819
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-12 12:34:27.860922
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 522-033-012
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 522-033-012
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-13 17:20:06.174143
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 522-033-012
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 522-033-012
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 522-033-012
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 312-347-176
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-13 22:21:43.592029
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-667-003
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-14 11:30:26.874205
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-667-003
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-10-14 11:37:19.349540

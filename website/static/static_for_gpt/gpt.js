@@ -1,7 +1,7 @@
 $(function () {
     console.log("gpt.js loaded");
-    const BaseUrl = "https://labpal.com.ng/gpt";
-    // const BaseUrl = "http://127.0.0.1:3500/gpt";
+    // const BaseUrl = "https://labpal.com.ng/gpt";
+    const BaseUrl = "http://13.60.96.217:3500/gpt";
 
     const chat_url = `${BaseUrl}/chat/push/`;
 

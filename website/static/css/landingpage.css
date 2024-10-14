@@ -137,6 +137,8 @@ h3 {
     border-bottom: #282c34;
     border: #007BFF;
     border-width: 10;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
 }
 
 .hero h1 {
@@ -160,13 +162,38 @@ h3 {
     background: linear-gradient(to right, #3157aa, #e25330); /* Gradient background */
 
 }
+#hero-pal{
+    color: #3157aa;
+}
+#hero-text {
+    text-align: center;
+    padding-left: 50px;
+    color: white;
+    font-family: 'Courier', monospace; /* For a typewriter feel */
+    overflow: hidden; /* Hide the overflowing text */
+    border-right: .15em solid orange; /* The cursor effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+    letter-spacing: .15em; /* Spacing for better readability */
+    animation: typing 4.5s steps(80, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: orange; }
+  }
+  
 
 .lab {
     color: #7B3787;
 }
 
 .btn {
-    background: #61dafb;
+    background: #DF5332;
     color: black;
     padding: 10px;
     text-decoration: none;
@@ -176,7 +203,7 @@ h3 {
 }
 
 .btn:hover {
-    background: #2F2E41;
+    background: #3357A9;
     color: white;
 }
 
