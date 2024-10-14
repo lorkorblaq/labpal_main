@@ -10,13 +10,9 @@
     font: 12px sans-serif;
 }
 
-
-
-
-
 #overview {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Flexible grid */
     grid-gap: 20px; /* Space between charts */
     padding: 20px;
 }

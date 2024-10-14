@@ -68,7 +68,6 @@ function filterData(data, filters, quantity) {
 
 
 // Step 5: Initialize and Render Chart
-// Step 6: Initialize the chart with dynamic data and set max slider value
 async function init(apiEndpoint, filterFields) {
     const itemsData = await fetchData(apiEndpoint); // Fetch items from the API
     
@@ -127,9 +126,6 @@ async function init(apiEndpoint, filterFields) {
     });
 }
 init(get_items_url, ['category', 'bench', 'class']);
-
-
-
 
 const endpoints = {
     items: `${BaseUrl}/items/get/${user_id}/${lab_name}/`,
@@ -272,9 +268,6 @@ function renderItemsChart(container, itemsData) {
      });
 }
 
-
-
-
 function renderChannelsChart(container, channelsData) {
     const svg = d3.select(container)
                   .append("svg")
@@ -345,8 +338,6 @@ function renderChannelsChart(container, channelsData) {
      .attr("height", d => height - y(d.quantity))
      .attr("fill", "teal");
 }
-
-
 
 function renderPiuChart(container, piuData) {
     const svg = d3.select(container)
@@ -419,7 +410,6 @@ function renderPiuChart(container, piuData) {
      .attr("fill", "orange");
 }
 
-
 function renderShipmentsChart(container, shipmentsData) {
     const svg = d3.select(container)
                   .append("svg")
@@ -487,7 +477,6 @@ function renderShipmentsChart(container, shipmentsData) {
      .attr("height", d => height - y(d.numb_of_packs))
      .attr("fill", "steelblue");
 }
-
 
 // // Create a dataset
 // const data = [
