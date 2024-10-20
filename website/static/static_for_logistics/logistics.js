@@ -190,7 +190,6 @@ $(document).ready(function() {
                         }
                     });
 
-
                     var seconds = Math.floor((duration / 1000) % 60);
                     var minutes = Math.floor((duration / (1000 * 60)) % 60);
                     var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -207,9 +206,6 @@ $(document).ready(function() {
                     $("#drop-off").text(dropOff_dateTime);
                     $("#duration").text(formattedDuration);
 
-
-
-
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
                 });
@@ -220,12 +216,6 @@ $(document).ready(function() {
             alert("Please fill in all the required fields.");
         }
     });
-
-
-
-
-
-
 
     $('#start-tracking').submit(async function (event) {
         event.preventDefault(); // Prevent the default form submission
@@ -306,8 +296,6 @@ $(document).ready(function() {
         // Fetch data from the provided URL
         return $.get(logistics_get);
     }
-
-
 
     var map;
 
@@ -450,25 +438,6 @@ $(document).ready(function() {
     });
     loadMapWithLastShipment();
 
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     async function loadData () {
         $('#loadingIndicator').show();
         $('.body').empty();
@@ -488,19 +457,39 @@ $(document).ready(function() {
     loadData();
 
     function renderTable(tableId, exTableId, data, columns) {
+        // Helper function to convert minutes to D:H:M format
+        function formatDuration(minutes) {
+            const days = Math.floor(minutes / (24 * 60));
+            const hours = Math.floor((minutes % (24 * 60)) / 60);
+            const mins = minutes % 60;
+    
+            return `${days}D:${hours}H:${mins}M`;
+        }
+    
         // Destroy the existing DataTable instance for the specified table ID (if it exists)
         if (dataTableInstance) {
             dataTableInstance.destroy();
-            }
-        // Empty the table body and header before rendering a new table
-        // $('#r_table tbody').empty();
-        // $(`#${tableId} thead`).empty();
-        // $(`#${tableId} thead`).append('<tr>' + columns.map(header => `<th>${header}</th>`));
-
-
+        }
+    
+        // Map the columns, applying the formatDuration function to the 'duration' field
         dataTableInstance = $(`#${tableId}`).DataTable({
             data: data,
-            columns: columns.map(col => ({ data: col })),
+            columns: columns.map(col => {
+                if (col === 'duration') {
+                    // Apply custom formatting to the duration column
+                    return {
+                        data: col,
+                        render: function(data, type, row) {
+                            if (type === 'display' && data !== null) {
+                                return formatDuration(data); // Convert minutes to D:H:M format
+                            }
+                            return data;
+                        }
+                    };
+                }
+                // Default behavior for other columns
+                return { data: col };
+            }),
             columnDefs: [
                 {
                     data: null,
@@ -510,10 +499,8 @@ $(document).ready(function() {
             ],
             order: [[1, 'desc']]
         });
-        // dataTableInstance.column(0).visible(false);
-
-
-
+    
+        // Add export and print buttons
         var exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
         var printButton = $('<button>').text(' Print').addClass('button fas fa-print');
         exportButton.click(function() {
@@ -522,10 +509,12 @@ $(document).ready(function() {
         printButton.click(function() {
             printJSONDataAsCSV(data);
         });
+    
         if ($(`#${exTableId}`).find('.button').length === 0) {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
     }
+    
 
     function exportJSONData(data) {
         // Convert JSON data to CSV format
