@@ -12,17 +12,17 @@ $(function() {
         return null;
     }
 
-    const HeadersQcEvents = ['event_id','Created At','User', 'Machine',  'Item', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning',''];
-    const ColumnsQcEvents = ['event_id','created_at','user', 'machine',  'items', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning', ''];
+    const HeadersQcEvents = ['event_id','Created At','User', 'Machine',  'Item', 'Resolved', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning',''];
+    const ColumnsQcEvents = ['event_id','created_at','user', 'machine',  'items','resolved', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning', ''];
 
-    const HeadersMaintenanceEvents = ['event_id','Created At','User', 'Machine',  'Frequency','Comments',''];
-    const ColumnsMaintenanceEvents = ['event_id','created_at','user', 'machine',  'frequency', 'comments',''];
+    const HeadersMaintenanceEvents = ['event_id','Created At','User','Resolved', 'Machine',  'Frequency','Comments',''];
+    const ColumnsMaintenanceEvents = ['event_id','created_at','user', 'resolved','machine',  'frequency', 'comments',''];
 
     const HeadersMachineEvents = ['event_id','Created At','User', 'Machine',  'Type of event','Resolved', 'Root Cause', 'Actioning',''];
     const ColumnsMachineEvents = ['event_id','created_at','user', 'machine',  'category', 'resolved','rootCause',  'actioning', ''];
 
-    const HeadersOperationsEvents = ['event_id','Created At','User', 'occurrence', 'Actioning',''];
-    const ColumnsOperationsEvents = ['event_id','created_at','user', 'occurrence',   'actioning',''];
+    const HeadersOperationsEvents = ['event_id','Created At','User', 'resolved','occurrence', 'Actioning',''];
+    const ColumnsOperationsEvents = ['event_id','created_at','user', 'resolved','occurrence',   'actioning',''];
     
 
     const user_id = getCookie('user_id');
@@ -427,6 +427,10 @@ $(function() {
         var CAQC = $('#CAQC').val();
         qcData.push(CAQC);
     
+        // Get the checkbox value (true if checked, false if not)
+        var resolvedChecked = $('#operations-checkbox').is(':checked');
+        qcData.push(resolvedChecked); // Add the checkbox status (true/false)
+    
         console.log(qcData);
         const filteredQC = qcData.filter(item => item !== '×'); // Filter out unwanted characters (like "×")
         console.log(filteredQC);
@@ -434,11 +438,12 @@ $(function() {
         const data = {
             "date": filteredQC[0],
             "machine": filteredQC[1],
-            "items": filteredQC.slice(2, filteredQC.length - 4),
-            "rootCause": filteredQC[filteredQC.length - 4],  
-            "subrootCause": filteredQC[filteredQC.length - 3],
-            "rootCauseDescription": filteredQC[filteredQC.length - 2],
-            "actioning": filteredQC[filteredQC.length - 1]
+            "items": filteredQC.slice(2, filteredQC.length - 5), // Adjusted to account for the new checkbox field
+            "rootCause": filteredQC[filteredQC.length - 5],  
+            "subrootCause": filteredQC[filteredQC.length - 4],
+            "rootCauseDescription": filteredQC[filteredQC.length - 3],
+            "actioning": filteredQC[filteredQC.length - 2],
+            "resolved": filteredQC[filteredQC.length - 1] // Add checkbox value to the data object
         };
         
         console.log(data);
@@ -447,9 +452,6 @@ $(function() {
         postSubmitsToApi(url, data);
     });
     
-
-
-
     // machine submit button
     $('#submit-machine').on('click', function(event) {
         event.preventDefault(); // Prevent default form submission behavior
@@ -461,6 +463,7 @@ $(function() {
         // Validate and collect date and time
         var datePickerValue = $('#datePicker-machine').val();
         var time = $('#timepicker-machine').val();
+        var resolvedChecked = $('#machines-checkbox').is(':checked');
         if (datePickerValue === '' || time === '') {
             alert('Please select a date and time');
             return;
@@ -468,6 +471,7 @@ $(function() {
         // var dateTime = `${datePickerValue} ${time}`;
         machineData.push(datePickerValue);
         machineData.push(time);
+        machineData.push(resolvedChecked);
     
         // Validate and collect machine information
         var machine = $('#machineIndicator').val();
@@ -523,6 +527,7 @@ $(function() {
                 'date': machineData[0],
                 'time': machineData[1],
                 'machine': machineData[2],
+                // 'resolved': machineData[3],
                 'category': 'Maintenance', // Fixed category for maintenance
                 'frequency': machineMaintenanceData[0], // Frequency array without '×'
                 'comments': machineMaintenanceData[1]
@@ -535,12 +540,12 @@ $(function() {
     
         // Function to handle downtimes form submission
         function handleDowntimesFormSubmission() {
-            var resolved = $('#downtimes-content input[type="checkbox"]').prop('checked');
+            // var resolved = $('#downtimes-content input[type="checkbox"]').prop('checked');
             var RCdowntime = $('#RCdowntime').val();
             var RCdownTimeDes = $('#RCdowntimeDes').val();
             var CAdowntime = $('#CAdowntime').val();
     
-            machineData.push(resolved);
+            // machineData.push(resolved);
             machineData.push(RCdowntime);
             machineData.push(CAdowntime);
     
@@ -548,8 +553,9 @@ $(function() {
                 'date': machineData[0],
                 'time': machineData[1],
                 'machine': machineData[2],
+                'resolved': machineData[3],
                 'category': 'Downtime', // Fixed category for downtimes
-                'resolved': resolved,
+                // 'resolved': resolved,
                 'rootCause': RCdowntime,
                 'rootCauseDes': RCdownTimeDes,
                 'actioning': CAdowntime
@@ -562,11 +568,11 @@ $(function() {
     
         // Function to handle troubleshooting form submission
         function handleTroubleshootingFormSubmission() {
-            var resolved = $('#troubleshooting-content input[type="checkbox"]').prop('checked');
+            // var resolved = $('#troubleshooting-content input[type="checkbox"]').prop('checked');
             var RCtroubleshooting = $('#RCtroubleshooting').val();
             var CAtroubleshooting = $('#CAtroubleshooting').val();
     
-            machineData.push(resolved);
+            // machineData.push(resolved);
             machineData.push(RCtroubleshooting);
             machineData.push(CAtroubleshooting);
     
@@ -574,8 +580,9 @@ $(function() {
                 'date': machineData[0],
                 'time': machineData[1],
                 'machine': machineData[2],
+                'resolved': machineData[3],
                 'category': 'Troubleshooting', // Fixed category for troubleshooting
-                'resolved': resolved,
+                // 'resolved': resolved,
                 'rootCause': RCtroubleshooting,
                 'actioning': CAtroubleshooting
             };
@@ -586,6 +593,7 @@ $(function() {
         }
     
     });
+    
 
     //operations submit button 
     $('#submit-operations').on('click', function(event) {
@@ -593,12 +601,14 @@ $(function() {
         const datePickerValue = $('#datePicker-operations').val();
         const operationsData = [];
         let tagsEntered = false; // Flag to check if at least one tag is entered
+    
         if (datePickerValue !== '') {
             operationsData.push(datePickerValue);
         } else {
             alert('Please select a date');
+            return; // Exit function if date is not selected
         }
-
+    
         // Collect tags from #operationsTagger .tag span
         $('#operationsTagger .tag span').each(function() {
             const text = $(this).text().trim();
@@ -613,18 +623,29 @@ $(function() {
             alert('Please enter at least one tag');
             return; // Exit function if no tags are entered
         }
-        OPearationsActioning =   $('#CAoperations').val();
+    
+        // Get the value from the actioning field
+        let OPearationsActioning = $('#CAoperations').val();
         operationsData.push(OPearationsActioning);
+    
+        // Get the checkbox value (true if checked, false if not)
+        var resolvedChecked = $('.option-checkbox').is(':checked');
+        operationsData.push(resolvedChecked); // Add the checkbox status (true/false)
+    
         const filteredOperations = operationsData.filter(item => item !== '×');
         
         const data = {
             'date': filteredOperations[0],
-            'occurrence': filteredOperations.slice(1, filteredOperations.length -1), // Send all tasks as an array
-            'actioning': filteredOperations[filteredOperations.length - 1]};
+            'occurrence': filteredOperations.slice(1, filteredOperations.length - 2), // Adjusted to account for checkbox value
+            'actioning': filteredOperations[filteredOperations.length - 2],
+            'resolved': filteredOperations[filteredOperations.length - 1] // Checkbox value
+        };
+    
         console.log(filteredOperations);
-        url = url_event_push+'operations/';
+        const url = url_event_push + 'operations/';
         postSubmitsToApi(url, data);
     });
+    
 
     // to-do submit button
     $('#submit-todo').on('click', function(event) {
@@ -673,13 +694,44 @@ $(function() {
                 alert(response.message);   
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                // Check if the responseJSON exists and has a message property
-                const errorMessage = jqXHR.responseJSON && jqXHR.responseJSON.message ? jqXHR.responseJSON.message : 'An error occurred';
-                alert(`${errorMessage}`);
-                console.error('Error posting data:', jqXHR, textStatus, errorThrown);
+                let errorMessage = 'An error occurred'; // Default error message
+                
+                console.error('Full jqXHR object:', jqXHR);  // Debugging full jqXHR object
+                
+                // Inspect responseJSON
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        errorMessage = jqXHR.responseJSON.message;  // Extract message if available
+                    } else {
+                        // Stringify full responseJSON object for better understanding
+                        errorMessage = JSON.stringify(jqXHR.responseJSON, null, 2);
+                    }
+                } 
+                // If no responseJSON, try responseText
+                else if (jqXHR.responseText) {
+                    try {
+                        let parsedResponse = JSON.parse(jqXHR.responseText);
+                        if (parsedResponse.message) {
+                            errorMessage = parsedResponse.message;
+                        } else {
+                            // Fallback to stringifying the entire parsed response
+                            errorMessage = JSON.stringify(parsedResponse, null, 2);
+                        }
+                    } catch (e) {
+                        // If responseText is not JSON, use it as plain text
+                        errorMessage = jqXHR.responseText;
+                    }
+                } else {
+                    // Fallback to errorThrown if neither responseJSON nor responseText has useful data
+                    errorMessage = errorThrown || 'Unknown error occurred';
+                }
+    
+                alert(errorMessage);  // Show the extracted error message
+                console.error('Error message:', errorMessage);
             }
         });
     }
+    
 
     let activeEventType = 'qc'; // Default active event type
     $('#qc-btn').click(function(){
@@ -852,7 +904,94 @@ $(function() {
 
 
 
-    async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
+    // async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
+    //     try {
+    //         let data;
+    
+    //         // Fetch the data if it's a URL
+    //         if (typeof urlOrData === 'string') {
+    //             console.log("Fetching data from URL:", urlOrData);
+    //             let response = await fetch(urlOrData);
+    //             data = await response.json(); // Assuming the API returns a JSON object
+    //         } else if (typeof urlOrData === 'object') {
+    //             data = urlOrData;
+    //         } else {
+    //             throw new Error("Invalid data source: Must provide either a URL or a data object.");
+    //         }
+    
+    //         // Ensure the DataTable is re-initialized if it already exists
+    //         if ($.fn.DataTable.isDataTable(`#${tableId}`)) {
+    //             console.log("DataTable exists, destroying...");
+    //             $(`#${tableId}`).DataTable().clear().destroy();
+    //         }
+    
+    //         // Clear and append new headers
+    //         $(`#${tableId} thead`).empty();
+    //         let headerRow = $('<tr>');
+    //         headers.forEach(function(header) {
+    //             headerRow.append(`<th>${header}</th>`);
+    //         });
+    //         $(`#${tableId} thead`).append(headerRow);
+    
+    //         // Initialize DataTable with the correct columns, ensuring '_id' is mapped
+    //         console.log("Initializing DataTable");
+    //         const dataTableInstance = $(`#${tableId}`).DataTable({
+    //             data: data.events || [],  // Adjust according to your data structure
+    //             columns: columns.map(col => ({ data: col })),
+
+    //             columnDefs: [
+    //                 {
+    //                     targets: -1, // Target the last column for the delete button
+    //                     data: null,
+    //                     defaultContent:
+    //                         '<button class="tablebtn btn-delete"><i class="fas fa-trash-alt"></i></button>',
+    //                 },
+    //             ],
+    //             order: [[1, 'desc']] 
+                
+    //         });
+    //         dataTableInstance.column(0).visible(false);
+    
+    //         // Handle delete button click event
+    //         $(`#${tableId} tbody`).on('click', '.btn-delete', function () {
+    //             const row = dataTableInstance.row($(this).parents('tr')); // Get the row
+    //             const rowData = row.data(); // Get the row data
+    //             console.log("Row data:", rowData); // Log the row data to check
+    //             const eventId = rowData.event_id; // Extract the _id from the row data
+    
+    //             if (eventId) {
+    //                 if (confirm("Are you sure you want to delete this event?")) {
+    //                     deleteEvent(row, eventId);
+    //                 }
+    //             } else {
+    //                 console.error("Event ID not found!");
+    //                 alert("Error: Event ID not found.");
+    //             }
+    //         });
+    
+    //         // Button setup (Ensure these buttons are set up every time)
+    //         let exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
+    //         let printButton = $('<button>').text(' Print').addClass('button fas fa-print');
+    
+    //         exportButton.click(function() {
+    //             exportJSONData(data.events || data); // Export function
+    //         });
+    
+    //         printButton.click(function() {
+    //             printJSONDataAsCSV(data); // Print function
+    //         });
+    
+    //         let buttonContainer = $(`#${exTableId}`);
+    //         if (buttonContainer.find('.button').length === 0) {
+    //             buttonContainer.append(exportButton).append(printButton);
+    //         }
+    
+    //     } catch (error) {
+    //         console.error("Error in renderTable:", error);
+    //     }
+    // }
+
+    async function renderTable(tableId, exTableId, urlOrData, columns, headers, userId, labName) {
         try {
             let data;
     
@@ -881,31 +1020,41 @@ $(function() {
             });
             $(`#${tableId} thead`).append(headerRow);
     
-            // Initialize DataTable with the correct columns, ensuring '_id' is mapped
+            // Initialize DataTable with the correct columns
             console.log("Initializing DataTable");
             const dataTableInstance = $(`#${tableId}`).DataTable({
                 data: data.events || [],  // Adjust according to your data structure
                 columns: columns.map(col => ({ data: col })),
-
                 columnDefs: [
                     {
-                        targets: -1, // Target the last column for the delete button
+                        // Add a switch to the "resolved" column
+                        targets: columns.indexOf('resolved'),
+                        data: 'resolved',
+                        render: function(data, type, row) {
+                            const resolved = data ? 'checked' : ''; // Determine if resolved
+                            return `<label class="switch">
+                                        <input type="checkbox" class="resolve-switch" ${resolved} data-event-id="${row.event_id}">
+                                        <span class="slider round"></span>
+                                    </label>`;
+                        }
+                    },
+                    {
+                        // Retain the delete button in the last column
+                        targets: -1,
                         data: null,
                         defaultContent:
                             '<button class="tablebtn btn-delete"><i class="fas fa-trash-alt"></i></button>',
                     },
                 ],
-                order: [[1, 'desc']] 
-                
+                order: [[1, 'desc']] // Order by the second column
             });
-            dataTableInstance.column(0).visible(false);
+            dataTableInstance.column(0).visible(false); // Hide ID column
     
             // Handle delete button click event
             $(`#${tableId} tbody`).on('click', '.btn-delete', function () {
                 const row = dataTableInstance.row($(this).parents('tr')); // Get the row
                 const rowData = row.data(); // Get the row data
-                console.log("Row data:", rowData); // Log the row data to check
-                const eventId = rowData.event_id; // Extract the _id from the row data
+                const eventId = rowData.event_id; // Extract the event_id
     
                 if (eventId) {
                     if (confirm("Are you sure you want to delete this event?")) {
@@ -917,7 +1066,36 @@ $(function() {
                 }
             });
     
-            // Button setup (Ensure these buttons are set up every time)
+            // Handle Resolve switch click event
+            $(`#${tableId} tbody`).on('change', '.resolve-switch', async function () {
+                const eventId = $(this).data('event-id');
+                const isResolved = $(this).is(':checked');
+                
+                // Declare the URL variable here
+                var url_event_resolve_put = `${url_event_put}${eventId}/`;
+                // url_event_put
+                try {
+                    const response = await fetch(url_event_resolve_put, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ resolved: isResolved })
+                    });
+
+                    if (response.ok) {
+                        console.log(`Event ${eventId} updated to resolved: ${isResolved}`);
+                        alert(`Event updated successfully`);
+                    } else {
+                        const errorData = await response.json();
+                        console.error("Error updating event:", errorData.message);
+                        alert(`Error updating event: ${errorData.message}`);
+                    }
+                } catch (error) {
+                    console.error("Error during fetch:", error);
+                }
+            });
+
+    
+            // Additional buttons setup if needed (Export, Print)
             let exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
             let printButton = $('<button>').text(' Print').addClass('button fas fa-print');
     
