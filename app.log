@@ -41966,3 +41966,35 @@ INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 455-624-963
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 544-876-052
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-20 06:47:11.604214
+INFO:root:f3mioloko@gmail.com logout, 127.0.0.1 at 2024-10-20 06:53:06.495059
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 959-820-365
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-245-676
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-10-21 21:25:09.093530
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 4 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 2 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+ERROR:socketio:Cannot receive from redis... retrying in 1 secs
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 729-318-185
+INFO:root:user:olorunfemi oloko, email:f3mioloko@gmail.com, ip:127.0.0.1 at 2024-11-20 20:23:27.030875
