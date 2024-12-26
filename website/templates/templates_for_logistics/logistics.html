@@ -24,7 +24,7 @@
             <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
                 Shipment Mapping
             </button>
-            <button type="button" class="" data-toggle="modal" data-target="#dashboardModal">
+            <button type="button" class="" data-toggle="modal" id="dashboard">
                 Dashboard
             </button>
         </div>
@@ -52,9 +52,15 @@
                                 <label for="dropoff-location">Select Drop-off Location</label>
                                 <input type="text" class="form-control autoInputLabs" id="dropoff-location" placeholder="Enter Locations...">
                             </div>
+
                             <div class="form-group">
                                 <label for="input-box">Number of packs</label>
                                 <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of packs" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-box">Weight of packs</label>
+                                <input type="text" class="form-control" id="weight" placeholder="Enter weight of packs" required>
                             </div>
                     
                             <div class="form-group">

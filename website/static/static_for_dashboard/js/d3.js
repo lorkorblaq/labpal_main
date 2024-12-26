@@ -410,159 +410,73 @@ function renderPiuChart(container, piuData) {
      .attr("fill", "orange");
 }
 
-function renderShipmentsChart(container, shipmentsData) {
-    const svg = d3.select(container)
-                  .append("svg")
-                  .attr("width", "100%")
-                  .attr("height", 450);
+// function renderShipmentsChart(container, shipmentsData) {
+//     const svg = d3.select(container)
+//                   .append("svg")
+//                   .attr("width", "100%")
+//                   .attr("height", 450);
 
-    const margin = {top: 20, right: 30, bottom: 40, left: 40},
-        width = parseInt(svg.style("width")) - margin.left - margin.right,
-        height = svg.attr("height") - margin.top - margin.bottom;
+//     const margin = {top: 20, right: 30, bottom: 40, left: 40},
+//         width = parseInt(svg.style("width")) - margin.left - margin.right,
+//         height = svg.attr("height") - margin.top - margin.bottom;
 
-    const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-    svg.append("text")
-    .attr("x", margin.left)
-    .attr("y", 15)
-    .attr("text-anchor", "start")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text("Shipment Qty. packs"); 
-    const x = d3.scaleBand()
-                .domain(shipmentsData.map(d => d.shipment_id))
-                .range([0, width])
-                .padding(0.1);
+//     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+//     svg.append("text")
+//     .attr("x", margin.left)
+//     .attr("y", 15)
+//     .attr("text-anchor", "start")
+//     .style("font-size", "16px")
+//     .style("font-weight", "bold")
+//     .text("Shipment Qty. packs"); 
+//     const x = d3.scaleBand()
+//                 .domain(shipmentsData.map(d => d.shipment_id))
+//                 .range([0, width])
+//                 .padding(0.1);
 
-    const y = d3.scaleLinear()
-                .domain([0, d3.max(shipmentsData, d => d.numb_of_packs)])
-                .nice()
-                .range([height, 0]);
+//     const y = d3.scaleLinear()
+//                 .domain([0, d3.max(shipmentsData, d => d.numb_of_packs)])
+//                 .nice()
+//                 .range([height, 0]);
 
-    g.append("g")
-     .attr("class", "x-axis")
-     .attr("transform", `translate(0,${height})`)
-     .call(d3.axisBottom(x))
-     .selectAll("text")
-     .attr("transform", "rotate(-40)")
-     .style("text-anchor", "end");
+//     g.append("g")
+//      .attr("class", "x-axis")
+//      .attr("transform", `translate(0,${height})`)
+//      .call(d3.axisBottom(x))
+//      .selectAll("text")
+//      .attr("transform", "rotate(-40)")
+//      .style("text-anchor", "end");
 
-    g.append("g")
-     .attr("class", "y-axis")
-     .call(d3.axisLeft(y));
+//     g.append("g")
+//      .attr("class", "y-axis")
+//      .call(d3.axisLeft(y));
 
-    // X Axis Label
-    svg.append("text")
-       .attr("x", margin.left + width / 2)
-       .attr("y", height + margin.top + 40)
-       .attr("text-anchor", "middle")
-       .style("font-size", "14px")
-       .text("Shipment ID");
+//     // X Axis Label
+//     svg.append("text")
+//        .attr("x", margin.left + width / 2)
+//        .attr("y", height + margin.top + 40)
+//        .attr("text-anchor", "middle")
+//        .style("font-size", "14px")
+//        .text("Shipment ID");
 
-    // Y Axis Label
-    svg.append("text")
-       .attr("transform", "rotate(-90)")
-       .attr("x", -margin.top - height / 2)
-       .attr("y", margin.left / 2)
-       .attr("text-anchor", "middle")
-       .style("font-size", "14px")
-       .text("No. of packs");
+//     // Y Axis Label
+//     svg.append("text")
+//        .attr("transform", "rotate(-90)")
+//        .attr("x", -margin.top - height / 2)
+//        .attr("y", margin.left / 2)
+//        .attr("text-anchor", "middle")
+//        .style("font-size", "14px")
+//        .text("No. of packs");
 
-    g.selectAll(".bar")
-     .data(shipmentsData)
-     .enter().append("rect")
-     .attr("class", "bar")
-     .attr("x", d => x(d.shipment_id))
-     .attr("y", d => y(d.numb_of_packs))
-     .attr("width", x.bandwidth())
-     .attr("height", d => height - y(d.numb_of_packs))
-     .attr("fill", "steelblue");
-}
-
-// // Create a dataset
-// const data = [
-//     { name: 'Product A', value: 30 },
-//     { name: 'Product B', value: 80 },
-//     { name: 'Product C', value: 45 },
-//     { name: 'Product D', value: 60 },
-//     { name: 'Product E', value: 20 },
-//     { name: 'Product F', value: 90 },
-//     { name: 'Product G', value: 55 },
-// ];
-
-// // Set dimensions and margins for the chart
-// const margin = { top: 40, right: 20, bottom: 40, left: 50 },
-//     width = 600 - margin.left - margin.right,
-//     height = 400 - margin.top - margin.bottom;
-
-// // Append SVG element to the body
-// const svg = d3.select("#chart-overview")
-//     .append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// // Create scales for the X and Y axes
-// const x = d3.scaleBand()
-//     .domain(data.map(d => d.name))
-//     .range([0, width])
-//     .padding(0.2);
-
-// const y = d3.scaleLinear()
-//     .domain([0, d3.max(data, d => d.value)])
-//     .range([height, 0]);
-
-// // Add X axis
-// svg.append("g")
-//     .attr("transform", "translate(0," + height + ")")
-//     .call(d3.axisBottom(x));
-
-// // Add Y axis
-// svg.append("g")
-//     .call(d3.axisLeft(y));
-
-// // Create bars for the chart
-// svg.selectAll(".bar")
-//     .data(data)
-//     .enter()
-//     .append("rect")
-//     .attr("class", "bar")
-//     .attr("x", d => x(d.name))
-//     .attr("y", d => y(d.value))
-//     .attr("width", x.bandwidth())
-//     .attr("height", d => height - y(d.value));
-
-// // Add labels to the bars
-// svg.selectAll(".text")
-//     .data(data)
-//     .enter()
-//     .append("text")
-//     .attr("class", "label")
-//     .attr("x", d => x(d.name) + x.bandwidth() / 2)
-//     .attr("y", d => y(d.value) - 5)
-//     .attr("text-anchor", "middle")
-//     .text(d => d.value);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//     g.selectAll(".bar")
+//      .data(shipmentsData)
+//      .enter().append("rect")
+//      .attr("class", "bar")
+//      .attr("x", d => x(d.shipment_id))
+//      .attr("y", d => y(d.numb_of_packs))
+//      .attr("width", x.bandwidth())
+//      .attr("height", d => height - y(d.numb_of_packs))
+//      .attr("fill", "steelblue");
+// }
 
 const tooltip = d3.select("#tooltip");
 
