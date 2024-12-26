@@ -11,11 +11,11 @@ $(document).ready(function() {
         }
         return null;
     }
-    // BaseUrl = "http://0.0.0.0:3000/api";
-    BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
 
-    const columnshipments = ['shipment_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'numb_of_packs', 'create_lat_lng', 'pickup_lat_lng', 'dropoff_lat_lng', 'created_by','picked_by','dropoff_by', 'description'];
-    const headershipments = ['Shipment Id','Completed', 'Created ⏰', 'Pickup ⏰', 'Dropoff ⏰',' Duration⏰', 'Pickup Loc.', 'Dropoff Loc.', 'No. of packs', 'Created lat/lng', 'Pick Up lat/lng','Drop Off lat/lng', 'Created by','Picked by','Dropped by', 'Description'];
+    const columnshipments = ['shipment_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'numb_of_packs', 'weight', 'create_lat_lng', 'pickup_lat_lng', 'dropoff_lat_lng', 'created_by','picked_by','dropoff_by', 'description'];
+    const headershipments = ['Shipment Id','Completed', 'Created ⏰', 'Pickup ⏰', 'Dropoff ⏰',' Duration⏰', 'Pickup Loc.', 'Dropoff Loc.', 'No. of packs', 'Weight', 'Created lat/lng', 'Pick Up lat/lng','Drop Off lat/lng', 'Created by','Picked by','Dropped by', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -40,6 +40,7 @@ $(document).ready(function() {
         var pickupLocation = $("#pickup-location").val();
         var dropoffLocation = $("#dropoff-location").val();
         var numb_of_packs = $("#numb_of_packs").val();
+        var weight = $("#weight").val();
         var description = $("#description").val();
         console.log(url_shipment_push)
         // Check if all required form fields are filled
@@ -62,6 +63,7 @@ $(document).ready(function() {
                         created_at: created_at,
                         shipment_id: shipment_id,
                         numb_of_packs: numb_of_packs,
+                        weight: weight,
                         pickup_loc: pickupLocation,
                         dropoff_loc: dropoffLocation,
                         create_lat_lng: createLatLngString,
@@ -357,7 +359,6 @@ $(document).ready(function() {
     }
     
     // Function to plot shipment by its ID
-
     async function plotShipmentByID(shipment_id) {
         try {
             // Fetch the shipment data from the backend for the user
@@ -423,8 +424,6 @@ $(document).ready(function() {
             console.error("Error fetching shipment data:", error);
         }
     }
-    
-
 
     // Event listener for the "Plot Shipment" button
     $('#plot-shipment-form').submit(function(event) {
@@ -615,5 +614,13 @@ $(document).ready(function() {
     
         return result;
     }
+
+
+    // Shipment dashboard
+    $('#dashboard').on('click', function() {
+        console.log('Dashboard clicked');
+        $('#ex-r_table').css('display', 'none');
+    }
+    );
 
 });
