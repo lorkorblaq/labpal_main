@@ -14,8 +14,8 @@ $(document).ready(function() {
     BaseUrl = "http://0.0.0.0:3000/api";
     // BaseUrl = "https://labpal.com.ng/api";
 
-    const columnshipments = ['shipment_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'numb_of_packs', 'weight', 'create_lat_lng', 'pickup_lat_lng', 'dropoff_lat_lng', 'created_by','picked_by','dropoff_by', 'description'];
-    const headershipments = ['Shipment Id','Completed', 'Created ⏰', 'Pickup ⏰', 'Dropoff ⏰',' Duration⏰', 'Pickup Loc.', 'Dropoff Loc.', 'No. of packs', 'Weight', 'Created lat/lng', 'Pick Up lat/lng','Drop Off lat/lng', 'Created by','Picked by','Dropped by', 'Description'];
+    const columnRequests = ['request_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'picked_by', 'description'];
+    const headerRequest = ['Request Id','Completed', 'Created at', 'Picked at', 'Dropped at',' Duration⏰', 'Pickup Lab.', 'No. of samples', 'Picked by', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -24,10 +24,10 @@ $(document).ready(function() {
     user_name = user_name.replace(/['"]+/g, '');
     console.log(user_id, user_name, lab_name);
 
-    const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`
-    const url_shipment_push = `${BaseUrl}/shipments/push/${user_id}/${lab_name}/`;
-    const url_shipment_put = `${BaseUrl}/shipments/put/${user_id}/${lab_name}/`;
-    const url_shipment_delete = `${BaseUrl}/shipments/delete/${user_id}/${lab_name}/`;  
+    const url_shipment_get = `${BaseUrl}/request-pickup/get/${user_id}/`
+    const url_shipment_push = `${BaseUrl}/request-pickup/push/${user_id}/`;
+    const url_shipment_put = `${BaseUrl}/request-pickup/put/${user_id}/`;
+    const url_shipment_delete = `${BaseUrl}/request-pickup/delete/${user_id}/`;  
 
 
     var dropOff_dateTime;
@@ -36,15 +36,15 @@ $(document).ready(function() {
 
     $("#create").click(function() {
         // Get form data
-        var shipment_id = $('#shipment_id').text();
+        var request_id = $('#request_id').text();
         var pickupLocation = $("#pickup-location").val();
         var dropoffLocation = $("#dropoff-location").val();
-        var numb_of_packs = $("#numb_of_packs").val();
+        var numb_of_samples = $("#numb_of_samples").val();
         var weight = $("#weight").val();
         var description = $("#description").val();
         console.log(url_shipment_push)
         // Check if all required form fields are filled
-        if (shipment_id) {
+        if (request_id) {
             // Check if Geolocation is supported
             if (navigator.geolocation) {
                 // Get current position
@@ -61,15 +61,15 @@ $(document).ready(function() {
                     completed = true;
                     data = {
                         created_at: created_at,
-                        shipment_id: shipment_id,
-                        numb_of_packs: numb_of_packs,
+                        request_id: request_id,
+                        numb_of_samples: numb_of_samples,
                         weight: weight,
                         pickup_loc: pickupLocation,
                         dropoff_loc: dropoffLocation,
                         create_lat_lng: createLatLngString,
                         description: description
                     }
-                    console.log(data);
+                    console.log(data); 
                     // Example of sending the data to your backend
                     $.ajax({
                         url: url_shipment_push,
@@ -86,127 +86,6 @@ $(document).ready(function() {
 
 
 
-
-                }, function(error) {
-                    console.error("Error Code = " + error.code + " - " + error.message);
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        } else {
-            alert("Please fill in all the required fields.");
-        }
-    });
-
-    $("#pick-up").click(function() {
-        // Get form data
-        var pickup_shipment_ID = $("#pick-shipment-id").val();
-
-        // Check if all required form fields are filled
-        if (pickup_shipment_ID) {
-            // Check if Geolocation is supported
-            if (navigator.geolocation) {
-                // Get current position
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Extract latitude, longitude, accuracy, and timestamp
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var timestamp = position.timestamp;
-
-                    // Convert timestamp to WAT (West Africa Time)
-                    var pickUp_dateTime = new Date(timestamp);
-                    pickUp_dateTime.setHours(pickUp_dateTime.getUTCHours() + 1); 
-                    pickUp_dateTime = pickUp_dateTime.toISOString()
-                    var picklatLngString = `${latitude},${longitude}`;
-
-                    data = {
-                        picked_by: user_name,
-                        shipment_id: pickup_shipment_ID,
-                        pickup_lat_lng: picklatLngString,
-                        // pickup_time: pickUp_dateTime,
-                    }
-
-                    // Example of sending the data to your backend
-                    $.ajax({
-                        url: url_shipment_put,
-                        type: 'PUT',
-                        contentType: 'application/json',
-                        data: JSON.stringify(data),
-                        success: function(response) {
-                            alert('pick up sent to the server successfully:', response);
-                        },
-                        error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
-                        }
-                    });
-                }, function(error) {
-                    console.error("Error Code = " + error.code + " - " + error.message);
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        } else {
-            alert("Please fill in all the required fields.");
-        }
-    });
-
-    $("#drop-off").click(function() {
-        // Get form data
-        var dropped_shipment_ID = $("#drop-shipment-id").val();
-
-        // Check if all required form fields are filled
-        if (dropped_shipment_ID) {
-            // Check if Geolocation is supported
-            if (navigator.geolocation) {
-                // Get current position
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Extract latitude, longitude, accuracy, and timestamp
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var accuracy = position.coords.accuracy;
-                    var timestamp = position.timestamp;
-                    completed = true;
-                    var droplatLngString = `${latitude},${longitude}`;
-
-                    var dropOff_dateTime = new Date(timestamp);
-                    dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
-                    dropOff_dateTime = dropOff_dateTime.toISOString()
-
-                    data = {
-                        dropoff_by: user_name,
-                        shipment_id: dropped_shipment_ID,
-                        dropoff_lat_lng: droplatLngString,
-                        // dropoff_time: dropOff_dateTime,
-                    }
-                    // Example of sending the data to your backend
-                    $.ajax({
-                        url: url_shipment_put,  // Your backend endpoint
-                        type: 'PUT',
-                        contentType: 'application/json',
-                        data: JSON.stringify(data),
-                        success: function(response) {
-                            alert('Drop off sent to the server successfully:', response);
-                        },
-                        error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
-                        }
-                    });
-
-                    var seconds = Math.floor((duration / 1000) % 60);
-                    var minutes = Math.floor((duration / (1000 * 60)) % 60);
-                    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-                    var days = Math.floor(duration / (1000 * 60 * 60 * 24));
-    
-                    // Format duration with leading zeros
-                    var formattedDuration = 
-                        ("00" + days).slice(-2) + "days:" +
-                        ("00" + hours).slice(-2) + "hrs:" +
-                        ("00" + minutes).slice(-2) + "mins:" +
-                        ("00" + seconds).slice(-2) + "sec";
-    
-                    // Display the drop-off stamp and duration in the table
-                    $("#drop-off").text(dropOff_dateTime);
-                    $("#duration").text(formattedDuration);
 
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
@@ -359,14 +238,14 @@ $(document).ready(function() {
     }
     
     // Function to plot shipment by its ID
-    async function plotShipmentByID(shipment_id) {
+    async function plotShipmentByID(request_id) {
         try {
             // Fetch the shipment data from the backend for the user
             const data = await fetchData(url_shipment_get);
             const shipments = data.shipments;
     
             // Filter the shipment by the entered shipment ID
-            const filteredShipment = shipments.find(shipment => shipment.shipment_id === shipment_id);
+            const filteredShipment = shipments.find(shipment => shipment.request_id === request_id);
     
             if (!filteredShipment) {
                 alert('Shipment ID not found.');
@@ -428,9 +307,9 @@ $(document).ready(function() {
     // Event listener for the "Plot Shipment" button
     $('#plot-shipment-form').submit(function(event) {
         event.preventDefault();
-        const shipment_id = $('#shipment-id-input').val(); // Assuming you have an input field for shipment ID
-        if (shipment_id) {
-            plotShipmentByID(shipment_id);
+        const request_id = $('#shipment-id-input').val(); // Assuming you have an input field for shipment ID
+        if (request_id) {
+            plotShipmentByID(request_id);
         } else {
             alert("Please enter a shipment ID.");
         }
@@ -441,13 +320,13 @@ $(document).ready(function() {
         $('#loadingIndicator').show();
         $('.body').empty();
         $('#reports_h').empty();
-        headershipments.forEach(function (header) {
+        headerRequest.forEach(function (header) {
             $('#reports_h').append(`<th>${header}</th>`);
             });
         try {
             const data = await fetchData(url_shipment_get);
             console.log(data);
-            renderTable('r_table', 'ex-r_table', data.shipments, columnshipments);
+            renderTable('r_table', 'ex-r_table', data.requests, columnRequests);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -513,6 +392,7 @@ $(document).ready(function() {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
     }
+    
 
     function exportJSONData(data) {
         // Convert JSON data to CSV format
@@ -532,6 +412,7 @@ $(document).ready(function() {
         link.click();
         document.body.removeChild(link);
     }
+
     // Function to convert JSON data to CSV format
     function convertJSONToCSV(data) {
         var csv = [];
@@ -555,6 +436,7 @@ $(document).ready(function() {
         var csvContent = csv.join('\n');
         return csvContent;
     }
+
     // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
         // Add header row
@@ -597,9 +479,10 @@ $(document).ready(function() {
         printWindow.document.close();
         printWindow.print();
     }
+
     $('#openCreateModalBtn').on('click', function() {
         const randomString = generateRandomString(7);
-        $('#shipment_id').text(randomString); // Append the random string to the element
+        $('#request_id').text(randomString); // Append the random string to the element
     });
 
     function generateRandomString(length) {
@@ -613,4 +496,80 @@ $(document).ready(function() {
     
         return result;
     }
+
+    // Shipment dashboard
+    $('#dashboard').on('click', function() {
+        console.log('Dashboard clicked');
+        $('#ex-r_table').css('display', 'none');
+    }
+    );
+
+
+
+
+
+    // Sample JSON response from the database
+    const response = {
+        "_id": { "$oid": "676fb569fb709aa659a5b966" },
+        "created_by": "Olorunfemi Oloko",
+        "created_at": { "$date": "2024-12-28T09:23:04.882Z" },
+        "request_id": "IFom86T",
+        "pickup_loc": "clinicals_lagos",
+        "dropoff_loc": "city_hospital_ikeja",
+        "numb_of_samples": 3,
+        "delivery_status": "In Transit",
+        "eta": "2024-12-28T10:30:00Z",
+        "description": "Safe",
+        "completed": "No",
+        "accepted": "Yes",
+        "rider_info": {
+            "name": "Miracle John",
+            "phone": "+2348012345678",
+            "vehicle": "Bike",
+            "current_lat_lng": "6.593421,3.350635"
+        },
+        "tracking_url": "https://yourapp.com/track/IFom86T"
+    };
+    // Example data for tracking timeline
+    const statuses = [
+        { status: "Request Received", details: "Waiting for the Lab. to confirm your request.", time: "10:47am", completed: true },
+        { status: "Rider loop", details: "Searching for the closest rider to asign.", time: "10:47am", completed: true },
+        { status: "Rider assigned", details: "A rider has been assigned and on there way to pickup.", time: "11:09am", completed: true },
+        { status: "Rider At Your Place", details: "Rider is waiting to pick up your samples.", time: "11:15am", completed: true },
+        { status: "Samples Picked Up", details: "Samples have been picked up and on     its way to the lab.", time: "11:16am", completed: false },
+        { status: "Samples Dropped Of", details: "Samples have been dropped off at the lab.", time: "11:16am", completed: false }
+    ];
+
+    // Function to populate tracking info dynamically
+    function populateTrackingInfo() {
+        // Clear previous content
+        const trackingInfo = $('#tracking-info');
+        trackingInfo.empty();
+
+        // Create the timeline container
+        const timeline = $('<div class="timeline"></div>');
+
+        // Add timeline items dynamically
+        statuses.forEach((entry) => {
+            const statusClass = entry.completed ? "completed" : "active";
+            const timelineItem = `
+                <div class="timeline-item ${statusClass}">
+                    <div class="status">${entry.status}</div>
+                    <div class="details">${entry.details}</div>
+                    <div class="time">${entry.time}</div>
+                </div>
+            `;
+            timeline.append(timelineItem);
+        });
+
+        // Append the timeline to tracking info
+        trackingInfo.append(timeline);
+    }
+
+    // Trigger the modal and populate tracking info
+    $('#mappingModal').on('show.bs.modal', function () {
+        populateTrackingInfo();
+    });
+
+
 });

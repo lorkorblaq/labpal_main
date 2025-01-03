@@ -282,6 +282,7 @@ $(function () {
         $("#billing").hide();
         $("#security").hide();
         $("#data").hide();
+        $("#members").hide();
         $("#notifications").show();
     });
 
@@ -289,6 +290,7 @@ $(function () {
         $("#billing").hide();
         $("#security").hide();
         $("#notifications").hide();
+        $("#members").hide();
         $("#data").show();
     });
 
@@ -296,6 +298,14 @@ $(function () {
         $("#notifications").hide();
         $("#security").hide();
         $("#data").hide();
+        $("#members").hide();
         $("#billing").show();
+    });
+    $('#mem-btn').click(function() {
+        $("#notifications").hide();
+        $("#security").hide();
+        $("#data").hide();
+        $("#billing").hide();
+        $("#members").show();
     });
 });

@@ -1,9 +1,12 @@
 from datetime import timedelta
 from flask import Flask
 from .extensions import mail, socketio, redis_URL
-from website.auth import auth
-from website.settings import settings
-from website.views import views
+from .auth import auth
+from .authClient import authClient
+from .settings import settings
+from .views import views
+from .viewsClient import viewsClient
+
 from flask_session import Session  
 # from website.celery_config import make_celery
 import redis
@@ -57,8 +60,10 @@ def create_app():
 
     # Register blueprints
     app.register_blueprint(views, url_prefix="")
+    app.register_blueprint(viewsClient, url_prefix="")
     app.register_blueprint(settings, url_prefix="/settings")
     app.register_blueprint(auth, url_prefix="")
+    app.register_blueprint(authClient, url_prefix="/client")
     return app
 
 # def get_lab_name():

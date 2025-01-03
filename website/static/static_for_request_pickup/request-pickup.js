@@ -14,8 +14,8 @@ $(document).ready(function() {
     BaseUrl = "http://0.0.0.0:3000/api";
     // BaseUrl = "https://labpal.com.ng/api";
 
-    const columnshipments = ['shipment_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'numb_of_packs', 'weight', 'create_lat_lng', 'pickup_lat_lng', 'dropoff_lat_lng', 'created_by','picked_by','dropoff_by', 'description'];
-    const headershipments = ['Shipment Id','Completed', 'Created ⏰', 'Pickup ⏰', 'Dropoff ⏰',' Duration⏰', 'Pickup Loc.', 'Dropoff Loc.', 'No. of packs', 'Weight', 'Created lat/lng', 'Pick Up lat/lng','Drop Off lat/lng', 'Created by','Picked by','Dropped by', 'Description'];
+    const columnRequests = ['request_id', 'completed', 'accepted', 'created_at', 'accepted_time', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'created_by', 'picked_by', 'description'];
+    const headerRequsts = ['Request Id','Completed', 'Accepted', 'Created at', 'accepted at', 'Pickup at', 'Dropoff at',' Duration', 'Pickup Lab.',  'No. of Samples', 'Created by', 'Picked by', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -24,27 +24,21 @@ $(document).ready(function() {
     user_name = user_name.replace(/['"]+/g, '');
     console.log(user_id, user_name, lab_name);
 
-    const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`
-    const url_shipment_push = `${BaseUrl}/shipments/push/${user_id}/${lab_name}/`;
-    const url_shipment_put = `${BaseUrl}/shipments/put/${user_id}/${lab_name}/`;
-    const url_shipment_delete = `${BaseUrl}/shipments/delete/${user_id}/${lab_name}/`;  
+    const url_shipment_get = `${BaseUrl}/request-pickup/get/${user_id}/`
+    const url_shipment_put = `${BaseUrl}/request-pickup/put/${user_id}/`;
+    const url_shipment_delete = `${BaseUrl}/request-pickup/delete/${user_id}/`;  
 
 
     var dropOff_dateTime;
     var formattedDuration;
     var completed = false;
 
-    $("#create").click(function() {
+    $("#accepted").click(function() {
         // Get form data
-        var shipment_id = $('#shipment_id').text();
-        var pickupLocation = $("#pickup-location").val();
-        var dropoffLocation = $("#dropoff-location").val();
-        var numb_of_packs = $("#numb_of_packs").val();
-        var weight = $("#weight").val();
-        var description = $("#description").val();
-        console.log(url_shipment_push)
+        var accept_request_ID = $("#accept-request-id").val();
+
         // Check if all required form fields are filled
-        if (shipment_id) {
+        if (accept_request_ID) {
             // Check if Geolocation is supported
             if (navigator.geolocation) {
                 // Get current position
@@ -52,40 +46,33 @@ $(document).ready(function() {
                     // Extract latitude, longitude, accuracy, and timestamp
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
-                    var createLatLngString = `${latitude},${longitude}`;
+                    var accuracy = position.coords.accuracy;
                     var timestamp = position.timestamp;
-                    var create_dateTime = new Date(timestamp);
-                    create_dateTime.setHours(create_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
-                    created_at = create_dateTime.toISOString()
-
                     completed = true;
+                    var acceptlatLngString = `${latitude},${longitude}`;
+
+                    var dropOff_dateTime = new Date(timestamp);
+                    dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
+                    dropOff_dateTime = dropOff_dateTime.toISOString()
+
                     data = {
-                        created_at: created_at,
-                        shipment_id: shipment_id,
-                        numb_of_packs: numb_of_packs,
-                        weight: weight,
-                        pickup_loc: pickupLocation,
-                        dropoff_loc: dropoffLocation,
-                        create_lat_lng: createLatLngString,
-                        description: description
+                        accepted_by: user_name,
+                        request_id: accept_request_ID,
                     }
-                    console.log(data);
+                    console.log(data)
                     // Example of sending the data to your backend
                     $.ajax({
-                        url: url_shipment_push,
-                        type: 'POST',
+                        url: url_shipment_put,  // Your backend endpoint
+                        type: 'PUT',
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Shipment sent to the server successfully:', response);
+                            alert('Request has been accepted:', response);
                         },
                         error: function(xhr, status, error) {
-                            alert('Error sending shipement to the server:', error);
+                            alert('Error accepting request, please try again:', error);
                         }
                     });
-
-
-
 
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
@@ -121,7 +108,7 @@ $(document).ready(function() {
 
                     data = {
                         picked_by: user_name,
-                        shipment_id: pickup_shipment_ID,
+                        request_id: pickup_shipment_ID,
                         pickup_lat_lng: picklatLngString,
                         // pickup_time: pickUp_dateTime,
                     }
@@ -150,12 +137,12 @@ $(document).ready(function() {
         }
     });
 
-    $("#drop-off").click(function() {
+    $("#dropped-off").click(function() {
         // Get form data
-        var dropped_shipment_ID = $("#drop-shipment-id").val();
+        var drop_off_request_ID = $("#drop-off-shipment-id").val();
 
         // Check if all required form fields are filled
-        if (dropped_shipment_ID) {
+        if (drop_off_request_ID) {
             // Check if Geolocation is supported
             if (navigator.geolocation) {
                 // Get current position
@@ -166,18 +153,18 @@ $(document).ready(function() {
                     var accuracy = position.coords.accuracy;
                     var timestamp = position.timestamp;
                     completed = true;
-                    var droplatLngString = `${latitude},${longitude}`;
+                    var acceptlatLngString = `${latitude},${longitude}`;
 
                     var dropOff_dateTime = new Date(timestamp);
                     dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
                     dropOff_dateTime = dropOff_dateTime.toISOString()
 
                     data = {
-                        dropoff_by: user_name,
-                        shipment_id: dropped_shipment_ID,
-                        dropoff_lat_lng: droplatLngString,
-                        // dropoff_time: dropOff_dateTime,
+                        dropped_by: user_name,
+                        request_id: drop_off_request_ID,
+                        accept_lat_lng: acceptlatLngString,
                     }
+                    console.log(data)
                     // Example of sending the data to your backend
                     $.ajax({
                         url: url_shipment_put,  // Your backend endpoint
@@ -185,10 +172,10 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Drop off sent to the server successfully:', response);
+                            alert('Request has been dropped:', response);
                         },
                         error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
+                            alert('Error dropping request, please try again:', error);
                         }
                     });
 
@@ -218,6 +205,7 @@ $(document).ready(function() {
             alert("Please fill in all the required fields.");
         }
     });
+
 
     $('#start-tracking').submit(async function (event) {
         event.preventDefault(); // Prevent the default form submission
@@ -309,13 +297,13 @@ $(document).ready(function() {
         try {
             // Fetch all shipment data
             const data = await fetchData(url_shipment_get);
-            const shipments = data.shipments;
+            const requests = data.requests;
     
             // Get the last shipment
-            const lastShipment = shipments[shipments.length - 1];
+            const lastShipment = requests[requests.length - 1];
     
             if (!lastShipment) {
-                alert('No shipments found.');
+                alert('No requests found.');
                 return;
             }
     
@@ -359,17 +347,17 @@ $(document).ready(function() {
     }
     
     // Function to plot shipment by its ID
-    async function plotShipmentByID(shipment_id) {
+    async function plotShipmentByID(request_id) {
         try {
             // Fetch the shipment data from the backend for the user
             const data = await fetchData(url_shipment_get);
-            const shipments = data.shipments;
+            const requests = data.requests;
     
             // Filter the shipment by the entered shipment ID
-            const filteredShipment = shipments.find(shipment => shipment.shipment_id === shipment_id);
+            const filteredShipment = requests.find(shipment => shipment.request_id === request_id);
     
             if (!filteredShipment) {
-                alert('Shipment ID not found.');
+                alert('Request ID not found.');
                 return;
             }
     
@@ -428,9 +416,9 @@ $(document).ready(function() {
     // Event listener for the "Plot Shipment" button
     $('#plot-shipment-form').submit(function(event) {
         event.preventDefault();
-        const shipment_id = $('#shipment-id-input').val(); // Assuming you have an input field for shipment ID
-        if (shipment_id) {
-            plotShipmentByID(shipment_id);
+        const request_id = $('#shipment-id-input').val(); // Assuming you have an input field for shipment ID
+        if (request_id) {
+            plotShipmentByID(request_id);
         } else {
             alert("Please enter a shipment ID.");
         }
@@ -441,13 +429,13 @@ $(document).ready(function() {
         $('#loadingIndicator').show();
         $('.body').empty();
         $('#reports_h').empty();
-        headershipments.forEach(function (header) {
+        headerRequsts.forEach(function (header) {
             $('#reports_h').append(`<th>${header}</th>`);
             });
         try {
             const data = await fetchData(url_shipment_get);
             console.log(data);
-            renderTable('r_table', 'ex-r_table', data.shipments, columnshipments);
+            renderTable('r_table', 'ex-r_table', data.requests, columnRequests);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -513,6 +501,7 @@ $(document).ready(function() {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
     }
+    
 
     function exportJSONData(data) {
         // Convert JSON data to CSV format
@@ -599,7 +588,7 @@ $(document).ready(function() {
     }
     $('#openCreateModalBtn').on('click', function() {
         const randomString = generateRandomString(7);
-        $('#shipment_id').text(randomString); // Append the random string to the element
+        $('#request_id').text(randomString); // Append the random string to the element
     });
 
     function generateRandomString(length) {
@@ -613,4 +602,13 @@ $(document).ready(function() {
     
         return result;
     }
+
+
+    // Shipment dashboard
+    $('#dashboard').on('click', function() {
+        console.log('Dashboard clicked');
+        $('#ex-r_table').css('display', 'none');
+    }
+    );
+
 });

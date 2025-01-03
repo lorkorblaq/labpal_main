@@ -38,47 +38,11 @@
                         <a href="https://labpal.com.ng/app" class="logo">
                             <img src="../static/images/labpal_small.png" alt="">
                         </a>
-                        <a href="/app/dashboard" id="dashboard" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a> 
-                        <a href="/app/events" id="events" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-feather-alt"></i>
-                            <span>Events</span>
-                        </a>
-                        <a href="/app/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-dolly"></i>
-                            <span>Inventory</span>
-                        </a>
-                        <a href="/app/in-use" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-play"></i>
-                            <span>In Use</span>
-                        </a>
-                        <a href="/app/channels" class="list-group-item list-group-item-action bg-dark"  >
-                            <i class="fas fa-exchange-alt"></i>
-                            <span>Channels</span>
-                        </a>
-                        <a href="/app/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-calendar-times icon"></i>
-                            <span>Lots & Exp.</span>
-                        </a>
-                        <a href="/app/logistics" id="logistics" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-truck"></i>
-                            <span>Shipments</span>
-                        </a>
-                        <a href="/app/request-pickup" id="request-pickup" class="list-group-item list-group-item-action bg-dark">
+                        <a href="/app/pickup" id="request-pickup" class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-shipping-fast"></i>
                             <span>Sample Pickup</span>
                         </a>
-                        <a href="/app/gpt" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-brain"></i> 
-                            <span>LabGPT</span>
-                        </a> 
-                        
-                        <!-- <a href="/chat" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-users icon"></i>
-                            <span>Team</span>
-                        </a> -->
+
                     </div>
 
                     <div class="su">
@@ -90,7 +54,7 @@
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
-                        <a href="{{url_for('auth.logout')}}"class="list-group-item list-group-item-action bg-dark">
+                        <a href="{{url_for('authClient.logout')}}"class="list-group-item list-group-item-action bg-dark">
                             <i class="fas fa-door-open"></i>
                             <span>Log out</span>
                         </a>

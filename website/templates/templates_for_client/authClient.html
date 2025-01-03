@@ -14,15 +14,13 @@
         </a>
         <div class="container">
             <div id="lab_org">
-                <button id="reg_org">To register Org...<i class="fas fa-hand-point-up"></i>.</button>
-                <button id="reg_lab">To register Lab...<i class="fas fa-hand-point-up"></i>.</button>
             </div>
             <div class="signUp">
-                <form class="signUp" action="{{ url_for('auth.signup_signin') }}" method="post">
-                    <h5>Create Staff Account</h5>
+                <form class="signUp" action="{{ url_for('authClient.signup_signin') }}" method="post">
+                    <h5>Create User Account</h5>
                     {{ register_form.hidden_tag() }}
-                    {{ register_form.org_id }}
-                    {{ register_form.lab }}
+                    {{ register_form.org_name }}
+                    {{ register_form.center_name }}
                     {{ register_form.firstname }}
                     {{ register_form.lastname }}
                     {{ register_form.email }}
@@ -31,7 +29,7 @@
                 </form>
             </div>
             <div class="signIn">
-                <form id="signinform" action="{{ url_for('auth.signup_signin') }}" method="post">
+                <form id="signinform" action="{{ url_for('authClient.signup_signin') }}" method="post">
                     <h5>Welcome</br>Back!</h5>
                     {{ login_form.hidden_tag() }}
                     {{ login_form.email }}
@@ -54,7 +52,7 @@
         </div>
         <!-- Modal -->
         <div id="myModal_org" class="modal">
-        <form class="regLab modal-content" action="{{ url_for('auth.signup_signin') }}" method="post">
+        <form class="regLab modal-content" action="{{ url_for('authClient.signup_signin') }}" method="post">
                 <span class="close">&times;</span>
                 <h5>Register Your Organisation</h5>
                 <p>Fill in the details to register your Org.</p>
@@ -69,7 +67,7 @@
             </form>
         </div>
         <div id="myModal_lab" class="modal">
-            <form class="regOrg modal-content" action="{{ url_for('auth.signup_signin') }}" method="post">
+            <form class="regOrg modal-content" action="{{ url_for('authClient.signup_signin') }}" method="post">
                 <span class="close">&times;</span>
                 <h5>Register Your Laboratory</h5>
                 <p>Fill in the details to register your Lab.</p>

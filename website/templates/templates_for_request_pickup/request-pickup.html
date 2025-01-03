@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="../static/css/channels.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -10,10 +9,10 @@
 {% block body %}
 <main>
     <div class="container mt-5">
-        <h2 class="text-center">Shipments Tracking</h2>
+        <h2 class="text-center">Request Pickup Tracking</h2>
         <div style="text-align: center;">
-            <button type="button" class="" id="openCreateModalBtn" data-toggle="modal" data-target="#createModal">
-                Create
+            <button type="button" class="" data-toggle="modal" data-target="#acceptModal">
+                Accept
             </button>
             <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
                 Pick up
@@ -24,13 +23,17 @@
             <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
                 Shipment Mapping
             </button>
+            <button type="button" class="" data-toggle="modal" id="dashboard">
+                Dashboard
+            </button>
+        </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Create Shipment</h5>
+                        <h5 class="modal-title" id="myModalLabel">Accept Request-pickup</h5>
                         <button type="button" class="" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -38,41 +41,17 @@
                     <div class="modal-body">
                         <form id="logistics-form" class="mt-4">
                             <div class="form-group">
-                                <h6>Shipment ID: <i id='shipment_id'></i> </h6>
-                                <label for="pickup-location">Enter Pickup Lab</label>
-                                <input type="text" class="form-control autoInputLabs" id="pickup-location" placeholder="Enter Locations...">
-            
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dropoff-location">Select Drop-off Location</label>
-                                <input type="text" class="form-control autoInputLabs" id="dropoff-location" placeholder="Enter Locations...">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="input-box">Number of packs</label>
-                                <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of packs" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="input-box">Weight of packs</label>
-                                <input type="text" class="form-control" id="weight" placeholder="Enter weight of packs" required>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Enter description" required>
-                            </div>
-                            
+                                <label for="input-box">Request ID</label>
+                                <input type="text" class="form-control" id="accept-request-id" placeholder="Enter request ID" required>
+                            </div>  
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="create" class="">Create</button>
+                        <button type="button" id="accepted" class="">Accept</button>
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>  
         <div class="modal fade" id="pickUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -96,12 +75,11 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="dropUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Drop Shipment</h5>
+                        <h5 class="modal-title" id="myModalLabel">Drop off Sample Request</h5>
                         <button type="button" class="" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -109,17 +87,18 @@
                     <div class="modal-body">
                         <form id="logistics-form" class="mt-4">
                             <div class="form-group">
-                                <label for="input-box">Shipment ID</label>
-                                <input type="text" class="form-control" id="drop-shipment-id" placeholder="Enter shipment ID" required>
+                                <label for="input-box">Request ID</label>
+                                <input type="text" class="form-control" id="drop-off-shipment-id" placeholder="Enter request ID" required>
                             </div>  
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="drop-off" class="">Dropped</button>
+                        <button type="button" id="dropped-off" class="">Drop Off</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
+
 
         <div class="modal fade" id="mappingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -135,6 +114,31 @@
                         <form id="plot-shipment-form">
                             <input type="text" id="shipment-id-input" placeholder="Enter Shipment ID">
                             <button type="submit">Map Shipment</button>
+                        </form>
+                        <br>
+                        <div id="map" style="width: 100%; height: 500px;"></div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="dashboardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Track your order</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="plot-shipment-form">
+                            <input type="text" id="shipment-id-input" placeholder="Enter Shipment ID">
+                            <button type="submit">Track ID</button>
                         </form>
                         <br>
                         <div id="map" style="width: 100%; height: 500px;"></div>
@@ -163,12 +167,13 @@
 
         <div id="location-status" class="mt-3"></div>
 
+
     </div>
 </main>
 {% endblock %}
 
 {% block scripts %}
-    <script src="../static/static_for_logistics/logistics.js" type="text/javascript"></script>
+    <script src="../static/static_for_request_pickup/request-pickup.js" type="text/javascript"></script>
 
     <!-- Include Leaflet.js -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>

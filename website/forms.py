@@ -17,12 +17,14 @@ class LabForm(FlaskForm):
     managers_firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"Managers first name"})
     managers_lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Managers last name"})
     managers_email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Managers Email address"})
+    password = PasswordField('Password',validators=[DataRequired(), ],  render_kw={"placeholder":"Managers Password"})
     submit = SubmitField('create lab')
-
 
 class RegistrationForm(FlaskForm):
     org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation ID"})
+    org_name = StringField('orgName', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation Name"})
     lab = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    center_name = StringField('center', validators=[Length(min=4, max=20)], render_kw={"placeholder":"Your center name"})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Last name"})
     email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Email address"})
@@ -30,16 +32,10 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder":"Verify password"})
     submit = SubmitField('Sign Up')
 
-    # def organisation_id(self, id):
-    #     ordid = User.query.filter_by(username=username.data).first()
-    #     if user:
-    #         raise ValidationError('That username is taken. Please choose a different one.')
-
 class LoginForm(FlaskForm):
     email = EmailField('Email', validators=[DataRequired(), Email(),],  render_kw={"placeholder":"Email address"})
     password = PasswordField('Password',validators=[DataRequired()],  render_kw={"placeholder":"Password"})
     submit = SubmitField('Login')
-
 
 class Resetpassword(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()],  render_kw={"email":"Email address"})

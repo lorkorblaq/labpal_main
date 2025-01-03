@@ -14,6 +14,7 @@ $(document).ready(function() {
     
 
     const user_id = getCookie('user_id');
+    const role = getCookie('role');
     const url_event_todo_push = `${BaseUrl}/to-do/push/${user_id}/`;
     const url_event_todo_put = `${BaseUrl}/to-do/put/${user_id}/`;
     const url_event_todo_get_one = `${BaseUrl}/to-do/get/${user_id}/`;

@@ -12,6 +12,7 @@
             <!-- <a class="nav-link" id="not-btn">Notifications</a> -->
             <a class="nav-link" id="data-btn">Data Center</a>
             <a class="nav-link" id="bill-btn">Billing</a>
+            <a class="nav-link" id="mem-btn">Members</a>
         </nav>
         <hr>
         <div class="row" id="security">
@@ -365,6 +366,127 @@
                                         <tr>
                                             <th class="border-gray-200" scope="col">Transaction ID</th>
                                             <th class="border-gray-200" scope="col">Date</th>
+                                            <th class="border-gray-200" scope="col">Amount</th>
+                                            <th class="border-gray-200" scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                           
+                                        </tr>
+                                        <tr>
+                                           
+                                        </tr>
+                                        <tr>
+                                            
+                                        </tr>
+                                        <tr>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modals -->
+            <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <!-- Card 1 -->
+                                    <div class="col-md-6">
+                                        <div class="card mb-4 pricing-plan">
+                                            <h3>Basic</h3>
+                                            <p>₦7500/month</p>
+                                            <button id="basic-btn" >Choose plan</button>
+                                        </div>
+                                    </div>
+            
+                                    <!-- Card 2 -->
+                                    <div class="col-md-6">
+                                        <div class="card mb-4 pricing-plan">
+                                            <h3>Premium</h3>
+                                            <p>₦9500/month</p>
+                                            <button id="premium-btn" >Choose plan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row" id ="members">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <!-- Billing card 1-->
+                    <div class="card h-100 border-start-lg border-start-primary card1">
+                        <div class="card-body">
+                            <div class="small text-muted">Managers</div>
+                            <div class="h3"></div>
+                            <a class="text-arrow-icon small" id="yearlySwitch" href="#!">
+                                Switch to yearly billing
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <!-- Billing card 2-->
+                    <div class="card h-100 border-start-lg border-start-secondary card2">
+                        <div class="card-body">
+                            <div id="due_date" class="small text-muted">Workers</div>
+                            <div class="h3"></div>
+                            <a class="text-arrow-icon small text-secondary" id="currentPlanUpgrade" href="#!">
+                                Make payment
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-lg-4 mb-4">
+                    <!-- Billing card 3-->
+                    <div class="card h-100 border-start-lg border-start-success card3">
+                        <div class="card-body">
+                            <div class="small text-muted">Client</div>
+                            <div id="plan" class="h3 d-flex align-items-center"></div>
+                            <a class="text-arrow-icon small text-success" id="upgrade-btn" href="#!">
+                                Upgrade plan
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Membership history card-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header">Membership list</div>
+                        <div class="card-body p-0">
+                            <!-- Billing history table-->
+                            <div class="table-responsive table-billing-history">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-gray-200" scope="col">User ID</th>
+                                            <th class="border-gray-200" scope="col">First name</th>
+                                            <th class="border-gray-200" scope="col">Last name</th>
+                                            <th class="border-gray-200" scope="col">Email Address</th>
+                                            <th class="border-gray-200" scope="col">Role</th>
                                             <th class="border-gray-200" scope="col">Amount</th>
                                             <th class="border-gray-200" scope="col">Status</th>
                                         </tr>

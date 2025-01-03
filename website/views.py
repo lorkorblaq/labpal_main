@@ -122,6 +122,11 @@ def gpt():
 def logistics():
     return render_template("/templates_for_logistics/logistics.html", data=data)
 
+@views.route("/app/request-pickup",  strict_slashes=False)
+@auth_required
+def requestPickup():
+    return render_template("/templates_for_request_pickup/request-pickup.html", data=data)
+
 @views.route("/app/user-profile",  strict_slashes=False)
 @auth_required
 def userProfile():
@@ -148,6 +153,7 @@ def settings():
     new_pass = Newpassword()
     return render_template("settings.html", new_pass=new_pass, name=session['name'], email=session['email'])
 # subscriptions = []
+
 @views.route("/subscription", methods=["GET", "POST"])
 def subscription():
     """

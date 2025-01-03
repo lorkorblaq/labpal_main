@@ -16,6 +16,7 @@ $(function () {
 
     const user_id = getCookie('user_id');
     const lab_name = getCookie('lab_name');
+    const role = getCookie('role');
     const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
     const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     const machine_url = `${BaseUrl}/machines/get/${user_id}/${lab_name}/`;

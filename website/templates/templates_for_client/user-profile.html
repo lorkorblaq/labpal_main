@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="../static/css/user-profile.css">
+{% endblock head %}
+
+{% block body %}
+        <main>
+            <div class="col-9">
+              <div class="container">
+                <div class="main-body" id="userContainer">
+                  <h1>User Profile</h1>
+                    <div class="row gutters-sm">
+                      <div class="col-md-5 mb-5">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                              <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"> -->
+                              <div class="mt- user_desk">
+                                <div id="upload_image" onclick="document.getElementById('image_input').click();">
+                                <img id="image_profile" src="" alt="No profile image? Upload.">
+                                  <input type="file" id="image_input" style="display: none;">
+                                  <i class="fas fa-upload upload_btn"></i>
+                                </div>
+                                <br>
+                                <h4 id="name"></h4>
+                                <h5 class="mb-1 title"></h5>
+                                <h6 class="mb-1" id="orgi">Organisation ID: {{data.org_id}}</h6>
+                                <h6 class="mb-1" id="orgh">Organisation Name: {{data.org_name}}</h6>
+
+                                <!-- <p class=" mb-1" id="id">{{data.part_id}}</p> -->
+                                <p class=" mb-1" id="id">Laboratory: {{data.lab_name}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-7" id="form1">
+                        <div class="card mb-3">
+                          <div class="card-body card-user">
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">First Name</h6>
+                                
+                              </div>
+                              <div class="col-sm-9 text-secondary" id="firstName">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Last Name</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary" id="lastName">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Job role</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary title">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0" >Email Addr.</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary" id="emailAddr">
+                              </div>
+                            </div>  
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Mobile No.</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary" id="mobileNumb">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Address</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary" id="address">
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <button class="" id="editButton">Edit</button>
+                                <button class="" id="saveButton" style="display: none;">Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/js/user-profile.js" type="text/javascript"></script>
+{% endblock %}
