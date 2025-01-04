@@ -15,12 +15,13 @@ $(function() {
     const user_id = getCookie('user_id');
     const lab_name = getCookie('lab_name');
     const url_event_get_all = `${BaseUrl}/events/get/${user_id}/${lab_name}/`;
-    const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`
+    const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`;
 
     async function fetchData(url) {
         // Fetch data from the provided URL
         return $.get(url);
     }
+    
     $('#overview-btn').click(function() {
         $("#monitoring").hide();
         $("#reports").hide();
@@ -49,10 +50,27 @@ $(function() {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     });
 
-
     $('#operations-btn').click(function(){
         var url = url_event_get_all + 'operations' + '/';
         renderTable('oper-r_table', 'ex-oper-r_table', url, ColumnsOperationsEvents, HeadersOperationsEvents);``
+    });
+
+    $('#direction').click(async function() {
+        console.log("Clicked"); 
+        var currentDirection = $(this).data('direction');
+    
+        // Toggle the icon based on the current direction
+        if (currentDirection === 'right') {
+          // Change to left arrow
+          $(this).removeClass('fa-arrow-circle-right').addClass('fa-arrow-circle-left');
+          // Update data-direction attribute
+          $(this).data('direction', 'left');
+        } else {
+          // Change to right arrow
+          $(this).removeClass('fa-arrow-circle-left').addClass('fa-arrow-circle-right');
+          // Update data-direction attribute
+          $(this).data('direction', 'right');
+        }
     });
 
     $('#applyFilter').click(async function () {
@@ -60,7 +78,16 @@ $(function() {
             // Fetch shipment data
             const shipmentData = await fetchData(url_shipment_get);
             console.log("Shipment Data:", shipmentData.shipments);
-    
+
+            var direction = $('#direction').data('direction');
+            $('#direction').data('direction', 'left');
+            var updatedDirection = $('.fa-arrow-circle-right').data('direction');
+
+
+            console.log("Direction:", updatedDirection);
+
+
+
             // Get filter values
             const dateRange = $('#machine-date-range').val(); // Date range input
             const fromLocation = $('#fromLocation').val(); // "From" location input
@@ -72,12 +99,10 @@ $(function() {
     
             // Filter shipments based on criteria
             const filteredShipments = shipmentData.shipments.filter(shipment => {
-                const pickupTime = new Date(shipment.pickup_time);
-    
+                const pickupTime = new Date(shipment.pickup_time);    
                 const matchesDateRange =
                     (!startDate || pickupTime >= startDate) &&
                     (!endDate || pickupTime <= endDate);
-    
                 const matchesFromLocation =
                     !fromLocation || shipment.pickup_loc.includes(fromLocation);
     

@@ -1,7 +1,7 @@
 $(function () {
     console.log("MAIN ready");
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://127.0.0.1:3000/api"
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://127.0.0.1:3000/api"
 
     function getCookie(name) {
         const cookieArr = document.cookie.split("; ");
@@ -62,7 +62,26 @@ $(function () {
                     response(labs_name);
                     },
                 error: function (error) {
-                    console.error("Error fetching lot data:", error);
+                    console.error("Error fetching labs name data:", error);
+                    }
+                });
+            },
+        });
+    $('.autoInputRegions').typeahead({
+        source: function (request, response) {
+            $.ajax({
+                url: labs_url, // Replace with your API endpoint for item search
+                method: "GET",
+                data: { term: request.term },
+                dataType: "json",
+                success: function (data) {
+                    console.log("Retrieved data:", data);
+                    const regions_name = data.labs.map(lab => lab.region);
+                    console.log(regions_name);
+                    response(regions_name);
+                    },
+                error: function (error) {
+                    console.error("Error fetching region data:", error);
                     }
                 });
             },
