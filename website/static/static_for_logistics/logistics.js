@@ -14,8 +14,8 @@ $(document).ready(function() {
     BaseUrl = "http://0.0.0.0:3000/api";
     // BaseUrl = "https://labpal.com.ng/api";
 
-    const columnshipments = ['shipment_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'numb_of_packs', 'weight', 'create_lat_lng', 'pickup_lat_lng', 'dropoff_lat_lng', 'created_by','picked_by','dropoff_by', 'description'];
-    const headershipments = ['Shipment Id','Completed', 'Created ⏰', 'Pickup ⏰', 'Dropoff ⏰',' Duration⏰', 'Pickup Loc.', 'Dropoff Loc.', 'No. of packs', 'Weight', 'Created lat/lng', 'Pick Up lat/lng','Drop Off lat/lng', 'Created by','Picked by','Dropped by', 'Description'];
+    const columnshipments = ['created_at', 'shipment_id', 'status', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'created_by','picked_by','dropoff_by', 'description'];
+    const headershipments = ['Created', 'Shipment Id','Status', 'Picked at', 'Dropped at',' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of packs', 'Weight', 'Vendor', 'Created by','Picked by','Dropped by', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -36,15 +36,17 @@ $(document).ready(function() {
 
     $("#create").click(function() {
         // Get form data
-        var shipment_id = $('#shipment_id').text();
+        // var shipment_id = $('#shipment_id').text();
         var pickupLocation = $("#pickup-location").val();
         var dropoffLocation = $("#dropoff-location").val();
+        var top = $("#top").val();
         var numb_of_packs = $("#numb_of_packs").val();
         var weight = $("#weight").val();
+        var vendor = $("#vendor").val();
         var description = $("#description").val();
-        console.log(url_shipment_push)
+        console.log(description)
         // Check if all required form fields are filled
-        if (shipment_id) {
+        if (pickupLocation && dropoffLocation && numb_of_packs && weight) {
             // Check if Geolocation is supported
             if (navigator.geolocation) {
                 // Get current position
@@ -61,9 +63,11 @@ $(document).ready(function() {
                     completed = true;
                     data = {
                         created_at: created_at,
-                        shipment_id: shipment_id,
+                        // shipment_id: shipment_id,
+                        top: top,
                         numb_of_packs: numb_of_packs,
                         weight: weight,
+                        vendor: vendor,
                         pickup_loc: pickupLocation,
                         dropoff_loc: dropoffLocation,
                         create_lat_lng: createLatLngString,
@@ -597,10 +601,10 @@ $(document).ready(function() {
         printWindow.document.close();
         printWindow.print();
     }
-    $('#openCreateModalBtn').on('click', function() {
-        const randomString = generateRandomString(7);
-        $('#shipment_id').text(randomString); // Append the random string to the element
-    });
+    // $('#openCreateModalBtn').on('click', function() {
+    //     const randomString = generateRandomString(7);
+    //     $('#shipment_id').text(randomString); // Append the random string to the element
+    // });
 
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

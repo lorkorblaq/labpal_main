@@ -14,6 +14,9 @@
             <button type="button" class="" data-toggle="modal" data-target="#acceptModal">
                 Accept
             </button>
+            <button type="button" class="" data-toggle="modal" data-target="#assignModal">
+                Assign
+            </button>
             <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
                 Pick up
             </button>
@@ -48,6 +51,31 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="accepted" class="">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="assignModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Assign to pickup</h5>
+                        <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="logistics-form" class="mt-4">
+                            <div class="form-group">
+                                <label for="input-box">Request ID</label>
+                                <input type="text" class="form-control" id="accept-request-id" placeholder="Enter request ID" required>
+                                <br>
+                                <input type="text" class="form-control" id="assign-rider" placeholder="Enter riders name" required>
+                            </div>  
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="accepted" class="">Assign</button>
                     </div>
                 </div>
             </div>

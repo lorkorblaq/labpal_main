@@ -48,6 +48,24 @@ $(function () {
     //             });
     //         },
     //     });
+    $('.autoInputName').typeahead({
+        source: function (request, response) {
+            $.ajax({
+                url: item_url, // Replace with your API endpoint for item search
+                method: "GET",
+                data: { term: request.term },
+                dataType: "json",
+                success: function (data) {
+                    console.log("Retrieved data:", data);
+                    const itemNames = data.items.map(item => item.item);
+                    response(itemNames);
+                    },
+                error: function (error) {
+                    console.error("Error fetching item data:", error);
+                    }
+                });
+            },
+        });
     $('.autoInputLabs').typeahead({
         source: function (request, response) {
             $.ajax({

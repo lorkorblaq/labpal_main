@@ -325,7 +325,6 @@ $(document).ready(function() {
             });
         try {
             const data = await fetchData(url_shipment_get);
-            console.log(data);
             renderTable('r_table', 'ex-r_table', data.requests, columnRequests);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -334,38 +333,91 @@ $(document).ready(function() {
     }
     loadData();
 
+    // function renderTable(tableId, exTableId, data, columns) {
+    //     // Helper function to convert minutes to D:H:M format
+    //     function formatDuration(minutes) {
+    //         const days = Math.floor(minutes / (24 * 60));
+    //         const hours = Math.floor((minutes % (24 * 60)) / 60);
+    //         const mins = minutes % 60;
+    
+    //         return `${days}D:${hours}H:${mins}M`;
+    //     }
+    
+    //     // Destroy the existing DataTable instance for the specified table ID (if it exists)
+    //     if (dataTableInstance) {
+    //         dataTableInstance.destroy();
+    //     }
+    
+    //     // Map the columns, applying the formatDuration function to the 'duration' field
+    //     dataTableInstance = $(`#${tableId}`).DataTable({
+    //         data: data,
+    //         columns: columns.map(col => {
+    //             if (col === 'duration') {
+    //                 // Apply custom formatting to the duration column
+    //                 return {
+    //                     data: col,
+    //                     render: function(data, type, row) {
+    //                         if (type === 'display' && data !== null) {
+    //                             return formatDuration(data); // Convert minutes to D:H:M format
+    //                         }
+    //                         return data;
+    //                     }
+    //                 };
+    //             }
+    //             // Default behavior for other columns
+    //             return { data: col };
+    //         }),
+    //         columnDefs: [
+    //             {
+    //                 data: null,
+    //                 defaultContent:
+    //                 '<button class="tablebtn" id="btn-delete"><i class="fas fa-trash-alt"></i></button>'
+    //             },
+    //         ],
+    //         order: [[1, 'desc']]
+    //     });
+    
+    //     // Add export and print buttons
+    //     var exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
+    //     var printButton = $('<button>').text(' Print').addClass('button fas fa-print');
+    //     exportButton.click(function() {
+    //         exportJSONData(data);
+    //     });
+    //     printButton.click(function() {
+    //         printJSONDataAsCSV(data);
+    //     });
+    
+    //     if ($(`#${exTableId}`).find('.button').length === 0) {
+    //         $(`#${exTableId}`).append(exportButton).append(printButton);
+    //     }
+    // }
+
     function renderTable(tableId, exTableId, data, columns) {
-        // Helper function to convert minutes to D:H:M format
         function formatDuration(minutes) {
             const days = Math.floor(minutes / (24 * 60));
             const hours = Math.floor((minutes % (24 * 60)) / 60);
             const mins = minutes % 60;
-    
             return `${days}D:${hours}H:${mins}M`;
         }
     
-        // Destroy the existing DataTable instance for the specified table ID (if it exists)
         if (dataTableInstance) {
             dataTableInstance.destroy();
         }
     
-        // Map the columns, applying the formatDuration function to the 'duration' field
         dataTableInstance = $(`#${tableId}`).DataTable({
             data: data,
             columns: columns.map(col => {
                 if (col === 'duration') {
-                    // Apply custom formatting to the duration column
                     return {
                         data: col,
                         render: function(data, type, row) {
                             if (type === 'display' && data !== null) {
-                                return formatDuration(data); // Convert minutes to D:H:M format
+                                return formatDuration(data);
                             }
                             return data;
                         }
                     };
                 }
-                // Default behavior for other columns
                 return { data: col };
             }),
             columnDefs: [
@@ -378,7 +430,15 @@ $(document).ready(function() {
             order: [[1, 'desc']]
         });
     
-        // Add export and print buttons
+        $(`#${tableId} tbody`).on('click', 'tr', function () {
+            var rowData = dataTableInstance.row(this).data();
+    
+            var trackingInfoHtml = createTrackingTimeline(rowData);
+            console.log(trackingInfoHtml);
+            $('#mappingModal').modal('show');
+            $('#tracking-info').html(trackingInfoHtml);
+        });        
+    
         var exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
         var printButton = $('<button>').text(' Print').addClass('button fas fa-print');
         exportButton.click(function() {
@@ -393,6 +453,80 @@ $(document).ready(function() {
         }
     }
     
+    function createTrackingTimeline(rowData) {
+        function formatTimeFromTimestamp(rowData, timestampField) {
+            // Check if the timestampField exists and is valid
+            const timestamp = new Date(rowData[timestampField]);
+        
+            if (isNaN(timestamp)) {
+                return 'Invalid timestamp';  // Return if the timestamp is invalid
+            }
+        
+            // Extract hours, minutes, and seconds, ensuring two-digit format
+            const hours = String(timestamp.getHours()).padStart(2, '0');
+            const minutes = String(timestamp.getMinutes()).padStart(2, '0');
+            const seconds = String(timestamp.getSeconds()).padStart(2, '0');
+        
+            // Return formatted time in HH:MM:SS format
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        console.log(rowData);
+        const statuses = [
+            {
+                status: "Request Received", 
+                details: "Waiting for the Lab. to confirm your request.", 
+                time: formatTimeFromTimestamp(rowData, 'accepted_time'), 
+                completed: rowData.accepted === "yes", // or another relevant field from your data
+            },            
+            { 
+                status: "Rider loop", 
+                details: "Searching for the closest rider to assign.", 
+                time: formatTimeFromTimestamp(rowData, 'assignedTime'), 
+                completed: rowData.assigned === "yes", // or another relevant field from your data
+
+            },
+            { 
+                status: "Rider assigned", 
+                details: "A rider has been assigned and is on their way to pickup.", 
+                time: formatTimeFromTimestamp(rowData, 'enrouteTime'), 
+                completed: rowData.enroute === "yes" 
+            },
+            { 
+                status: "Rider At Your Place", 
+                details: "Rider is waiting to pick up your samples.", 
+                time: formatTimeFromTimestamp(rowData, 'atPickupTime'), 
+                completed: rowData.atPickup === "yes" 
+            },
+            { 
+                status: "Samples Picked Up", 
+                details: "Samples have been picked up and are on their way to the lab.", 
+                time: formatTimeFromTimestamp(rowData, 'pickup_time'), 
+                completed: rowData.picked === "yes" 
+            },
+            { 
+                status: "Samples Dropped Off", 
+                details: "Samples have been dropped off at the lab.", 
+                time: formatTimeFromTimestamp(rowData, 'dropoff_time'), 
+                completed: rowData.completed === "yes" 
+            }
+        ];
+    
+        let timelineHtml = '<div class="timeline">';
+        statuses.forEach(status => {
+            const completedClass = status.completed ? 'completed' : 'pending';
+            timelineHtml += `
+                <div class="timeline-item ${completedClass}">
+                    <div class="timeline-status">${status.status}</div>
+                    <div class="timeline-details">${status.details}</div>
+                    <div class="timeline-time">${status.time}</div>
+                </div>
+            `;
+        });
+        timelineHtml += '</div>';
+    
+        return timelineHtml;
+    }
 
     function exportJSONData(data) {
         // Convert JSON data to CSV format
@@ -505,71 +639,6 @@ $(document).ready(function() {
     );
 
 
-
-
-
-    // Sample JSON response from the database
-    const response = {
-        "_id": { "$oid": "676fb569fb709aa659a5b966" },
-        "created_by": "Olorunfemi Oloko",
-        "created_at": { "$date": "2024-12-28T09:23:04.882Z" },
-        "request_id": "IFom86T",
-        "pickup_loc": "clinicals_lagos",
-        "dropoff_loc": "city_hospital_ikeja",
-        "numb_of_samples": 3,
-        "delivery_status": "In Transit",
-        "eta": "2024-12-28T10:30:00Z",
-        "description": "Safe",
-        "completed": "No",
-        "accepted": "Yes",
-        "rider_info": {
-            "name": "Miracle John",
-            "phone": "+2348012345678",
-            "vehicle": "Bike",
-            "current_lat_lng": "6.593421,3.350635"
-        },
-        "tracking_url": "https://yourapp.com/track/IFom86T"
-    };
-    // Example data for tracking timeline
-    const statuses = [
-        { status: "Request Received", details: "Waiting for the Lab. to confirm your request.", time: "10:47am", completed: true },
-        { status: "Rider loop", details: "Searching for the closest rider to asign.", time: "10:47am", completed: true },
-        { status: "Rider assigned", details: "A rider has been assigned and on there way to pickup.", time: "11:09am", completed: true },
-        { status: "Rider At Your Place", details: "Rider is waiting to pick up your samples.", time: "11:15am", completed: true },
-        { status: "Samples Picked Up", details: "Samples have been picked up and on     its way to the lab.", time: "11:16am", completed: false },
-        { status: "Samples Dropped Of", details: "Samples have been dropped off at the lab.", time: "11:16am", completed: false }
-    ];
-
-    // Function to populate tracking info dynamically
-    function populateTrackingInfo() {
-        // Clear previous content
-        const trackingInfo = $('#tracking-info');
-        trackingInfo.empty();
-
-        // Create the timeline container
-        const timeline = $('<div class="timeline"></div>');
-
-        // Add timeline items dynamically
-        statuses.forEach((entry) => {
-            const statusClass = entry.completed ? "completed" : "active";
-            const timelineItem = `
-                <div class="timeline-item ${statusClass}">
-                    <div class="status">${entry.status}</div>
-                    <div class="details">${entry.details}</div>
-                    <div class="time">${entry.time}</div>
-                </div>
-            `;
-            timeline.append(timelineItem);
-        });
-
-        // Append the timeline to tracking info
-        trackingInfo.append(timeline);
-    }
-
-    // Trigger the modal and populate tracking info
-    $('#mappingModal').on('show.bs.modal', function () {
-        populateTrackingInfo();
-    });
 
 
 });

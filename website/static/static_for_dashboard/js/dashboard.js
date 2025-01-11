@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(async function () {
     // BaseUrl = "https://labpal.com.ng/api";
     BaseUrl = "http://127.0.0.1:3000/api";
     function getCookie(name) {
@@ -73,61 +73,104 @@ $(function() {
         }
     });
 
+    const defaultDateRange = `${new Date(new Date().setDate(new Date().getDate() - 30)).toLocaleDateString()} - ${new Date().toLocaleDateString()}`;
+    const defaultRegion = 'north';
+
+    // Set default values to inputs
+    $('#machine-date-range').val(defaultDateRange);
+    $('#locRegion').val(defaultRegion);
+
+    await applyFilter();
     $('#applyFilter').click(async function () {
+        await applyFilter();
+    });
+
+    async function applyFilter() {
         try {
             // Fetch shipment data
             const shipmentData = await fetchData(url_shipment_get);
             console.log("Shipment Data:", shipmentData.shipments);
 
             var direction = $('#direction').data('direction');
-            $('#direction').data('direction', 'left');
-            var updatedDirection = $('.fa-arrow-circle-right').data('direction');
-
-
-            console.log("Direction:", updatedDirection);
-
-
+            var locRegion = $('#locRegion').val();
+            console.log("Direction:", direction);
 
             // Get filter values
             const dateRange = $('#machine-date-range').val(); // Date range input
-            const fromLocation = $('#fromLocation').val(); // "From" location input
-            const toLocation = $('#toLocation').val(); // "To" location input
-            console.log("Filter Values:", dateRange, fromLocation, toLocation);
-    
-            // Parse date range into start and end dates
             const [startDate, endDate] = dateRange.split(" - ").map(date => new Date(date.trim()));
-    
-            // Filter shipments based on criteria
-            const filteredShipments = shipmentData.shipments.filter(shipment => {
-                const pickupTime = new Date(shipment.pickup_time);    
-                const matchesDateRange =
-                    (!startDate || pickupTime >= startDate) &&
-                    (!endDate || pickupTime <= endDate);
-                const matchesFromLocation =
-                    !fromLocation || shipment.pickup_loc.includes(fromLocation);
-    
-                const matchesToLocation =
-                    !toLocation || shipment.dropoff_loc.includes(toLocation);
-                console.log("Matches:", matchesDateRange, matchesFromLocation, matchesToLocation);
-                return matchesDateRange && matchesFromLocation && matchesToLocation;
+
+            let filteredShipments = shipmentData.shipments.filter(shipment => {
+                const shipmentDate = new Date(shipment.created_at);
+                const isWithinDateRange = shipmentDate >= startDate && shipmentDate <= endDate;
+
+                if (direction === 'right') {
+                    return isWithinDateRange && shipment.to_region.includes(locRegion);
+                } else {
+                    return isWithinDateRange && shipment.from_region.includes(locRegion);
+                }
             });
+
             console.log("Filtered Shipments:", filteredShipments);
-            // Calculate totals
-            const totalWeight = filteredShipments.reduce((sum, shipment) => sum + shipment.weight, 0);
-            const totalPrice = filteredShipments.reduce((sum, shipment) => sum + calculatePrice(shipment), 0);
-            const shipmentCount = filteredShipments.length;
-    
-            // Update the cards dynamically
-            updateCard('#operationsBoard .col-lg-4:nth-child(1) .card-body span', `${totalWeight}kg`, "text-primary");
-            updateCard('#operationsBoard .col-lg-4:nth-child(2) .card-body span', `₦${totalPrice.toFixed(2)}`, "text-success");
-            updateCard('#operationsBoard .col-lg-4:nth-child(3) .card-body span', `${shipmentCount}`, "text-danger");
+
+            let totalWeight = 0;
+            let shipmentCount = filteredShipments.length;
+            console.log("Shipment Count:", shipmentCount);
+            filteredShipments.forEach(shipment => {
+                totalWeight += shipment.weight;
+            });
+            console.log("Total Weight:", totalWeight);
+
+            // Update cards
+            updateCard('#operationsBoard .col-lg-6:nth-child(1) .card-body span', `${totalWeight}kg`, "text-primary");
+            updateCard('#operationsBoard .col-lg-6:nth-child(2) .card-body span', `${shipmentCount}`, "text-danger");
+
+            // Populate the table
+            let shipmentTableBody = document.getElementById('shipmentTableBody');
+            shipmentTableBody.innerHTML = ''; // Clear existing rows
             
-            // Populate the shipment table
-            populateShipmentTable(filteredShipments);
+            let shipmentsByLab = {};
+            
+            filteredShipments.forEach(shipment => {
+                let lab;
+                if (direction === 'right') {
+                    lab = shipment.dropoff_loc;
+                    if (!shipmentsByLab[lab]) {
+                        shipmentsByLab[lab] = {
+                            count: 0,
+                            totalWeight: 0
+                        };
+                    }
+                    shipmentsByLab[lab].count += 1;
+                    shipmentsByLab[lab].totalWeight += shipment.weight;
+                } else {
+                    lab = shipment.pickup_loc;
+                    if (!shipmentsByLab[lab]) {
+                        shipmentsByLab[lab] = {
+                            count: 0,
+                            totalWeight: 0
+                        };
+                    }
+                    shipmentsByLab[lab].count += 1;
+                    shipmentsByLab[lab].totalWeight += shipment.weight;
+                }
+            });
+            
+            // Populate the table
+            Object.keys(shipmentsByLab).forEach(lab => {
+                let row = `
+                    <tr>
+                        <td>${lab}</td>
+                        <td>${shipmentsByLab[lab].count}</td>
+                        <td>${shipmentsByLab[lab].totalWeight}kg</td>
+                    </tr>
+                `;
+                shipmentTableBody.insertAdjacentHTML('beforeend', row);
+            });
+
         } catch (error) {
             console.error("Error fetching or processing data:", error);
         }
-    });
+    }
     
     // Helper function to calculate price (dummy implementation, update as needed)
     function calculatePrice(shipment) {

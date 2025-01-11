@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -206,7 +204,6 @@ $(document).ready(function() {
         }
     });
 
-
     $('#start-tracking').submit(async function (event) {
         event.preventDefault(); // Prevent the default form submission
 
@@ -214,6 +211,25 @@ $(document).ready(function() {
         await submitForm();
         refreshTable();
     });
+
+    $('.autoInputMemebers').typeahead({
+        source: function (request, response) {
+            $.ajax({
+                url: item_url, // Replace with your API endpoint for item search
+                method: "GET",
+                data: { term: request.term },
+                dataType: "json",
+                success: function (data) {
+                    console.log("Retrieved data:", data);
+                    const itemNames = data.items.map(item => item.item);
+                    response(itemNames);
+                    },
+                error: function (error) {
+                    console.error("Error fetching item data:", error);
+                    }
+                });
+            },
+        });
 
     async function submitForm() {
         var latitude = position.coords.latitude;
@@ -502,7 +518,6 @@ $(document).ready(function() {
         }
     }
     
-
     function exportJSONData(data) {
         // Convert JSON data to CSV format
         var csvContent = convertJSONToCSV(data);
@@ -602,13 +617,10 @@ $(document).ready(function() {
     
         return result;
     }
-
-
     // Shipment dashboard
     $('#dashboard').on('click', function() {
         console.log('Dashboard clicked');
         $('#ex-r_table').css('display', 'none');
-    }
-    );
+    });
 
 });

@@ -38,32 +38,52 @@
                     <div class="modal-body">
                         <form id="logistics-form" class="mt-4">
                             <div class="form-group">
-                                <h6>Shipment ID: <i id='shipment_id'></i> </h6>
+                                <!-- <h6>Shipment ID: <i id='shipment_id'></i> </h6> -->
                                 <label for="pickup-location">Enter Pickup Lab</label>
                                 <input type="text" class="form-control autoInputLabs" id="pickup-location" placeholder="Enter Locations...">
-            
                             </div>
-
                             <div class="form-group">
                                 <label for="dropoff-location">Select Drop-off Location</label>
                                 <input type="text" class="form-control autoInputLabs" id="dropoff-location" placeholder="Enter Locations...">
                             </div>
-
                             <div class="form-group">
-                                <label for="input-box">Number of packs</label>
-                                <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of packs" required>
+                                <select class="" id="top">
+                                    <option value="" disabled selected>Select a type of package</option>
+                                    <option value="carton">Carton</option>
+                                    <option value="pack">Pack</option>
+                                    <option value="parcel">Parcel</option>
+                                    <option value="stryoform">Stryoform</option>
+                                </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="input-box">Weight of packs</label>
+                                <label for="input-box">Number of Package</label>
+                                <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of package" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-box">Weight of packs(Kg)</label>
                                 <input type="text" class="form-control" id="weight" placeholder="Enter weight of packs" required>
                             </div>
-                    
                             <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Enter description" required>
+                                <select class="" id="vendor">
+                                    <option value="" disabled selected>Select a Vendor</option>
+                                    <option value="scs">SCS</option>
+                                    <option value="vircon">Vircon</option>
+                                    <option value="others">Others</option>
+                                </select>
                             </div>
-                            
+                            <div class="form-group">
+                                <select class="" id="description">
+                                    <option value="" disabled selected>Select a description</option>
+                                    <option value="inventory">Inventory</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="samples">Samples</option>
+                                    <option value="qualtiy(EQA/IQA)">Qualtiy(EQA/IQA)</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="others">Others</option>
+
+                                </select>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
