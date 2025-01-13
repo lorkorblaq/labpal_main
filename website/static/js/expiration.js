@@ -14,8 +14,8 @@ $(function () {
     }
     user_id = getCookie("user_id");
     lab_name = getCookie("lab_name");
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
     lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     async function fetchData(url) {
         const response = await fetch(url);
@@ -154,7 +154,7 @@ $(function () {
         });
         try {
             const data = await fetchData(lotexpUrl);
-            console.log(data.lotexp);
+            console.log(data);
             // renderExpireTable(data.lotexp, columnsLot);
             renderTable('expire_table', 'ex-expire_table', data.lotexp, columnsLot, headersLot);
 
