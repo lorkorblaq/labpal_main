@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DateField, BooleanField, EmailField
+from wtforms import StringField, PasswordField, SubmitField, DateField, BooleanField, EmailField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 import email_validator
 
@@ -14,6 +14,19 @@ class OrgForm(FlaskForm):
 class LabForm(FlaskForm):
     org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation Id"})
     lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    region = SelectField(
+        'Region', 
+        choices=[
+            ('', 'Select a region'),  # Placeholder option
+            ('north', 'North'),
+            ('east', 'East'),
+            ('west', 'West'),
+            ('south', 'South')
+        ],
+        validators=[DataRequired()],
+        render_kw={"placeholder": "Region"}
+    )    
+    area = StringField('area', validators=[ Length(min=4, max=20)], render_kw={"placeholder":"Area name"})
     managers_firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"Managers first name"})
     managers_lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Managers last name"})
     managers_email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Managers Email address"})

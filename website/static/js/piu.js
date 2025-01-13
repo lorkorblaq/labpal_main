@@ -3,8 +3,8 @@ $(function () {
     const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity(store-unit)', 'Description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://0.0.0.0:3000/api";
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
@@ -62,6 +62,14 @@ $(function () {
     
                     const item_data = await fetchData(item_url);
                     const lot_data = await fetchData(lot_url);
+                    if (!item_data.items) {
+                        alert("No items found, please add an item via inventory.");
+                        return;
+                    }
+                    if (!lot_data.lotexp) {
+                        alert("No lots found, please add a lot via channels.");
+                        return;
+                    }
     
                     // Check if the item is present in the fetched data
                     const itemExists = item_data.items.some(dataItem => dataItem.item === item);
@@ -90,25 +98,25 @@ $(function () {
                                 alert("Item put in use successfully");
                                 console.log(response);
                             },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                let errorMessage = "Could not insert data. Please make sure the item is in the inventory as is";
-                                if (jqXHR.responseJSON && jqXHR.responseJSON.message) {
-                                    errorMessage = jqXHR.responseJSON.message;
-
+                            error: function (xhr, status, error) {
+                                // Extract the error message from the server response
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    alert(xhr.responseJSON.message);  // Show the custom error message
+                                } else {
+                                    alert("An error occurred: " + error);  // Fallback for unknown errors
                                 }
-                                alert(errorMessage);
-                                console.error(errorThrown);
+                                console.error(xhr.responseText);  // Log the full response for debugging
                             },
                             complete: function () {
                                 // Hide the loading indicator after the request completes (success or error)
                                 $('#loadingIndicator').hide();
                             }
-                            
-                        });
+                        }); 
                     }
                     $('#loadingIndicator').hide();
                     
                 } catch (error) {
+                    alert("An error occurred: "+ error.responseJSON.message);
                     console.error("Error fetching data:", error);
                     // Ensure loading indicator is hidden in case of fetch errors
                     $('#loadingIndicator').hide();
@@ -242,7 +250,6 @@ $(function () {
         $(`#${tableId} thead`).empty();
         $(`#${tableId} thead`).append('<tr>' + columns.map(header => `<th>${header}</th>`));
 
-
         dataTableInstance = $(`#${tableId}`).DataTable({
             data: data,
             columns: columns.map(col => ({ data: col })),
@@ -257,8 +264,6 @@ $(function () {
             order: [[1, 'desc']]
         });
         dataTableInstance.column(0).visible(false);
-
-
 
         var exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
         var printButton = $('<button>').text(' Print').addClass('button fas fa-print');
@@ -364,6 +369,7 @@ $(function () {
     $('#print_request_button').click(function() {
         printTable('request_invent_table');
     });
+
     $('#r_table tbody').on('click', '#btn-delete', function () {
         var row = dataTableInstance.row($(this).parents('tr'));
         console.log(row);

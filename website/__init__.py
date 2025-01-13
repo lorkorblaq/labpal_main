@@ -26,9 +26,9 @@ def create_app():
     app.config['MONGO_URI'] = mongo_url
     
     # Email configuration for AWS SES SMTP
-    app.config['MAIL_SERVER'] = 'email-smtp.eu-north-1.amazonaws.com'
+    app.config['MAIL_SERVER'] = 'email-smtp.eu-west-1.amazonaws.com'
     app.config['MAIL_PORT'] = 465  # TLS Wrapper port
-    app.config['MAIL_USERNAME'] = 'AKIAQ3EGUQIIZITNA2FX'  # Replace with your SMTP username
+    app.config['MAIL_USERNAME'] = 'AKIAYDWHTGGLELRQDSFC'  # Replace with your SMTP username
     app.config['MAIL_PASSWORD'] = mail_password  # Replace with your SMTP password
     app.config['MAIL_USE_SSL'] = True  # Using SSL on port 465
     app.config['MAIL_USE_TLS'] = False  # SSL and TLS are mutually exclusive here

@@ -12,6 +12,7 @@
             <h1>Events</h1>
             <nav class="nav nav-borders mt-3">
                 <button class="" id="createButton">Create Event</button>
+                <a class="nav-link" id="incedence-btn" data-target="#incidenceEvents">Incidence Events</a>
                 <a class="nav-link" id="qc-btn" data-target="#QCEvents">Q.Control Events</a>
                 <a class="nav-link" id="maintenance-btn" data-target="#maintenanceEvents">Maintenance Events</a>
                 <a class="nav-link" id="machine-btn" data-target="#machineEvents">Machine Events</a>
@@ -46,6 +47,13 @@
                     <div class="description">
                         <h3>Operations</h3>
                         <p>Stock outs, personnel</p>
+                    </div>
+                </div>
+                <div class="tool" id="tool4">
+                    <div class="iconevents">✅</div>
+                    <div class="description">
+                        <h3>Incidences</h3>
+                        <p>Transcription error and all</p>
                     </div>
                 </div>
                 <button id="closebtn" class="close">Close</button>
@@ -110,7 +118,7 @@
                         <div class="menu-item" id="downtimes-tab">Downtime</div>
                         <div class="menu-item" id="troubleshooting-tab">Troubleshooting</div>
                     </div><br>
-                    <label><input type="checkbox" class="option-checkbox" data-value="resolved" id="machines-checkbox"> Resolved</label>
+                    <!-- <label><input type="checkbox" class="option-checkbox" data-value="resolved" id="machines-checkbox"> Resolved</label> -->
 
                     <div class="content" id="maintenance-content">
                         <label><input type="checkbox" class="option-checkbox" data-value="resolved" id="maintenance-checkbox"> Resolved</label><br>
@@ -198,6 +206,33 @@
             <!-- Add similar content for other tools as needed -->
         </div>
         <br>
+        <div class="events" id="incidenceEvents">
+            <h3>Incidence Events</h3>
+            <!-- <div class="filterContainer">
+                <h6>Select a date range:</h6>
+                <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
+                <input type="text"class="autoInputMachine" id="QCfilterMachine" placeholder="Enter Machine">
+                <input type="text" class="autoInputItem" id="filterItems" placeholder="Enter items">
+                <button class="applyFilter">Apply Filter</button>
+            </div> -->
+            <div class="eventContainer" id="QCeventContainer">
+                <!-- Cards will be dynamically added here -->
+            </div>
+            <div class="table-responsive" id ="ex-QCr_table">
+                <table class="table table-bordered table-striped" id="QCr_table">
+                    <h6>Select a date range:</h6>
+                    <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
+                    <thead class="head thead-dark">
+                        <tr id="">
+                        </tr>
+                    </thead>
+                    <tbody id="tbody" class="body" >
+                        <tr id=''>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <div class="events" id="QCEvents">
             <h3>Quality Control Events</h3>
@@ -247,25 +282,6 @@
 
         <div class="events" id="machineEvents">
             <h3>Machine Events</h3>
-            <!--<div class="filterContainer">
-                <h6>Select a date range:</h6>
-                <input type="text" class="date-range" id="machine-date-range" placeholder="Select date range">
-                <input type="text" class="autoInputMachine" id="MfilterMachine" placeholder="Enter Machine name">
-
-                <input type="text" id="filterType" placeholder="Enter Type of machine event">
-                
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <a class="dropdown-item" type="button">Action</a>
-                      <a class="dropdown-item" type="button">Another action</a>
-                      <a class="dropdown-item" type="button">Something else here</a>
-                    </div>
-                  </div> 
-                <button class="applyFilter">Apply Filter</button>
-            </div> -->
             <div class="eventContainer" id="machineEventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>

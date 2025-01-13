@@ -191,10 +191,9 @@ def signup_signin():
     
     if 'signup' in request.form:
         org_id = register_form.org_id.data
-        # lab_name = register_form.lab.data.strip().lower()
-        lab_name = register_form.lab.data.strip().lower()
-        firstname = register_form.firstname.data
-        lastname = register_form.lastname.data
+        lab_name = register_form.lab.data.strip().lower().replace(' ', '_')
+        firstname = register_form.firstname.data.strip().lower()
+        lastname = register_form.lastname.data.strip().lower()
         email = register_form.email.data.strip().lower()
         print(lab_name)
         try:
@@ -341,6 +340,8 @@ def signup_signin():
             return redirect(url_for('auth.auth_page'))
 
     elif 'create lab' in request.form:
+        region = labform.region.data
+        area = labform.area.data.strip().lower().replace(' ', '_')
         lab_name = labform.lab_name.data.strip().lower().replace(' ', '_')
         managers_email = labform.managers_email.data.strip().lower()
         password = labform.password.data
@@ -395,6 +396,8 @@ def signup_signin():
 
 
             lab_data = {
+                "region": region,
+                "area": area,
                 "lab_name": lab_name,
                 "managers_email": managers_email,
                 "users": [str(user_id)],

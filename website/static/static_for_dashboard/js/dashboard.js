@@ -56,7 +56,6 @@ $(document).ready(async function () {
     });
 
     $('#direction').click(async function() {
-        console.log("Clicked"); 
         var currentDirection = $(this).data('direction');
     
         // Toggle the icon based on the current direction
@@ -65,12 +64,23 @@ $(document).ready(async function () {
           $(this).removeClass('fa-arrow-circle-right').addClass('fa-arrow-circle-left');
           // Update data-direction attribute
           $(this).data('direction', 'left');
+          await applyFilter();
         } else {
           // Change to right arrow
           $(this).removeClass('fa-arrow-circle-left').addClass('fa-arrow-circle-right');
           // Update data-direction attribute
           $(this).data('direction', 'right');
+          await applyFilter();
         }
+    });
+
+    $('#locRegion').change(function() {
+        var selectedValue = $(this).val();
+        applyFilter();
+        // You can add more logic here based on the selected value
+    });
+    $('.applyBtn').click(function() {
+        applyFilter();
     });
 
     const defaultDateRange = `${new Date(new Date().setDate(new Date().getDate() - 30)).toLocaleDateString()} - ${new Date().toLocaleDateString()}`;

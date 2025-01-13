@@ -1,7 +1,7 @@
 $(function () {
     console.log("inventory.js loaded");
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
     const HeadersItem = ['Items','Qty-in-Store', 'Unit', 'Category', 'Bench', 
                         'Class', 'BU', 'SU', 'PU', 
                         'BU per SU', 'SU per PU', 
@@ -462,8 +462,6 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
-    // refreshTable();
 
-    // tooltips
     $('[data-toggle="tooltip"]').tooltip();
 });

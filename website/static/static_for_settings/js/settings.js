@@ -198,9 +198,6 @@ $(function () {
         }
     });
     
-    
-    
-    
     $('#yearlySwitch').click(function() {
         console.log("Yearly switch clicked");
 
@@ -269,43 +266,45 @@ $(function () {
             console.error('Fetch Error:', error); // Log any errors to the console
         });
     }
-
+    
+    $("#members").hide();
     $('#sec-btn').click(function() {
         console.log("Security clicked");
+        $("#security").show();
         $("#notifications").hide();
         $("#billing").hide();
         $("#data").hide();
-        $("#security").show();
+        $("#members").hide();
     });
 
     $('#not-btn').click(function() {
+        $("#notifications").show();
         $("#billing").hide();
         $("#security").hide();
         $("#data").hide();
         $("#members").hide();
-        $("#notifications").show();
     });
 
     $('#data-btn').click(function() {
+        $("#data").show();
         $("#billing").hide();
         $("#security").hide();
         $("#notifications").hide();
         $("#members").hide();
-        $("#data").show();
     });
 
     $('#bill-btn').click(function() {
+        $("#billing").show();
         $("#notifications").hide();
         $("#security").hide();
         $("#data").hide();
         $("#members").hide();
-        $("#billing").show();
     });
     $('#mem-btn').click(function() {
+        $("#members").show();
         $("#notifications").hide();
         $("#security").hide();
         $("#data").hide();
         $("#billing").hide();
-        $("#members").show();
     });
 });

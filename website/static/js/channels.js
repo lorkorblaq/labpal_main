@@ -1,8 +1,8 @@
 $(function () {
     const headersChannel = ['_id','created at', 'user', 'item', 'lot_numb', 'direction', 'location', 'quantity', 'description', 'action'];
     console.log("channels.js loaded");
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://127.0.0.1:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://127.0.0.1:3000/api";
 
     // const user_d = $.cookie('user_id');
     function getCookie(name) {
@@ -42,6 +42,7 @@ $(function () {
             return [];
         }
     }
+
     async function submitForm() {
         let item = $('#inputItem').val();
         let lot = $('#inputLot').val();
@@ -54,17 +55,14 @@ $(function () {
             case !item:
                 alert("Please enter an item.");
                 break;
-            case !quantity:
-                alert("Please enter a quantity.");
-                break;
-            case !direction:
-                alert("Please enter a machine.");
+            case !lot:
+                alert("Please enter a lot number.");
                 break;
             case !location:
                 alert("Please enter a location.");
                 break;
-            case !lot:
-                alert("Please enter a lot number.");
+            case !quantity:
+                alert("Please enter a quantity.");
                 break;
             default:
                 // Create an object with the form data
@@ -79,7 +77,6 @@ $(function () {
                 
                 // Show the loading indicator
                 $('#loadingIndicator').show();
-    
                 // Make the post request
                 $.post({
                     url: url_channel_push,
@@ -102,16 +99,11 @@ $(function () {
                         // Hide the loading indicator after the request completes (success or error)
                         $('#loadingIndicator').hide();
                     }
-                });
-    
-                // Optionally, you can add the PUT request logic here if you need it
-                // e.g. after successfully creating the channel, update the item quantity.
-                
+                }); 
                 refreshTable(); // Refresh the table after the form submission is done
         }
     }
     
-
     function refreshTable() {
         fetchData(url_channel_get).then(data => {
             dataTableInstance.clear();
@@ -132,7 +124,7 @@ $(function () {
             });
         try {
             const data = await fetchData(url_channel_get);
-            // console.log(data);
+            console.log(data);
             // renderTablePISChannels(data.channels, headersChannel);
             renderTablePISChannels('r_table', 'ex-r_table', data.channels, headersChannel);
 
@@ -143,6 +135,7 @@ $(function () {
         $('#loadingIndicator').hide();        
 
     }
+
     $('#r_table tbody').on('click','td:not(:first-child, :last-child, :nth-child(2), :nth-child(3), :nth-child(4), :nth-child(5))',function () {
         // Check if there's no other cell being edited
         if (!editedCell) {
@@ -158,7 +151,6 @@ $(function () {
         }
     });
 
-    
     $('#r_table tbody').on('blur', '.edit-input', function () {
         // Get the updated value from the input field
         var updatedValue = $(this).val();
@@ -211,7 +203,6 @@ $(function () {
         }
     });
     
-    
     // Event listener for Enter key press
     $('#r_table tbody').on('keypress', '.edit-input', function (event) {
         // Check if the pressed key is Enter (key code 13)
@@ -225,12 +216,17 @@ $(function () {
         event.preventDefault();
         let lotNumbers = await fetchLotNumbers();
         let lot = $('#inputLot').val();
+        let direction = $('#dropDownDirectionChannel').val();
+        console.log(direction);
 
         if (!lotNumbers.includes(lot)) {
-            console.log("Lot doesn't exist");
-            // Show the date input modal
-            $('#dateModal').modal('show');
-
+            if (direction === 'To') {
+                alert("Lot doesn't exist in your store so you can't send. Please get the lot from the store first.");
+            } else if (direction === 'From') {
+                console.log("Lot doesn't exist");
+                // Show the date input modal
+                $('#dateModal').modal('show');
+            }
         } else if (lotNumbers.includes(lot)){
             console.log("Lot exists");
             // Handle form submission without expiration date
@@ -238,34 +234,7 @@ $(function () {
             refreshTable();
         }
     });
-    // Function to handle form submission with expiration date
-    // function renderTablePISChannels(data, columns) {
-    //     // Destroy the existing DataTable instance (if it exists)
-    //     if (dataTableInstance) {
-    //         dataTableInstance.destroy();
-    //         }
-    //     // Empty the table body and header before rendering a new table
-    //     // $('#r_table tbody').empty();
-    //     $('#r_table thead').empty();
-    //     $('#r_table thead').append('<tr>' + columns.map(header => `<th>${header}</th>`));
-    
-    //     // Initialize a new DataTable instance
-    //     dataTableInstance = $('#r_table').DataTable({
-    //         data: data,
-    //         columns: columns.map(col => ({ data: col })),
-    //         columnDefs: [
-    //             {
-    //                 targets: -1, // Target the last column
-    //                 data: null,
-    //                 defaultContent:
-    //                 '<button class="tablebtn" id="btn-delete"><i class="fas fa-trash-alt"></i></button>'
-    //             },
-    //         ],
-    //         order: [[1, 'desc']]
-    //     });
-    //     dataTableInstance.column(0).visible(false);
 
-    //     }
     function renderTablePISChannels(tableId, exTableId, data, columns) {
         // Destroy the existing DataTable instance for the specified table ID (if it exists)
         if (dataTableInstance) {

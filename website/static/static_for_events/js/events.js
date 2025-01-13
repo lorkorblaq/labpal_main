@@ -463,7 +463,8 @@ $(function() {
         // Validate and collect date and time
         var datePickerValue = $('#datePicker-machine').val();
         var time = $('#timepicker-machine').val();
-        var resolvedChecked = $('#machines-checkbox').is(':checked');
+        // var resolvedChecked = $('#machines-checkbox').is(':checked');
+        var resolvedChecked = $('.option-checkbox').is(':checked');
         if (datePickerValue === '' || time === '') {
             alert('Please select a date and time');
             return;
@@ -471,7 +472,6 @@ $(function() {
         // var dateTime = `${datePickerValue} ${time}`;
         machineData.push(datePickerValue);
         machineData.push(time);
-        machineData.push(resolvedChecked);
     
         // Validate and collect machine information
         var machine = $('#machineIndicator').val();
@@ -479,7 +479,10 @@ $(function() {
             alert('Please select a machine');
             return;
         }
+        console.log(machine)
         machineData.push(machine);
+        machineData.push(resolvedChecked);
+        console.log(machineData)
     
         // Determine active menu item and handle form submission accordingly
         var activeMenuItem = $('.menu-item.active');
@@ -527,7 +530,7 @@ $(function() {
                 'date': machineData[0],
                 'time': machineData[1],
                 'machine': machineData[2],
-                // 'resolved': machineData[3],
+                'resolved': machineData[3],
                 'category': 'Maintenance', // Fixed category for maintenance
                 'frequency': machineMaintenanceData[0], // Frequency array without '×'
                 'comments': machineMaintenanceData[1]

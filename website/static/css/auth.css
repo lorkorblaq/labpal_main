@@ -342,6 +342,33 @@ input {
   height: 300px;
   border: none;
 }
+
+.regOrg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.regOrg select {
+  width: 85%;
+  padding: 10px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  
+}
+
+.regOrg select:focus {
+  border-color: #007bff; /* Adjust to match your design */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+
 @keyframes overshadowing-dx {
   0%{
     z-index:2;

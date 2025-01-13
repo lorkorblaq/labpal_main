@@ -95,23 +95,32 @@
                                     }
                                     const user_id = getCookie('user_id');
                                     const lab_name = getCookie('lab_name')
-                                    const urlLotExp = `https://labpal.com.ng/api/lotexp/push/${user_id}/${lab_name}/`;
+                                    // const urlLotExp = `https://labpal.com.ng/api/lotexp/push/${user_id}/${lab_name}/`;
                                     // const urlLotExp = `http://127.0.0.1:3000/api/lotexp/push/${user_id}/${lab_name}/`;
-                                    const urlChannel = `https://labpal.com.ng/api/channel/push/${user_id}/${lab_name}/`;
-                                    // const urlChannel = `http://127.0.0.1:3000/api/channel/push/${user_id}/${lab_name}/`;
-                                    $.post({
-                                            url: urlLotExp,
-                                            contentType: "application/json",
-                                            data: JSON.stringify(formDataLotExp),
-                                            success: function (response) {
-                                                alert("Lot created successfully");
-                                                console.log(response);
-                                            },
-                                            error: function (error) {
-                                                alert("Could not push lot, make sure the item is valid");
-                                                console.error(error);
-                                            }
-                                        });
+                                    // const urlChannel = `https://labpal.com.ng/api/channel/push/${user_id}/${lab_name}/`;
+                                    const urlChannel = `http://127.0.0.1:3000/api/channel/push/${user_id}/${lab_name}/`;
+                                    // $.post({
+                                    //         url: urlLotExp,
+                                    //         contentType: "application/json",
+                                    //         data: JSON.stringify(formDataLotExp),
+                                    //         success: function (response) {
+                                    //             alert("Lot created successfully");
+                                    //             console.log(response);
+                                    //         },
+                                    //         error: function (xhr, status, error) {
+                                    //         // Extract the error message from the server response
+                                    //         if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    //             alert(xhr.responseJSON.message);  // Show the custom error message
+                                    //         } else {
+                                    //             alert("An error occurred: " + error);  // Fallback for unknown errors
+                                    //         }
+                                    //         console.error(xhr.responseText);  // Log the full response for debugging
+                                    //     },
+                                    //     complete: function () {
+                                    //         // Hide the loading indicator after the request completes (success or error)
+                                    //         $('#loadingIndicator').hide();
+                                    //     }
+                                    // }); 
                                     $.post({
                                         url: urlChannel,
                                         contentType: "application/json",
@@ -120,16 +129,21 @@
                                             alert("Channel created successfully");
                                             console.log(response);
                                         },
-                                        error: function (error) {
-                                            alert("Could not push channel, make sure the item is valid");
-                                            console.error(error);
+                                        error: function (xhr, status, error) {
+                                            // Extract the error message from the server response
+                                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                                alert(xhr.responseJSON.message);  // Show the custom error message
+                                            } else {
+                                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                                            }
+                                            console.error(xhr.responseText);  // Log the full response for debugging
+                                        },
+                                        complete: function () {
+                                            // Hide the loading indicator after the request completes (success or error)
+                                            $('#loadingIndicator').hide();
                                         }
-                                    });
-                            
-                            // Log the expiration date (you can perform any desired action here)
-                            console.log('Expiration Date:', expirationDate);
+                                    }); 
                             $('#expirationDate').val('');
-                            console.log('Expiration Date:', expirationDate);
                             // Close the modal (assuming you are using Bootstrap)
                             $('#dateModal').modal('hide');
                         }
