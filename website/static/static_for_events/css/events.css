@@ -283,59 +283,18 @@ button:hover {
     cursor: pointer;
 }
 
-
-
-
 /* to do */
-.todo-container {
+.incidence-container {
     width: 100%;
     margin: 0 auto;
 }
 
-.todo-input-container {
+.incidence-input-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
-
-#new-todo {
-    width: 70%;
-    padding: 5px;
-    font-size: 16px;
-}
-
-#add-todo {
-    width: 30%;
-    padding: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-ul#todo-list {
-    list-style: none;
-    padding: 0;
-}
-
-ul#todo-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-ul#todo-list li .todo-actions {
-    display: flex;
-    gap: 5px;
-}
-
-ul#todo-list li .todo-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 
 /* to-do check lists */
 .checklist-item {

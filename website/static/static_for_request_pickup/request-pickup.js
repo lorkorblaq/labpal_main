@@ -83,6 +83,164 @@ $(document).ready(function() {
         }
     });
 
+    $("#assigned").click(function() {
+        // Get form data
+        var assign_request_ID = $("#assign-request-id").val();
+        var assigned_rider = $("#assigned-rider").val();
+
+        // Check if all required form fields are filled
+        if (assign_request_ID) {
+            // Check if Geolocation is supported
+            if (navigator.geolocation) {
+                // Get current position
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Extract latitude, longitude, accuracy, and timestamp
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var accuracy = position.coords.accuracy;
+                    var timestamp = position.timestamp;
+                    completed = true;
+                    var acceptlatLngString = `${latitude},${longitude}`;
+
+                    var dropOff_dateTime = new Date(timestamp);
+                    dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
+                    dropOff_dateTime = dropOff_dateTime.toISOString()
+
+                    data = {
+                        assigned_by: user_name,
+                        assigned_to: assigned_rider,
+                        request_id: assign_request_ID,
+                    }
+                    console.log(data)
+                    // Example of sending the data to your backend
+                    $.ajax({
+                        url: url_shipment_put,  // Your backend endpoint
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function(response) {
+                            alert('Request has been assigned:', response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error assigned request, please try again:', error);
+                        }
+                    });
+
+                }, function(error) {
+                    console.error("Error Code = " + error.code + " - " + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        } else {
+            alert("Please fill in all the required fields.");
+        }
+    });
+
+    $("#enroute").click(function() {
+        // Get form data
+        var enroute_request_ID = $("#enroute-request-id").val();
+
+        // Check if all required form fields are filled
+        if (enroute_request_ID) {
+            // Check if Geolocation is supported
+            if (navigator.geolocation) {
+                // Get current position
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Extract latitude, longitude, accuracy, and timestamp
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var accuracy = position.coords.accuracy;
+                    var timestamp = position.timestamp;
+                    completed = true;
+                    var acceptlatLngString = `${latitude},${longitude}`;
+
+                    var dropOff_dateTime = new Date(timestamp);
+                    dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
+                    dropOff_dateTime = dropOff_dateTime.toISOString()
+
+                    data = {
+                        enroute_by: user_name,
+                        request_id: enroute_request_ID,
+                    }
+                    console.log(data)
+                    // Example of sending the data to your backend
+                    $.ajax({
+                        url: url_shipment_put,  // Your backend endpoint
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function(response) {
+                            alert('Enroute', response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error assigned request, please try again:', error);
+                        }
+                    });
+
+                }, function(error) {
+                    console.error("Error Code = " + error.code + " - " + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        } else {
+            alert("Please fill in all the required fields.");
+        }
+    });
+
+    $("#atPickup").click(function() {
+        // Get form data
+        var atPickup_request_ID = $("#atPickup-request-id").val();
+
+        // Check if all required form fields are filled
+        if (atPickup_request_ID) {
+            // Check if Geolocation is supported
+            if (navigator.geolocation) {
+                // Get current position
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Extract latitude, longitude, accuracy, and timestamp
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var accuracy = position.coords.accuracy;
+                    var timestamp = position.timestamp;
+                    completed = true;
+                    var acceptlatLngString = `${latitude},${longitude}`;
+
+                    var dropOff_dateTime = new Date(timestamp);
+                    dropOff_dateTime.setHours(dropOff_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
+                    dropOff_dateTime = dropOff_dateTime.toISOString()
+
+                    data = {
+                        atPickup: 'yes',
+                        request_id: atPickup_request_ID,
+                    }
+                    console.log(data)
+                    // Example of sending the data to your backend
+                    $.ajax({
+                        url: url_shipment_put,  // Your backend endpoint
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function(response) {
+                            alert('You at pick up', response);
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error assigned request, please try again:', error);
+                        }
+                    });
+
+                }, function(error) {
+                    console.error("Error Code = " + error.code + " - " + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        } else {
+            alert("Please fill in all the required fields.");
+        }
+    });
+
     $("#pick-up").click(function() {
         // Get form data
         var pickup_shipment_ID = $("#pick-shipment-id").val();
@@ -108,7 +266,6 @@ $(document).ready(function() {
                         picked_by: user_name,
                         request_id: pickup_shipment_ID,
                         pickup_lat_lng: picklatLngString,
-                        // pickup_time: pickUp_dateTime,
                     }
 
                     // Example of sending the data to your backend

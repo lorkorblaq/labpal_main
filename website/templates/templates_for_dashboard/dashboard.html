@@ -43,22 +43,29 @@
    
         <div class="events" id="reports">
             <div class="filterContainer" style="padding-bottom:10px">
-                <!-- <input type="text" class="autoInputRegions" id="fromLocation" placeholder="From which location"> -->
-                <label for="">Central Store</label>
-                <i class="fa fa-arrow-circle-right" id="direction" style="padding-left: 15px; padding-right: 15px;" data-direction="right"></i>
-
-                <select class="" id="locRegion">
-                    <option value="" disabled selected>Select a region</option>
-                    <option value="north">North</option>
-                    <option value="east">East</option>
-                    <option value="west">West</option>
-                </select>
+                <div class="row">
+                    <!-- <input type="text" class="autoInputRegions" id="fromLocation" placeholder="From which location"> -->
+                     <div class="col-3">
+                        <label for="">Central Store</label>
+                    <!-- </div>
+                    <div class="col-2"> -->
+                        <i class="fa fa-arrow-right" id="direction" style="padding-left: 10px;" data-direction="right"></i>
+                    </div>
+                    <div class="col-3">
+                        <select class="" id="locRegion">
+                            <option value="" disabled selected>Select a region</option>
+                            <option value="north">North</option>
+                            <option value="east">East</option>
+                            <option value="west">West</option>
+                        </select>
+                    </div>
+                </div>
                 <!-- <input type="text" class="autoInputRegions" id="toLocation" placeholder="To which location"> -->
                 <div class="row">
-                    <div class="col-lg-1">
+                    <div class="col-3">
                         <h6>Select a date range:</h6>
                     </div>
-                    <div class="col-lg-1">
+                    <div class="col-3">
                         <input type="text" class="date-range" id="machine-date-range" placeholder="Select date range">
                     </div>
                 </div>

@@ -327,7 +327,8 @@ def signup_signin():
                     return redirect(url_for('auth.auth_page'))
                 else:
                     # url = f"https://labpal.com.ng/register-org?org_name={org_name}&lab_name={lab_name}&firstname={firstname}&lastname={lastname}&email={email}"
-                    reg_url = generate_registration_url(org_name, lab_name, firstname, lastname, email)
+                    url = "register-org"
+                    reg_url = generate_registration_url(org_name, lab_name, firstname, lastname, email, url)
                     print(reg_url)
                     send_verification_email(email, firstname, reg_url)
                     flash("Kindly check the inbox of the email you provided for verification to proceed", "success")
@@ -427,7 +428,6 @@ def register_org():
     firstname = payload.get('firstname')
     lastname = payload.get('lastname')
     email = payload.get('email')
-
     if request.method == 'POST':
         password = register_form.password.data
         confirm_password = register_form.confirm_password.data

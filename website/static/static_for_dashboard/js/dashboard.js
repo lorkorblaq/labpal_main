@@ -61,13 +61,13 @@ $(document).ready(async function () {
         // Toggle the icon based on the current direction
         if (currentDirection === 'right') {
           // Change to left arrow
-          $(this).removeClass('fa-arrow-circle-right').addClass('fa-arrow-circle-left');
+          $(this).removeClass('fa-arrow-right').addClass('fa-arrow-left');
           // Update data-direction attribute
           $(this).data('direction', 'left');
           await applyFilter();
         } else {
           // Change to right arrow
-          $(this).removeClass('fa-arrow-circle-left').addClass('fa-arrow-circle-right');
+          $(this).removeClass('fa-arrow-left').addClass('fa-arrow-right');
           // Update data-direction attribute
           $(this).data('direction', 'right');
           await applyFilter();

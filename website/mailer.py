@@ -17,7 +17,7 @@ def mailer(emailh, subjecth, htmlh):
 
 
 def welcomeMail(email, firstname):
-    subject = "Hi, I'm LabPal"
+    subject = "Hi, I'm Olorunfemi"
     html_content = render_template("welcome.html", firstname=firstname)
     message = Message(subject=subject, recipients=[email], html=html_content)
     try:

@@ -17,6 +17,11 @@ $(function () {
     // BaseUrl = "https://labpal.com.ng/api"
     BaseUrl = "http://0.0.0.0:3000/api";
     lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
+    const import_lots_url = `${BaseUrl}/lotexp/bulkpush/${user_id}/${lab_name}/`;
+
+
+    import_heading = ['item', 'lot_numb', 'expiration', 'quantity'];
+
     async function fetchData(url) {
         const response = await fetch(url);
         if (!response.ok) {
@@ -52,7 +57,7 @@ $(function () {
         if ($(`#${exTableId}`).find('.button').length === 0) {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
-        }
+    }
 
     function exportJSONData(data) {
         // Convert JSON data to CSV format
@@ -72,6 +77,7 @@ $(function () {
         link.click();
         document.body.removeChild(link);
     }
+
     // Function to convert JSON data to CSV format
     function convertJSONToCSV(data) {
         var csv = [];
@@ -95,6 +101,7 @@ $(function () {
         var csvContent = csv.join('\n');
         return csvContent;
     }
+
     // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
         // Add header row
@@ -137,6 +144,7 @@ $(function () {
         printWindow.document.close();
         printWindow.print();
     }
+
     // Event listeners for export and print buttons
     $('#export_request_button').click(function() {
         console.log("export button clicked");
@@ -164,10 +172,9 @@ $(function () {
             }
         $('#loadingIndicator').hide();        
 
-        };
+    };
     loadexpireData();
     
-
     $('#expiry_filter').on('input', async function () {
         const filterValue = $(this).val();
     
@@ -202,5 +209,102 @@ $(function () {
             console.error("Error fetching data:", error);
         }
     });
+
+    $('#importButton').click(function() {
+        var alertMessage = `Please select a CSV file to import data.\nThe CSV file should contain exactly the following columns:\n\n`;
+        $.each(import_heading, function(index, column) {
+            alertMessage += `${column}\n`;
+        });
+        alert(alertMessage);
+        
+        // Create hidden file input
+        var fileInput = $('<input>').attr('type', 'file').attr('accept', '.csv').css('display', 'none');
+        $('body').append(fileInput); // Append to body
+        
+        // Bind change event before triggering click
+        fileInput.on('change', function(event) {
+            var file = event.target.files[0];
+            if (file) {
+                readCSVFile(file);
+            }
+        });
+        // Trigger file input click
+        fileInput.click();
+    });
     
+    function readCSVFile(file) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var csvData = event.target.result;
+            var jsonData = convertCSVToJSON(csvData);
+            sendJSONDataToAPI(jsonData);
+        };
+        reader.readAsText(file);
+    }
+
+    function convertCSVToJSON(csvData) {
+        var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
+        var result = [];
+        var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
+        
+        // Set of fields that should be converted to numbers
+        var numericFields = new Set(['quantity']);
+
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentLine = lines[i].split(',').map(cell => cell.trim()); // Trim cell values
+
+            for (var j = 0; j < headers.length; j++) {
+                var header = headers[j];
+                var value = currentLine[j];
+                // Convert numeric fields to numbers
+                if (numericFields.has(header)) {
+                    obj[header] = Number(value);
+                } else {
+                    obj[header] = value;
+                }
+            }
+            result.push(obj);
+        }
+        return result;
+    }
+
+    function sendJSONDataToAPI(jsonData) {
+        // Show the loading indicator when the fetch starts
+        fetch(import_lots_url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.message || 'Error importing data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            // Extract the success message from the response and show it in the alert
+            const successMessage = data.message;
+            const skippedItems = data['note'];  // Handle skipped items if present
+    
+            let alertMessage = successMessage;
+            if (skippedItems && skippedItems.length > 0) {
+                alertMessage += skippedItems;
+            }
+    
+            alert(alertMessage);  // Show the success message in the alert
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(`Error importing your lots data data:\n${error.message}`);
+        })
+        .finally(() => {
+            // Hide the loading indicator after the request finishes
+            loadingIndicator.style.display = 'none';
+        });
+    }
 });

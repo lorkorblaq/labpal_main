@@ -122,6 +122,20 @@ h1 {
     animation: spin 2s linear infinite;
 }
 
+#importButton{
+    background-color: #677b88;
+    color: white;
+    border-radius: 3px;
+    padding: 3px 15px;
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: 0 0 0 1px black;
+}
+
+#importButton:hover{
+    box-shadow: 0 0 0 1px #ffffff;
+}
+
 
 
 /* Spin animation */

@@ -1,6 +1,6 @@
 $(function() {
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://127.0.0.1:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://127.0.0.1:3000/api";
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -11,6 +11,9 @@ $(function() {
         }
         return null;
     }
+    const HeadersIncidenceEvents = ['event_id','Created At','User', 'Resolved', 'Date & Time', 'Stage of Error', 'Barcode', 'Machine', 'Assay', 'Location Involved', 'Incidence', 'Actioning',''];
+    const ColumnsIncidenceEvents = ['event_id','created_at','user', 'resolved', 'date', 'errorStage', 'barcode', 'machine', 'items', 'locationInvolved', 'incidenceText', 'actioning', ''];
+
 
     const HeadersQcEvents = ['event_id','Created At','User', 'Machine',  'Item', 'Resolved', 'Root Cause', 'Sub-root Cause', 'Root Cause Des.', 'Actioning',''];
     const ColumnsQcEvents = ['event_id','created_at','user', 'machine',  'items','resolved', 'rootCause', 'subrootCause', 'rootCauseDescription', 'actioning', ''];
@@ -32,7 +35,6 @@ $(function() {
     const url_event_get_one = `${BaseUrl}/event/get/${user_id}/${lab_name}/`;
     const url_event_get_all = `${BaseUrl}/events/get/${user_id}/${lab_name}/`;
     const url_event_del = `${BaseUrl}/event/del/${user_id}/${lab_name}/`;
-    const url_event_todo_push = `${BaseUrl}/event/to-do-push/${user_id}/`;
     const url_event_todo_get_one = `${BaseUrl}/event/to-do-get/${user_id}/`;
     const url_event_todo_get_all = `${BaseUrl}/event/to-do-get-all/${user_id}/`;
 
@@ -87,7 +89,7 @@ $(function() {
     var currentHours = currentTime.getHours();
     var currentMinutes = currentTime.getMinutes();
     var formattedTime = currentHours + ':' + (currentMinutes < 10 ? '0' + currentMinutes : currentMinutes);
-     $('#timepicker-machine').timepicker({
+     $('.timepicker').timepicker({
         timeFormat: 'hh:mm p',   // 24-hour format with AM/PM
         interval: 1,            // 30-minute increments
         minTime: '00:00am',      // Earliest time 10:00 AM
@@ -316,65 +318,69 @@ $(function() {
         });
     });
 
-    // logic for the to-do modal
-    const $todoInput = $('#new-todo');
-    const $addTodoButton = $('#add-todo');
-    const $todoList = $('#todo-list');
+    // Incidence submit button
+    $('#submit-incidence').on('click', function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        // logic for the to-do modal
+        const datePickerValue = $('#datePicker-incidence').val();
+        const timePickerValue = $('#timePicker-incidence').val();
+        const errorStage = $('#errorStage').val().trim();
+        const barcode = $('#barcode').val().trim();
+        const isValidBarcode = /^\d{9}$/.test(barcode);machineIndicatorIncidence
+        if (!isValidBarcode) {alert("Please enter a valid 9-digit barcode.");return;}
+        const machine = $('#machineIndicatorIncidence').val().trim();
+        const location = $('#location').val().trim();
+        const item = $('#itemIndicatorIncidence').val().trim();
+        const incidenceText = $('#issue').val().trim();
+        const actionTakenText = $('#actionTaken').val().trim();
+        const resolvedChecked = $('#incidence-checkbox').is(':checked');
+        switch (true) {
+            case !datePickerValue:
+                alert("Please enter Date of incidence.");
+                break;
+            case !timePickerValue:
+                alert("Please enter Time of incidence.");
+                break;
+            case !errorStage:
+                alert("Please enter stage of error.");
+                break;
+            case !barcode:
+                alert("Please enter barcode.");
+                break;
+            case !machine:
+                alert("Please enter barcode.");
+                break;
+            case !location:
+                alert("Please enter location.");
+                break;
+            case !incidenceText:
+                alert("Please state the incidence.");
+                break;
+            case !actionTakenText:
+                alert("Please state action taken.");
+                break;
+            default:
+                // Create an object with the form data
+                const data = {
+                    date: datePickerValue,
+                    time: timePickerValue,
+                    errorStage: errorStage,
+                    barcode: barcode,
+                    machine: machine,
+                    items: item,
+                    locationInvolved: location,
+                    incidenceText: incidenceText,
+                    actioning: actionTakenText,
+                    resolved: resolvedChecked
+                };
+                // Make the post request
+                const url = url_event_push + 'incidence/';
+                postSubmitsToApi(url, data);
+                refreshTable(); // Refresh the table after the form submission is done
+        }
+    });
 
     //QC submit button
-    // $('#submit-qc').on('click', function(event) {
-    //     event.preventDefault(); // Prevent default form submission behavior
-    //     const qcData = [];
-    //     const datePickerValue = $('#datePicker-qc').val();
-    //     let tagsEntered = false; // Flag to check if at least one tag is entered
-
-    //     if (datePickerValue !== '') {
-    //         qcData.push(datePickerValue);
-    //     } else {
-    //         alert('Please select a date');
-    //     }
-    //     machine = $('#machineIndicatorQC').val();
-    //     qcData.push(machine);
-
-    //     $('#qcTagger .tag span').each(function() {
-    //         const text = $(this).text().trim();
-            
-    //         if (text !== '') {
-    //             qcData.push(text);
-    //             tagsEntered = true; // Set flag to true if at least one tag is entered
-    //         }
-    //     });
-    
-    //     if (!tagsEntered) {
-    //         alert('Please enter at least one tag');
-    //         return; // Exit function if no tags are entered
-    //     }
-    //     var root_cause = $('#rootcause').val();
-    //     qcData.push(root_cause);
-    //     var subMenu = $('#submenu').val();
-    //     qcData.push(subMenu);
-    //     var RCQC_des = $('#RCQC_des').val();
-    //     qcData.push(RCQC_des);
-    //     var CAQC = $('#CAQC').val();
-    //     qcData.push(CAQC);
-
-    //     console.log(qcData);
-    //     const filteredQC = qcData.filter(item => item !== '×');
-    //     console.log(filteredQC)
-    //     data = {
-    //         "date": filteredQC[0],
-    //         "machine": filteredQC[1],
-    //         "items": filteredQC.slice(2, filteredQC.length -4),
-    //         "rootCause": filteredQC[filteredQC.length -4],  
-    //         "subrootCause": filteredQC[filteredQC.length -3],
-    //         "rootCauseDescription": filteredQC[filteredQC.length -2],
-    //         "actioning": filteredQC[filteredQC.length -1]
-    //     }
-    //     console.log(data);
-    //     url = url_event_push + 'qc/';
-    //     postSubmitsToApi(url, data);
-    // });
-
     $('#submit-qc').on('click', function(event) {
         event.preventDefault(); // Prevent default form submission behavior
         const qcData = [];
@@ -596,7 +602,6 @@ $(function() {
         }
     
     });
-    
 
     //operations submit button 
     $('#submit-operations').on('click', function(event) {
@@ -649,45 +654,9 @@ $(function() {
         postSubmitsToApi(url, data);
     });
     
-
-    // to-do submit button
-    $('#submit-todo').on('click', function(event) {
-        event.preventDefault(); // Prevent default form submission behavior
-        const todoText = $todoInput.val().trim();
-        const allTodos = [];
-        const datePickerValue = $('#datePicker-todo').val();
-        if (datePickerValue !== '') {
-            allTodos.push(datePickerValue);
-        } else {
-            alert('Please select a date');
-        }
-        // Add the new todo if it's not empty
-        if (todoText !== '') {
-            allTodos.push(todoText);
-        } else if ($todoList.find('li').length !== 0) {
-            $todoList.find('li span').each(function() {
-                allTodos.push($(this).text());
-            });
-        } else {
-            alert('Please add a task');
-            return;
-        }
-        // Collect all existing todos from the list
-        // $todoList.find('li span').each(function() {
-        //     allTodos.push($(this).text());
-        // });
-
-        // console.log(allTodos[0]);
-        const data = {
-            'date': allTodos[0],
-            'task': allTodos.slice(1) // Send all tasks as an array
-        };
-        url = url_event_todo_push;
-        postSubmitsToApi(url, data);
-    });
-
     // Function to post data to an API
     function postSubmitsToApi(url, data) {
+        $('#loadingIndicator').show();
         $.ajax({
             type: 'POST',
             url: url,
@@ -731,18 +700,24 @@ $(function() {
     
                 alert(errorMessage);  // Show the extracted error message
                 console.error('Error message:', errorMessage);
+            },
+            complete : function() {
+                $('#loadingIndicator').hide();
             }
         });
     }
     
+    let activeEventType = 'incidence'; // Default active event type
+    $('#incidence-btn').click(function(){
+        var url = url_event_get_all + 'incidence' + '/';
+        renderTable('incidence-r_table', 'ex-incidence-r_table', url, ColumnsIncidenceEvents, HeadersIncidenceEvents);``
+    });
+    $('#incidence-btn').click();
 
-    let activeEventType = 'qc'; // Default active event type
     $('#qc-btn').click(function(){
         var url = url_event_get_all + 'qc' + '/';
         renderTable('QCr_table', 'ex-QCr_table', url, ColumnsQcEvents, HeadersQcEvents);``
     });
-    $('#qc-btn').click();
-
 
     $('#maintenance-btn').click(function() {
         var url = url_event_get_all + 'machine' + '/';
@@ -786,45 +761,53 @@ $(function() {
     });
 
     // Function to filter events based on the selected machine and items
-    function getDateRange(selector) {
-        const dateRangeInput = $(selector).val().trim();
-        const [start, end] = dateRangeInput.split(' - ');
+    // function getDateRange(selector) {
+    //     const dateRangeInput = $(selector).val().trim();
+    //     const [start, end] = dateRangeInput.split(' - ');
 
-        const startDate = start ? new Date(start) : null;
-        const endDate = end ? new Date(end) : null;
-        console.log("Date Range:", startDate, endDate);
-        return { startDate, endDate };
-    }
-
-    function filterQC(events, machine, items, startDate, endDate) {
-        return events.filter(event => {
-            const eventDate = new Date(event.date);
-            const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
-            const matchesItems = items ? items.every(item => event.items.includes(item)) : true;
-            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
-            return matchesMachine && matchesItems && withinDateRange;
-        });
-    }
+    //     const startDate = start ? new Date(start) : null;
+    //     const endDate = end ? new Date(end) : null;
+    //     console.log("Date Range:", startDate, endDate);
+    //     return { startDate, endDate };
+    // }
+    // function filterIncidence(events, machine, items, startDate, endDate) {
+    //     return events.filter(event => {
+    //         const eventDate = new Date(event.date);
+    //         const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
+    //         const matchesItems = items ? items.every(item => event.items.includes(item)) : true;
+    //         const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+    //         return matchesMachine && matchesItems && withinDateRange;
+    //     });
+    // }
+    // function filterQC(events, machine, items, startDate, endDate) {
+    //     return events.filter(event => {
+    //         const eventDate = new Date(event.date);
+    //         const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
+    //         const matchesItems = items ? items.every(item => event.items.includes(item)) : true;
+    //         const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+    //         return matchesMachine && matchesItems && withinDateRange;
+    //     });
+    // }
     
-    function filterMachine(events, machine, type, startDate, endDate) {
-        return events.filter(event => {
-            const eventDate = new Date(event.datetime);
-            const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
-            const matchesType = type ? event.category.toLowerCase() === type.toLowerCase() : true;
-            // const matchesResolved = resolved === 'all' || (resolved === 'resolved' && event.resolved) || (resolved === 'unresolved' && !event.resolved);
-            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
-            // return matchesMachine && matchesType && matchesResolved && withinDateRange;
-            return matchesMachine && matchesType && withinDateRange;
-        });
-    }
+    // function filterMachine(events, machine, type, startDate, endDate) {
+    //     return events.filter(event => {
+    //         const eventDate = new Date(event.datetime);
+    //         const matchesMachine = machine ? event.machine.toLowerCase().includes(machine.toLowerCase()) : true;
+    //         const matchesType = type ? event.category.toLowerCase() === type.toLowerCase() : true;
+    //         // const matchesResolved = resolved === 'all' || (resolved === 'resolved' && event.resolved) || (resolved === 'unresolved' && !event.resolved);
+    //         const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+    //         // return matchesMachine && matchesType && matchesResolved && withinDateRange;
+    //         return matchesMachine && matchesType && withinDateRange;
+    //     });
+    // }
     
-    function filterOperations(events, startDate, endDate) {
-        return events.filter(event => {
-            const eventDate = new Date(event.date);
-            const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
-            return withinDateRange;
-        });
-    }
+    // function filterOperations(events, startDate, endDate) {
+    //     return events.filter(event => {
+    //         const eventDate = new Date(event.date);
+    //         const withinDateRange = (!startDate || !endDate) || (eventDate >= startDate && eventDate <= endDate);
+    //         return withinDateRange;
+    //     });
+    // }
     
     // Function to render a DataTable instance for the specified table ID
     // async function renderTable(tableId, exTableId, urlOrData, columns, headers) {
@@ -1479,6 +1462,9 @@ $(function() {
 
         let startDate, endDate;
         switch (activeEventType) {
+            case 'incidence':
+                ({ startDate, endDate } = getDateRange('#incidence-date-range'));
+                break;
             case 'qc':
                 ({ startDate, endDate } = getDateRange('#qc-date-range'));
                 break;
@@ -1503,6 +1489,11 @@ $(function() {
                 console.log('Raw Data:', response);
                 let filteredEvents;
                 switch (activeEventType) {
+                    case 'incidence':
+                        filteredEvents = filterIncidence(response, QCmachine, items, startDate, endDate);
+                        console.log('Filtered Incidence Data:', filteredEvents);
+                        displayEventCards(filteredEvents);
+                        break;
                     case 'qc':
                         filteredEvents = filterQC(response, QCmachine, items, startDate, endDate);
                         console.log('Filtered QC Data:', filteredEvents);

@@ -77,10 +77,10 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Shipment sent to the server successfully:', response);
+                            alert('Pickup request sent successfully', response);
                         },
                         error: function(xhr, status, error) {
-                            alert('Error sending shipement to the server:', error);
+                            alert('Error sending pickup request', error);
                         }
                     });
 
@@ -459,7 +459,7 @@ $(document).ready(function() {
             const timestamp = new Date(rowData[timestampField]);
         
             if (isNaN(timestamp)) {
-                return 'Invalid timestamp';  // Return if the timestamp is invalid
+                return '';  // Return if the timestamp is invalid
             }
         
             // Extract hours, minutes, and seconds, ensuring two-digit format
@@ -487,7 +487,7 @@ $(document).ready(function() {
 
             },
             { 
-                status: "Rider assigned", 
+                status: "Rider enroute", 
                 details: "A rider has been assigned and is on their way to pickup.", 
                 time: formatTimeFromTimestamp(rowData, 'enrouteTime'), 
                 completed: rowData.enroute === "yes" 

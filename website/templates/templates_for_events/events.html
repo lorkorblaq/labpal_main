@@ -12,11 +12,11 @@
             <h1>Events</h1>
             <nav class="nav nav-borders mt-3">
                 <button class="" id="createButton">Create Event</button>
-                <a class="nav-link" id="incedence-btn" data-target="#incidenceEvents">Incidence Events</a>
-                <a class="nav-link" id="qc-btn" data-target="#QCEvents">Q.Control Events</a>
-                <a class="nav-link" id="maintenance-btn" data-target="#maintenanceEvents">Maintenance Events</a>
-                <a class="nav-link" id="machine-btn" data-target="#machineEvents">Machine Events</a>
-                <a class="nav-link" id="operations-btn" data-target="#operationEvents">Operations Events</a>
+                <a class="nav-link" id="incidence-btn" data-target="#incidenceEvents">Incidences</a>
+                <a class="nav-link" id="qc-btn" data-target="#QCEvents">Quality C.</a>
+                <a class="nav-link" id="maintenance-btn" data-target="#maintenanceEvents">Maintenances</a>
+                <a class="nav-link" id="machine-btn" data-target="#machineEvents">Machines</a>
+                <a class="nav-link" id="operations-btn" data-target="#operationEvents">Operations</a>
                 <!-- <a class="nav-link" id="to-do-btn" data-target="#to-doEvents">To-Do Events</a> -->
             </nav>
         </div>
@@ -29,51 +29,89 @@
                 <span class="close">&times;</span>
                 <h2>Describe your events</h2>
                 <div class="tool" id="tool1">
+                    <div class="iconevents">📝</div>
+                    <div class="description">
+                        <h3>Incidences</h3>
+                        <p>Transcription error and all</p>
+                    </div>
+                </div>
+                <div class="tool" id="tool2">
                     <div class="iconevents">✅</div>
                     <div class="description">
                         <h3>Quality Control</h3>
                         <p>Your quality indicators, performance, trends, biases</p>
                     </div>
                 </div>
-                <div class="tool" id="tool2">
+                <div class="tool" id="tool3">
                     <div class="iconevents">⚙️</div>
                     <div class="description">
                         <h3>Machine</h3>
                         <p>Machine performance, maintenance, downtimes and troubleshooting</p>
                     </div>
                 </div>
-                <div class="tool" id="tool3">
+                <div class="tool" id="tool4">
                     <div class="iconevents">🛠️</div>
                     <div class="description">
                         <h3>Operations</h3>
                         <p>Stock outs, personnel</p>
                     </div>
                 </div>
-                <div class="tool" id="tool4">
-                    <div class="iconevents">✅</div>
-                    <div class="description">
-                        <h3>Incidences</h3>
-                        <p>Transcription error and all</p>
-                    </div>
-                </div>
                 <button id="closebtn" class="close">Close</button>
             </div>
 
-            <!-- Additional Modal Content for QC -->
+            <!-- Additional Modal Content for Incidences -->
             <div id="additionalContent1" class="modal-content" style="display:none;">
+                <span class="close">&times;</span>
+                <h2>Incidences</h2>
+                <form>
+                    <div class="incidence-container">
+                        <div class="incidence-input-container">
+                            <input type="text" class="form-control datePicker" id="datePicker-incidence" placeholder="Date/time of incidence"> <br>
+                            <input type="text" class="form-control timepicker" id="timePicker-incidence"><br>
+                        </div>
+                        <div class="incidence-input-container">
+                            <select class="form-control" id="errorStage">
+                                <option value="" disabled selected>Stage of error...</option>
+                                <option value="procedures">Pre-analytical</option>
+                                <option value="methods">Analytical</option>
+                                <option value="machines">Post-analytical</option>
+                            </select>
+                            <input type="text" class="form-control" id="barcode" placeholder="Barcode">
+                            <input type="text" class="form-control autoInputItem" id="itemIndicatorIncidence" placeholder="Assay if invloved.">
+                            <input type="text" class="form-control autoInputMachine" id="machineIndicatorIncidence" placeholder="Machine if invloved.">
+                            <input type="text" class="form-control autoInputLabs" id="location" placeholder="Location invloved.">
+                        </div>
+                        <div class="incidence-input-container">
+                            <input type="text" class="form-control" id="issue" placeholder="State the incidence...">
+                        </div>
+                        <div class="incidence-input-container">
+                            <input type="text" class="form-control" id="actionTaken" placeholder="Action taken...">
+                        </div>
+                        <label><input type="checkbox" class="option-checkbox" data-value="resolved" id="incidence-checkbox"> Resolved</label><br>
+                        <div class="incidence-input-container">
+                            <!-- <input type="text" class="form-control" id="new-todo" placeholder="Barcode"> -->
+                        </div>
+                        <ul id="todo-list">
+                            <!-- To-do items will be added here -->
+                        </ul>
+                    </div>
+                    <button type="submit" id="submit-incidence">Submit</button>
+                    <button type="button" class="back">Back</button>
+                </form>
+            </div>
+
+            <!-- Additional Modal Content for QC -->
+            <div id="additionalContent2" class="modal-content" style="display:none;">
                 <span class="close">&times;</span>
                 <h2>Quality Control</h2>
                 <form>
-                    <label for="datePicker">Date:</label>
-                    <input type="text" class="form-control datePicker" id="datePicker-qc" placeholder="Select date">
+                    <input type="text" class="form-control datePicker" id="datePicker-qc" placeholder="Select date"><br>
 
-                    <label for="qualityIndicator">Machine:</label>
                     <input type="text" class="form-control autoInputMachine" id="machineIndicatorQC" placeholder="Enter Machine...">
                     <br>
 
                     <div id="qcTagger">
                         <input type="text" class="form-control autoInputItem" id="QCtags" placeholder="Enter affected item(s) separated by commas">
-
                     </div><br>
 
                     <select class="form-control" id="rootcause">
@@ -102,12 +140,12 @@
             </div>
 
             <!-- Additional Modal Content for Machines-->
-            <div id="additionalContent2" class="modal-content" style="display:none;">
+            <div id="additionalContent3" class="modal-content" style="display:none;">
                 <span class="close">&times;</span>
                 <h2>Machine History</h2>
                 <form>
                     <input type="text" class="form-control datePicker" id="datePicker-machine" placeholder="Select date">                  
-                    <input type="text" class="mt-2 form-control" id="timepicker-machine">
+                    <input type="text" class="mt-2 form-control timepicker" id="timepicker-machine">
                     <br>
                     
                     <!-- <label for="machineIndicator">Machine(s):</label> -->
@@ -162,7 +200,7 @@
             </div>
 
             <!-- Additional Modal Content for Operations-->
-            <div id="additionalContent3" class="modal-content" style="display:none;">
+            <div id="additionalContent4" class="modal-content" style="display:none;">
                 <span class="close">&times;</span>
                 <h2>Operations</h2>
                 <form>
@@ -181,47 +219,19 @@
                 </form>
             </div>
 
-            <!-- Personale task -->
-            <div id="additionalContent4" class="modal-content" style="display:none;">
-                <span class="close">&times;</span>
-                <h2>Personal Tasks</h2>
-                <form>
-                    <input type="text" class="form-control datePicker" id="datePicker-todo" placeholder="Select date">
-                    
-                    <div class="todo-container">
-                        <h6>Breaking things down so you don't break down</h6>
-                        <div class="todo-input-container">
-                            <input type="text" class="form-control" id="new-todo" placeholder="Add new item...">
-                            <button id="add-todo">+</button>
-                        </div>
-                        <ul id="todo-list">
-                            <!-- To-do items will be added here -->
-                        </ul>
-                    </div>
-                    <button type="submit" id="submit-todo">Submit</button>
-                    <button type="button" class="back">Back</button>
-                </form>
-            </div>
 
             <!-- Add similar content for other tools as needed -->
         </div>
         <br>
         <div class="events" id="incidenceEvents">
             <h3>Incidence Events</h3>
-            <!-- <div class="filterContainer">
-                <h6>Select a date range:</h6>
-                <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
-                <input type="text"class="autoInputMachine" id="QCfilterMachine" placeholder="Enter Machine">
-                <input type="text" class="autoInputItem" id="filterItems" placeholder="Enter items">
-                <button class="applyFilter">Apply Filter</button>
-            </div> -->
             <div class="eventContainer" id="QCeventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>
-            <div class="table-responsive" id ="ex-QCr_table">
-                <table class="table table-bordered table-striped" id="QCr_table">
+            <div class="table-responsive" id ="ex-incidence-r_table">
+                <table class="table table-bordered table-striped" id="incidence-r_table">
                     <h6>Select a date range:</h6>
-                    <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
+                    <input type="text" class="date-range" id="incidence-date-range" placeholder="Select date range">
                     <thead class="head thead-dark">
                         <tr id="">
                         </tr>
@@ -236,13 +246,6 @@
 
         <div class="events" id="QCEvents">
             <h3>Quality Control Events</h3>
-            <!-- <div class="filterContainer">
-                <h6>Select a date range:</h6>
-                <input type="text" class="date-range" id="qc-date-range" placeholder="Select date range">
-                <input type="text"class="autoInputMachine" id="QCfilterMachine" placeholder="Enter Machine">
-                <input type="text" class="autoInputItem" id="filterItems" placeholder="Enter items">
-                <button class="applyFilter">Apply Filter</button>
-            </div> -->
             <div class="eventContainer" id="QCeventContainer">
                 <!-- Cards will be dynamically added here -->
             </div>
