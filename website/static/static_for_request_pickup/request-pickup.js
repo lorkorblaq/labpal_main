@@ -9,8 +9,8 @@ $(document).ready(function() {
         }
         return null;
     }
-    BaseUrl = "http://0.0.0.0:3000/api";
-    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
 
     const columnRequests = ['request_id', 'completed', 'accepted', 'created_at', 'accepted_time', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'created_by', 'picked_by', 'description'];
     const headerRequsts = ['Request Id','Completed', 'Accepted', 'Created at', 'accepted at', 'Pickup at', 'Dropoff at',' Duration', 'Pickup Lab.',  'No. of Samples', 'Created by', 'Picked by', 'Description'];

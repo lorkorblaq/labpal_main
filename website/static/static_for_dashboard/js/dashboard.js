@@ -1,6 +1,6 @@
 $(document).ready(async function () {
-    // BaseUrl = "https://labpal.com.ng/api";
-    BaseUrl = "http://127.0.0.1:3000/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://127.0.0.1:3000/api";
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {

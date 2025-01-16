@@ -14,8 +14,8 @@ $(function () {
     }
     user_id = getCookie("user_id");
     lab_name = getCookie("lab_name");
-    // BaseUrl = "https://labpal.com.ng/api"
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api"
+    // BaseUrl = "http://0.0.0.0:3000/api";
     lotexpUrl = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     const import_lots_url = `${BaseUrl}/lotexp/bulkpush/${user_id}/${lab_name}/`;
 

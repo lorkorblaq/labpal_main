@@ -1,8 +1,8 @@
 $(function () {
     const headersChannel = ['_id','created at', 'user', 'item', 'lot_numb', 'direction', 'location', 'quantity', 'description', 'action'];
     console.log("channels.js loaded");
-    // BaseUrl = "https://labpal.com.ng/api";
-    BaseUrl = "http://127.0.0.1:3000/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://127.0.0.1:3000/api";
 
     // const user_d = $.cookie('user_id');
     function getCookie(name) {

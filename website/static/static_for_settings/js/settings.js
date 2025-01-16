@@ -1,7 +1,7 @@
 $(function () {
     console.log("settings.js loaded");
-    // const BaseUrl = "http://127.0.0.1:3000/api";
     const BaseUrl = "https://labpal.com.ng/api";
+    // const BaseUrl = "http://127.0.0.1:3000/api";
 
     if (!window.socket) {
         window.socket = io();

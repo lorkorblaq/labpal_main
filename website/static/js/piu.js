@@ -3,8 +3,8 @@ $(function () {
     const columnsPIS = ['Created at', 'User', 'Item', 'Bench', 'Machine', 'Quantity(store-unit)', 'Description', ''];
     const headersPIS = ['_id','created at', 'user', 'item', 'bench', 'machine','lot_numb', 'quantity', 'description', ''];
 
-    // BaseUrl = "https://labpal.com.ng/api"
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api"
+    // BaseUrl = "http://0.0.0.0:3000/api";
     
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
