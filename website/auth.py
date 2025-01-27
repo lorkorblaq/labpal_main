@@ -13,6 +13,7 @@ from functools import wraps
 from .mailer import welcomeMail, send_verification_email
 import logging
 from .celeryMasters.inventoryMaster import watch_inventory_changes
+from .celeryMasters.pickupMaster import watchCreatePickup
 from flask import current_app
 from bson.errors import InvalidId
 import re
@@ -255,6 +256,7 @@ def signup_signin():
             org_name = org.get('org_name')
             org_plan = org.get('subscription')
             role = user.get('role')
+            center = user.get('center', "")
             lab_name = user.get('labs_access', [""])[0]
             ip_address = request.remote_addr
             firstname = user['firstname']
@@ -278,6 +280,7 @@ def signup_signin():
                 'firstname': firstname,
                 'lastname': lastname,
                 'name': name,
+                'center': center,
                 'title': user.get('title', ""),
                 'address': user.get('address', ""),
                 'mobile': user.get('mobile', ""),
@@ -305,6 +308,7 @@ def signup_signin():
             response.set_cookie('lab_name', lab_name)
             response.set_cookie('token', token)
             watch_inventory_changes.delay(org_name, lab_name)
+            watchCreatePickup.delay(org_name, center, role)
             return response
 
         flash("Invalid login credentials.", "danger")

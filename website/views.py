@@ -12,6 +12,8 @@ from pywebpush import webpush
 from .subscription import add_subscription
 from dotenv import load_dotenv, find_dotenv
 import os, json
+
+from .extensions import socketio
 load_dotenv(find_dotenv())
 valid_pub_key = os.getenv('VAPID_PUB_KEY')
 valid_pri_key = os.getenv('VAPID_PRI_KEY')
@@ -96,7 +98,6 @@ def expiration():
 def put_in_use():
     return render_template("put-in-use.html", data=data)
 
-
 @views.route("/app/channels",  strict_slashes=False)
 @auth_required
 def channels():
@@ -172,3 +173,7 @@ def subscription():
     # print('subscrsi',subscriptions)
     return {"message": "Subscription added"}, 201
 
+@socketio.on('message')
+def handle_message(data):
+    print(f"Message received: {data}")
+    socketio.emit('response', {'message': f"Echo: {data}"})

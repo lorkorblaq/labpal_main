@@ -11,7 +11,7 @@ $(function() {
         }
         return null;
     }
-    const HeadersIncidenceEvents = ['event_id','Created At','User', 'Resolved', 'Date & Time', 'Stage of Error', 'Barcode', 'Machine', 'Assay', 'Location Involved', 'Incidence', 'Actioning',''];
+    const HeadersIncidenceEvents = ['event_id','Created At','Reporter', 'Resolved', 'Date & Time', 'Stage of Error', 'Barcode', 'Machine', 'Assay', 'Location Involved', 'Incidence', 'Actioning',''];
     const ColumnsIncidenceEvents = ['event_id','created_at','user', 'resolved', 'date', 'errorStage', 'barcode', 'machine', 'items', 'locationInvolved', 'incidenceText', 'actioning', ''];
 
 
@@ -42,6 +42,7 @@ $(function() {
         // Fetch data from the provided URL
         return $.get(url);
     }
+    
  
     $('.nav-link').on('click', function() {
         // Remove 'active' class from all links
@@ -712,6 +713,7 @@ $(function() {
         var url = url_event_get_all + 'incidence' + '/';
         renderTable('incidence-r_table', 'ex-incidence-r_table', url, ColumnsIncidenceEvents, HeadersIncidenceEvents);``
     });
+
     $('#incidence-btn').click();
 
     $('#qc-btn').click(function(){
@@ -1123,7 +1125,9 @@ $(function() {
             alert("Error deleting event. Please try again.");
         }
     }
-    
+
+
+
     
     
     

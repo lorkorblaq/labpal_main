@@ -61,3 +61,11 @@ body {
 .timeline-item:last-child:after {
     display: none; /* Remove the line for the last item */
 }
+
+#r_table tbody tr {
+    cursor: pointer;  /* Change cursor to pointer */
+}
+
+#r_table tbody tr:hover {
+    background-color: #a2b5c0;  /* Optional: Change background color on hover */
+}

@@ -22,15 +22,16 @@ def generate_registration_url(org_name, lab_name, firstname, lastname, email, ur
     url_address = f"https://labpal.com.ng/{url}?token={token}"
     return url_address
 
-def generate_client_registration_url(org_id, center_name, firstname, lastname, email):
+def generate_client_registration_url(org_id, center, firstname, lastname, homeAddress, email):
     # Define the payload
     payload = {
         "org_id": org_id,
-        "center_name": center_name,
+        "center": center,
         "firstname": firstname,
         "lastname": lastname,
+        "homeAddress": homeAddress,
         "email": email,
-        "exp": datetime.datetime.now() + datetime.timedelta(hours=6),  # Token expiration time
+        "exp": datetime.datetime.now() + datetime.timedelta(hours=1),  # Token expiration time
     }
     print(payload)
     # Encode the payload into a JWT

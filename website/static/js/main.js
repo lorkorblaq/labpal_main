@@ -17,37 +17,89 @@ $(function () {
     const user_id = getCookie('user_id');
     const lab_name = getCookie('lab_name');
     const role = getCookie('role');
+    const center = getCookie('center');
     const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
     const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
     const machine_url = `${BaseUrl}/machines/get/${user_id}/${lab_name}/`;
     const labs_url = `${BaseUrl}/labs/get/${user_id}/`;
     
 
-// Check if socket is already initialized
+    // Check if socket is already initialized
     if (!window.socket) {
-        // Initialize socket
-        window.socket = io();
+        // Initialize socket and pass role as a query parameter
+        window.socket = io({ query: { role: role } });  // Or dynamically set 'staff'/'client'
     }
-    // In your other file (let's call it otherFile.js)
+    socket.emit('pickUp', { message: 'role' });
 
-    // $('.InputItemMain').typeahead({
-    //     source: function (request, response) {
-    //         $.ajax({
-    //             url: item_url, // Replace with your API endpoint for item search
-    //             method: "GET",
-    //             data: { term: request.term },
-    //             dataType: "json",
-    //             success: function (data) {
-    //                 console.log("Retrieved data:", data);
-    //                 const itemNames = data.items.map(item => item.item);
-    //                     response(itemNames);
-    //                 },
-    //             error: function (error) {
-    //                 console.error("Error fetching item data:", error);
-    //                 }
-    //             });
-    //         },
-    //     });
+    socket.on('pickUp', (data) => {
+        console.log('Received from server:', data)
+    });
+
+    socket.on('connect_error', (error) => {
+        console.error('Connection failed:', error);
+    });
+    
+    var path = window.location.pathname;
+    
+    // Add the 'active' class to the link with a matching pattern
+    $('a[href="' + path + '"]').addClass('active');
+    function refreshTable() {
+        fetchData(`${BaseUrl}/channels/get/`).then(data => {
+            dataTableInstance.clear();
+            dataTableInstance.rows.add(data.channels);
+            dataTableInstance.draw();
+        }).catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    }
+    toastr.options = {
+        "timeOut": 0,          // Set timeOut to 0 to keep the notification until closed
+        "extendedTimeOut": 0,  // Set extendedTimeOut to 0 to keep the notification until closed
+        "tapToDismiss": true, // Disable tap to dismiss
+        "positionClass": "toast-bottom-right", // Position of the notification
+        "iconClass": 'toast-success-icon', // Custom icon class
+        "escapeHtml": true,    // Escape HTML in message
+        "showMethod": 'slideDown', // Show animation method
+        "hideMethod": 'slideUp',    // Hide animation method
+        "showEasing": 'swing',  // Show animation easing
+        "hideEasing": 'linear', // Hide animation easing
+        "showDuration": 300,    // Show animation duration
+        "hideDuration": 300     // Hide animation duration
+    };
+    console.log("Role:", role, "center",center);
+    // if (role === 'creator') {
+    //     console.log("Staff");
+    //     // Staff-specific code here
+    //     socket.on('StaffNotifications', handleNotification);
+    // }else if (role === 'client') {
+    //     console.log("Client");
+    //     // Client-specific code here
+    //     socket.on('ClientNotifications', handleNotification);
+    // }
+    socket.on('StaffNotifications', handleNotification);  
+    
+    function handleNotification(data) {
+        console.log('Notification:', data.message);
+        toastr.warning(data.message, 'Notification');
+        // Display the notification to the user (e.g., using a toast or alert)
+    }
+      
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCblrG_QMF34EkvQDVNERUbgkIau4xymiI",
+        authDomain: "labpal-28980.firebaseapp.com",
+        projectId: "labpal-28980",
+        storageBucket: "labpal-28980.appspot.com",
+        messagingSenderId: "292842656635",
+        appId: "1:292842656635:web:d27ed2319914e9baed63de",
+        measurementId: "G-D0ECY39XF8"
+    };
+
+    // Initialize Firebase
+    // const app = initializeApp(firebaseConfig);
+    // firebase.initializeApp(firebaseConfig);
+    // const analytics = getAnalytics(app);
+
     $('.autoInputName').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -160,52 +212,4 @@ $(function () {
                 });
             },
         });
-    var path = window.location.pathname;
-    
-    // Add the 'active' class to the link with a matching pattern
-    $('a[href="' + path + '"]').addClass('active');
-    function refreshTable() {
-        fetchData(`${BaseUrl}/channels/get/`).then(data => {
-            dataTableInstance.clear();
-            dataTableInstance.rows.add(data.channels);
-            dataTableInstance.draw();
-        }).catch(error => {
-            console.error("Error fetching data:", error);
-        });
-    }
-    toastr.options = {
-        "timeOut": 0,          // Set timeOut to 0 to keep the notification until closed
-        "extendedTimeOut": 0,  // Set extendedTimeOut to 0 to keep the notification until closed
-        "tapToDismiss": true, // Disable tap to dismiss
-        "positionClass": "toast-bottom-right", // Position of the notification
-        "iconClass": 'toast-success-icon', // Custom icon class
-        "escapeHtml": true,    // Escape HTML in message
-        "showMethod": 'slideDown', // Show animation method
-        "hideMethod": 'slideUp',    // Hide animation method
-        "showEasing": 'swing',  // Show animation easing
-        "hideEasing": 'linear', // Hide animation easing
-        "showDuration": 300,    // Show animation duration
-        "hideDuration": 300     // Hide animation duration
-    };
-    socket.on('notifications', function(data) {
-        // Handle notification received from the server
-        console.log('Notification:', data.message);
-        toastr.warning(data.message, 'Notification');
-        // Display the notification to the user (e.g., using a toast or alert)
-    });  
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCblrG_QMF34EkvQDVNERUbgkIau4xymiI",
-        authDomain: "labpal-28980.firebaseapp.com",
-        projectId: "labpal-28980",
-        storageBucket: "labpal-28980.appspot.com",
-        messagingSenderId: "292842656635",
-        appId: "1:292842656635:web:d27ed2319914e9baed63de",
-        measurementId: "G-D0ECY39XF8"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    firebase.initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
 });

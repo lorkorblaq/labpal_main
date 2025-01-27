@@ -54,7 +54,7 @@ def create_app():
 
     socketio.init_app(app)
     mail.init_app(app)
-    
+
     # celery = make_celery(app)
 
 

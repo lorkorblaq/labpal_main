@@ -12,7 +12,7 @@ import datetime
 from functools import wraps
 from .mailer import welcomeMail, send_verification_email
 import logging
-from .celeryMasters.inventoryMaster import watch_inventory_changes
+from .celeryMasters.pickupMaster import watchCreatePickup
 from flask import current_app
 from bson.errors import InvalidId
 import re
@@ -72,25 +72,26 @@ def signup_signin():
     orgform = OrgForm()
     
     if 'signup' in request.form:
-        org_name = register_form.org_name.data.lower()
-        center_name = register_form.org_name.data.lower()
-        firstname = register_form.firstname.data
-        lastname = register_form.lastname.data
+        ref_org_id = register_form.ref_org_id.data.strip()
+        center = register_form.center_name.data.strip().lower()
+        firstname = register_form.firstname.data.strip().lower()
+        lastname = register_form.lastname.data.strip().lower()
+        homeAddress = register_form.homeAddress.data.strip().lower()
         email = register_form.email.data.strip().lower()
         
-        org = ORG_COLLECTION.find_one({'org_name': org_name}, {'_id':1,'subscription': 1, 'users': 1, 'labs': 1})
+        org = ORG_COLLECTION.find_one({'_id': ObjectId(ref_org_id)}, {'subscription': 1, 'users': 1, 'labs': 1})
         if not org:
-            flash("Organisation not registered. Please confirm your org name.", "warning")
+            flash("Organisation not registered. Please confirm the Org. ID or contact referring Org.", "warning")
             return redirect(url_for('authClient.auth_page'))
         
         num_users = len(org.get('users', []))
         sub = org.get('subscription')
-        user_limits = {'free': 3, 'Basic monthly plan': 20, 'Basic yearly plan': 20, 'Premium monthly plan ': 45, 'Premium yearly plan ': 45}
+        user_limits = {'free': 20, 'Basic monthly plan': 45, 'Basic yearly plan': 45, 'Premium monthly plan ': 90, 'Premium yearly plan ': 90}
 
         if num_users >= user_limits.get(sub, float('inf')):
             plan_upgrades = {'free': 'Basic or Premium', 'basic': 'Premium', 'premium': 'Enterprise'}
-            flash(f"Your organization has reached the maximum number of {user_limits[sub]} users for the current plan. "
-                  f"Please upgrade your plan to {plan_upgrades.get(sub, '')} to add more users.", "warning")
+            flash(f"This organization has reached the maximum number of {user_limits[sub]} users for their current plan. "
+                  f"Please upgrade inform them to upgrade there plan to {plan_upgrades.get(sub, '')} to add more users.", "warning")
             return redirect(url_for('authClient.auth_page'))
         
     
@@ -100,10 +101,7 @@ def signup_signin():
             flash("A user with this email address already exists.", "danger")
             return redirect(url_for('authClient.auth_page'))
         
-
-        org_id = str(org.get('_id'))
-        print(org_id)
-        url_address = generate_client_registration_url(org_id, center_name, firstname, lastname, email)
+        url_address = generate_client_registration_url(ref_org_id, center, firstname, lastname, homeAddress, email)
         # url = f"https://labpal.com.ng/register-user?org_id={org_id}&lab_name={lab_name}&firstname={firstname}&lastname={lastname}&email={email}"
         print(url_address)
         send_verification_email(email, firstname, url_address)
@@ -127,10 +125,11 @@ def signup_signin():
             org_name = org.get('org_name')
             org_plan = org.get('subscription')
             role = user.get('role')
-            ip_address = request.remote_addr
+            center = user['center']
             firstname = user['firstname']
             lastname = user['lastname']
             name = f'{firstname} {lastname}'
+            ip_address = request.remote_addr
             part_id = full_id[-7:]
             print(org_plan)
             logging.info(f"user:{name}, email:{email}, ip:{ip_address} at {datetime.datetime.now()}")
@@ -139,6 +138,7 @@ def signup_signin():
                 'id': full_id,
                 'org_id': org_id,
                 'org_name': org_name,
+                'center': center,
                 'org_plan': org_plan,
                 'role': role,
                 'ip_address': ip_address,
@@ -153,7 +153,6 @@ def signup_signin():
                 'mobile': user.get('mobile', ""),
                 'image': user.get('image', ""),
             })
-            print(session)
             secret_key = "LVUC5jSkp7jjR3O-"
             token = jwt.encode({
                 'email': email,
@@ -172,6 +171,9 @@ def signup_signin():
             response.set_cookie('role', role)
             response.set_cookie('org_id', org_id)
             response.set_cookie('token', token)
+            response.set_cookie('center', center)
+            watchCreatePickup.delay(org_name, center, role)
+
             return response
 
         flash("Invalid login credentials.", "danger")
@@ -189,9 +191,10 @@ def register_user():
     # Decode the token
     payload = decode_token(reg_token)
     org_id = payload.get('org_id')
-    center_name = payload.get('center_name')
+    center = payload.get('center')
     firstname = payload.get('firstname')
     lastname = payload.get('lastname')
+    homeAddress = payload.get('homeAddress')
     email = payload.get('email')
 
     if request.method == 'POST':
@@ -206,15 +209,16 @@ def register_user():
             user_data = {
                 "firstname": firstname,
                 "lastname": lastname,
+                "address": homeAddress,
                 "email": email,
                 "password": hashed_password,
                 "role": "client",
                 "org_id": org_id,
-                "center_name": center_name,
+                "center": center,
                 "created_at": datetime.datetime.now(),
             }
             user_id = USERS_COLLECTION.insert_one(user_data).inserted_id
-            ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"users": str(user_id)}})
+            ORG_COLLECTION.find_one_and_update({"_id": ObjectId(org_id)}, {"$push": {"clients": str(user_id), "centers": center}})
             # Register the lab and organization
             welcomeMail(email, firstname)
             flash("Registration successful, you can now login", "success")

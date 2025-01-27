@@ -15,3 +15,7 @@ items = ITEMS_COLLECTION.find()
 def stock_alerts(data):
     emit('stock_alerts', data, broadcast=True)
     print('Client notification connected')
+
+@socketio.on('connect')
+def handle_connect():
+    print('connected')

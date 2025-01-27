@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -14,15 +12,14 @@ $(document).ready(function() {
     BaseUrl = "https://labpal.com.ng/api";
     // BaseUrl = "http://0.0.0.0:3000/api";
 
-    const columnRequests = ['request_id', 'completed', 'created_at', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'picked_by', 'description'];
-    const headerRequest = ['Request Id','Completed', 'Created at', 'Picked at', 'Dropped at',' Duration⏰', 'Pickup Lab.', 'No. of samples', 'Picked by', 'Description'];
+    const columnRequests = ['request_id', 'accepted', 'completed', 'created_at', 'dropoff_time','duration','description'];
+    const headerRequest = ['Request Id','Accepted', 'Completed','Created at', 'Dropped at', 'Duration', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
     var user_name = getCookie('name');
     const lab_name = getCookie('lab_name');
     user_name = user_name.replace(/['"]+/g, '');
-    console.log(user_id, user_name, lab_name);
 
     const url_shipment_get = `${BaseUrl}/request-pickup/get/${user_id}/`
     const url_shipment_push = `${BaseUrl}/request-pickup/push/${user_id}/`;
@@ -77,7 +74,7 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Pickup request sent successfully', response);
+                            alert('Pickup request sent to lab successfully', response);
                         },
                         error: function(xhr, status, error) {
                             alert('Error sending pickup request', error);
@@ -326,6 +323,23 @@ $(document).ready(function() {
         try {
             const data = await fetchData(url_shipment_get);
             renderTable('r_table', 'ex-r_table', data.requests, columnRequests);
+            // Set up periodic polling to update the DataTable
+            previousDataHash = hashData(data.requests);
+            console.log('old',previousDataHash);
+            setInterval(async function() {
+                try {
+                    const newData = await fetchData(url_shipment_get);
+                    const newDataHash = hashData(newData.requests);
+                    console.log('new',newDataHash);
+                    if (newDataHash !== previousDataHash) {
+                        dataTableInstance.clear().rows.add(newData.requests).draw();
+                        previousDataHash = newDataHash;
+                        toastr.success("Request has been updated!");
+                    }
+                } catch (error) {
+                    console.error("Error fetching updated data:", error);
+                }
+            }, 3000); // Poll every 3 seconds
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -430,14 +444,36 @@ $(document).ready(function() {
             order: [[1, 'desc']]
         });
     
+        // $(`#${tableId} tbody`).on('click', 'tr', function () {
+        //     var rowData = dataTableInstance.row(this).data();
+        //     const rowPickupId = rowData.request_id;
+        //     console.log('thisdata',rowData.id);
+        //     var trackingInfoHtml = createTrackingTimeline(rowData);
+        //     console.log(trackingInfoHtml);
+        //     $('#mappingModal').modal('show');
+        //     $('#tracking-info').html(trackingInfoHtml);
+        // });
         $(`#${tableId} tbody`).on('click', 'tr', function () {
             var rowData = dataTableInstance.row(this).data();
-    
-            var trackingInfoHtml = createTrackingTimeline(rowData);
-            console.log(trackingInfoHtml);
-            $('#mappingModal').modal('show');
-            $('#tracking-info').html(trackingInfoHtml);
-        });        
+            var rowDataId = rowData.id;  // Assuming each row has a unique ID
+            
+        
+            // Make an AJAX call to fetch real-time data
+            $.ajax({
+                url: url_shipment_get+rowDataId,  // Replace with your endpoint
+                method: 'GET',
+                success: function(latestData) {
+                    var trackingInfoHtml = createTrackingTimeline(latestData);
+                    console.log(latestData);
+                    $('#mappingModal').modal('show');
+                    $('#tracking-info').html(trackingInfoHtml);
+                },
+                error: function(err) {
+                    console.error('Failed to fetch the latest data:', err);
+                }
+            });
+        });
+             
     
         var exportButton = $('<button>').text(' Export').addClass('button fas fa-file-export');
         var printButton = $('<button>').text(' Print').addClass('button fas fa-print');
@@ -452,7 +488,13 @@ $(document).ready(function() {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
     }
-    
+    // Function to calculate a hash of the data for comparison
+    function hashData(data) {
+        // Convert data to a string and hash it using a simple checksum method
+        return JSON.stringify(data)
+            .split('')
+            .reduce((a, b) => a + b.charCodeAt(0), 0);
+    }
     function createTrackingTimeline(rowData) {
         function formatTimeFromTimestamp(rowData, timestampField) {
             // Check if the timestampField exists and is valid
@@ -623,11 +665,9 @@ $(document).ready(function() {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
         const charactersLength = characters.length;
-    
         for (let i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-    
         return result;
     }
 
@@ -635,10 +675,6 @@ $(document).ready(function() {
     $('#dashboard').on('click', function() {
         console.log('Dashboard clicked');
         $('#ex-r_table').css('display', 'none');
-    }
+        }
     );
-
-
-
-
 });

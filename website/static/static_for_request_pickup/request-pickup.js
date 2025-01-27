@@ -9,11 +9,11 @@ $(document).ready(function() {
         }
         return null;
     }
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
 
-    const columnRequests = ['request_id', 'completed', 'accepted', 'created_at', 'accepted_time', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'created_by', 'picked_by', 'description'];
-    const headerRequsts = ['Request Id','Completed', 'Accepted', 'Created at', 'accepted at', 'Pickup at', 'Dropoff at',' Duration', 'Pickup Lab.',  'No. of Samples', 'Created by', 'Picked by', 'Description'];
+    const columnRequests = ['request_id', 'completed', 'accepted', 'created_at', 'accepted_time', 'assigned_to', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'numb_of_samples', 'created_by', 'picked_by', 'description'];
+    const headerRequsts = ['Request Id','Completed', 'Accepted', 'Created at', 'accepted at', 'Assigned to','Pickup at', 'Dropoff at',' Duration', 'Pickup Lab.',  'No. of Samples', 'Created by', 'Picked by', 'Description'];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -65,11 +65,17 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Request has been accepted:', response);
+                            alert('Request has been accepted', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error accepting request, please try again:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
 
                 }, function(error) {
@@ -119,11 +125,17 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Request has been assigned:', response);
+                            alert('Request has been assigned', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error assigned request, please try again:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
 
                 }, function(error) {
@@ -171,11 +183,17 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Enroute', response);
+                            alert('Enroute to pickup', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error assigned request, please try again:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
 
                 }, function(error) {
@@ -223,11 +241,17 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('You at pick up', response);
+                            alert('Client notified you at pickup', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error assigned request, please try again:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
 
                 }, function(error) {
@@ -275,11 +299,17 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('pick up sent to the server successfully:', response);
+                            alert('Sample pick up successfully:', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
@@ -327,28 +357,34 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function(response) {
-                            alert('Request has been dropped:', response);
+                            alert('Samples has been dropped at lab:', response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error dropping request, please try again:', error);
-                        }
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
                     });
 
-                    var seconds = Math.floor((duration / 1000) % 60);
-                    var minutes = Math.floor((duration / (1000 * 60)) % 60);
-                    var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-                    var days = Math.floor(duration / (1000 * 60 * 60 * 24));
+                    // var seconds = Math.floor((duration / 1000) % 60);
+                    // var minutes = Math.floor((duration / (1000 * 60)) % 60);
+                    // var hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+                    // var days = Math.floor(duration / (1000 * 60 * 60 * 24));
     
-                    // Format duration with leading zeros
-                    var formattedDuration = 
-                        ("00" + days).slice(-2) + "days:" +
-                        ("00" + hours).slice(-2) + "hrs:" +
-                        ("00" + minutes).slice(-2) + "mins:" +
-                        ("00" + seconds).slice(-2) + "sec";
+                    // // Format duration with leading zeros
+                    // var formattedDuration = 
+                    //     ("00" + days).slice(-2) + "days:" +
+                    //     ("00" + hours).slice(-2) + "hrs:" +
+                    //     ("00" + minutes).slice(-2) + "mins:" +
+                    //     ("00" + seconds).slice(-2) + "sec";
     
-                    // Display the drop-off stamp and duration in the table
-                    $("#drop-off").text(dropOff_dateTime);
-                    $("#duration").text(formattedDuration);
+                    // // Display the drop-off stamp and duration in the table
+                    // $("#drop-off").text(dropOff_dateTime);
+                    // $("#duration").text(formattedDuration);
 
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
@@ -386,7 +422,7 @@ $(document).ready(function() {
                     }
                 });
             },
-        });
+    });
 
     async function submitForm() {
         var latitude = position.coords.latitude;
@@ -609,6 +645,25 @@ $(document).ready(function() {
             const data = await fetchData(url_shipment_get);
             console.log(data);
             renderTable('r_table', 'ex-r_table', data.requests, columnRequests);
+            previousDataHash = hashData(data.requests);
+            console.log('old',previousDataHash);
+
+            // Set up periodic polling to update the DataTable
+            setInterval(async function() {
+                try {
+                    const newData = await fetchData(url_shipment_get);
+                    const newDataHash = hashData(newData.requests);
+                    console.log('new',newDataHash);
+                    if (newDataHash !== previousDataHash) {
+                        dataTableInstance.clear().rows.add(newData.requests).draw();
+                        previousDataHash = newDataHash;
+                        toastr.success("Sample request pickup has been logged!");
+
+                    }
+                } catch (error) {
+                    console.error("Error fetching updated data:", error);
+                }
+            }, 3000); // Poll every 3 seconds
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -673,6 +728,13 @@ $(document).ready(function() {
         if ($(`#${exTableId}`).find('.button').length === 0) {
             $(`#${exTableId}`).append(exportButton).append(printButton);
         }
+    }
+    // Function to calculate a hash of the data for comparison
+    function hashData(data) {
+        // Convert data to a string and hash it using a simple checksum method
+        return JSON.stringify(data)
+            .split('')
+            .reduce((a, b) => a + b.charCodeAt(0), 0);
     }
     
     function exportJSONData(data) {

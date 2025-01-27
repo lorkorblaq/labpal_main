@@ -17,5 +17,7 @@ mail = Mail()
 # socketio = SocketIO()
 redis_client = Redis.from_url(redis_URL)
 
-socketio = SocketIO(message_queue=redis_URL)
-# print(socketio)
+socketio = SocketIO(cors_allowed_origins="*", transports=['websocket','polling'], message_queue=redis_URL)
+# socketio = SocketIO(cors_allowed_origins="*", transports=['websocket','polling'])
+
+print('me',socketio)

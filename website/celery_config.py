@@ -8,10 +8,10 @@ celery = Celery(
 )
 celery.conf.update(
     task_routes={
-        'website.celeryMasters.chatMaster.chat_watcher': {'queue': 'chat'},
         'website.celeryMasters.inventoryMaster.watch_inventory_changes': {'queue': 'inventory'},
+        'website.celeryMasters.pickupMaster.watchCreatePickup': {'queue': 'createPickup'},
     },
-    imports=('website.celeryMasters.inventoryMaster','website.celeryMasters.chatMaster')
+    imports=('website.celeryMasters.inventoryMaster','website.celeryMasters.pickupMaster')
 )
 
 celery.conf.broker_connection_retry_on_startup = True

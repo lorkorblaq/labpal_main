@@ -46,7 +46,7 @@ $(function () {
     async function submitForm() {
         let item = $('#inputItem').val();
         let lot = $('#inputLot').val();
-        let quantity = $('#QtyInputChannel').val();
+        let quantity = $('#QtyInputChannel').val() ;
         let direction = $('#dropDownDirectionChannel').val();
         let location = $('#locationsChannel').val();
         let description = $('#DescripInputChannel').val();
@@ -74,7 +74,6 @@ $(function () {
                     location: location,
                     description: description
                 };
-                
                 // Show the loading indicator
                 $('#loadingIndicator').show();
                 // Make the post request

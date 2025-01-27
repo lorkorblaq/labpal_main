@@ -1,6 +1,7 @@
 $(document).ready(function() {
     BaseUrl = "https://labpal.com.ng/api";
     // BaseUrl = "http://127.0.0.1:3000/api";
+
     function getCookie(name) {
         let cookieArr = document.cookie.split("; ");
         for(let i = 0; i < cookieArr.length; i++) {
@@ -12,7 +13,6 @@ $(document).ready(function() {
         return null;
     }
     
-
     const user_id = getCookie('user_id');
     const role = getCookie('role');
     const url_event_todo_push = `${BaseUrl}/to-do/push/${user_id}/`;
@@ -26,6 +26,7 @@ $(document).ready(function() {
         autoclose: true,
         todayHighlight: true,
     });
+
     function getCurrentDate() {
         var today = new Date();
         var year = today.getFullYear();
@@ -34,6 +35,7 @@ $(document).ready(function() {
 
         return `${year}-${month}-${day}`;
     }
+
     $('#date-input').val(getCurrentDate());
     $.ajax({
         url: url_event_todo_get_all,  // Replace with your endpoint for fetching all to-dos
@@ -137,7 +139,6 @@ $(document).ready(function() {
         }
     }
     
-    
     function createTaskItem(text, completed, date) {
         var listItem = $('<li>').addClass('task-item');
         var checkbox = $('<input type="checkbox">').addClass('task-checkbox').prop('checked', completed);
@@ -226,7 +227,6 @@ $(document).ready(function() {
         listItem.append(checkbox, label);
         return listItem;
     }
-    
     
     function moveToCompleted(taskItem) {
         var completedList = taskItem.closest('.card-bodyer').find('.completed-list');
