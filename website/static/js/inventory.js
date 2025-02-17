@@ -1,14 +1,14 @@
 $(function () {
     console.log("inventory.js loaded");
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
     const HeadersItem = ['Items','Qty-in-Store', 'Unit', 'Category', 'Bench', 
-                        'Class', 'BU', 'SU', 'PU', 
+                        'Class', 'BU', 'SU', 'PU', 'BU per day',
                         'BU per SU', 'SU per PU', 
                         'price per PU(₦)'];
 
     const ColumnsItem = ['item',  'quantity','storeUnit','category', 'bench', 
-                        'class',  'baseUnit', 'storeUnit', 'purchaseUnit', 
+                        'class',  'baseUnit', 'storeUnit', 'purchaseUnit', 'baseUnit/day',
                         'baseUnit/storeUnit', 'storeUnit/purchaseUnit', 
                         'price/purchaseUnit'];
 
@@ -42,6 +42,10 @@ $(function () {
     const get_requistion_url = `${BaseUrl}/items/requisite/${user_id}/${lab_name}/`;
     const delete_items_url = `${BaseUrl}/items/deleteall/${user_id}/${lab_name}/`;
     const import_items_url = `${BaseUrl}/items/bulkpush/${user_id}/${lab_name}/`;
+    const update_items_url = `${BaseUrl}/item/put/${user_id}/${lab_name}/`;
+
+    let editedCell;
+    let DataTable
 
     $('#inventory_b').click(function() {
         console.log("drawer clicked");
@@ -210,6 +214,39 @@ $(function () {
         reader.readAsText(file);
     }
 
+    function convertCSVToJSON(csvData) {
+        var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
+        var result = [];
+        var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
+        
+        // Set of fields that should be converted to numbers (integers)
+        var numericFields = new Set(['quantity', 'reOrderLevel', 'baseUnit/day', 'baseUnit/storeUnit', 'storeUnit/purchaseUnit']);
+    
+        // Set of fields that should be converted to floats
+        var floatFields = new Set(['price/purchaseUnit']);
+    
+        for (var i = 1; i < lines.length; i++) {
+            var obj = {};
+            var currentLine = lines[i].split(',').map(cell => cell.trim()); // Trim cell values
+    
+            for (var j = 0; j < headers.length; j++) {
+                var header = headers[j];
+                var value = currentLine[j];
+    
+                if (numericFields.has(header)) {
+                    obj[header] = Number(value); // Convert to integer
+                } else if (floatFields.has(header)) {
+                    obj[header] = parseFloat(value); // Convert to float
+                } else {
+                    obj[header] = value; // Keep as string
+                }
+            }
+            result.push(obj);
+        }
+        return result;
+    }
+    
+    
     function sendJSONDataToAPI(jsonData) {
         // Show the loading indicator when the fetch starts
         fetch(import_items_url, {
@@ -292,32 +329,7 @@ $(function () {
         return csvContent;
     }
 
-    function convertCSVToJSON(csvData) {
-        var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
-        var result = [];
-        var headers = lines[0].split(',').map(header => header.trim()); // Trim headers
-        
-        // Set of fields that should be converted to numbers
-        var numericFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
 
-        for (var i = 1; i < lines.length; i++) {
-            var obj = {};
-            var currentLine = lines[i].split(',').map(cell => cell.trim()); // Trim cell values
-
-            for (var j = 0; j < headers.length; j++) {
-                var header = headers[j];
-                var value = currentLine[j];
-                // Convert numeric fields to numbers
-                if (numericFields.has(header)) {
-                    obj[header] = Number(value);
-                } else {
-                    obj[header] = value;
-                }
-            }
-            result.push(obj);
-        }
-        return result;
-    }
     // Function to print the table content
     function printJSONDataAsCSV(jsonData) {
         // Add header row
@@ -382,9 +394,10 @@ $(function () {
             console.error("Error fetching data:", error);
             }
         $('#loadingIndicator').hide();        
-        };
+    };
     loadInventoryData();
 
+    
     $('#all-items').click(async function() {
         console.log("All items clicked");
         try {
@@ -395,19 +408,7 @@ $(function () {
             console.error("Error fetching data:", error);
         }
     });
-        // Replace the existing click event with change event for the dropdown
-    // $('#reorderable').click(async function() {
-    //     console.log("reorderable clicked");
-    //     try {
-    //         const data = await fetchData(get_items_url);
-    //         const reorderableItems = data.items.filter(item => item['quantity'] <= item['reOrderLevel']);
-    //         renderTable('inventory_table', 'ex-inventory_table', reorderableItems, ColumnsItem, HeadersItem);
-    //         console.log(reorderableItems);
-    //         }
-    //     catch (error) {
-    //         console.error("Error fetching data:", error);
-    //         }
-    //     });
+
     $('#reorderable').on('change', async function() {
         let selectedValue = $(this).val();  // Get the value of the selected option
         if (selectedValue === 'all-items') {
@@ -464,4 +465,92 @@ $(function () {
     }
 
     $('[data-toggle="tooltip"]').tooltip();
+
+
+    
+
+
+    $('#inventory_table tbody').on('click', 'td', function () {
+        // Check if there's no other cell being edited
+        if (!editedCell) {
+            // Store the currently edited cell
+            editedCell = $(this);
+            console.log('editedCell:',editedCell);
+            // Get the current text of the cell
+            var cellText = $(this).text();
+            // Replace the cell's content with an input field, using the cell's current text as the initial value
+            $(this).html('<input type="text" class="edit-input" value="' + cellText + '">');
+
+            // Focus on the input field
+            $('.edit-input').focus();
+        }
+    });
+
+
+    $('#inventory_table tbody').on('blur', '.edit-input', function () {
+        // Get the updated value from the input field
+        var updatedValue = $(this).val();
+        DataTable = $('#inventory_table').DataTable(); 
+        // Get the channel ID from the data attribute of the row
+        var row = DataTable.row(editedCell.closest('tr'));
+        var rowData = row.data();
+        var rowId = rowData._id;
+        var columnIndex = editedCell.index();
+        var columnsChannels = {
+            0: 'item',
+            1: 'quantity',
+            2: 'storeUnit',
+            3: 'category',
+            4: 'bench',
+            5: 'class',
+            6: 'baseUnit',
+            7: 'storeUnit',
+            8: 'purchaseUnit',
+            9: 'baseUnit/day',
+            10: 'baseUnit/storeUnit',
+            11: 'storeUnit/purchaseUnit',
+            12: 'price/purchaseUnit'
+        };
+        var columnNameChannels = columnsChannels[columnIndex];
+    
+        editedCell.text(updatedValue);
+        editedCell = null;
+    
+        // Update the channel data in the database
+        updateInventory(rowId, columnNameChannels, updatedValue);
+    
+        function updateInventory(rowId, columnNameChannels, updatedValue) {
+            $.ajax({
+                url: update_items_url + rowId + '/',
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({ [columnNameChannels]: updatedValue }),
+                success: function (result) {
+                    if (result && result.message) {
+                        console.log(`The item id:${rowId} updated successfully.`);
+                    } else {
+                        console.error("Unexpected response:", result);
+                        alert("Error updating channels. Please try again or contact support");
+                    }
+                },
+                error: function (error) {
+                    console.error("Error updating Channels:", error);
+                    if (error.responseJSON && error.responseJSON.message) {
+                        alert(error.responseJSON.message);
+                    } else {
+                        alert("Error updating channels. Please try again or contact support");
+                    }
+                }
+            });
+        }
+    });
+    
+    // Event listener for Enter key press
+    $('#inventory_table tbody').on('keypress', '.edit-input', function (event) {
+        // Check if the pressed key is Enter (key code 13)
+        if (event.which === 13) {
+            // Trigger the blur event to handle the update
+            $(this).blur();
+            }
+    });
 });

@@ -209,7 +209,7 @@ $(function () {
             // Trigger the blur event to handle the update
             $(this).blur();
             }
-        });
+    });
     // post for channel
     $('#postChannelForm').submit(async function (event) {
         event.preventDefault();
@@ -373,7 +373,7 @@ $(function () {
     $('#r_table tbody').on('click', '#btn-delete', function () {
         var row = dataTableInstance.row($(this).parents('tr'));
         deleteChannel(row);
-        });
+    });
 
     $('#channel_btn').click(loadData ());
 
@@ -393,6 +393,5 @@ $(function () {
                 alert("Error deleting channel. Please try again or call Femo.");
             }
         });
-    }
-   
+    }   
 });
