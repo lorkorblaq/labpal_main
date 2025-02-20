@@ -1,6 +1,6 @@
 from flask import app, Blueprint, render_template, request, session, url_for, redirect, flash, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
-from .forms import RegistrationForm, LoginForm, Newpassword, LabForm, OrgForm
+from .forms import RegistrationForm, LoginForm, Newpassword, LabForm, OrgForm, Resetpassword
 from .extensions import socketio, redis_client
 from flask_socketio import send, emit
 from .db_clinicalx import db_org_users, client
@@ -10,14 +10,14 @@ import os
 import jwt
 import datetime
 from functools import wraps
-from .mailer import welcomeMail, send_verification_email
+from .mailer import welcomeMail, send_verification_email, send_reset_password_mail
 import logging
 from .celeryMasters.inventoryMaster import watch_inventory_changes
 from .celeryMasters.pickupMaster import watchCreatePickup
 from flask import current_app
 from bson.errors import InvalidId
 import re
-from .utils.tokens import generate_registration_url, decode_token
+from .utils.tokens import generate_registration_url, decode_token, generate_reset_email_url
 # from datetime import datetime
 # from .celeryMasters.chatMaster import chat_watcher
 # from .redis_config import redis_client
@@ -189,6 +189,7 @@ def signup_signin():
     register_form = RegistrationForm()
     labform = LabForm()
     orgform = OrgForm()
+    resetpassword = Resetpassword()
     
     if 'signup' in request.form:
         org_id = register_form.org_id.data
@@ -554,7 +555,7 @@ def register_user():
             welcomeMail(email, firstname)
             flash("Registration successful, you can now login", "success")
             return redirect(url_for('auth.auth_page'))
-    return render_template("reg_org.html", firstname=firstname, register_form=register_form)
+    return render_template("templates_for_auth/reg_org.html", firstname=firstname, register_form=register_form)
 
 @auth.route('/subscription', methods=['GET', 'POST'])
 def subscription():
@@ -601,3 +602,49 @@ def password_reset():
     else:
         flash("Please check your input and try again failed")
         return render_template("settings.html", new_pass=new_pass)
+    
+@auth.route('/send_reset_link', methods=['POST'], strict_slashes=False)
+def send_verification():
+    email = request.form.get('email')
+    print(email)
+    user = USERS_COLLECTION.find_one({'email': email})
+    if user:
+        firstname = user.get('firstname')
+        reg_url = generate_reset_email_url(firstname, email)
+        send_reset_password_mail(email, firstname, reg_url)
+        return "Kindly check the inbox of the email you provided for verification to proceed"
+    else:
+        return "This email does not exist."
+    
+@auth.route('/reset-password', methods=['GET', 'POST'], strict_slashes=False)
+def reset_password():
+    newpassword = Newpassword()
+    token = request.args.get('token')
+    if not token:
+        flash("Missing or invalid password reset token.", "danger")
+        return redirect(url_for('auth.auth_page'))
+    # Decode the token
+    payload = decode_token(token)
+    email = payload.get('email')
+    firstName = payload.get('firstname')
+    print(firstName)
+    if request.method == 'POST':
+        password = newpassword.new_password.data
+        confirm_password = newpassword.confirm_password.data
+        if password != confirm_password:
+            flash("Passwords do not match.", "danger")
+            return redirect(url_for('auth.reset_password', token=token, newpassword=newpassword, firstName=firstName))
+        if password == confirm_password:
+            hashed_password = generate_password_hash(password)
+            # Register the user
+            user = USERS_COLLECTION.find_one_and_update({"email": email}, {"$set": {"password": hashed_password}})
+            if user:
+                flash("Password reset successful, you can now login", "success")
+                return redirect(url_for('auth.auth_page'))
+            else:
+                flash("Failed to reset password. Please try again or contact support", "danger")
+                return redirect(url_for('auth.reset_password', token=token, newpassword=newpassword, firstName=firstName))
+        else:
+            flash(f"Failed to reset password. Error: ", "danger")
+            return redirect(url_for('auth.reset_password', token=token, newpassword=newpassword, firstName=firstName))
+    return render_template("templates_for_auth/reset_password.html", token=token, newpassword=newpassword, firstName=firstName)

@@ -67,4 +67,34 @@ $(document).ready(function() {
     }
   });
 
+  $("#resetPasswordModal").hide();
+
+  $("#openResetModal").click(function() {
+      $("#resetPasswordModal").fadeIn();
+  });
+
+  $(".close, .modal").click(function(event) {
+      if (event.target === this) $("#resetPasswordModal").fadeOut();
+  });
+
+  $("#sendResetLink").click(function(event) {
+    console.log("submitting");
+      event.preventDefault();
+      var email = $("#resetEmail").val();
+      console.log(email);
+      $.ajax({
+          url: "/send_reset_link",
+          type: "POST",
+          data: {
+              email: email
+          },
+          success: function(data) {
+              $("#resetPasswordModal").fadeOut();
+              alert(data);
+          },
+          error: function(data) {
+              alert("An error occurred. Please try again later.");
+          }
+      });
+  });
 });

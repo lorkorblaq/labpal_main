@@ -1,7 +1,7 @@
 $(function () {
     console.log("inventory.js loaded");
-    // BaseUrl = "https://labpal.com.ng/api";
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
     const HeadersItem = ['Items','Qty-in-Store', 'Unit', 'Category', 'Bench', 
                         'Class', 'BU', 'SU', 'PU', 'BU per day',
                         'BU per SU', 'SU per PU', 

@@ -36,10 +36,22 @@
                     {{ login_form.hidden_tag() }}
                     {{ login_form.email }}
                     {{ login_form.password }}
+                    <a href="#" id="openResetModal">Reset Password</a>
                     <button class="form-btn sx back" type="button" onclick="showSignUpForm()">Sign up</button>
                     <button class="form-btn dx" type="submit" name="signin">Log In</button>
                 </form>
             </div>
+            <!-- Reset Password Modal -->
+            <div id="resetPasswordModal" class="resetModal">
+                <div class="resetModal-content">
+                    <span class="close">&times;</span>
+                    <h2>Reset Password</h2>
+                    <p>Enter your email address to receive a password reset link.</p>
+                    <input id="resetEmail" placeholder="Email Address" type="email" name="email">
+                    <button id="sendResetLink">Send Reset Link</button>
+                </div>
+            </div>
+
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     <div class="flash-messages">

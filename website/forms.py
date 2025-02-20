@@ -53,7 +53,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class Resetpassword(FlaskForm):
-    email = StringField('Email',validators=[DataRequired(), Email()],  render_kw={"email":"Email address"})
+    email = EmailField('Email', validators=[DataRequired(), Email(),],  render_kw={"placeholder":"Email address"})
     submit = SubmitField('Request Password Reset')
 
 class Newpassword(FlaskForm):

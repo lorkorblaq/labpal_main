@@ -41,6 +41,19 @@ def generate_client_registration_url(org_id, center, firstname, lastname, homeAd
     url_address = f"https://labpal.com.ng/{url}?token={token}"
     return url_address
 
+def generate_reset_email_url(firstname, email,):
+    # Define the payload
+    payload = {
+        "firstname": firstname,
+        "email": email,
+        "exp": datetime.datetime.now() + datetime.timedelta(hours=1),  # Token expiration time
+    }
+    print(payload)
+    # Encode the payload into a JWT
+    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+    # Generate the URL with the token
+    url_address = f"https://labpal.com.ng/reset-password?token={token}"
+    return url_address
 
 def decode_token(token):
     try:
