@@ -16,6 +16,7 @@ $(document).ready(async function () {
     const lab_name = getCookie('lab_name');
     const url_event_get_all = `${BaseUrl}/events/get/${user_id}/${lab_name}/`;
     const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`;
+    const url_get_labs = `${BaseUrl}/labs/get/${user_id}/`;
 
     async function fetchData(url) {
         // Fetch data from the provided URL
@@ -39,6 +40,50 @@ $(document).ready(async function () {
         $("#overview").hide();
         $("#reports").show();
     });
+
+
+
+    try {
+        // Fetch lab data
+        const data = await fetchData(url_get_labs);
+        console.log("Lab Data:", data);
+        
+        // Build options HTML starting with the default prompt
+        let optionsHtml = '<option value="" disabled selected>Select a region</option>';
+        
+        // Assume the response is always an array of lab objects
+        const labs = data.labs; // or simply data if labs are returned as the root array
+        
+        // Use a Set to store unique region values
+        const uniqueRegions = new Set();
+        labs.forEach(function(lab) {
+            if (lab.region) {
+                uniqueRegions.add(lab.region);
+            }
+        });
+        
+        // Loop through the set and build the options
+        uniqueRegions.forEach(function(region) {
+            optionsHtml += `<option value="${region}">${capitalize(region)}</option>`;
+        });
+        
+        // Build the select element
+        let selectHtml = `<select id="locRegion">${optionsHtml}</select>`;
+        
+        // Inject the select element into the "to-card" container
+        $('#to-card').html(selectHtml);
+        
+    } catch (err) {
+        console.error("Error fetching labs:", err);
+    }
+    
+    // Helper function to capitalize the first letter
+    function capitalize(str) {
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+
 
     // # date range picker
     $('.date-range').daterangepicker({
@@ -76,9 +121,11 @@ $(document).ready(async function () {
 
     $('#locRegion').change(function() {
         var selectedValue = $(this).val();
+        console.log(selectedValue)
         applyFilter();
         // You can add more logic here based on the selected value
     });
+
     $('.applyBtn').click(function() {
         applyFilter();
     });
@@ -131,8 +178,10 @@ $(document).ready(async function () {
             console.log("Total Weight:", totalWeight);
 
             // Update cards
-            updateCard('#operationsBoard .col-lg-6:nth-child(1) .card-body span', `${totalWeight}kg`, "text-primary");
-            updateCard('#operationsBoard .col-lg-6:nth-child(2) .card-body span', `${shipmentCount}`, "text-danger");
+            const totalPrice = filteredShipments.reduce((sum, shipment) => sum + calculatePrice(shipment), 0);
+            updateCard('#operationsBoard .col-lg-4:nth-child(1) .card-body span', `${totalWeight}kg`, "text-primary");
+            updateCard('#operationsBoard .col-lg-4:nth-child(2) .card-body span', `${shipmentCount}`, "text-danger");
+            updateCard('#operationsBoard .col-lg-4:nth-child(3) .card-body span', `₦${totalPrice.toFixed(2)}`, "text-success");
 
             // Populate the table
             let shipmentTableBody = document.getElementById('shipmentTableBody');
@@ -171,6 +220,7 @@ $(document).ready(async function () {
                     <tr>
                         <td>${lab}</td>
                         <td>${shipmentsByLab[lab].count}</td>
+                        <td>${shipmentsByLab[lab].totalWeight}kg</td>
                         <td>${shipmentsByLab[lab].totalWeight}kg</td>
                     </tr>
                 `;
@@ -212,8 +262,6 @@ $(document).ready(async function () {
         });
     }
     
-        
-
     // Function to filter events based on the selected machine and items
     function getDateRange(selector) {
         const dateRangeInput = $(selector).val().trim();
@@ -308,7 +356,6 @@ $(document).ready(async function () {
         return csv.join('\n');
     }
 
-
     function convertCSVToJSON(csvData) {
         var lines = csvData.split('\n').filter(line => line.trim() !== ''); // Filter out empty lines
         var result = [];
@@ -388,4 +435,7 @@ $(document).ready(async function () {
         printWindow.document.close();
         printWindow.print();
     }
+
+
+
 });

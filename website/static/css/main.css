@@ -2,16 +2,18 @@ main {
     margin: 0;
 }
 .logo {
+    position: absolute; /* Position the logo relative to the page */
+    top: 0px; /* Adjust top spacing */
+    left: 10px; /* Adjust left spacing */
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the logo horizontally */
 }
 
 .logo img {
-    height: 50px; /* Make the logo take full height of its container */
-    width: auto; /* Maintain aspect ratio */
-    padding-left: 2px;  
+    height: 50px; /* Maintain a consistent size */
+    width: auto;
 }
+
 .search {
     display: flex;
     width: 100%;

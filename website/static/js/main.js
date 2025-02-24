@@ -83,17 +83,28 @@ $(function () {
         toastr.warning(data.message, 'Notification');
         // Display the notification to the user (e.g., using a toast or alert)
     }
-      
+    // Toggle menu on click
+    $("#menu-icon").click(function (event) {
+        $("#floating-menu").fadeToggle(); // Smooth fade effect
+        event.stopPropagation(); // Prevent closing immediately
+    });
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCblrG_QMF34EkvQDVNERUbgkIau4xymiI",
-        authDomain: "labpal-28980.firebaseapp.com",
-        projectId: "labpal-28980",
-        storageBucket: "labpal-28980.appspot.com",
-        messagingSenderId: "292842656635",
-        appId: "1:292842656635:web:d27ed2319914e9baed63de",
-        measurementId: "G-D0ECY39XF8"
-    };
+    // Close menu when clicking outside
+    $(document).click(function (event) {
+        if (!$(event.target).closest("#floating-menu, #menu-icon").length) {
+            $("#floating-menu").fadeOut(); // Fade out when clicking outside
+        }
+    });
+
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyCblrG_QMF34EkvQDVNERUbgkIau4xymiI",
+    //     authDomain: "labpal-28980.firebaseapp.com",
+    //     projectId: "labpal-28980",
+    //     storageBucket: "labpal-28980.appspot.com",
+    //     messagingSenderId: "292842656635",
+    //     appId: "1:292842656635:web:d27ed2319914e9baed63de",
+    //     measurementId: "G-D0ECY39XF8"
+    // };
 
     // Initialize Firebase
     // const app = initializeApp(firebaseConfig);

@@ -488,14 +488,13 @@ $(function () {
 
 
     $('#inventory_table tbody').on('blur', '.edit-input', function () {
-        // Get the updated value from the input field
-        var updatedValue = $(this).val();
-        DataTable = $('#inventory_table').DataTable(); 
-        // Get the channel ID from the data attribute of the row
+        var updatedValue = $(this).val().trim(); // Trim to remove leading/trailing spaces
+        var DataTable = $('#inventory_table').DataTable(); 
         var row = DataTable.row(editedCell.closest('tr'));
         var rowData = row.data();
         var rowId = rowData._id;
         var columnIndex = editedCell.index();
+    
         var columnsChannels = {
             0: 'item',
             1: 'quantity',
@@ -511,12 +510,20 @@ $(function () {
             11: 'storeUnit/purchaseUnit',
             12: 'price/purchaseUnit'
         };
+    
         var columnNameChannels = columnsChannels[columnIndex];
+    
+        // Prevent saving if the value is empty or null
+        if (!updatedValue) {
+            alert("Empty values are not allowed!");
+            editedCell.text(rowData[columnNameChannels] || ""); // Restore previous value
+            editedCell = null;
+            return;
+        }
     
         editedCell.text(updatedValue);
         editedCell = null;
     
-        // Update the channel data in the database
         updateInventory(rowId, columnNameChannels, updatedValue);
     
         function updateInventory(rowId, columnNameChannels, updatedValue) {
@@ -543,7 +550,7 @@ $(function () {
                 }
             });
         }
-    });
+    });    
     
     // Event listener for Enter key press
     $('#inventory_table tbody').on('keypress', '.edit-input', function (event) {

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    document.querySelector(".hamburger").addEventListener("click", function() {
+        document.querySelector(".nav-menu").classList.toggle("active");
+    });
     console.log('landing page ready!');
     const navLinks = $('.nav-links a');
 

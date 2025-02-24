@@ -22,7 +22,99 @@ h1 {
     margin-left: 50px
 }
 
-#sidebar-wrapper {
+/* Menu Button (Fixed Position) */
+#menu-icon {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#menu-icon:hover {
+    background-color: #444;
+}
+
+/* Floating Menu Styling */
+#floating-menu {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 325px; /* Adjust width for better layout */
+    background: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    display: none; /* Ensures the menu is hidden by default */
+    z-index: 1000;
+    max-height: 500px; /* Set max height to make it scrollable */
+    overflow-y: auto; /* Enables scrolling when content overflows */
+}
+
+/* Scrollbar styling (optional) */
+#floating-menu::-webkit-scrollbar {
+    width: 5px;
+}
+
+#floating-menu::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 5px;
+}
+
+#floating-menu::-webkit-scrollbar-track {
+    background: #333;
+}
+
+/* Grid Layout for Menu Items */
+#floating-menu .menu-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 10px; /* Space between items */
+    text-align: center;
+}
+
+/* Menu Items */
+.menu-item {
+    background: #333;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    transition: background 0.3s;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item i {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.menu-item:hover {
+    background: #DF5332;
+    color: #2e8cca;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    #floating-menu .menu-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+    }
+}
+
+
+/* #sidebar-wrapper {
     width: 55px;
     height: 100vh;
     position: sticky;
@@ -36,7 +128,6 @@ h1 {
     top: 0; 
     .bodyof {
         width: 80%;
-        /* margin-left: 60px */
     }
 } 
 
@@ -52,6 +143,11 @@ h1 {
     display: inline;
     color: white;
 }
+#sidebar-wrapper a{
+    color: #B8DAF0;
+} */
+
+
 .location input {
     border: 2px solid #DDDDDD;
     border-top-left-radius: 10px;
@@ -92,10 +188,6 @@ h1 {
 #ex-inventory_table, #ex-expire_table, #ex-r_table {
     box-shadow: 0px 0px 20px #3157aa;
     margin-top: 5px;
-}
-
-#sidebar-wrapper a{
-    color: #B8DAF0;
 }
 
 /* Container to center the loader */

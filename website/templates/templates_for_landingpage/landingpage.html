@@ -5,7 +5,7 @@
 {% endblock head %}
 {% block body %}
 
-    <section class="hero"></section>
+    <section class="hero">
             <h1 id="hero-text">Your <span id="hero-pal">pal</span> for everything laboratory</h1>
             <a href="{{ url_for('views.home') }}" class="hero-btn">Get Started</a>
     </section>
@@ -25,7 +25,7 @@
                 <h3>Messaging</h3>
                 <p>Stay connected with our built-in messaging feature, enhancing communication within your team.</p>
                 <!-- <a href="{{url_for('views.features', feature='messaging')}}">Explore features</a> -->
-                <p style="color: rgb(51, 14, 14);">Still n progress...</p>
+                <p style="color: rgb(204, 51, 51); font-weight: bold;">Feature coming soon...</p>
             </div>
             <div class="feature-item">
                 <img src="../../static/images/inventory.svg" alt="Feature Two Image">
@@ -43,11 +43,11 @@
 
         <br>
     </section>
+
     <section id="pricing">
         <h1>Pricing</h1>
         <div class="pricing-table">
-            <!-- Free Plan -->
-            <div class="pricing-card">
+            <!-- <div class="pricing-card">
               <h2>Free</h2>
               <h2>Zero cost</h2>
               <h3 class="fas fa-user"> Up to 3 Users</h3>
@@ -56,7 +56,6 @@
               <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
           
-            <!-- Basic Plan -->
             <div class="pricing-card">
               <h2>Basic</h2>
               <h2>Starting at ₦7500/month</h2>
@@ -64,15 +63,14 @@
               <h3 class="fas fa-clinic-medical"> And 5 Centers</h3>
               <hr>
               <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
-            </div>
+            </div> -->
           
             <!-- Premium Plan -->
             <div class="pricing-card">
                 <h2>Premium</h2>
-                <h2>Starting at ₦9500/month</h2>
+                <h2>Starting at ₦20,000/month</h2>
                 <h3 class="fas fa-user"> Up to 45 Users</h3>
-                <h3 class="fas fa-clinic-medical"> And 15 Centers</h3>
-                <h3 class="fas fa-microchip"> Generalised AI Lab Assistant</h3>
+                <h3 class="fas fa-building"> And 15 Centers</h3>
                 <hr>
                 <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
@@ -82,13 +80,29 @@
                 <h2>Enterprise</h2>
                 <h2>Contact us</h2>
                 <h3 class="fas fa-user">Unlimited Users</h3>
-                <h3 class="fas fa-clinic-medical"> Unlimited Centers</h3>
-                <h3 class="fas fa-microchip"> Custom trained AI Lab Assistant</h3>
-                <hr>
+                <h3 class="fas fa-building"> Unlimited Centers</h3>
+                    <hr>
                 <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
           </div>
     </section>
+
+    <section class="demo-section">
+        <div class="demo-container">
+            <div class="demo-text">
+                <h2>Experience Seamless workflow</h2>
+                <p>Request a demo today and discover how our platform can transform your processes.</p>
+            </div>
+            <form class="demo-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Company Name" required>
+                <input type="number" placeholder="Company size" required>
+                <button type="submit">Request a Demo</button>
+            </form>
+        </div>
+    </section> 
+       
     <div class="video-container">
         <h2>Watch how to get started</h2>
         <hr>

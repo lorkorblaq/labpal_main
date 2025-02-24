@@ -28,75 +28,91 @@
     <body style="background-color: #DBDEE3;">    
         <div class="row container-fluid d-flex" id="wrapper">
             <!-- Sidebar -->
-            <div class="bg-light border-right bg-dark" id="sidebar-wrapper">
-                <!-- <div class="list-group list-group-flush  tabs  push-down1.2 " > -->
-                    <!-- <a href="http://13.53.70.208:8050/" class="list-group-item list-group-item-action bg-dark">
+            <!-- <div class="bg-light border-right bg-dark" id="sidebar-wrapper">
+                <div class="all">
+                    <a href="https://labpal.com.ng/app" class="logo">
+                        <img src="../static/images/labpal_small.png" alt="">
+                    </a>
+                    <a href="/app/dashboard" id="dashboard" class="list-group-item list-group-item-action bg-dark">
                         <i class="fas fa-tachometer-alt"></i>
                         <span>Dashboard</span>
-                    </a> -->
-                    <div class="all">
-                        <a href="https://labpal.com.ng/app" class="logo">
-                            <img src="../static/images/labpal_small.png" alt="">
-                        </a>
-                        <a href="/app/dashboard" id="dashboard" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a> 
-                        <a href="/app/events" id="events" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-feather-alt"></i>
-                            <span>Events</span>
-                        </a>
-                        <a href="/app/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-dolly"></i>
-                            <span>Inventory</span>
-                        </a>
-                        <a href="/app/in-use" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-play"></i>
-                            <span>In Use</span>
-                        </a>
-                        <a href="/app/channels" class="list-group-item list-group-item-action bg-dark"  >
-                            <i class="fas fa-exchange-alt"></i>
-                            <span>Channels</span>
-                        </a>
-                        <a href="/app/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-calendar-times icon"></i>
-                            <span>Lots & Exp.</span>
-                        </a>
-                        <a href="/app/logistics" id="logistics" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-truck"></i>
-                            <span>Shipments</span>
-                        </a>
-                        <a href="/app/request-pickup" id="request-pickup" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-bicycle"></i>
-                            <span>Sample Pickup</span>
-                        </a>
-                        <a href="/app/gpt" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-brain"></i> 
-                            <span>LabGPT</span>
-                        </a> 
-                        
-                        <!-- <a href="/chat" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-users icon"></i>
-                            <span>Team</span>
-                        </a> -->
-                    </div>
+                    </a> 
+                    <a href="/app/events" id="events" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-feather-alt"></i>
+                        <span>Events</span>
+                    </a>
+                    <a href="/app/inventory" id="inventory" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-dolly"></i>
+                        <span>Inventory</span>
+                    </a>
+                    <a href="/app/in-use" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-play"></i>
+                        <span>In Use</span>
+                    </a>
+                    <a href="/app/channels" class="list-group-item list-group-item-action bg-dark"  >
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Channels</span>
+                    </a>
+                    <a href="/app/expiration" id="inventory" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-calendar-times icon"></i>
+                        <span>Lots & Exp.</span>
+                    </a>
+                    <a href="/app/logistics" id="logistics" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-truck"></i>
+                        <span>Shipments</span>
+                    </a>
+                    <a href="/app/request-pickup" id="request-pickup" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-bicycle"></i>
+                        <span>Sample Pickup</span>
+                    </a>
+                    <a href="/app/gpt" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-brain"></i> 
+                        <span>LabGPT</span>
+                    </a> 
+                </div>
+                <div class="su">
+                    <a href="/app/user-profile" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-user icon"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="/app/settings" class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="{{url_for('auth.logout')}}"class="list-group-item list-group-item-action bg-dark">
+                        <i class="fas fa-door-open"></i>
+                        <span>Log out</span>
+                    </a>
+                </div>
+            </div> -->
+            <!-- Floating Menu Trigger Button -->
 
-                    <div class="su">
-                        <a href="/app/user-profile" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-user icon"></i>
-                            <span>Profile</span>
-                        </a>
-                        <a href="/app/settings" class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
-                        </a>
-                        <a href="{{url_for('auth.logout')}}"class="list-group-item list-group-item-action bg-dark">
-                            <i class="fas fa-door-open"></i>
-                            <span>Log out</span>
-                        </a>
-                    </div>
-                <!-- </div> -->
+            <a href="https://labpal.com.ng/app" class="logo">
+                <img src="../static/images/labpal_small.png" alt="">
+            </a>
+            <div id="menu-icon">
+                <i class="fas fa-th"></i>
             </div>
+
+            <!-- Floating Menu -->
+            <div id="floating-menu">
+                <div class="menu-container">
+                    <a href="/app/dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="/app/events" class="menu-item"><i class="fas fa-feather-alt"></i> Events</a>
+                    <a href="/app/inventory" class="menu-item"><i class="fas fa-dolly"></i> Inventory</a>
+                    <a href="/app/in-use" class="menu-item"><i class="fas fa-play"></i> In Use</a>
+                    <a href="/app/channels" class="menu-item"><i class="fas fa-exchange-alt"></i> Channels</a>
+                    <a href="/app/expiration" class="menu-item"><i class="fas fa-calendar-times"></i> Lots & Exp.</a>
+                    <a href="/app/logistics" class="menu-item"><i class="fas fa-truck"></i> Shipments</a>
+                    <!-- <a href="/app/request-pickup" class="menu-item"><i class="fas fa-bicycle"></i> Sample Pickup</a> -->
+                    <!-- <a href="/app/gpt" class="menu-item"><i class="fas fa-brain"></i> LabGPT</a> -->
+                    <!-- <hr> -->
+                    <a href="/app/user-profile" class="menu-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="/app/settings" class="menu-item"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="{{url_for('auth.logout')}}" class="menu-item"><i class="fas fa-door-open"></i> Log out</a>
+                </div>
+            </div>
+
             <!-- Page Content -->
             <div class="flex-grow-1 p-3 bodyof">
                 <!-- <nav class="search">
