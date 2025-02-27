@@ -46,7 +46,20 @@ $(document).ready(function() {
         var description = $("#description").val();
         console.log(description)
         // Check if all required form fields are filled
-        if (pickupLocation && dropoffLocation && numb_of_packs && weight) {
+        if (pickupLocation && dropoffLocation && top && numb_of_packs && weight && vendor && description) {
+            // Convert to numbers
+            numb_of_packs = parseInt(numb_of_packs, 10);
+            weight = parseFloat(weight);
+
+            // Validate if they are numbers
+            if (isNaN(numb_of_packs)) {
+                alert("Please enter a valid number for Number of Packs");
+                return;  
+            }
+            if (isNaN(weight)) {
+                alert("Please enter a valid number for Weight");
+                return;  
+            }         
             // Check if Geolocation is supported
             if (navigator.geolocation) {
                 // Get current position
@@ -63,7 +76,6 @@ $(document).ready(function() {
                     completed = true;
                     data = {
                         created_at: created_at,
-                        // shipment_id: shipment_id,
                         top: top,
                         numb_of_packs: numb_of_packs,
                         weight: weight,
@@ -75,21 +87,30 @@ $(document).ready(function() {
                     }
                     console.log(data);
                     // Example of sending the data to your backend
+                    $('#loadingIndicator').show();
                     $.ajax({
                         url: url_shipment_push,
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify(data),
-                        success: function(response) {
-                            alert('Shipment sent to the server successfully:', response);
+                        success: function (response) {
+                            alert("Shipment created successfully");
+                            console.log(response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error sending shipement to the server:', error);
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
+                        complete: function () {
+                            // Hide the loading indicator after the request completes (success or error)
+                            $('#loadingIndicator').hide();
                         }
                     });
-
-
-
 
                 }, function(error) {
                     console.error("Error Code = " + error.code + " - " + error.message);

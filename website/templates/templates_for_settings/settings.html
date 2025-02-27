@@ -7,528 +7,534 @@
 
 {% block body %}
     <main>
-        <nav class="nav nav-borders">
-            <a class="nav-link" id="sec-btn" >Security</a>
-            <!-- <a class="nav-link" id="not-btn">Notifications</a> -->
-            <a class="nav-link" id="data-btn">Data Center</a>
-            <a class="nav-link" id="bill-btn">Billing</a>
-            <a class="nav-link" id="mem-btn">Members</a>
-        </nav>
-        <hr>
-        <div class="row" id="security">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <div class="flash-messages">
-                    {% for message in messages %}
-                        <script>
-                        alert("{{ message }}");
-                        </script>
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-            {% endwith %}
-                <div class="col-12">
-                    <!-- Change password card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Change Password</div>
-                        <div class="card-body">
-                            <form id="pwForm" method="POST" action="{{ url_for('auth.password_reset') }}">                                        <!-- Form Group (current password)-->
-                                {{ new_pass.hidden_tag() }}                                      
-                                <div class="mb-3">{{ new_pass.current_password }}</div> 
-                                <div class="mb-3">{{ new_pass.new_password }}</div> 
-                                <div class="mb-3">{{ new_pass.confirm_password }}</div> 
-                                <button class="form-btn dx" type="submit" name="reset">Save</button>
-                            </form>
+        <div class="container mt-5 mb-2" >
+            <h1>Settings</h1>
+            <div>
+            <!-- <nav class="nav nav-borders"> -->
+                <button id="sec-btn" >Security</button>
+                <!-- <a class="nav-link" id="not-btn">Notifications</a> -->
+                <button id="data-btn">Data Center</button>
+                <button id="bill-btn">Billing</button>
+                <button id="mem-btn">Members</button>
+            <!-- </nav> -->
+            </div>
+            <hr>
+
+            <div class="row" id="security">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <script>
+                            alert("{{ message }}");
+                            </script>
+                        {% endfor %}
                         </div>
-                    </div>
-                </div>  
-                <div class="col-12">
-                    <!-- Security preferences card-->
-                    <div class="card mb-4">
-                        <div class="card-header">Security Preferences</div>
-                        <div class="card-body">
-                            <!-- Data sharing options-->
-                            <h5 class="mb-1">Data Sharing</h5>
-                            <p class="small text-muted">Sharing usage data can help us to improve our products and better serve our users as they navigation through our application. When you agree to share usage data with us, crash reports and usage analytics will be automatically sent to our development team for investigation.</p>
-                            <form>
-                                <div class="form-check">
-                                    <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage" checked="">
-                                    <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app developers</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
-                                    <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app developers</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-4">
+                        {% endif %}
+                {% endwith %}
+                    <div class="col-12">
+                        <!-- Change password card-->
                         <div class="card mb-4">
-                            <div class="card-header">Delete Account</div>
-                            <div class="card-body" style="text-align: center;">
-                                <h6>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, click the button below.</h6>
-                                <button class="" type="button"style="text-align:center">Delete</button>
+                            <div class="card-header">Change Password</div>
+                            <div class="card-body">
+                                <form id="pwForm" method="POST" action="{{ url_for('auth.password_reset') }}">                                        <!-- Form Group (current password)-->
+                                    {{ new_pass.hidden_tag() }}                                      
+                                    <div class="mb-3">{{ new_pass.current_password }}</div> 
+                                    <div class="mb-3">{{ new_pass.new_password }}</div> 
+                                    <div class="mb-3">{{ new_pass.confirm_password }}</div> 
+                                    <button class="form-btn dx" type="submit" name="reset">Save</button>
+                                </form>
                             </div>
                         </div>
-                </div> -->
-        </div>
-        <div class="row" id="notifications">
-            <div class="row">
-                <!-- Email notifications preferences card-->
-                <div class="col-lg-12">
-                    <div class="card card-header-actions mb-4">
-                        <div class="card-header">
-                            Email Notifications
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" id="" type="checkbox" checked="">
-                                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <!-- Form Group (default email)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputNotificationEmail">Default notification email</label>
-                                    <input class="form-control" id="inputNotificationEmail" type="email" value="name@example.com" disabled="">
-                                </div>
-                                <!-- Form Group (email updates checkboxes)-->
-                                <div class="mb-0">
-                                    <label class="small mb-2">Choose which types of email updates you receive</label>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkAccountChanges" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkAccountChanges">Changes made to your account</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkAccountGroups" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkAccountGroups">Changes are made to groups you're part of</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkProductUpdates" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkProductUpdates">Product updates for products you've purchased or starred</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkProductNew" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkProductNew">Information on new products and services</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkPromotional" type="checkbox">
-                                        <label class="form-check-label" for="checkPromotional">Marketing and promotional offers</label>
+                    </div>  
+                    <div class="col-12">
+                        <!-- Security preferences card-->
+                        <div class="card mb-4">
+                            <div class="card-header">Security Preferences</div>
+                            <div class="card-body">
+                                <!-- Data sharing options-->
+                                <h5 class="mb-1">Data Sharing</h5>
+                                <p class="small text-muted">Sharing usage data can help us to improve our products and better serve our users as they navigation through our application. When you agree to share usage data with us, crash reports and usage analytics will be automatically sent to our development team for investigation.</p>
+                                <form>
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="radioUsage1" type="radio" name="radioUsage" checked="">
+                                        <label class="form-check-label" for="radioUsage1">Yes, share data and crash reports with app developers</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" id="checkSecurity" type="checkbox" checked="" disabled="">
-                                        <label class="form-check-label" for="checkSecurity">Security alerts</label>
+                                        <input class="form-check-input" id="radioUsage2" type="radio" name="radioUsage">
+                                        <label class="form-check-label" for="radioUsage2">No, limit my data sharing with app developers</label>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- SMS push notifications card-->
-                <div class="col-lg-8">
-                    <div class="card card-header-actions mb-4">
-                        <div class="card-header">
-                            Push Notifications
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" id="smsToggleSwitch" type="checkbox" checked="">
-                                <label class="form-check-label" for="smsToggleSwitch"></label>
+                                </form>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <form>
-                                <!-- Form Group (default SMS number)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputNotificationSms">Default SMS number</label>
-                                    <input class="form-control" id="inputNotificationSms" type="tel" value="123-456-7890" disabled="">
-                                </div>
-                                <!-- Form Group (SMS updates checkboxes)-->
-                                <div class="mb-0">
-                                    <label class="small mb-2">Choose which types of push notifications you receive</label>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkSmsComment" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkSmsComment">Someone comments on your post</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkSmsShare" type="checkbox">
-                                        <label class="form-check-label" for="checkSmsShare">Someone shares your post</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkSmsFollow" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkSmsFollow">A user follows your account</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" id="checkSmsGroup" type="checkbox">
-                                        <label class="form-check-label" for="checkSmsGroup">New posts are made in groups you're part of</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="checkSmsPrivateMessage" type="checkbox" checked="">
-                                        <label class="form-check-label" for="checkSmsPrivateMessage">You receive a private message</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <!-- Notifications preferences card-->
-                    <div class="card">
-                        <div class="card-header">Notification Preferences</div>
-                        <div class="card-body">
-                            <form>
-                                <!-- Form Group (notification preference checkboxes)-->
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" id="checkAutoGroup" type="checkbox" checked="">
-                                    <label class="form-check-label" for="checkAutoGroup">Automatically subscribe to group notifications</label>
+                    <!-- <div class="col-lg-4">
+                            <div class="card mb-4">
+                                <div class="card-header">Delete Account</div>
+                                <div class="card-body" style="text-align: center;">
+                                    <h6>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, click the button below.</h6>
+                                    <button class="" type="button"style="text-align:center">Delete</button>
                                 </div>
-                                <div class="form-check mb-3">
-                                    <input class="form-check-input" id="checkAutoProduct" type="checkbox">
-                                    <label class="form-check-label" for="checkAutoProduct">Automatically subscribe to new product notifications</label>
-                                </div>
-                                <!-- Submit button-->
-                                <button class="btn btn-danger-soft text-danger">Unsubscribe all notifications</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>       
-        </div>
-        <div class="row" id ="data">
-            <div class="col-12">
-                <div class="porter">
-                    <!-- Use Flexbox to arrange buttons side by side -->
-                    <div class="card-body d-flex justify-content-left align-items-center">
-                        <!-- Button 1 -->
-                        <button type="button" class="mx-2" id="addItemModal" data-toggle="modal" data-target="#itemModal">
-                            <i class="fas fa-plus"></i><br>Items
-                        </button>
-                        <!-- Button 2 -->
-                        <button type="button" class="mx-2" id="addMachineModal" data-toggle="modal" data-target="#machineModal">
-                            <i class="fas fa-plus"></i><br>Machines
-                        </button>
-                    </div>
-                </div>
+                            </div>
+                    </div> -->
             </div>
-            
-            <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Add Items</h5>
-                            <button type="button" class="" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+            <div class="row" id="notifications">
+                <div class="row">
+                    <!-- Email notifications preferences card-->
+                    <div class="col-lg-12">
+                        <div class="card card-header-actions mb-4">
+                            <div class="card-header">
+                                Email Notifications
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" id="" type="checkbox" checked="">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <!-- Form Group (default email)-->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="inputNotificationEmail">Default notification email</label>
+                                        <input class="form-control" id="inputNotificationEmail" type="email" value="name@example.com" disabled="">
+                                    </div>
+                                    <!-- Form Group (email updates checkboxes)-->
+                                    <div class="mb-0">
+                                        <label class="small mb-2">Choose which types of email updates you receive</label>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkAccountChanges" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkAccountChanges">Changes made to your account</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkAccountGroups" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkAccountGroups">Changes are made to groups you're part of</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkProductUpdates" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkProductUpdates">Product updates for products you've purchased or starred</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkProductNew" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkProductNew">Information on new products and services</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkPromotional" type="checkbox">
+                                            <label class="form-check-label" for="checkPromotional">Marketing and promotional offers</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="checkSecurity" type="checkbox" checked="" disabled="">
+                                            <label class="form-check-label" for="checkSecurity">Security alerts</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- SMS push notifications card-->
+                    <div class="col-lg-8">
+                        <div class="card card-header-actions mb-4">
+                            <div class="card-header">
+                                Push Notifications
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" id="smsToggleSwitch" type="checkbox" checked="">
+                                    <label class="form-check-label" for="smsToggleSwitch"></label>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <!-- Form Group (default SMS number)-->
+                                    <div class="mb-3">
+                                        <label class="small mb-1" for="inputNotificationSms">Default SMS number</label>
+                                        <input class="form-control" id="inputNotificationSms" type="tel" value="123-456-7890" disabled="">
+                                    </div>
+                                    <!-- Form Group (SMS updates checkboxes)-->
+                                    <div class="mb-0">
+                                        <label class="small mb-2">Choose which types of push notifications you receive</label>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkSmsComment" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkSmsComment">Someone comments on your post</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkSmsShare" type="checkbox">
+                                            <label class="form-check-label" for="checkSmsShare">Someone shares your post</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkSmsFollow" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkSmsFollow">A user follows your account</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" id="checkSmsGroup" type="checkbox">
+                                            <label class="form-check-label" for="checkSmsGroup">New posts are made in groups you're part of</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="checkSmsPrivateMessage" type="checkbox" checked="">
+                                            <label class="form-check-label" for="checkSmsPrivateMessage">You receive a private message</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Notifications preferences card-->
+                        <div class="card">
+                            <div class="card-header">Notification Preferences</div>
+                            <div class="card-body">
+                                <form>
+                                    <!-- Form Group (notification preference checkboxes)-->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" id="checkAutoGroup" type="checkbox" checked="">
+                                        <label class="form-check-label" for="checkAutoGroup">Automatically subscribe to group notifications</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" id="checkAutoProduct" type="checkbox">
+                                        <label class="form-check-label" for="checkAutoProduct">Automatically subscribe to new product notifications</label>
+                                    </div>
+                                    <!-- Submit button-->
+                                    <button class="btn btn-danger-soft text-danger">Unsubscribe all notifications</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+            <div class="row" id ="data">
+                <div class="col-12">
+                    <div class="porter">
+                        <!-- Use Flexbox to arrange buttons side by side -->
+                        <div class="card-body d-flex justify-content-left align-items-center">
+                            <!-- Button 1 -->
+                            <button type="button" class="mx-2" id="addItemModal" data-toggle="modal" data-target="#itemModal">
+                                <i class="fas fa-plus"></i><br>Items
+                            </button>
+                            <!-- Button 2 -->
+                            <button type="button" class="mx-2" id="addMachineModal" data-toggle="modal" data-target="#machineModal">
+                                <i class="fas fa-plus"></i><br>Machines
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form id="machine-form" class="mt-4">
-                                <div class="form-group">
-                                    <label for="input-box">Name of item</label>
-                                    <input type="text" class="form-control" id="name_of_item" placeholder="Name of item" required>
-                                </div>
-                        
-                                <div class="form-group">
-                                    <label for="tests_vial">The tests/Vial</label>
-                                    <input type="text" class="form-control" id="tests_vial" placeholder="Enter the tests per vial" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="vials_pack">vials/pack</label>
-                                    <input type="text" class="form-control" id="vials_pack" placeholder="Enter vials per pack" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tests_day">Tests/day</label>
-                                    <input type="text" class="form-control" id="tests_day" placeholder="Enter the tests per day" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="reorder_level">Reorder level</label>
-                                    <input type="text" class="form-control" id="reorder_level" placeholder="Enter the reorder level of the items" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="class">Class</label>
-                                    <input type="text" class="form-control" id="class" placeholder="Enter class of item e.g A, B, C" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Category</label>
-                                    <input type="text" class="form-control" id="category" placeholder="Enter the category e.g reagent, control, calibrator" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bench">Bench</label>
-                                    <input type="text" class="form-control" id="bench" placeholder="Enter the bench e.g Haematology, Chemistry, Endoserology..." required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="quantity">Quantity</label>
-                                    <input type="text" class="form-control" id="quantity" placeholder="Enter the quantity..." required>
-                                </div>
-                            </form>
+                    </div>
+                </div>
+                
+                <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">Add Items</h5>
+                                <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="machine-form" class="mt-4">
+                                    <div class="form-group">
+                                        <label for="input-box">Name of item</label>
+                                        <input type="text" class="form-control" id="name_of_item" placeholder="Name of item" required>
+                                    </div>
+                            
+                                    <div class="form-group">
+                                        <label for="tests_vial">The tests/Vial</label>
+                                        <input type="text" class="form-control" id="tests_vial" placeholder="Enter the tests per vial" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vials_pack">vials/pack</label>
+                                        <input type="text" class="form-control" id="vials_pack" placeholder="Enter vials per pack" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tests_day">Tests/day</label>
+                                        <input type="text" class="form-control" id="tests_day" placeholder="Enter the tests per day" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reorder_level">Reorder level</label>
+                                        <input type="text" class="form-control" id="reorder_level" placeholder="Enter the reorder level of the items" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="class">Class</label>
+                                        <input type="text" class="form-control" id="class" placeholder="Enter class of item e.g A, B, C" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <input type="text" class="form-control" id="category" placeholder="Enter the category e.g reagent, control, calibrator" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bench">Bench</label>
+                                        <input type="text" class="form-control" id="bench" placeholder="Enter the bench e.g Haematology, Chemistry, Endoserology..." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity</label>
+                                        <input type="text" class="form-control" id="quantity" placeholder="Enter the quantity..." required>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addBulkItems" data-toggle="tooltip" data-placement="right" title="Import your items from CSV">Import Items</button>
+                                <button type="button" id="addItem" class="">Add Item</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" id="addBulkItems" data-toggle="tooltip" data-placement="right" title="Import your items from CSV">Import Items</button>
-                            <button type="button" id="addItem" class="">Add Item</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="machineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="myModalLabel">Add machine</h5>
+                                <button type="button" class="" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="machine-form" class="mt-4">
+                                    <div class="form-group">
+                                        <label for="input-box">Name of machine</label>
+                                        <input type="text" class="form-control" id="name_of_machine" placeholder="Name of machine" required>
+                                    </div>
+                            
+                                    <div class="form-group">
+                                        <label for="description">Manufacturer</label>
+                                        <input type="text" class="form-control" id="manufacturer" placeholder="Enter manufacturer" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Serial number</label>
+                                        <input type="text" class="form-control" id="serial_number" placeholder="Enter serial number" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Name of Engineer</label>
+                                        <input type="text" class="form-control" id="name_engineer" placeholder="Enter Name of Engineer" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Contact of Engineer</label>
+                                        <input type="text" class="form-control" id="contact_engineer" placeholder="Enter Contact of Engineer" required>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addBulkMachine" class="">Import Machines</button>
+                                <button type="button" id="addMachine" class="">Add Machine</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="machineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel">Add machine</h5>
-                            <button type="button" class="" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+            <div class="row" id ="billing">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <!-- Billing card 1-->
+                        <div class="card h-100 border-start-lg border-start-primary card1">
+                            <div class="card-body">
+                                <div class="small text-muted">Current period bill</div>
+                                <div class="h3"></div>
+                                <a class="text-arrow-icon small" id="yearlySwitch" href="#!">
+                                    Switch to yearly billing
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form id="machine-form" class="mt-4">
-                                <div class="form-group">
-                                    <label for="input-box">Name of machine</label>
-                                    <input type="text" class="form-control" id="name_of_machine" placeholder="Name of machine" required>
-                                </div>
-                        
-                                <div class="form-group">
-                                    <label for="description">Manufacturer</label>
-                                    <input type="text" class="form-control" id="manufacturer" placeholder="Enter manufacturer" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Serial number</label>
-                                    <input type="text" class="form-control" id="serial_number" placeholder="Enter serial number" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Name of Engineer</label>
-                                    <input type="text" class="form-control" id="name_engineer" placeholder="Enter Name of Engineer" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Contact of Engineer</label>
-                                    <input type="text" class="form-control" id="contact_engineer" placeholder="Enter Contact of Engineer" required>
-                                </div>
-                            </form>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <!-- Billing card 2-->
+                        <div class="card h-100 border-start-lg border-start-secondary card2">
+                            <div class="card-body">
+                                <div id="due_date" class="small text-muted">Next payment due</div>
+                                <div class="h3"></div>
+                                <a class="text-arrow-icon small text-secondary" id="currentPlanUpgrade" href="#!">
+                                    Make payment
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" id="addBulkMachine" class="">Import Machines</button>
-                            <button type="button" id="addMachine" class="">Add Machine</button>
+                    </div>  
+                    <div class="col-lg-4 mb-4">
+                        <!-- Billing card 3-->
+                        <div class="card h-100 border-start-lg border-start-success card3">
+                            <div class="card-body">
+                                <div class="small text-muted">Current plan</div>
+                                <div id="plan" class="h3 d-flex align-items-center"></div>
+                                <a class="text-arrow-icon small text-success" id="upgrade-btn" href="#!">
+                                    Upgrade plan
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row" id ="billing">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <!-- Billing card 1-->
-                    <div class="card h-100 border-start-lg border-start-primary card1">
-                        <div class="card-body">
-                            <div class="small text-muted">Current period bill</div>
-                            <div class="h3"></div>
-                            <a class="text-arrow-icon small" id="yearlySwitch" href="#!">
-                                Switch to yearly billing
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-4">
-                    <!-- Billing card 2-->
-                    <div class="card h-100 border-start-lg border-start-secondary card2">
-                        <div class="card-body">
-                            <div id="due_date" class="small text-muted">Next payment due</div>
-                            <div class="h3"></div>
-                            <a class="text-arrow-icon small text-secondary" id="currentPlanUpgrade" href="#!">
-                                Make payment
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>  
-                <div class="col-lg-4 mb-4">
-                    <!-- Billing card 3-->
-                    <div class="card h-100 border-start-lg border-start-success card3">
-                        <div class="card-body">
-                            <div class="small text-muted">Current plan</div>
-                            <div id="plan" class="h3 d-flex align-items-center"></div>
-                            <a class="text-arrow-icon small text-success" id="upgrade-btn" href="#!">
-                                Upgrade plan
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Billing history card-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card mb-4">
-                        <div class="card-header">Billing History</div>
-                        <div class="card-body p-0">
-                            <!-- Billing history table-->
-                            <div class="table-responsive table-billing-history">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-gray-200" scope="col">Transaction ID</th>
-                                            <th class="border-gray-200" scope="col">Date</th>
-                                            <th class="border-gray-200" scope="col">Amount</th>
-                                            <th class="border-gray-200" scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                           
-                                        </tr>
-                                        <tr>
-                                           
-                                        </tr>
-                                        <tr>
+                <!-- Billing history card-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">Billing History</div>
+                            <div class="card-body p-0">
+                                <!-- Billing history table-->
+                                <div class="table-responsive table-billing-history">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-gray-200" scope="col">Transaction ID</th>
+                                                <th class="border-gray-200" scope="col">Date</th>
+                                                <th class="border-gray-200" scope="col">Amount</th>
+                                                <th class="border-gray-200" scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
                                             
-                                        </tr>
-                                        <tr>
+                                            </tr>
+                                            <tr>
                                             
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- modals -->
-            <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <!-- Card 1 -->
-                                    <div class="col-md-6">
-                                        <div class="card mb-4 pricing-plan">
-                                            <h3>Basic</h3>
-                                            <p>₦7500/month</p>
-                                            <button id="basic-btn" >Choose plan</button>
+                <!-- modals -->
+                <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <!-- Card 1 -->
+                                        <div class="col-md-6">
+                                            <div class="card mb-4 pricing-plan">
+                                                <h3>Basic</h3>
+                                                <p>₦7500/month</p>
+                                                <button id="basic-btn" >Choose plan</button>
+                                            </div>
                                         </div>
-                                    </div>
-            
-                                    <!-- Card 2 -->
-                                    <div class="col-md-6">
-                                        <div class="card mb-4 pricing-plan">
-                                            <h3>Premium</h3>
-                                            <p>₦9500/month</p>
-                                            <button id="premium-btn" >Choose plan</button>
+                
+                                        <!-- Card 2 -->
+                                        <div class="col-md-6">
+                                            <div class="card mb-4 pricing-plan">
+                                                <h3>Premium</h3>
+                                                <p>₦9500/month</p>
+                                                <button id="premium-btn" >Choose plan</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <div class="" id ="members">
-            <div class="row">
-                <div id="staffs-btn" class="col-6 mb-4">
-                    <!-- Billing card 2-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="h3">
-                                Staffs:
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                <div class="col-6 mb-4">
-                    <!-- Billing card 3-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="upgrade-btn" class="h3">
-                                Clients:
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
+            <div class="" id ="members">
+                <div class="row">
+                    <div id="staffs-btn" class="col-6 mb-4">
+                        <!-- Billing card 2-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="h3">
+                                    Staffs:
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-6 mb-4">
+                        <!-- Billing card 3-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="upgrade-btn" class="h3">
+                                    Clients:
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Membership history card-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card mb-4">
-                        <div class="card-header">Membership list</div>
-                        <div class="card-body p-0">
-                            <!-- Billing history table-->
-                            <div class="table-responsive table-billing-history">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-gray-200" scope="col">User ID</th>
-                                            <th class="border-gray-200" scope="col">First name</th>
-                                            <th class="border-gray-200" scope="col">Last name</th>
-                                            <th class="border-gray-200" scope="col">Email Address</th>
-                                            <th class="border-gray-200" scope="col">Role</th>
-                                            <th class="border-gray-200" scope="col">Amount</th>
-                                            <th class="border-gray-200" scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            
-                                        </tr>
-                                        <tr>
-                                            
-                                        </tr>
-                                        <tr>
-                                            
-                                        </tr>
-                                        <tr>
-                                            
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <!-- Membership history card-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card mb-4">
+                            <div class="card-header">Membership list</div>
+                            <div class="card-body p-0">
+                                <!-- Billing history table-->
+                                <div class="table-responsive table-billing-history">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-gray-200" scope="col">User ID</th>
+                                                <th class="border-gray-200" scope="col">First name</th>
+                                                <th class="border-gray-200" scope="col">Last name</th>
+                                                <th class="border-gray-200" scope="col">Email Address</th>
+                                                <th class="border-gray-200" scope="col">Role</th>
+                                                <th class="border-gray-200" scope="col">Amount</th>
+                                                <th class="border-gray-200" scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                            <tr>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- modals -->
-            <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <!-- Card 1 -->
-                                    <div class="col-md-6">
-                                        <div class="card mb-4 pricing-plan">
-                                            <h3>Basic</h3>
-                                            <p>₦7500/month</p>
-                                            <button id="basic-btn" >Choose plan</button>
+                <!-- modals -->
+                <div class="modal fade" id="upgradeModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="importModalLabel">Choose Your Plan</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <!-- Card 1 -->
+                                        <div class="col-md-6">
+                                            <div class="card mb-4 pricing-plan">
+                                                <h3>Basic</h3>
+                                                <p>₦7500/month</p>
+                                                <button id="basic-btn" >Choose plan</button>
+                                            </div>
                                         </div>
-                                    </div>
-            
-                                    <!-- Card 2 -->
-                                    <div class="col-md-6">
-                                        <div class="card mb-4 pricing-plan">
-                                            <h3>Premium</h3>
-                                            <p>₦9500/month</p>
-                                            <button id="premium-btn" >Choose plan</button>
+                
+                                        <!-- Card 2 -->
+                                        <div class="col-md-6">
+                                            <div class="card mb-4 pricing-plan">
+                                                <h3>Premium</h3>
+                                                <p>₦9500/month</p>
+                                                <button id="premium-btn" >Choose plan</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">&times</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            
         </div>
     </main>
 {% endblock %}

@@ -1,28 +1,3 @@
-#sec-btn {
-    color: red;
-}
-#sec-btn:hover {
-    color: black;
-}
-#not-btn {
-    color: orange;
-}
-#not-btn:hover {
-    color: black;
-}
-#bill-btn {
-    color: blue;
-}
-#bill-btn:hover {
-    color: black;
-}
-.nav-link:hover {
-    font-style:italic;
-    color: black;
-    cursor: pointer;
-}
-
-
 #settings.active {
     display: none;
 }

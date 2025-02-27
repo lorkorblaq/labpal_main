@@ -12,6 +12,7 @@ from pywebpush import webpush
 from .subscription import add_subscription
 from dotenv import load_dotenv, find_dotenv
 import os, json
+from .mailer import request_for_demo_mail
 
 from .extensions import socketio
 load_dotenv(find_dotenv())
@@ -118,10 +119,10 @@ def chat():
 def gpt():
     return render_template("/templates_for_gpt/gpt.html", data=data)
 
-@views.route("/app/logistics",  strict_slashes=False)
+@views.route("/app/shipments",  strict_slashes=False)
 @auth_required
-def logistics():
-    return render_template("/templates_for_logistics/logistics.html", data=data)
+def shipments():
+    return render_template("/templates_for_shipments/shipments.html", data=data)
 
 @views.route("/app/request-pickup",  strict_slashes=False)
 @auth_required
@@ -172,6 +173,13 @@ def subscription():
     # subscriptions.append(subscription)
     # print('subscrsi',subscriptions)
     return {"message": "Subscription added"}, 201
+
+@views.route("/send_demo_request", methods=["POST"])
+def send_demo_request():
+    data = request.get_json()
+    print(data)
+    request_for_demo_mail(data)
+    return {"message": "Request sent"}, 201
 
 @socketio.on('message')
 def handle_message(data):

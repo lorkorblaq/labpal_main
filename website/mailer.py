@@ -39,21 +39,37 @@ def send_reset_password_mail(email, firstname, link):
     html_content = render_template("templates_for_mail/reset_password.html", firstname=firstname, link=link)
     mailer(email, subject, html_content)
     return "Password reset mail sent"
-# def stockAlert(email, name):
-#     alert_items = []
-#     for item in items:
-#         if 4 < item['in stock'] < 5:
-#             item_name = item['item']
-#             quantity = item['in stock']
-#             test = f'{item_name} has {quantity} vials in stock'
-#             alert_items.append(test)
-#         # print(alert_items)
-#     subject="Stock Alert"
-     
-#     html = f'<h5>Hello {name},<br></h5><p>Your stock alert level: <br>{ "<br>".join(alert_items) }</p>'
-#     # mail.send(message)
-#     mailer(email, subject, html)
+    
+def request_to_join_lab(email, labname, labowner):
+    subject = "Request to join your lab"
+    html_content = render_template("templates_for_mail/request_to_join_lab.html", labname=labname, labowner=labowner)
+    mailer(email, subject, html_content)
+    return "Request to join lab mail sent"
 
+def request_to_join_lab_accepted(email, labname, labowner):
+    subject = "Request to join your lab accepted"
+    html_content = render_template("templates_for_mail/request_to_join_lab_accepted.html", labname=labname, labowner=labowner)
+    mailer(email, subject, html_content)
+    return "Request to join lab accepted mail sent"
+
+def request_to_join_lab_rejected(email, labname, labowner):
+    subject = "Request to join your lab rejected"
+    html_content = render_template("templates_for_mail/request_to_join_lab_rejected.html", labname=labname, labowner=labowner)
+    mailer(email, subject, html_content)
+    return "Request to join lab rejected mail sent"
+
+def send_lab_invitation(email, labname, labowner):
+    subject = "Invitation to join a lab"
+    html_content = render_template("templates_for_mail/send_lab_invitation.html", labname=labname, labowner=labowner)
+    mailer(email, subject, html_content)
+    return "Lab invitation mail sent"
+
+def request_for_demo_mail(data):
+    subject = "Request for a demo"
+    email="f3mioloko@gmail.com"
+    html_content = render_template("templates_for_mail/request_for_demo.html", data=data)
+    mailer(email, subject, html_content)
+    return "Request for demo mail sent"
 
 
 

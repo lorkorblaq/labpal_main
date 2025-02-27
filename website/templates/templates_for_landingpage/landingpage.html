@@ -69,8 +69,8 @@
             <div class="pricing-card">
                 <h2>Premium</h2>
                 <h2>Starting at ₦20,000/month</h2>
-                <h3 class="fas fa-user"> Up to 45 Users</h3>
-                <h3 class="fas fa-building"> And 15 Centers</h3>
+                <h3 class="fas fa-user"> Up to 15 Users</h3>
+                <h3 class="fas fa-building"> And 3 Centers</h3>
                 <hr>
                 <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
             </div>
@@ -92,12 +92,13 @@
             <div class="demo-text">
                 <h2>Experience Seamless workflow</h2>
                 <p>Request a demo today and discover how our platform can transform your processes.</p>
+                <p><span style="color: red;">30 days free trial</span> included!</p>
             </div>
             <form class="demo-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <input type="text" placeholder="Company Name" required>
-                <input type="number" placeholder="Company size" required>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="company" placeholder="Company Name" required>
+                <input type="number" name="size" placeholder="Company Size" required>
                 <button type="submit">Request a Demo</button>
             </form>
         </div>

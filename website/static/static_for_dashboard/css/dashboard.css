@@ -181,26 +181,6 @@ button:hover {
     margin: auto;
 }
 
-.menu {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: linear-gradient(to right, #e25330, #3157aa); /* Gradient background */
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.menu-item {
-    padding: 10px 20px;
-    color: white;
-    cursor: pointer;
-}
-
-.menu-item.active {
-    background-color: #1F2327;
-    border-radius: 15px;
-}
-
 .add-button {
     /* background-color: #43b581; */
     color: white;

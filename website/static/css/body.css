@@ -106,6 +106,15 @@ h1 {
     color: #2e8cca;
 }
 
+/* Active menu item */
+.menu-item.active {
+    background: #DF5332;  /* Keep hover color */
+    color: #2e8cca; /* Keep hover text color */
+    font-weight: bold; /* Optional: Make active item stand out */
+    border: 2px solid white; /* Optional: Add a border */
+}
+
+
 /* Responsive Design */
 @media (max-width: 500px) {
     #floating-menu .menu-container {

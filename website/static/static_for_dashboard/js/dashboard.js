@@ -41,8 +41,6 @@ $(document).ready(async function () {
         $("#reports").show();
     });
 
-
-
     try {
         // Fetch lab data
         const data = await fetchData(url_get_labs);
@@ -82,8 +80,6 @@ $(document).ready(async function () {
         if (!str) return '';
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
-
-
 
     // # date range picker
     $('.date-range').daterangepicker({
@@ -130,8 +126,9 @@ $(document).ready(async function () {
         applyFilter();
     });
 
-    const defaultDateRange = `${new Date(new Date().setDate(new Date().getDate() - 30)).toLocaleDateString()} - ${new Date().toLocaleDateString()}`;
-    const defaultRegion = 'north';
+    const formatDate = (date) => date.toISOString().split("T")[0]; // Converts to YYYY-MM-DD
+    const defaultDateRange = `${formatDate(new Date(new Date().setDate(new Date().getDate() - 30)))} - ${formatDate(new Date())}`;
+        const defaultRegion = 'north';
 
     // Set default values to inputs
     $('#machine-date-range').val(defaultDateRange);
@@ -147,42 +144,45 @@ $(document).ready(async function () {
             // Fetch shipment data
             const shipmentData = await fetchData(url_shipment_get);
             console.log("Shipment Data:", shipmentData.shipments);
-
+    
             var direction = $('#direction').data('direction');
             var locRegion = $('#locRegion').val();
             console.log("Direction:", direction);
-
+    
             // Get filter values
             const dateRange = $('#machine-date-range').val(); // Date range input
             const [startDate, endDate] = dateRange.split(" - ").map(date => new Date(date.trim()));
-
+    
             let filteredShipments = shipmentData.shipments.filter(shipment => {
                 const shipmentDate = new Date(shipment.created_at);
                 const isWithinDateRange = shipmentDate >= startDate && shipmentDate <= endDate;
-
+    
                 if (direction === 'right') {
                     return isWithinDateRange && shipment.to_region.includes(locRegion);
                 } else {
                     return isWithinDateRange && shipment.from_region.includes(locRegion);
                 }
             });
-
+    
             console.log("Filtered Shipments:", filteredShipments);
-
+    
             let totalWeight = 0;
+            let totalPrice = 0;
             let shipmentCount = filteredShipments.length;
-            console.log("Shipment Count:", shipmentCount);
+    
             filteredShipments.forEach(shipment => {
-                totalWeight += shipment.weight;
+                totalWeight += shipment.weight || 0;  // Ensure weight is a number
+                totalPrice += Number(shipment.price) || 0;  // Ensure price is a valid number
             });
+    
             console.log("Total Weight:", totalWeight);
-
-            // Update cards
-            const totalPrice = filteredShipments.reduce((sum, shipment) => sum + calculatePrice(shipment), 0);
-            updateCard('#operationsBoard .col-lg-4:nth-child(1) .card-body span', `${totalWeight}kg`, "text-primary");
-            updateCard('#operationsBoard .col-lg-4:nth-child(2) .card-body span', `${shipmentCount}`, "text-danger");
-            updateCard('#operationsBoard .col-lg-4:nth-child(3) .card-body span', `₦${totalPrice.toFixed(2)}`, "text-success");
-
+            console.log("Total Price:", totalPrice);
+    
+            // Update cards with formatted price
+            updateCard('#operationsBoard .col-lg-4:nth-child(1) .card-body span', `${shipmentCount}`, "text-danger");
+            updateCard('#operationsBoard .col-lg-4:nth-child(2) .card-body span', `${totalWeight}kg`, "text-primary");
+            updateCard('#operationsBoard .col-lg-4:nth-child(3) .card-body span', `₦${totalPrice.toLocaleString()}`, "text-success");
+    
             // Populate the table
             let shipmentTableBody = document.getElementById('shipmentTableBody');
             shipmentTableBody.innerHTML = ''; // Clear existing rows
@@ -190,47 +190,39 @@ $(document).ready(async function () {
             let shipmentsByLab = {};
             
             filteredShipments.forEach(shipment => {
-                let lab;
-                if (direction === 'right') {
-                    lab = shipment.dropoff_loc;
-                    if (!shipmentsByLab[lab]) {
-                        shipmentsByLab[lab] = {
-                            count: 0,
-                            totalWeight: 0
-                        };
-                    }
-                    shipmentsByLab[lab].count += 1;
-                    shipmentsByLab[lab].totalWeight += shipment.weight;
-                } else {
-                    lab = shipment.pickup_loc;
-                    if (!shipmentsByLab[lab]) {
-                        shipmentsByLab[lab] = {
-                            count: 0,
-                            totalWeight: 0
-                        };
-                    }
-                    shipmentsByLab[lab].count += 1;
-                    shipmentsByLab[lab].totalWeight += shipment.weight;
+                let lab = direction === 'right' ? shipment.dropoff_loc : shipment.pickup_loc;
+    
+                if (!shipmentsByLab[lab]) {
+                    shipmentsByLab[lab] = {
+                        count: 0,
+                        totalWeight: 0,
+                        totalPrice: 0
+                    };
                 }
+    
+                shipmentsByLab[lab].count += 1;
+                shipmentsByLab[lab].totalWeight += shipment.weight || 0;
+                shipmentsByLab[lab].totalPrice += Number(shipment.price) || 0;
             });
-            
-            // Populate the table
+    
+            // Populate the table with formatted prices
             Object.keys(shipmentsByLab).forEach(lab => {
                 let row = `
                     <tr>
                         <td>${lab}</td>
                         <td>${shipmentsByLab[lab].count}</td>
                         <td>${shipmentsByLab[lab].totalWeight}kg</td>
-                        <td>${shipmentsByLab[lab].totalWeight}kg</td>
+                        <td>₦${shipmentsByLab[lab].totalPrice.toLocaleString()}</td>
                     </tr>
                 `;
                 shipmentTableBody.insertAdjacentHTML('beforeend', row);
             });
-
+    
         } catch (error) {
             console.error("Error fetching or processing data:", error);
         }
     }
+    
     
     // Helper function to calculate price (dummy implementation, update as needed)
     function calculatePrice(shipment) {
