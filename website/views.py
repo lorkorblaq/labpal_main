@@ -18,11 +18,13 @@ from .extensions import socketio
 load_dotenv(find_dotenv())
 valid_pub_key = os.getenv('VAPID_PUB_KEY')
 valid_pri_key = os.getenv('VAPID_PRI_KEY')
+RECAPTCHA_SECRET_KEY = os.getenv("GOOGLE_RECAPTCHA_SECRETKEY")  # Replace with your reCAPTCHA secret key
 
 BASE = "https://labpal.com.ng/api"
 views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
 CORS(views)
 data=""
+
 
 def login_required(route_func):
     def wrapper(*args, **kwargs):
@@ -177,6 +179,16 @@ def subscription():
 @views.route("/send_demo_request", methods=["POST"])
 def send_demo_request():
     data = request.get_json()
+    recaptcha_response = data.get("recaptcha")  # Get reCAPTCHA response from frontend
+    # Verify reCAPTCHA with Google
+    verify_url = "https://www.google.com/recaptcha/api/siteverify"
+    response = requests.post(verify_url, data={
+        "secret": RECAPTCHA_SECRET_KEY,
+        "response": recaptcha_response
+    })
+    result = response.json()
+    if not result.get("success"):
+        return {"message": "reCAPTCHA verification failed"}, 400
     print(data)
     request_for_demo_mail(data)
     return {"message": "Request sent"}, 201

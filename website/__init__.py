@@ -6,6 +6,7 @@ from .authClient import authClient
 from .settings import settings
 from .views import views
 from .viewsClient import viewsClient
+from .app_mailing import app_mailing
 
 from flask_session import Session  
 # from website.celery_config import make_celery
@@ -64,6 +65,7 @@ def create_app():
     app.register_blueprint(settings, url_prefix="/settings")
     app.register_blueprint(auth, url_prefix="")
     app.register_blueprint(authClient, url_prefix="/client")
+    app.register_blueprint(app_mailing, url_prefix="/mailing")
     return app
 
 # def get_lab_name():

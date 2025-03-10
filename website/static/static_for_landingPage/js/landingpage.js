@@ -26,15 +26,30 @@ $(document).ready(function () {
         $('#nav-menu').toggleClass('active');
     });
 
+    function validateRecaptcha() {
+        var response = grecaptcha.getResponse();
+        if(response.length == 0) {
+            alert("Please complete the reCAPTCHA verification.");
+            return false;
+        }
+        return true;
+    }
 
     $(".demo-form").submit(function (event) {
         event.preventDefault(); // Prevent default form submission
+        var recaptchaResponse = grecaptcha.getResponse(); // Get reCAPTCHA response
 
+        if (recaptchaResponse.length === 0) {
+            alert("Please complete the reCAPTCHA verification.");
+            return;
+        }
         var formData = {
             name: $("input[name='name']").val(),
             email: $("input[name='email']").val(),
             company: $("input[name='company']").val(),
-            size: $("input[name='size']").val()
+            size: $("input[name='size']").val(),
+            recaptcha: recaptchaResponse // Send reCAPTCHA response to backend
+
         };
         console.log(formData);
 
@@ -46,6 +61,7 @@ $(document).ready(function () {
             success: function (response) {
                 alert(response.message); // Show success message
                 $(".demo-form")[0].reset();
+                grecaptcha.reset(); // Reset reCAPTCHA
 
             },
             error: function (xhr, status, error) {

@@ -22,3 +22,5 @@ startsecs=10
 sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl start worker1
+
+google recaptacha pubKey=6LcFKOcqAAAAACftbSZVeSbHeOMMxG3iWbvBMvdC

@@ -10,6 +10,20 @@
             <a href="{{ url_for('views.home') }}" class="hero-btn">Get Started</a>
     </section>
 
+    <section class="container-head">
+        <h1 class="h1-text">Optimizing <span>Lab</span> Workflow & Management</h1>
+        <p class="head-text">
+            LabPal is a powerful laboratory management application designed to streamline lab operations, 
+            enhance team collaboration, and improve efficiency. It enables seamless <strong>event recording</strong>, 
+            facilitates real-time <strong>messaging</strong>, and optimizes <strong>inventory management</strong>.
+        </p>
+        <p class="head-text">
+            With an intuitive interface and an <strong>AI Laboratory Assistant</strong>, LabPal provides valuable 
+            scientific insights while ensuring smooth workflow automation. The <strong>notifications</strong> feature 
+            keeps teams updated on inventory status, task assignments, and critical lab activities.
+        </p>
+    </section>
+
     <section id="features">
         <h1>Features</h1>
         <div class="features-container">
@@ -72,7 +86,7 @@
                 <h3 class="fas fa-user"> Up to 15 Users</h3>
                 <h3 class="fas fa-building"> And 3 Centers</h3>
                 <hr>
-                <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
+                <a href="{{ url_for('views.home') }}" class="btn dangle btn-primary">Get started</a>
             </div>
 
             <!-- Enterprice Plan -->
@@ -82,7 +96,7 @@
                 <h3 class="fas fa-user">Unlimited Users</h3>
                 <h3 class="fas fa-building"> Unlimited Centers</h3>
                     <hr>
-                <a href="{{ url_for('views.home') }}" class="btn btn-primary">Get started</a>
+                <a href="{{ url_for('views.home') }}" class="btn dangle btn-primary">Get started</a>
             </div>
           </div>
     </section>
@@ -95,10 +109,12 @@
                 <p><span style="color: red;">30 days free trial</span> included!</p>
             </div>
             <form class="demo-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="text" name="company" placeholder="Company Name" required>
-                <input type="number" name="size" placeholder="Company Size" required>
+                <input type="text" name="name" placeholder=" Your Name" required>
+                <input type="email" name="email" placeholder=" Your Email" required>
+                <input type="text" name="company" placeholder=" Your Organisation Name" required>
+                <input type="number" name="size" placeholder=" Your Organisation Size" required>
+                    <!-- Google reCAPTCHA -->
+                <div class="g-recaptcha" data-sitekey="6LcFKOcqAAAAACftbSZVeSbHeOMMxG3iWbvBMvdC"></div>    
                 <button type="submit">Request a Demo</button>
             </form>
         </div>

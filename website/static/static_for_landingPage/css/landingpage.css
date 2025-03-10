@@ -243,6 +243,34 @@ h3 {
 }
 
 
+.container-head {
+    font-family: Arial, sans-serif;
+    /* margin: 0; */
+    /* padding: 0; */
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    max-width: 100%;
+    padding: 40px;
+    margin: 0 auto;
+}
+
+.h1-text {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.h1-text span {
+    color: #DF5332;
+}
+
+.head-text {
+    font-size: 20px;
+    text-align: center;  
+}
+
 .lab {
     color: #7B3787;
 }
@@ -422,6 +450,26 @@ h1 {
 /* Ensure all pricing cards have more space */
 .pricing-card:not(:last-child) {
     margin-right: 10px; /* Adds spacing between cards */
+}
+
+.dangle {
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.dangle:hover {
+    background-color: #0056b3;
+    animation: dangle 1s ease-in-out;
+}
+
+@keyframes dangle {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(15deg) rotateY(15deg); }
+    50% { transform: rotateX(0deg) rotateY(-15deg); }
+    75% { transform: rotateX(-15deg) rotateY(10deg); }
+    100% { transform: rotateX(0deg) rotateY(0deg); }
 }
 
 footer {
@@ -619,7 +667,7 @@ button:hover {
 }
 .demo-form input {
     width: 100%;
-    padding: 12px;
+    padding: 12px 0;
     margin: 10px 0;
     border: none;
     border-radius: 5px;

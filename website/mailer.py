@@ -71,6 +71,10 @@ def request_for_demo_mail(data):
     mailer(email, subject, html_content)
     return "Request for demo mail sent"
 
-
+def app_mail(data, subject):
+    email="f3mioloko@gmail.com"
+    html_content = render_template("templates_for_mail/app.html", data=data)
+    mailer(email, subject, html_content)
+    return "Mail sent"
 
     
