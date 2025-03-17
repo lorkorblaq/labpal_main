@@ -36,7 +36,7 @@
                     {{ login_form.hidden_tag() }}
                     {{ login_form.email }}
                     {{ login_form.password }}
-                    <a href="#" id="openResetModal">Reset Password</a>
+                    <a href="#" id="openResetModal">Forgot Password</a>
                     <button class="form-btn sx back" type="button" onclick="showSignUpForm()">Sign up</button>
                     <button class="form-btn dx" type="submit" name="signin">Log In</button>
                 </form>
@@ -45,7 +45,7 @@
             <div id="resetPasswordModal" class="resetModal">
                 <div class="resetModal-content">
                     <span class="close">&times;</span>
-                    <h2>Reset Password</h2>
+                    <h5>Forgot Password</h5>
                     <p>Enter your email address to receive a password reset link.</p>
                     <input id="resetEmail" placeholder="Email Address" type="email" name="email">
                     <button id="sendResetLink">Send Reset Link</button>

@@ -41,38 +41,44 @@ $(document).ready(async function () {
         $("#reports").show();
     });
 
-    try {
-        // Fetch lab data
-        const data = await fetchData(url_get_labs);
-        console.log("Lab Data:", data);
-        
-        // Build options HTML starting with the default prompt
-        let optionsHtml = '<option value="" disabled selected>Select a region</option>';
-        
-        // Assume the response is always an array of lab objects
-        const labs = data.labs; // or simply data if labs are returned as the root array
-        
-        // Use a Set to store unique region values
-        const uniqueRegions = new Set();
-        labs.forEach(function(lab) {
-            if (lab.region) {
-                uniqueRegions.add(lab.region);
-            }
-        });
-        
-        // Loop through the set and build the options
-        uniqueRegions.forEach(function(region) {
-            optionsHtml += `<option value="${region}">${capitalize(region)}</option>`;
-        });
-        
-        // Build the select element
-        let selectHtml = `<select id="locRegion">${optionsHtml}</select>`;
-        
-        // Inject the select element into the "to-card" container
-        $('#to-card').html(selectHtml);
-        
-    } catch (err) {
-        console.error("Error fetching labs:", err);
+    async function populateSelectOptions(filterType) {
+        try {
+            // Fetch lab data
+            const data = await fetchData(url_get_labs);
+            console.log("Lab Data:", data);
+    
+            // Build options HTML starting with the default prompt
+            let optionsHtml = `<option value="" disabled selected>Select a ${filterType}</option>`;
+    
+            // Assume the response is always an array of lab objects
+            const labs = data.labs; // or simply data if labs are returned as the root array
+    
+            // Use a Set to store unique values
+            const uniqueValues = new Set();
+            labs.forEach(function(lab) {
+                if (filterType === 'region' && lab.region) {
+                    uniqueValues.add(lab.region);
+                } else if (filterType === 'location' && lab.lab_name) {
+                    uniqueValues.add(lab.lab_name);
+                }
+            });
+    
+            // Loop through the set and build the options
+            uniqueValues.forEach(function(value) {
+                optionsHtml += `<option value="${value}">${capitalize(value)}</option>`;
+            });
+    
+            // Build the select elements
+            let TselectHtml = `<select id="TlocRegion">${optionsHtml}</select>`;
+            let FselectHtml = `<select id="FlocRegion">${optionsHtml}</select>`;
+    
+            // Inject the select elements into the containers
+            $('#to-card').html(TselectHtml);
+            $('#from-card').html(FselectHtml);
+    
+        } catch (err) {
+            console.error("Error fetching labs:", err);
+        }
     }
     
     // Helper function to capitalize the first letter
@@ -80,6 +86,25 @@ $(document).ready(async function () {
         if (!str) return '';
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+
+
+    // Event listener for filter type change
+    $('#filterType').change(function() {
+        const filterType = $(this).val();
+        populateSelectOptions(filterType);
+    });
+
+    // Event listeners for select options change
+    $('#to-card').on('change', '#TlocRegion', function() {
+        applyFilter();
+    });
+
+    $('#from-card').on('change', '#FlocRegion', function() {
+        applyFilter();
+    });
+
+    // Initial population based on default filter type
+    populateSelectOptions($('#filterType').val());
 
     // # date range picker
     $('.date-range').daterangepicker({
@@ -115,12 +140,19 @@ $(document).ready(async function () {
         }
     });
 
-    $('#locRegion').change(function() {
+    $('#FlocRegion').change(function() {
         var selectedValue = $(this).val();
         console.log(selectedValue)
         applyFilter();
         // You can add more logic here based on the selected value
     });
+    $('#TlocRegion').change(function() {
+        var selectedValue = $(this).val();
+        console.log(selectedValue)
+        applyFilter();
+        // You can add more logic here based on the selected value
+    });
+
 
     $('.applyBtn').click(function() {
         applyFilter();
@@ -128,17 +160,22 @@ $(document).ready(async function () {
 
     const formatDate = (date) => date.toISOString().split("T")[0]; // Converts to YYYY-MM-DD
     const defaultDateRange = `${formatDate(new Date(new Date().setDate(new Date().getDate() - 30)))} - ${formatDate(new Date())}`;
-        const defaultRegion = 'north';
+        const defaultFRegion = 'north';
+        const defaultTRegion = 'central_store';
 
     // Set default values to inputs
     $('#machine-date-range').val(defaultDateRange);
-    $('#locRegion').val(defaultRegion);
+    $('#FlocRegion').val(defaultFRegion);
 
     await applyFilter();
     $('#applyFilter').click(async function () {
         await applyFilter();
     });
-
+    
+    $('#filterType').change(function() {
+        applyFilter();
+    });
+    
     async function applyFilter() {
         try {
             // Fetch shipment data
@@ -146,8 +183,14 @@ $(document).ready(async function () {
             console.log("Shipment Data:", shipmentData.shipments);
     
             var direction = $('#direction').data('direction');
-            var locRegion = $('#locRegion').val();
+            var FlocRegion = $('#FlocRegion').val();
+            var TlocRegion = $('#TlocRegion').val();
+            var filterType = $('#filterType').val(); // Get the selected filter type
+    
             console.log("Direction:", direction);
+            console.log("From Region:", FlocRegion);
+            console.log("To Region:", TlocRegion);
+            console.log("Filter Type:", filterType);
     
             // Get filter values
             const dateRange = $('#machine-date-range').val(); // Date range input
@@ -157,11 +200,27 @@ $(document).ready(async function () {
                 const shipmentDate = new Date(shipment.created_at);
                 const isWithinDateRange = shipmentDate >= startDate && shipmentDate <= endDate;
     
-                if (direction === 'right') {
-                    return isWithinDateRange && shipment.to_region.includes(locRegion);
-                } else {
-                    return isWithinDateRange && shipment.from_region.includes(locRegion);
+                if (filterType === 'region') {
+                    if (direction === 'right') {
+                        return isWithinDateRange && shipment.to_region === TlocRegion && shipment.from_region === FlocRegion;
+
+                        // return isWithinDateRange && shipment.to_region === TlocRegion;
+                    } else {
+                        return isWithinDateRange && shipment.from_region === FlocRegion && shipment.to_region === TlocRegion;
+
+                        // return isWithinDateRange && shipment.from_region === FlocRegion;
+                    }
+                } else if (filterType === 'location') {
+                    if (direction === 'right') {
+                        return isWithinDateRange && shipment.dropoff_loc === TlocRegion && shipment.pickup_loc === FlocRegion;
+
+                        // return isWithinDateRange && shipment.dropoff_loc === TlocRegion;
+                    } else {
+                        return isWithinDateRange && shipment.pickup_loc === FlocRegion && shipment.dropoff_loc === TlocRegion;
+                        // return isWithinDateRange && shipment.pickup_loc === FlocRegion;
+                    }
                 }
+                return false;
             });
     
             console.log("Filtered Shipments:", filteredShipments);
@@ -186,9 +245,9 @@ $(document).ready(async function () {
             // Populate the table
             let shipmentTableBody = document.getElementById('shipmentTableBody');
             shipmentTableBody.innerHTML = ''; // Clear existing rows
-            
+    
             let shipmentsByLab = {};
-            
+    
             filteredShipments.forEach(shipment => {
                 let lab = direction === 'right' ? shipment.dropoff_loc : shipment.pickup_loc;
     

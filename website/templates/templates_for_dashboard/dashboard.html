@@ -42,9 +42,14 @@
     
             <div class="events" id="reports">
                 <div class="filterContainer" style="padding-bottom:10px">
+                    <!-- Add this HTML to your filter section -->
+                    <select id="filterType">
+                        <option value="region">Region</option>
+                        <option value="location">Location</option>
+                    </select>
                     <div class="swap-container">
                         <div class="carder" id="from-card">
-                            <span id="fromLocation">Central Store</span>
+                            <!-- <span id="fromLocation">Central Store</span> -->
                         </div>
                         
                         <button id="swap-btn" class="swap-button" title="Swap locations">
@@ -103,7 +108,7 @@
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="border-gray-200" scope="col">Laboratory</th>
+                                                <th class="border-gray-200" scope="col">Location</th>
                                                 <th class="border-gray-200" scope="col">Total Shipments</th>
                                                 <th class="border-gray-200" scope="col">Total Weights</th>
                                                 <th class="border-gray-200" scope="col">Total Average Cost</th>
@@ -146,7 +151,7 @@
                 </div>
             </div>
             <div id="tooltip" style="position: absolute; visibility: hidden; padding: 10px; background-color: white; border: 1px solid #ccc;"></div>
-<       </div>
+        </div>
 	</main>
 {% endblock %}
 
