@@ -11,11 +11,11 @@ $(document).ready(function() {
         }
         return null;
     }
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
 
-    const columnshipments = ['created_at', 'shipment_id', 'status', 'pickup_time', 'dropoff_time','duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'created_by','picked_by','dropoff_by', 'description'];
-    const headershipments = ['Created', 'Shipment Id','Status', 'Picked at', 'Dropped at',' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of packs', 'Weight', 'Vendor', 'Created by','Picked by','Dropped by', 'Description'];
+    const columnshipments = ['created_at', 'shipment_id', 'status', 'dropoff_time',   'duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'description', 'created_by','dropoff_by', 'action'];
+    const headershipments = ['Created', 'Id', 'Status', 'Recieved',  ' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of package', 'Weight', 'Vendor', , 'Description', 'Created by', 'Recieved by', ''];
 
     let dataTableInstance ;
     const user_id = getCookie('user_id');
@@ -27,7 +27,7 @@ $(document).ready(function() {
     const url_shipment_get = `${BaseUrl}/shipments/get/${user_id}/${lab_name}/`
     const url_shipment_push = `${BaseUrl}/shipments/push/${user_id}/${lab_name}/`;
     const url_shipment_put = `${BaseUrl}/shipments/put/${user_id}/${lab_name}/`;
-    const url_shipment_delete = `${BaseUrl}/shipments/delete/${user_id}/${lab_name}/`;  
+    const url_shipment_delete = `${BaseUrl}/shipments/delete/${user_id}/`;  
 
 
     var dropOff_dateTime;
@@ -123,57 +123,57 @@ $(document).ready(function() {
         }
     });
 
-    $("#pick-up").click(function() {
-        // Get form data
-        var pickup_shipment_ID = $("#pick-shipment-id").val();
+    // $("#pick-up").click(function() {
+    //     // Get form data
+    //     var pickup_shipment_ID = $("#pick-shipment-id").val();
 
-        // Check if all required form fields are filled
-        if (pickup_shipment_ID) {
-            // Check if Geolocation is supported
-            if (navigator.geolocation) {
-                // Get current position
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Extract latitude, longitude, accuracy, and timestamp
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var timestamp = position.timestamp;
+    //     // Check if all required form fields are filled
+    //     if (pickup_shipment_ID) {
+    //         // Check if Geolocation is supported
+    //         if (navigator.geolocation) {
+    //             // Get current position
+    //             navigator.geolocation.getCurrentPosition(function(position) {
+    //                 // Extract latitude, longitude, accuracy, and timestamp
+    //                 var latitude = position.coords.latitude;
+    //                 var longitude = position.coords.longitude;
+    //                 var timestamp = position.timestamp;
 
-                    // Convert timestamp to WAT (West Africa Time)
-                    var pickUp_dateTime = new Date(timestamp);
-                    pickUp_dateTime.setHours(pickUp_dateTime.getUTCHours() + 1); 
-                    pickUp_dateTime = pickUp_dateTime.toISOString()
-                    var picklatLngString = `${latitude},${longitude}`;
+    //                 // Convert timestamp to WAT (West Africa Time)
+    //                 var pickUp_dateTime = new Date(timestamp);
+    //                 pickUp_dateTime.setHours(pickUp_dateTime.getUTCHours() + 1); 
+    //                 pickUp_dateTime = pickUp_dateTime.toISOString()
+    //                 var picklatLngString = `${latitude},${longitude}`;
 
-                    data = {
-                        picked_by: user_name,
-                        shipment_id: pickup_shipment_ID,
-                        pickup_lat_lng: picklatLngString,
-                        // pickup_time: pickUp_dateTime,
-                    }
+    //                 data = {
+    //                     picked_by: user_name,
+    //                     shipment_id: pickup_shipment_ID,
+    //                     pickup_lat_lng: picklatLngString,
+    //                     // pickup_time: pickUp_dateTime,
+    //                 }
 
-                    // Example of sending the data to your backend
-                    $.ajax({
-                        url: url_shipment_put,
-                        type: 'PUT',
-                        contentType: 'application/json',
-                        data: JSON.stringify(data),
-                        success: function(response) {
-                            alert('pick up sent to the server successfully:', response);
-                        },
-                        error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
-                        }
-                    });
-                }, function(error) {
-                    console.error("Error Code = " + error.code + " - " + error.message);
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        } else {
-            alert("Please fill in all the required fields.");
-        }
-    });
+    //                 // Example of sending the data to your backend
+    //                 $.ajax({
+    //                     url: url_shipment_put,
+    //                     type: 'PUT',
+    //                     contentType: 'application/json',
+    //                     data: JSON.stringify(data),
+    //                     success: function(response) {
+    //                         alert('pick up sent to the server successfully:', response);
+    //                     },
+    //                     error: function(xhr, status, error) {
+    //                         alert('Error sending location to the server:', error);
+    //                     }
+    //                 });
+    //             }, function(error) {
+    //                 console.error("Error Code = " + error.code + " - " + error.message);
+    //             });
+    //         } else {
+    //             alert("Geolocation is not supported by this browser.");
+    //         }
+    //     } else {
+    //         alert("Please fill in all the required fields.");
+    //     }
+    // });
 
     $("#drop-off").click(function() {
         // Get form data
@@ -209,11 +209,22 @@ $(document).ready(function() {
                         type: 'PUT',
                         contentType: 'application/json',
                         data: JSON.stringify(data),
-                        success: function(response) {
-                            alert('Drop off sent to the server successfully:', response);
+                        success: function (response) {
+                            alert("Shipment recieved successfully");
+                            console.log(response);
                         },
-                        error: function(xhr, status, error) {
-                            alert('Error sending location to the server:', error);
+                        error: function (xhr, status, error) {
+                            // Extract the error message from the server response
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                alert(xhr.responseJSON.message);  // Show the custom error message
+                            } else {
+                                alert("An error occurred: " + error);  // Fallback for unknown errors
+                            }
+                            console.error(xhr.responseText);  // Log the full response for debugging
+                        },
+                        complete: function () {
+                            // Hide the loading indicator after the request completes (success or error)
+                            $('#loadingIndicator').hide();
                         }
                     });
 
@@ -516,6 +527,7 @@ $(document).ready(function() {
             }),
             columnDefs: [
                 {
+                    targets: -1, // Target the last column
                     data: null,
                     defaultContent:
                     '<button class="tablebtn" id="btn-delete"><i class="fas fa-trash-alt"></i></button>'
@@ -536,6 +548,46 @@ $(document).ready(function() {
     
         if ($(`#${exTableId}`).find('.button').length === 0) {
             $(`#${exTableId}`).append(exportButton).append(printButton);
+        }
+    }
+
+    // Add event listener for delete button
+    $('#r_table tbody').on('click', '#btn-delete', function () {
+        var row = dataTableInstance.row($(this).parents('tr'));
+        deleteShipment(row);
+    });
+
+    function deleteShipment(row) {
+        var rowId = row.data().id; // Assuming 'shipment_id' is the unique identifier
+        console.log(rowId);
+        if (rowId) {
+            // Show confirmation dialog
+            if (confirm("Are you sure you want to delete this shipment? This action cannot be undone.")) {
+                $.ajax({
+                    url: `${url_shipment_delete}${rowId}/`,
+                    method: "DELETE",
+                    success: function (response) {
+                        row.remove().draw();
+                        alert("Shipment deleted successfully");
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Extract the error message from the server response
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            alert(xhr.responseJSON.message);  // Show the custom error message
+                        } else {
+                            alert("An error occurred: " + error);  // Fallback for unknown errors
+                        }
+                        console.error(xhr.responseText);  // Log the full response for debugging
+                    },
+                    complete: function () {
+                        // Hide the loading indicator after the request completes (success or error)
+                        $('#loadingIndicator').hide();
+                    }
+                });
+            }
+        } else {
+            alert("Error: Shipment couldn't be deleted. Kindly contact admin!");
         }
     }
 

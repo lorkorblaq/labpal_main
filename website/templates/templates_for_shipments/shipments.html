@@ -17,15 +17,15 @@
             <button type="button" class="" id="openCreateModalBtn" data-toggle="modal" data-target="#createModal">
                 Create
             </button>
-            <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
+            <!-- <button type="button" class="" data-toggle="modal" data-target="#pickUpModal">
                 Pick up
-            </button>
+            </button> -->
             <button type="button" class="" data-toggle="modal" data-target="#dropUpModal">
-                Drop Off
+                Recieve
             </button>
-            <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
+            <!-- <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
                 Shipment Mapping
-            </button>
+            </button> -->
         </div>
         <hr>
         <!-- Modal -->
@@ -51,11 +51,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="required" for="input-box">Number of Package</label>
-                                <input type="text" class="form-control" id="numb_of_packs" placeholder="Enter number of package" required>
+                                <input type="number" class="form-control" id="numb_of_packs" placeholder="Enter number of package" required>
                             </div>
                             <div class="form-group">
                                 <label class="required" for="input-box">Weight of packs(Kg)</label>
-                                <input type="text" class="form-control" id="weight" placeholder="Enter weight of packs" required>
+                                <input type="number" class="form-control" id="weight" placeholder="Enter weight of packs" required>
                             </div>
                             <div class="form-group">
                                 <label class="required " for="input-box">Select type of package</label>
@@ -128,7 +128,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Drop Shipment</h5>
+                        <h5 class="modal-title" id="myModalLabel">Recieve Shipment</h5>
                         <button type="button" class="" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -142,7 +142,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="drop-off" class="">Dropped</button>
+                        <button type="button" id="drop-off" class="">Recieved</button>
                     </div>
                 </div>
             </div>

@@ -41,20 +41,15 @@ $(document).ready(async function () {
         $("#reports").show();
     });
 
-    async function populateSelectOptions(filterType) {
+    async function populateSelectOptions(filterType, card) {
         try {
-            // Fetch lab data
             const data = await fetchData(url_get_labs);
             console.log("Lab Data:", data);
-    
-            // Build options HTML starting with the default prompt
+
             let optionsHtml = `<option value="" disabled selected>Select a ${filterType}</option>`;
-    
-            // Assume the response is always an array of lab objects
-            const labs = data.labs; // or simply data if labs are returned as the root array
-    
-            // Use a Set to store unique values
+            const labs = data.labs;
             const uniqueValues = new Set();
+
             labs.forEach(function(lab) {
                 if (filterType === 'region' && lab.region) {
                     uniqueValues.add(lab.region);
@@ -62,23 +57,22 @@ $(document).ready(async function () {
                     uniqueValues.add(lab.lab_name);
                 }
             });
-    
-            // Loop through the set and build the options
+
             uniqueValues.forEach(function(value) {
                 optionsHtml += `<option value="${value}">${capitalize(value)}</option>`;
             });
-    
-            // Build the select elements
-            let TselectHtml = `<select id="TlocRegion">${optionsHtml}</select>`;
-            let FselectHtml = `<select id="FlocRegion">${optionsHtml}</select>`;
-    
-            // Inject the select elements into the containers
-            $('#to-card').html(TselectHtml);
-            $('#from-card').html(FselectHtml);
-    
+
+            let selectHtml = `<select id="${card === 'to' ? 'TlocRegion' : 'FlocRegion'}" class="form-control">${optionsHtml}</select>`;
+            $(`#${card}-card`).html(selectHtml);
+
         } catch (err) {
             console.error("Error fetching labs:", err);
         }
+    }
+
+    function capitalize(str) {
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
     
     // Helper function to capitalize the first letter
@@ -88,13 +82,16 @@ $(document).ready(async function () {
     }
 
 
-    // Event listener for filter type change
-    $('#filterType').change(function() {
+    $('#toFilterType').change(function() {
         const filterType = $(this).val();
-        populateSelectOptions(filterType);
+        populateSelectOptions(filterType, 'to');
     });
 
-    // Event listeners for select options change
+    $('#fromFilterType').change(function() {
+        const filterType = $(this).val();
+        populateSelectOptions(filterType, 'from');
+    });
+
     $('#to-card').on('change', '#TlocRegion', function() {
         applyFilter();
     });
@@ -103,8 +100,9 @@ $(document).ready(async function () {
         applyFilter();
     });
 
-    // Initial population based on default filter type
-    populateSelectOptions($('#filterType').val());
+    populateSelectOptions($('#toFilterType').val(), 'to');
+    populateSelectOptions($('#fromFilterType').val(), 'from');
+
 
     // # date range picker
     $('.date-range').daterangepicker({
@@ -126,18 +124,17 @@ $(document).ready(async function () {
     
         // Toggle the icon based on the current direction
         if (currentDirection === 'right') {
-          // Change to left arrow
-          $(this).removeClass('fa-arrow-right').addClass('fa-arrow-left');
-          // Update data-direction attribute
-          $(this).data('direction', 'left');
-          await applyFilter();
-        } else {
-          // Change to right arrow
-          $(this).removeClass('fa-arrow-left').addClass('fa-arrow-right');
-          // Update data-direction attribute
-          $(this).data('direction', 'right');
-          await applyFilter();
+            // Change to left arrow
+            $(this).removeClass('fa-arrow-right').addClass('fa-arrow-left');
+            // Update data-direction attribute
+            $(this).data('direction', 'left');
+        } else if(currentDirection === 'left') {
+            // Change to right arrow
+            $(this).removeClass('fa-arrow-left').addClass('fa-arrow-right');
+            // Update data-direction attribute
+            $(this).data('direction', 'right');
         }
+        await applyFilter();
     });
 
     $('#FlocRegion').change(function() {
@@ -178,46 +175,47 @@ $(document).ready(async function () {
     
     async function applyFilter() {
         try {
-            // Fetch shipment data
             const shipmentData = await fetchData(url_shipment_get);
             console.log("Shipment Data:", shipmentData.shipments);
     
             var direction = $('#direction').data('direction');
             var FlocRegion = $('#FlocRegion').val();
             var TlocRegion = $('#TlocRegion').val();
-            var filterType = $('#filterType').val(); // Get the selected filter type
+            var fromFilterType = $('#fromFilterType').val();
+            var toFilterType = $('#toFilterType').val();
     
             console.log("Direction:", direction);
             console.log("From Region:", FlocRegion);
             console.log("To Region:", TlocRegion);
-            console.log("Filter Type:", filterType);
+            console.log("From Filter Type:", fromFilterType);
+            console.log("To Filter Type:", toFilterType);
     
-            // Get filter values
-            const dateRange = $('#machine-date-range').val(); // Date range input
+            const dateRange = $('#machine-date-range').val();
             const [startDate, endDate] = dateRange.split(" - ").map(date => new Date(date.trim()));
     
             let filteredShipments = shipmentData.shipments.filter(shipment => {
                 const shipmentDate = new Date(shipment.created_at);
                 const isWithinDateRange = shipmentDate >= startDate && shipmentDate <= endDate;
     
-                if (filterType === 'region') {
-                    if (direction === 'right') {
+                if (direction === 'right') {
+                    if (fromFilterType === 'region' && toFilterType === 'region') {
                         return isWithinDateRange && shipment.to_region === TlocRegion && shipment.from_region === FlocRegion;
-
-                        // return isWithinDateRange && shipment.to_region === TlocRegion;
-                    } else {
-                        return isWithinDateRange && shipment.from_region === FlocRegion && shipment.to_region === TlocRegion;
-
-                        // return isWithinDateRange && shipment.from_region === FlocRegion;
-                    }
-                } else if (filterType === 'location') {
-                    if (direction === 'right') {
+                    } else if (fromFilterType === 'location' && toFilterType === 'location') {
                         return isWithinDateRange && shipment.dropoff_loc === TlocRegion && shipment.pickup_loc === FlocRegion;
-
-                        // return isWithinDateRange && shipment.dropoff_loc === TlocRegion;
-                    } else {
-                        return isWithinDateRange && shipment.pickup_loc === FlocRegion && shipment.dropoff_loc === TlocRegion;
-                        // return isWithinDateRange && shipment.pickup_loc === FlocRegion;
+                    } else if (fromFilterType === 'region' && toFilterType === 'location') {
+                        return isWithinDateRange && shipment.dropoff_loc === TlocRegion && shipment.from_region === FlocRegion;
+                    } else if (fromFilterType === 'location' && toFilterType === 'region') {
+                        return isWithinDateRange && shipment.to_region === TlocRegion && shipment.pickup_loc === FlocRegion;
+                    }
+                } else if (direction === 'left') {
+                    if (fromFilterType === 'region' && toFilterType === 'region') {
+                        return isWithinDateRange && shipment.from_region === TlocRegion && shipment.to_region === FlocRegion;
+                    } else if (fromFilterType === 'location' && toFilterType === 'location') {
+                        return isWithinDateRange && shipment.pickup_loc === TlocRegion && shipment.dropoff_loc === FlocRegion;
+                    } else if (fromFilterType === 'region' && toFilterType === 'location') {
+                        return isWithinDateRange && shipment.to_region === FlocRegion && shipment.pickup_loc === TlocRegion;
+                    } else if (fromFilterType === 'location' && toFilterType === 'region') {
+                        return isWithinDateRange && shipment.from_region === TlocRegion && shipment.dropoff_loc === FlocRegion;
                     }
                 }
                 return false;
@@ -230,48 +228,48 @@ $(document).ready(async function () {
             let shipmentCount = filteredShipments.length;
     
             filteredShipments.forEach(shipment => {
-                totalWeight += shipment.weight || 0;  // Ensure weight is a number
-                totalPrice += Number(shipment.price) || 0;  // Ensure price is a valid number
+                totalWeight += shipment.weight || 0;
+                totalPrice += Number(shipment.price) || 0;
             });
     
             console.log("Total Weight:", totalWeight);
             console.log("Total Price:", totalPrice);
     
-            // Update cards with formatted price
             updateCard('#operationsBoard .col-lg-4:nth-child(1) .card-body span', `${shipmentCount}`, "text-danger");
             updateCard('#operationsBoard .col-lg-4:nth-child(2) .card-body span', `${totalWeight}kg`, "text-primary");
             updateCard('#operationsBoard .col-lg-4:nth-child(3) .card-body span', `₦${totalPrice.toLocaleString()}`, "text-success");
     
-            // Populate the table
             let shipmentTableBody = document.getElementById('shipmentTableBody');
-            shipmentTableBody.innerHTML = ''; // Clear existing rows
+            shipmentTableBody.innerHTML = '';
     
             let shipmentsByLab = {};
     
             filteredShipments.forEach(shipment => {
-                let lab = direction === 'right' ? shipment.dropoff_loc : shipment.pickup_loc;
+                let fromLab = direction === 'right' ? shipment.pickup_loc : shipment.dropoff_loc;
+                let toLab = direction === 'right' ? shipment.dropoff_loc : shipment.pickup_loc;
     
-                if (!shipmentsByLab[lab]) {
-                    shipmentsByLab[lab] = {
+                if (!shipmentsByLab[fromLab]) {
+                    shipmentsByLab[fromLab] = {
                         count: 0,
                         totalWeight: 0,
-                        totalPrice: 0
+                        totalPrice: 0,
+                        toLab: toLab
                     };
                 }
     
-                shipmentsByLab[lab].count += 1;
-                shipmentsByLab[lab].totalWeight += shipment.weight || 0;
-                shipmentsByLab[lab].totalPrice += Number(shipment.price) || 0;
+                shipmentsByLab[fromLab].count += 1;
+                shipmentsByLab[fromLab].totalWeight += shipment.weight || 0;
+                shipmentsByLab[fromLab].totalPrice += Number(shipment.price) || 0;
             });
     
-            // Populate the table with formatted prices
-            Object.keys(shipmentsByLab).forEach(lab => {
+            Object.keys(shipmentsByLab).forEach(fromLab => {
                 let row = `
                     <tr>
-                        <td>${lab}</td>
-                        <td>${shipmentsByLab[lab].count}</td>
-                        <td>${shipmentsByLab[lab].totalWeight}kg</td>
-                        <td>₦${shipmentsByLab[lab].totalPrice.toLocaleString()}</td>
+                        <td>${direction === 'right' ? fromLab : shipmentsByLab[fromLab].toLab}</td>
+                        <td>${direction === 'right' ? shipmentsByLab[fromLab].toLab : fromLab}</td>
+                        <td>${shipmentsByLab[fromLab].count}</td>
+                        <td>${shipmentsByLab[fromLab].totalWeight}kg</td>
+                        <td>₦${shipmentsByLab[fromLab].totalPrice.toLocaleString()}</td>
                     </tr>
                 `;
                 shipmentTableBody.insertAdjacentHTML('beforeend', row);
