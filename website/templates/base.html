@@ -97,19 +97,16 @@
             <!-- Floating Menu -->
             <div id="floating-menu">
                 <div class="menu-container">
-                    <a href="/app/dashboard" class="menu-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                    <a href="/app/events" class="menu-item"><i class="fas fa-feather-alt"></i> Events</a>
-                    <a href="/app/inventory" class="menu-item"><i class="fas fa-dolly"></i> Inventory</a>
-                    <a href="/app/in-use" class="menu-item"><i class="fas fa-play"></i> In Use</a>
-                    <a href="/app/channels" class="menu-item"><i class="fas fa-exchange-alt"></i> Channels</a>
-                    <a href="/app/expiration" class="menu-item"><i class="fas fa-calendar-times"></i> Lots & Exp.</a>
-                    <a href="/app/shipments" class="menu-item"><i class="fas fa-truck"></i> Shipments</a>
-                    <!-- <a href="/app/request-pickup" class="menu-item"><i class="fas fa-bicycle"></i> Sample Pickup</a> -->
-                    <!-- <a href="/app/gpt" class="menu-item"><i class="fas fa-brain"></i> LabGPT</a> -->
-                    <!-- <hr> -->
-                    <a href="/app/user-profile" class="menu-item"><i class="fas fa-user"></i> Profile</a>
-                    <a href="/app/settings" class="menu-item"><i class="fas fa-cog"></i> Settings</a>
-                    <a href="{{url_for('auth.logout')}}" class="menu-item"><i class="fas fa-door-open"></i> Log out</a>
+                    <!-- <a href="/app/dashboard" class="menu-item" id="menu-dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a> -->
+                    <a href="/app/events" class="menu-item" id="menu-events"><i class="fas fa-feather-alt"></i> Events</a>
+                    <a href="/app/inventory" class="menu-item" id="menu-inventory"><i class="fas fa-dolly"></i> Inventory</a>
+                    <a href="/app/in-use" class="menu-item" id="menu-in-use"><i class="fas fa-play"></i> In Use</a>
+                    <a href="/app/channels" class="menu-item" id="menu-channels"><i class="fas fa-exchange-alt"></i> Channels</a>
+                    <a href="/app/expiration" class="menu-item" id="menu-expiration"><i class="fas fa-calendar-times"></i> Lots & Exp.</a>
+                    <a href="/app/shipments" class="menu-item" id="menu-shipments"><i class="fas fa-truck"></i> Shipments</a>
+                    <a href="/app/user-profile" class="menu-item" id="menu-profile"><i class="fas fa-user"></i> Profile</a>
+                    <a href="/app/settings" class="menu-item" id="menu-settings"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="{{url_for('auth.logout')}}" class="menu-item" id="menu-logout"><i class="fas fa-door-open"></i> Log out</a>
                 </div>
             </div>
 

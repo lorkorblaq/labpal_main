@@ -11,8 +11,8 @@ $(document).ready(function() {
         }
         return null;
     }
-    // BaseUrl = "https://labpal.com.ng/api";
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
 
     const columnshipments = ['created_at', 'shipment_id', 'status', 'dropoff_time',   'duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'description', 'created_by','dropoff_by', 'action'];
     const headershipments = ['Created', 'Id', 'Status', 'Recieved',  ' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of package', 'Weight', 'Vendor', , 'Description', 'Created by', 'Recieved by', ''];
@@ -690,4 +690,27 @@ $(document).ready(function() {
     
         return result;
     }
+
+    // Add toggle functionality for the "Report" button
+    $("#report-table").click(function() {
+        const tableSection = $("#ex-r_table");
+        const reportSection = $("#reports");
+
+        if (tableSection.is(":visible")) {
+            tableSection.hide();
+            reportSection.show();
+            $(this).text("Table"); // Change button text to "Table"
+        } else {
+            tableSection.show();
+            reportSection.hide();
+            $(this).text("Report"); // Change button text to "Report"
+        }
+    });
+
+    // Initially hide the report section and set button text to "Report"
+    $("#reports").hide();
+    $("#report-table").text("Report");
+
+    // Initially hide the report section
+    $("#reports").hide();
 });

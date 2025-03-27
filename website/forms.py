@@ -36,7 +36,8 @@ class LabForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation ID"})
     org_name = StringField('orgName', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation Name"})
-    lab = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    lab = SelectField('lab', choices=[('','Select a lab')], validators=[DataRequired()], render_kw={"placeholder":"Laboratory name"})
+    # lab = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
     center_name = StringField('center', validators=[Length(min=4, max=20)], render_kw={"placeholder":"Your center name if any"})
     ref_org_id = StringField('refOrgID', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Reffering Center ID"})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})

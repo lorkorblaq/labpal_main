@@ -342,25 +342,36 @@ input {
   border: none;
 }
 
-.regOrg {
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.regOrg select {
-  width: 85%;
+select {
   padding: 10px;
   margin: 8px 0;
   display: block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 16px;
-  
+  font-size: 16px;  
+  border-bottom: 1px solid #ff7e5f;
+  width: 85%;
+  font-family: 'Roboto';
+  color: #ff7e5f;
+  text-align: center;
+  font-size: 21px;
+  font-weight:100;
 }
 
-.regOrg select:focus {
+#lab{
+  border: 0;
+  border-bottom: 1px solid #ff7e5f;
+  margin-bottom: 20px;
+}
+
+select:focus {
   border-color: #007bff; /* Adjust to match your design */
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);

@@ -247,7 +247,7 @@ def signup_signin():
         user = USERS_COLLECTION.find_one({'email': email})
         if user and check_password_hash(user['password'], password):
             org_id = user.get('org_id')
-            org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'org_name': 1, 'subscription':1})
+            org = ORG_COLLECTION.find_one({'_id': ObjectId(org_id)}, {'org_name': 1, 'subscription':1, 'services':1})
 
             if not org:
                 flash("Organisation not found.", "danger")
@@ -256,23 +256,26 @@ def signup_signin():
             full_id = str(user['_id'])
             org_name = org.get('org_name')
             org_plan = org.get('subscription')
+            org_services = org.get('services', [""])
             role = user.get('role')
             center = user.get('center', "")
             lab_name = user.get('labs_access', [""])[0]
+
             ip_address = request.remote_addr
             firstname = user['firstname']
             lastname = user['lastname']
             name = f'{firstname} {lastname}'
             part_id = full_id[-7:]
-            print(org_plan)
+            print('org serv', org_services)
             logging.info(f"user:{name}, email:{email}, ip:{ip_address} at {datetime.datetime.now()}")
 
             session.update({
                 'id': full_id,
                 'org_id': org_id,
-                'lab_name': lab_name,
-                'org_name': org_name,
                 'org_plan': org_plan,
+                'org_name': org_name,
+                'org_services': org_services,
+                'lab_name': lab_name,
                 'role': role,
                 'ip_address': ip_address,
                 'logged_in': True,
@@ -305,8 +308,9 @@ def signup_signin():
             response.set_cookie('org_plan', org_plan)
             response.set_cookie('role', role)
             response.set_cookie('org_id', org_id)
+            response.set_cookie('org_services', ','.join(org_services).replace('"', ''))            # response.set_cookie('lab_name', lab_name)
             response.set_cookie('lab_name', lab_name)
-            response.set_cookie('lab_name', lab_name)
+
             response.set_cookie('token', token)
             watch_inventory_changes.delay(org_name, lab_name)
             watchCreatePickup.delay(org_name, center, role)
@@ -405,7 +409,6 @@ def signup_signin():
                 "region": region,
                 "area": area,
                 "lab_name": lab_name,
-                "managers_email": managers_email,
                 "users": [str(user_id)],
                 "created_at": datetime.datetime.now(),
                 "org_id": org_id
@@ -463,7 +466,7 @@ def register_org():
                 print("this is org labs collection", ORG_LABS_COLLECTION)
                 org_data = {
                     "org_name": org_name,
-                    "labs": [lab_name],
+                    "labs": [lab_name, 'central_store'],
                     "subscription": "free",
                     "creator": str(user_id),
                     "creators_email": email,
@@ -472,21 +475,32 @@ def register_org():
                 }
                 org_id = ORG_COLLECTION.insert_one(org_data).inserted_id
                 print("this is org id:",org_id)
-                lab_data = {
+                lab_data = [ {
                     "lab_name": lab_name,
+                    "region": 'central',
+                    "area": 'central',
                     "managers_email": email,
                     "users": [str(user_id)],
                     "created_at": datetime.datetime.now(),
                     "org_id": str(org_id)
-                }
-                ORG_LABS_COLLECTION.insert_one(lab_data).inserted_id
+                },
+                {
+                    "lab_name": 'central_store',
+                    "region": 'central',
+                    "area": 'central',
+                    "managers_email": email,
+                    "users": [str(user_id)],
+                    "created_at": datetime.datetime.now(),
+                    "org_id": str(org_id)
+                }]
+                ORG_LABS_COLLECTION.insert_many(lab_data)
                 # print(lab)
                 if org_id:
                     USERS_COLLECTION.update_one(
                         {"email": email},
                         {
                          "$set": {"org_id": str(org_id)},
-                         "$push": {"labs_access": lab_name}
+                         "$push": {"labs_access": {"$each": [lab_name, 'central_store']}}
                         }
                     )
                     flash("Registration successful, you can now login", "success")
@@ -505,7 +519,7 @@ def register_org():
             return redirect(url_for('auth.register_org', token=reg_token, register_form=register_form))
 
     # return render_template("reg_org.html", lab=lab_name, lastname=lastname, firstname=firstname, register_form=register_form)
-    return render_template("reg_org.html", token=reg_token, firstname=firstname ,register_form=register_form)
+    return render_template("templates_for_auth/reg_org.html", token=reg_token, firstname=firstname ,register_form=register_form)
 
 @auth.route('/register-user', methods=['GET', 'POST'])
 def register_user():
@@ -648,3 +662,21 @@ def reset_password():
             flash(f"Failed to reset password. Error: ", "danger")
             return redirect(url_for('auth.reset_password', token=token, newpassword=newpassword, firstName=firstName))
     return render_template("templates_for_auth/reset_password.html", token=token, newpassword=newpassword, firstName=firstName)
+
+@auth.route('/get-labs', methods=['GET'])
+def get_labs():
+    org_id = request.args.get('org_id')  # Get the org_id from the query parameter
+    if not org_id:
+        return {"error": "Organization ID is required"}, 400
+
+    try:
+        org_object_id = ObjectId(org_id)
+        org = ORG_COLLECTION.find_one({'_id': org_object_id}, {'labs': 1})
+        print(org)
+        if org:
+            labs = org.get('labs', [])
+            return {"labs": labs}, 200
+        else:
+            return {"error": "Organization not found"}, 404
+    except InvalidId:
+        return {"error": "Invalid Organization ID format"}, 400

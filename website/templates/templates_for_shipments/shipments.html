@@ -3,6 +3,7 @@
     {{ super() }}
     <link rel="stylesheet" href="../static/css/channels.css">
     <link rel="stylesheet" href="../static/static_for_shipments/css/shipments.css">
+    <link rel="stylesheet" href="../static/static_for_shipments/css/dashboard.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -23,9 +24,9 @@
             <button type="button" class="" data-toggle="modal" data-target="#dropUpModal">
                 Recieve
             </button>
-            <!-- <button type="button" class="" data-toggle="modal" data-target="#mappingModal">
-                Shipment Mapping
-            </button> -->
+            <button type="button" id="report-table">
+            </button>
+
         </div>
         <hr>
         <!-- Modal -->
@@ -187,7 +188,108 @@
                 </tbody>
             </table>
         </div>
-
+        
+        <div class="events" id="reports">
+            <div class="filterContainer" style="padding-bottom:10px">
+                <div class="swap-container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div id="from-card-filter">
+                                <!-- <label for="fromFilterType">From Filter Type</label> -->
+                                <select id="fromFilterType" class="form-control">
+                                    <option value="region">Region</option>
+                                    <option value="location">Location</option>
+                                </select>
+                            </div>
+                            <div class="carder mt-2" id="from-card">
+                                <!-- <span id="fromLocation">Central Store</span> -->
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                            <button id="swap-btn" class="swap-button btn btn-secondary" title="Swap locations">
+                                <i class="fas fa-arrow-right" id="direction" data-direction="right"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-5">
+                            <div id="to-card-filter">
+                                <!-- <label for="toFilterType">To Filter Type</label> -->
+                                <select id="toFilterType" class="form-control">
+                                    <option value="region">Region</option>
+                                    <option value="location">Location</option>
+                                </select>
+                            </div>
+                            <div class="carder mt-2" id="to-card">
+                                <!-- The select will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- <input type="text" class="autoInputRegions" id="toLocation" placeholder="To which location"> -->
+                <div class="row">
+                    <!-- <div class="col-3">
+                        <h6>Select a date range:</h6>
+                    </div> -->
+                    <div class="col-3">
+                        <input type="text" class="date-range" id="machine-date-range" placeholder="Select date range">
+                    </div>
+                </div>
+                <!-- <button id="applyFilter">Apply</button> -->
+            </div> 
+            <div class="row" id="operationsBoard">
+                <div class="col-lg-4">
+                    <div class="card mb-3" style="height: auto; min-height: 150px;">
+                        <div class="card-header py-2">Total Number of Shipments:</div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <span class="display-4 text-danger">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card mb-3" style="height: auto; min-height: 150px;">
+                        <div class="card-header py-2">Total weights carried:</div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <span class="display-4 text-primary">0Kg</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card mb-3" style="height: auto; min-height: 150px;">
+                        <div class="card-header py-2">Total Average Cost:</div>
+                        <div class="card-body d-flex justify-content-center align-items-center">
+                            <span class="display-4 text-success">₦0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+            <div class="row" id="logisticsTable">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header">Shipments:</div>
+                        <div class="card-body p-0">
+                            <!-- Billing history table -->
+                            <div class="table-responsive table-billing-history">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-gray-200" scope="col">From Locations</th>
+                                            <th class="border-gray-200" scope="col">To Locations</th>
+                                            <th class="border-gray-200" scope="col">Total Shipments</th>
+                                            <th class="border-gray-200" scope="col">Total Weights</th>
+                                            <th class="border-gray-200" scope="col">Total Average Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="shipmentTableBody">
+                                        <!-- Rows will be added here dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
         <div id="location-status" class="mt-3"></div>
 
     </div>
@@ -196,6 +298,8 @@
 
 {% block scripts %}
     <script src="../static/static_for_shipments/js/shipments.js" type="text/javascript"></script>
+    <script src="../static/static_for_shipments/js/dashboard.js" type="text/javascript"></script>
+
 
     <!-- Include Leaflet.js -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>

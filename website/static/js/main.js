@@ -18,12 +18,69 @@ $(function () {
     const lab_name = getCookie('lab_name');
     const role = getCookie('role');
     const center = getCookie('center');
-    const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
-    const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
-    const machine_url = `${BaseUrl}/machines/get/${user_id}/${lab_name}/`;
-    const labs_url = `${BaseUrl}/labs/get/${user_id}/`;
-    
+    const org_services = getCookie('org_services');
 
+    // If the cookie exists, split it into an array
+    if (org_services) {
+        // Decode any escaped characters and clean up extra quotes
+        const decodedOrgServices = decodeURIComponent(org_services)
+            .replace(/\\054/g, ',') // Replace escaped commas
+            .replace(/^"|"$/g, '') // Remove leading and trailing quotes
+            .replace(/\\"/g, ''); // Remove escaped quotes within the string
+
+        // Split into an array
+        const orgServicesArray = decodedOrgServices.split(',');
+        // Define which menu items correspond to which services
+        const menuMapping = {
+            'dashboard': 'menu-dashboard',
+            'events': 'menu-events',
+            'inventory': 'menu-inventory',
+            'piu': 'menu-in-use',
+            'channels': 'menu-channels',
+            'lotExp': 'menu-expiration',
+            'shipments': 'menu-shipments',
+            'profile': 'menu-profile',
+            'settings': 'menu-settings',
+        };
+        const cardMapping = {
+            'events': 'card-events',
+            'inventory': 'card-inventory',
+            'expiration': 'card-expiration',
+            'in-use': 'card-in-use',
+            'channels': 'card-channels',
+        };
+        // Hide all menu items initially
+        Object.values(menuMapping).forEach(menuId => {
+            $(`#${menuId}`).hide();
+        });
+        Object.values(cardMapping).forEach(cardId => {
+            $(`#${cardId}`).hide();
+        });
+
+        // Show menu items based on org_services
+        orgServicesArray.forEach(service => {
+            const menuId = menuMapping[service.trim()];
+            if (menuId) {
+                $(`#${menuId}`).show();
+            }
+        });
+        orgServicesArray.forEach(service => {
+            const cardId = cardMapping[service.trim()];
+            if (cardId) {
+                $(`#${cardId}`).show();
+            }
+        });
+        console.log(orgServicesArray)
+    } else {
+        console.log("org_services cookie not found.");
+    }        
+
+
+        const item_url = `${BaseUrl}/items/get/${user_id}/${lab_name}/`;
+        const lot_url = `${BaseUrl}/lotexp/get/${user_id}/${lab_name}/`;
+        const machine_url = `${BaseUrl}/machines/get/${user_id}/${lab_name}/`;
+        const labs_url = `${BaseUrl}/labs/get/${user_id}/`;
+    
     // Check if socket is already initialized
     if (!window.socket) {
         // Initialize socket and pass role as a query parameter
@@ -52,6 +109,7 @@ $(function () {
             console.error("Error fetching data:", error);
         });
     }
+
     toastr.options = {
         "timeOut": 0,          // Set timeOut to 0 to keep the notification until closed
         "extendedTimeOut": 0,  // Set extendedTimeOut to 0 to keep the notification until closed
@@ -66,6 +124,7 @@ $(function () {
         "showDuration": 300,    // Show animation duration
         "hideDuration": 300     // Hide animation duration
     };
+
     console.log("Role:", role, "center",center);
     // if (role === 'creator') {
     //     console.log("Staff");
@@ -129,6 +188,7 @@ $(function () {
                 });
             },
         });
+
     $('.autoInputLabs').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -148,6 +208,7 @@ $(function () {
                 });
             },
         });
+
     $('.autoInputRegions').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -167,6 +228,7 @@ $(function () {
                 });
             },
         });
+
     $('.autoInputItem').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -185,6 +247,7 @@ $(function () {
                 });
             },
         });
+
     $('.autoInputMachine').typeahead({
         source: function (request, response) {
             $.ajax({
@@ -204,6 +267,7 @@ $(function () {
                 });
             },
         });
+
     $('.autoInputLot').typeahead({
         source: function (request, response) {
             $.ajax({

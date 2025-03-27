@@ -21,12 +21,49 @@ $(function() {
     const import_items_url = `${BaseUrl}/items/bulkpush/${user_id}/${lab_name}/`;
 
     const url_data_item_push = `${BaseUrl}/items/push/${user_id}/${lab_name}/`;
+    const url_data_labs_push = `${BaseUrl}/labs/push/${user_id}/`;
     const url_data_item_bulk_push = `${BaseUrl}/items/bulkpush/${user_id}/${lab_name}/`;
     const import_item_heading = ['bench', 'category', 'item', 'vials/pack', 'tests/vial', 'quantity', 'reOrderLevel', 'class', 'tests/day']
     var numericItemsFields = new Set(['quantity', 'tests/vial', 'vials/pack', 'reOrderLevel', 'tests/day']);
 
 
     const url_data_del = `${BaseUrl}/data/del/${user_id}/${lab_name}/`;
+
+    $('#addLocation').on('click', function(event) {
+        console.log('Add Location Clicked');
+        event.preventDefault();
+        const data = {
+            'lab_name': $.trim($('#lab_name').val()).replace(/\s+/g, '_'),
+            'region': $.trim($('#region').val()),
+            'area': $.trim($('#area').val()).replace(/\s+/g, '_'),
+        }
+        console.log(data)
+        console.log(data);
+        $('#loadingIndicator').show();
+        $.ajax({
+            url: url_data_labs_push,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data), 
+            success: function(response) {
+                console.log(response);
+                alert('Location created successfully');
+            },
+            error: function (xhr, status, error) {
+                // Extract the error message from the server response
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert(xhr.responseJSON.message);  // Show the custom error message
+                } else {
+                    alert("An error occurred: " + error);  // Fallback for unknown errors
+                }
+                console.error(xhr.responseText);  // Log the full response for debugging
+            },
+            complete: function () {
+                // Hide the loading indicator after the request completes (success or error)
+                $('#loadingIndicator').hide();
+            }
+        });
+    });
 
     $('#addMachine').on('click', function(event) {
         console.log('Add Machine Clicked');

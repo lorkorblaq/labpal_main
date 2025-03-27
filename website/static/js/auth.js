@@ -97,4 +97,35 @@ $(document).ready(function() {
           }
       });
   });
+
+  const orgIdInput = document.querySelector('input[name="org_id"]');
+  const labsDropdown = document.querySelector('select[name="lab"]');
+
+  $(orgIdInput).on('input', function () {
+      const orgId = $(this).val().trim();
+      console.log('Org ID:', orgId);
+      if (orgId) {
+          $.ajax({
+              url: `/get-labs?org_id=${orgId}`,
+              method: 'GET',
+              dataType: 'json',
+              success: function (data) {
+                  // Clear existing options
+                  $(labsDropdown).html('<option value="" disabled selected>Select a lab</option>');
+                  if (data.labs) {
+                      data.labs.forEach(function (lab) {
+                          const option = $('<option></option>').val(lab).text(lab);
+                          $(labsDropdown).append(option);
+                      });
+                  } else if (data.error) {
+                      alert(data.error);
+                  }
+              },
+              error: function (xhr, status, error) {
+                  console.error('Error fetching labs:', error);
+                  alert('An error occurred while fetching labs.');
+              }
+          });
+      }
+  });
 });
