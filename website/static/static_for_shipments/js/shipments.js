@@ -11,8 +11,8 @@ $(document).ready(function() {
         }
         return null;
     }
-    BaseUrl = "https://labpal.com.ng/api";
-    // BaseUrl = "http://0.0.0.0:3000/api";
+    // BaseUrl = "https://labpal.com.ng/api";
+    BaseUrl = "http://0.0.0.0:3000/api";
 
     const columnshipments = ['created_at', 'shipment_id', 'status', 'dropoff_time',   'duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'description', 'created_by','dropoff_by', 'action'];
     const headershipments = ['Created', 'Id', 'Status', 'Recieved',  ' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of package', 'Weight', 'Vendor', , 'Description', 'Created by', 'Recieved by', ''];
@@ -70,12 +70,11 @@ $(document).ready(function() {
                     var createLatLngString = `${latitude},${longitude}`;
                     var timestamp = position.timestamp;
                     var create_dateTime = new Date(timestamp);
-                    create_dateTime.setHours(create_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
-                    created_at = create_dateTime.toISOString()
+                    // create_dateTime.setHours(create_dateTime.getUTCHours() + 1); // Adjust for WAT (UTC+1)
+                    // created_at = create_dateTime.toISOString()
 
                     completed = true;
                     data = {
-                        created_at: created_at,
                         top: top,
                         numb_of_packs: numb_of_packs,
                         weight: weight,
@@ -96,6 +95,7 @@ $(document).ready(function() {
                         success: function (response) {
                             alert("Shipment created successfully");
                             console.log(response);
+                            loadData(); // Refresh the table with fresh data
                         },
                         error: function (xhr, status, error) {
                             // Extract the error message from the server response
@@ -210,8 +210,9 @@ $(document).ready(function() {
                         contentType: 'application/json',
                         data: JSON.stringify(data),
                         success: function (response) {
-                            alert("Shipment recieved successfully");
+                            alert("Shipment received successfully");
                             console.log(response);
+                            loadData(); // Refresh the table with fresh data
                         },
                         error: function (xhr, status, error) {
                             // Extract the error message from the server response
@@ -473,24 +474,58 @@ $(document).ready(function() {
     });
     loadMapWithLastShipment();
 
-    async function loadData () {
-        $('#loadingIndicator').show();
-        $('.body').empty();
-        $('#reports_h').empty();
-        headershipments.forEach(function (header) {
-            $('#reports_h').append(`<th>${header}</th>`);
-            });
+    // async function loadData () {
+    //     $('#loadingIndicator').show();
+    //     $('.body').empty();
+    //     $('#reports_h').empty();
+    //     headershipments.forEach(function (header) {
+    //         $('#reports_h').append(`<th>${header}</th>`);
+    //         });
+    //     try {
+    //         const data = await fetchData(url_shipment_get);
+    //         console.log(data);
+    //         renderTable('r_table', 'ex-r_table', data.shipments, columnshipments);
+    //     } catch (error) {
+    //         console.error("Error fetching data:", error);
+    //     }
+    //     $('#loadingIndicator').hide();        
+    // }
+    // loadData();
+    async function loadData() {
         try {
-            const data = await fetchData(url_shipment_get);
+            // Show the loading indicator
+            $('#loadingIndicator').show();
+
+            // Clear the table body and headers
+            $('.body').empty();
+            $('#reports_h').empty();
+
+            // Append table headers
+            headershipments.forEach(header => {
+                $('#reports_h').append(`<th>${header}</th>`);
+            });
+
+            // Fetch data from the backend
+            const response = await fetch(url_shipment_get);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            // Log the data for debugging
             console.log(data);
+
+            // Render the table with the fetched data
             renderTable('r_table', 'ex-r_table', data.shipments, columnshipments);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error("Error fetching or rendering data:", error);
+            alert("Failed to load data. Please try again later.");
+        } finally {
+            // Hide the loading indicator
+            $('#loadingIndicator').hide();
         }
-        $('#loadingIndicator').hide();        
     }
-    loadData();
-
+    loadData()
     function renderTable(tableId, exTableId, data, columns) {
         // Helper function to convert minutes to D:H:M format
         function formatDuration(minutes) {

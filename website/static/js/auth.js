@@ -67,14 +67,14 @@ $(document).ready(function() {
     }
   });
 
-  $("#resetPasswordModal").hide();
+  // $("#resetPasswordModal").hide();
 
   $("#openResetModal").click(function() {
-      $("#resetPasswordModal").fadeIn();
+      $("#resetPasswordModal").addClass("show");
   });
 
-  $(".close, .modal").click(function(event) {
-      if (event.target === this) $("#resetPasswordModal").fadeOut();
+  $(".close, .resetModal").click(function(event) {
+      if (event.target === this) $("#resetPasswordModal").removeClass("show");
   });
 
   $("#sendResetLink").click(function(event) {

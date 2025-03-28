@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 import email_validator
 
 class OrgForm(FlaskForm):
-    org_name = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation name"})
-    lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    org_name = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation"})
+    lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Your first lab"})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Last name"})
     email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Email address"})
@@ -36,7 +36,7 @@ class LabForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     org_id = StringField('org', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation ID"})
     org_name = StringField('orgName', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Organisation Name"})
-    lab = SelectField('lab', choices=[('','Select a lab')], validators=[DataRequired()], render_kw={"placeholder":"Enter your first lab name"})
+    lab = SelectField('lab', choices=[('','Select a lab')], validators=[DataRequired()], render_kw={"placeholder":"Laboratory name"})
     # lab = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
     center_name = StringField('center', validators=[Length(min=4, max=20)], render_kw={"placeholder":"Your center name if any"})
     ref_org_id = StringField('refOrgID', validators=[DataRequired(), Length(min=4, max=90)], render_kw={"placeholder":"Reffering Center ID"})
