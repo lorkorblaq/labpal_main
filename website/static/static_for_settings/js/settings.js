@@ -45,8 +45,10 @@ $(function () {
     const planStack = plans[org_plan];
     console.log(planStack);
 
-    if (role === "user") {
+    if (role === "staff") {
         $("#bill-btn").hide();
+        $('#data-btn').hide();
+        $('#mem-btn').hide();
     }
 
     function koboToNaira(kobo) {

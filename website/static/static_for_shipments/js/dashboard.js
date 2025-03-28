@@ -157,17 +157,20 @@ $(document).ready(async function () {
 
     const formatDate = (date) => date.toISOString().split("T")[0]; // Converts to YYYY-MM-DD
     const defaultDateRange = `${formatDate(new Date(new Date().setDate(new Date().getDate() - 30)))} - ${formatDate(new Date())}`;
-        const defaultFRegion = 'north';
-        const defaultTRegion = 'central_store';
+        const defaultFRegion = 'Central';
+        const defaultTRegion = 'Central';
 
     // Set default values to inputs
     $('#machine-date-range').val(defaultDateRange);
     $('#FlocRegion').val(defaultFRegion);
+    $('#TlocRegion').val(defaultTRegion);
+    $('#fromFilterType').val('region');
+    $('#toFilterType').val('region');
 
     await applyFilter();
-    $('#applyFilter').click(async function () {
-        await applyFilter();
-    });
+    // $('#applyFilter').click(async function () {
+    //     await applyFilter();
+    // });
     
     $('#filterType').change(function() {
         applyFilter();
@@ -192,7 +195,8 @@ $(document).ready(async function () {
     
             const dateRange = $('#machine-date-range').val();
             const [startDate, endDate] = dateRange.split(" - ").map(date => new Date(date.trim()));
-    
+            endDate.setHours(23, 59, 59, 999); // Set end date to the end of the day
+            console.log(startDate, endDate);
             let filteredShipments = shipmentData.shipments.filter(shipment => {
                 const shipmentDate = new Date(shipment.created_at);
                 const isWithinDateRange = shipmentDate >= startDate && shipmentDate <= endDate;

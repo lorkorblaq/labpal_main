@@ -734,7 +734,7 @@ $(document).ready(function() {
         if (tableSection.is(":visible")) {
             tableSection.hide();
             reportSection.show();
-            $(this).text("Table"); // Change button text to "Table"
+            $(this).text("Log"); // Change button text to "Table"
         } else {
             tableSection.show();
             reportSection.hide();
