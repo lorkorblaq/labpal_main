@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 import email_validator
 
 class OrgForm(FlaskForm):
-    org_name = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation name"})
-    lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Laboratory name"})
+    org_name = StringField('org', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Organisation"})
+    lab_name = StringField('lab', validators=[DataRequired(), Length(min=4, max=20)], render_kw={"placeholder":"Your first lab"})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=3, max=20), ], render_kw={"placeholder":"First name"})
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=3, max=20),],  render_kw={"placeholder":"Last name"})
     email = EmailField('Email',validators=[DataRequired(), Email()], render_kw={"placeholder":"Email address"})

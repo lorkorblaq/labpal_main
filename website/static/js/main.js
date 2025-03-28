@@ -1,7 +1,7 @@
 $(function () {
     console.log("MAIN ready");
-    BaseUrl = "https://labpal.com.ng/api"
-    // BaseUrl = "http://127.0.0.1:3000/api"
+    // BaseUrl = "https://labpal.com.ng/api"
+    BaseUrl = "http://127.0.0.1:3000/api"
 
     function getCookie(name) {
         const cookieArr = document.cookie.split("; ");
