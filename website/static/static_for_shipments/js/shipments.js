@@ -11,8 +11,8 @@ $(document).ready(function() {
         }
         return null;
     }
-    // BaseUrl = "https://labpal.com.ng/api";
-    BaseUrl = "http://0.0.0.0:3000/api";
+    BaseUrl = "https://labpal.com.ng/api";
+    // BaseUrl = "http://0.0.0.0:3000/api";
 
     const columnshipments = ['created_at', 'shipment_id', 'status', 'dropoff_time',   'duration', 'pickup_loc', 'dropoff_loc', 'top', 'numb_of_packs', 'weight', 'vendor', 'description', 'created_by','dropoff_by', 'action'];
     const headershipments = ['Created', 'Id', 'Status', 'Recieved',  ' Duration', 'Pickup Loc.', 'Dropoff Loc.','Type of package', 'No. of package', 'Weight', 'Vendor', , 'Description', 'Created by', 'Recieved by', ''];
